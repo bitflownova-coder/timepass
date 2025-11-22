@@ -73,14 +73,14 @@ export function BudgetCard({ category, budget, expenses, onBudgetChange }: Budge
 
       <div className="flex flex-col gap-2">
         <Label htmlFor={`budget-${category}`} className="text-sm">
-          Monthly Budget
+          Monthly Budget (₹)
         </Label>
         <Input
           id={`budget-${category}`}
           type="number"
-          step="0.01"
+          step="1"
           min="0"
-          placeholder="0.00"
+          placeholder="Enter budget in ₹"
           value={budget || ''}
           onChange={(e) => onBudgetChange(category, parseFloat(e.target.value) || 0)}
           className="tabular-nums"

@@ -4,6 +4,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Button } from '@/components/ui/button'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Plus, Wallet, ChartBar, Tag } from '@phosphor-icons/react'
+import { LoginPage } from '@/components/LoginPage'
+import { Header } from '@/components/Header'
 import { ExpenseDialog } from '@/components/ExpenseDialog'
 import { ExpenseItem } from '@/components/ExpenseItem'
 import { StatCard } from '@/components/StatCard'
@@ -24,6 +26,7 @@ import {
 } from '@/components/ui/alert-dialog'
 
 function App() {
+  const [userEmail, setUserEmail] = useKV<string | null>('user-email', null)
   const [expenses, setExpenses] = useKV<Expense[]>('expenses', [])
   const [budgets, setBudgets] = useKV<BudgetMap>('budgets', {} as BudgetMap)
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -79,6 +82,25 @@ function App() {
     })
   }, [budgets, currentMonthExpenses])
 
+  const sortedExpenses = useMemo(() => {
+    return [...(expenses || [])].sort((a, b) => 
+      new Date(b.date).getTime() - new Date(a.date).getTime()
+    )
+  }, [expenses])
+
+  const handleLogin = (email: string) => {
+    setUserEmail(email)
+  }
+
+  const handleLogout = () => {
+    setUserEmail(null)
+    toast.success('Signed out successfully')
+  }
+
+  if (!userEmail) {
+    return <LoginPage onLogin={handleLogin} />
+  }
+
   const handleSaveExpense = (expenseData: Omit<Expense, 'id' | 'createdAt'>) => {
     if (editingExpense) {
       setExpenses(current => 
@@ -132,23 +154,19 @@ function App() {
     }
   }
 
-  const sortedExpenses = useMemo(() => {
-    return [...(expenses || [])].sort((a, b) => 
-      new Date(b.date).getTime() - new Date(a.date).getTime()
-    )
-  }, [expenses])
-
   return (
     <div className="min-h-screen bg-background">
+      <Header userEmail={userEmail} onLogout={handleLogout} />
+      
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-8">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-semibold text-foreground tracking-tight">Finance Tracker</h1>
+            <h2 className="text-3xl font-semibold text-foreground tracking-tight">Expense Dashboard</h2>
             <p className="text-muted-foreground mt-1">Track your expenses and manage your budget</p>
           </div>
           <Button onClick={() => setDialogOpen(true)} size="lg" className="gap-2">
             <Plus className="w-5 h-5" />
-            Add Expense
+            <span className="hidden sm:inline">Add Expense</span>
           </Button>
         </div>
 
@@ -182,15 +200,15 @@ function App() {
           <TabsList className="grid w-full max-w-md grid-cols-3">
             <TabsTrigger value="expenses" className="gap-2">
               <Wallet className="w-4 h-4" />
-              Expenses
+              <span className="hidden sm:inline">Expenses</span>
             </TabsTrigger>
             <TabsTrigger value="budgets" className="gap-2">
               <Tag className="w-4 h-4" />
-              Budgets
+              <span className="hidden sm:inline">Budgets</span>
             </TabsTrigger>
             <TabsTrigger value="trends" className="gap-2">
               <ChartBar className="w-4 h-4" />
-              Trends
+              <span className="hidden sm:inline">Trends</span>
             </TabsTrigger>
           </TabsList>
 
