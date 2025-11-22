@@ -1,6 +1,7 @@
 import { Separator } from '@/components/ui/separator'
 import { LinkedinLogo, Envelope } from '@phosphor-icons/react'
 import { ContactForm } from '@/components/website/ContactForm'
+import { Logo } from '@/components/website/Logo'
 
 interface FooterProps {
   navigate: (path: string) => void
@@ -30,13 +31,8 @@ export function Footer({ navigate }: FooterProps) {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           <div>
-            <div className="flex flex-col gap-1 mb-4">
-              <div className="text-2xl font-bold text-foreground tracking-tight">
-                # BITFLOW #
-              </div>
-              <div className="text-sm text-muted-foreground font-medium">
-                Design. Protect. automate.
-              </div>
+            <div className="mb-4">
+              <Logo />
             </div>
             <p className="text-muted-foreground">
               Expert Professionals delivering innovative digital solutions with Sustainable Practices

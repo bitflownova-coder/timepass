@@ -1,7 +1,9 @@
 import { Button } from '@/components/ui/button'
-import { List, X } from '@phosphor-icons/react'
+import { List, Moon, Sun } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { useTheme } from '@/hooks/use-theme'
+import { Logo } from '@/components/website/Logo'
 
 interface NavbarProps {
   currentPath: string
@@ -10,6 +12,7 @@ interface NavbarProps {
 
 export function Navbar({ currentPath, navigate }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const { theme, toggleTheme } = useTheme()
 
   const scrollToContact = () => {
     const contactSection = document.getElementById('contact')
@@ -42,14 +45,9 @@ export function Navbar({ currentPath, navigate }: NavbarProps) {
         <div className="flex items-center justify-between h-16">
           <button 
             onClick={() => handleNavClick('/')}
-            className="flex flex-col items-start gap-0 hover:opacity-80 transition-opacity"
+            className="hover:opacity-80 transition-opacity"
           >
-            <div className="text-xl md:text-2xl font-bold text-foreground tracking-tight">
-              # BITFLOW #
-            </div>
-            <div className="text-xs md:text-sm text-muted-foreground font-medium">
-              Design. Protect. automate.
-            </div>
+            <Logo />
           </button>
 
           <div className="hidden md:flex items-center gap-6">
@@ -66,6 +64,15 @@ export function Navbar({ currentPath, navigate }: NavbarProps) {
                 {link.label}
               </button>
             ))}
+            
+            <Button 
+              variant="ghost" 
+              size="icon"
+              onClick={toggleTheme}
+              className="rounded-full"
+            >
+              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </Button>
             
             <Button 
               onClick={scrollToContact}
@@ -96,6 +103,24 @@ export function Navbar({ currentPath, navigate }: NavbarProps) {
                     {link.label}
                   </button>
                 ))}
+                
+                <Button 
+                  variant="outline" 
+                  onClick={toggleTheme}
+                  className="w-full justify-start"
+                >
+                  {theme === 'dark' ? (
+                    <>
+                      <Sun className="w-5 h-5 mr-2" />
+                      Light Mode
+                    </>
+                  ) : (
+                    <>
+                      <Moon className="w-5 h-5 mr-2" />
+                      Dark Mode
+                    </>
+                  )}
+                </Button>
                 
                 <Button 
                   onClick={scrollToContact}

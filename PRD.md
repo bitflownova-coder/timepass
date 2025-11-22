@@ -1,16 +1,51 @@
 # Bitflow Nova - Modern Corporate Digital Solutions Website
 
-A comprehensive, professional marketing website for Bitflow Nova showcasing digital solutions expertise with a modern corporate tech aesthetic optimized for enterprise audiences.
+A comprehensive, professional marketing website for Bitflow Nova showcasing digital solutions expertise with a modern corporate tech aesthetic optimized for enterprise audiences. Features advanced UI components including spiral animations and orbital service visualizations with full dark/light theme support.
 
 **Experience Qualities**: 
 1. **Professional** - Clean, corporate design establishing trust and credibility with enterprise clients
 2. **Precise** - Clear information architecture with action-oriented messaging emphasizing expertise
 3. **Confident** - Bold visual hierarchy and compelling differentiators highlighting competitive advantages
 
-**Complexity Level**: Content Showcase (information-focused)
-- Multi-page marketing site with routing, forms, legal pages, and strict enterprise branding guidelines
+**Complexity Level**: Light Application (multiple features with basic state)
+- Multi-page marketing site with routing, forms, legal pages, theme switching, and advanced interactive components
 
 ## Essential Features
+
+### Theme Toggle System
+- **Functionality**: Global light/dark theme toggle with persistent state
+- **Purpose**: Provide user preference for viewing experience
+- **Trigger**: Click theme toggle button in navigation
+- **Progression**: Click sun/moon icon → theme switches → preference saved → applies to all pages
+- **Success criteria**: Theme persists across sessions, all components adapt to theme, smooth transitions
+
+### Dynamic Logo Component
+- **Functionality**: Reusable logo component with SVG graphic and brand text
+- **Purpose**: Establish consistent brand identity across header and footer
+- **Trigger**: Renders in navigation and footer
+- **Progression**: Logo displays SVG icon → brand name "BITFLOW NOVA" → tagline "Design. Protect. automate."
+- **Success criteria**: Logo component used in header and footer, scales properly, clickable in nav
+
+### Spiral Animation Hero Background
+- **Functionality**: GSAP-powered 3D spiral particle animation
+- **Purpose**: Create engaging, premium visual experience in hero section
+- **Trigger**: Page load on homepage
+- **Progression**: Canvas initializes → 5000 stars generated → spiral animation loops → particles expand dynamically
+- **Success criteria**: Smooth 60fps animation, responsive to screen size, proper z-index layering
+
+### Orbital Service Visualization
+- **Functionality**: Interactive radial orbital timeline for service showcase
+- **Purpose**: Innovative way to explore services with relationship mapping
+- **Trigger**: Toggle to "Orbital View" in services section
+- **Progression**: View rotating orbital → click service node → see details card → explore related services → auto-rotation pauses
+- **Success criteria**: All 6 services displayed, smooth rotation, related services highlight, detail cards appear
+
+### Grid/Orbital View Toggle
+- **Functionality**: Switch between traditional grid and orbital visualization
+- **Purpose**: Offer multiple ways to explore services
+- **Trigger**: Click "Grid View" or "Orbital View" buttons
+- **Progression**: Click toggle → view transitions → selected state updates
+- **Success criteria**: Both views functional, clean transition, state remembered during session
 
 ### Mandatory Brand Identity
 - **Functionality**: Consistent global header logo structure across all pages
@@ -94,9 +129,9 @@ A comprehensive, professional marketing website for Bitflow Nova showcasing digi
 The design should evoke corporate professionalism, precision, and technological expertise - reflecting a trusted partner for enterprise digital transformation. The aesthetic must be modern corporate tech: clean, minimalist, with high-quality abstract technology imagery. The interface prioritizes clarity and conversion over decorative elements, with strategic use of the accent color for high-visibility CTAs.
 
 ## Color Selection
-Custom palette strictly adhering to mandated brand colors: Primary Blue for trust and corporate identity, neutral gray for sophistication, and Gold accent for conversion urgency.
+Custom palette strictly adhering to mandated brand colors with full dark mode support: Primary Blue for trust and corporate identity, neutral gray for sophistication, and Gold accent for conversion urgency.
 
-**Mandated Color Palette:**
+**Mandated Color Palette (Light Mode):**
 - **Primary Color**: Royal Blue #0047AB (oklch(0.42 0.18 264)) - Corporate professionalism, trust, technology leadership
 - **Secondary/Background Color**: Light Gray #F5F5F5 (oklch(0.97 0 0)) - Clean, minimalist foundation for content
 - **Accent/CTA Color**: Gold #FFD700 (oklch(0.87 0.15 95)) - High-visibility conversion trigger, premium positioning
@@ -105,6 +140,14 @@ Custom palette strictly adhering to mandated brand colors: Primary Blue for trus
   - Primary (#0047AB oklch(0.42 0.18 264)): White text (oklch(1 0 0)) - Ratio 6.8:1 ✓
   - Accent (#FFD700 oklch(0.87 0.15 95)): Dark text (oklch(0.20 0 0)) - Ratio 11.5:1 ✓
   - Card (White oklch(1 0 0)): Dark text (oklch(0.20 0 0)) - Ratio 15.1:1 ✓
+
+**Dark Mode Palette:**
+- **Background**: Deep Gray (oklch(0.145 0 0)) - Professional dark foundation
+- **Card**: Slightly lighter gray (oklch(0.18 0 0)) - Elevated surfaces
+- **Primary**: Brighter blue (oklch(0.50 0.20 264)) - Maintains brand while ensuring contrast
+- **Accent**: Lighter gold (oklch(0.75 0.15 95)) - Visible CTAs in dark mode
+- **Foreground**: Near white (oklch(0.985 0 0)) - High contrast text
+- All dark mode pairings maintain WCAG AA compliance
 
 ## Font Selection
 Modern, highly legible sans-serif typography conveying clarity and professionalism appropriate for corporate enterprise audiences. Inter throughout for consistent, clean readability.

@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from '@phosphor-icons/react'
+import { SpiralAnimation } from '@/components/ui/spiral-animation'
 
 interface HeroProps {
   onConsultationClick: () => void
@@ -9,7 +10,10 @@ interface HeroProps {
 export function Hero({ onConsultationClick, onContactClick }: HeroProps) {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
+      <div className="absolute inset-0 opacity-20">
+        <SpiralAnimation />
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background/50 to-accent/5" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.1),rgba(255,255,255,0))]" />
       
       <div className="relative max-w-7xl mx-auto px-4 md:px-8 py-20 text-center">
