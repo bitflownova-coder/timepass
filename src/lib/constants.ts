@@ -1,68 +1,52 @@
-import { Category } from './types'
-import { 
-  Hamburger, 
-  Car, 
-  FilmSlate, 
-  ShoppingBag, 
-  Receipt, 
-  FirstAid, 
-  DotsThree 
-} from '@phosphor-icons/react'
+import { ServiceType } from './types'
 
-export const CATEGORIES: Category[] = [
-  'Food',
-  'Transport',
-  'Entertainment',
-  'Shopping',
-  'Bills',
-  'Health',
-  'Other'
+export const SERVICES: ServiceType[] = [
+  'AI Development',
+  'Cyber Security Services',
+  'Software Development',
+  'Automation Tools',
+  'App Development',
+  'Digital Marketing'
 ]
 
-export const CATEGORY_ICONS = {
-  Food: Hamburger,
-  Transport: Car,
-  Entertainment: FilmSlate,
-  Shopping: ShoppingBag,
-  Bills: Receipt,
-  Health: FirstAid,
-  Other: DotsThree
-}
+export const PROCESS_STEPS = [
+  {
+    number: 1,
+    title: 'Discuss Requirements',
+    description: 'Share your vision with our expert team'
+  },
+  {
+    number: 2,
+    title: 'Solution Crafted',
+    description: 'Get a tailored solution within 1 week'
+  },
+  {
+    number: 3,
+    title: 'Implementation',
+    description: 'Precision deployment in 2 weeks'
+  },
+  {
+    number: 4,
+    title: 'Experience Results',
+    description: 'See the impact on your business'
+  }
+]
 
-export const CATEGORY_COLORS = {
-  Food: 'oklch(0.65 0.18 145)',
-  Transport: 'oklch(0.65 0.15 200)',
-  Entertainment: 'oklch(0.60 0.22 320)',
-  Shopping: 'oklch(0.75 0.15 85)',
-  Bills: 'oklch(0.60 0.22 25)',
-  Health: 'oklch(0.65 0.15 25)',
-  Other: 'oklch(0.50 0.02 250)'
-}
-
-export function formatCurrency(amount: number): string {
-  return new Intl.NumberFormat('en-IN', {
-    style: 'currency',
-    currency: 'INR',
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0
-  }).format(amount)
-}
-
-export function formatDate(dateString: string): string {
-  const date = new Date(dateString)
-  return new Intl.DateTimeFormat('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric'
-  }).format(date)
-}
-
-export function getMonthYear(dateString: string): string {
-  const date = new Date(dateString)
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`
-}
-
-export function getCurrentMonthYear(): string {
-  const now = new Date()
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`
-}
+export const WHY_CHOOSE_US = [
+  {
+    title: 'Expert Professionals',
+    description: 'Our team brings years of industry experience and cutting-edge expertise to every project'
+  },
+  {
+    title: 'Unmatched Support',
+    description: '24/7 dedicated support ensuring your success at every step'
+  },
+  {
+    title: 'Fast Turnaround',
+    description: 'Efficient processes delivering quality solutions on time, every time'
+  },
+  {
+    title: 'Sustainable Practices',
+    description: 'Eco-conscious approach building solutions for a better tomorrow'
+  }
+]

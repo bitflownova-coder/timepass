@@ -1,24 +1,17 @@
-export type Category = 
-  | 'Food' 
-  | 'Transport' 
-  | 'Entertainment' 
-  | 'Shopping' 
-  | 'Bills' 
-  | 'Health' 
-  | 'Other'
-
-export interface Expense {
+export interface QuoteRequest {
   id: string
-  amount: number
-  category: Category
-  description: string
-  date: string
+  firstName: string
+  lastName: string
+  email: string
+  phone: string
+  service: string
   createdAt: string
 }
 
-export interface Budget {
-  category: Category
-  limit: number
-}
-
-export type BudgetMap = Record<Category, number>
+export type ServiceType = 
+  | 'AI Development'
+  | 'Cyber Security Services'
+  | 'Software Development'
+  | 'Automation Tools'
+  | 'App Development'
+  | 'Digital Marketing'
