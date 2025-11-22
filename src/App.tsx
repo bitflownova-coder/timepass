@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react'
 import { useKV } from '@github/spark/hooks'
+import { useTheme } from '@/hooks/use-theme'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Button } from '@/components/ui/button'
 import { Alert, AlertDescription } from '@/components/ui/alert'
@@ -26,6 +27,7 @@ import {
 } from '@/components/ui/alert-dialog'
 
 function App() {
+  useTheme()
   const [userEmail, setUserEmail] = useKV<string | null>('user-email', null)
   const [expenses, setExpenses] = useKV<Expense[]>('expenses', [])
   const [budgets, setBudgets] = useKV<BudgetMap>('budgets', {} as BudgetMap)

@@ -19,6 +19,13 @@ A professional expense management platform for BitflowNova that enables employee
 - **Progression**: User enters email/password → validates credentials → redirects to dashboard
 - **Success criteria**: User session persists across page reloads, logout clears session
 
+### Theme Toggle
+- **Functionality**: Switch between light and dark mode with persistent preference
+- **Purpose**: Provide comfortable viewing experience in different lighting conditions
+- **Trigger**: Click theme toggle button in header
+- **Progression**: Click button → theme switches instantly → preference saved → persists across sessions
+- **Success criteria**: Theme preference persists, all colors adapt properly, smooth visual transition
+
 ### Expense Tracking
 - **Functionality**: Add, edit, and delete expenses with categorization
 - **Purpose**: Maintain accurate records of company spending
@@ -51,17 +58,28 @@ A professional expense management platform for BitflowNova that enables employee
 The design should evoke professionalism, trust, and technological sophistication - similar to edu-bit's clean corporate aesthetic but with a unique BitflowNova identity. The interface should feel modern and efficient with a tech-forward vibe, using a minimal approach that emphasizes content and data clarity over decorative elements.
 
 ## Color Selection
-Custom palette inspired by the BitflowNova logo (navy blue with cyan accents)
+Custom palette inspired by the BitflowNova logo (navy blue with cyan accents), with full dark mode support
 
-- **Primary Color**: Deep Navy (oklch(0.25 0.05 250)) - Represents professionalism, trust, and corporate stability
-- **Secondary Colors**: Slate Gray (oklch(0.45 0.02 250)) for supporting elements, Light Blue-Gray backgrounds (oklch(0.97 0.01 250))
+**Light Mode:**
+- **Primary Color**: Deep Navy (oklch(0.28 0.06 250)) - Represents professionalism, trust, and corporate stability
+- **Secondary Colors**: Slate Gray (oklch(0.45 0.02 250)) for supporting elements, Light Blue-Gray backgrounds (oklch(0.96 0.01 250))
 - **Accent Color**: Cyan Blue (oklch(0.65 0.15 200)) - Tech-forward highlight for CTAs and active states, draws from logo's cyan elements
 - **Foreground/Background Pairings**: 
-  - Background (Light Blue-Gray oklch(0.97 0.01 250)): Dark Navy text (oklch(0.25 0.05 250)) - Ratio 8.5:1 ✓
+  - Background (Light Blue-Gray oklch(96.8% 0.007 247.896)): Dark Navy text (oklch(0.25 0.05 250)) - Ratio 8.5:1 ✓
   - Card (White oklch(1 0 0)): Dark Navy text (oklch(0.25 0.05 250)) - Ratio 11.2:1 ✓
-  - Primary (Navy oklch(0.25 0.05 250)): White text (oklch(1 0 0)) - Ratio 11.2:1 ✓
+  - Primary (Navy oklch(0.28 0.06 250)): White text (oklch(1 0 0)) - Ratio 11.2:1 ✓
   - Accent (Cyan oklch(0.65 0.15 200)): White text (oklch(1 0 0)) - Ratio 5.2:1 ✓
   - Secondary (Slate oklch(0.45 0.02 250)): White text (oklch(1 0 0)) - Ratio 7.1:1 ✓
+
+**Dark Mode:**
+- **Primary Color**: Bright Cyan (oklch(0.70 0.15 200)) - Maintains tech-forward aesthetic, better visibility on dark background
+- **Secondary Colors**: Medium Gray (oklch(0.35 0.03 250)) for supporting elements
+- **Accent Color**: Cyan Blue (oklch(0.60 0.15 200)) - Slightly muted for dark backgrounds
+- **Foreground/Background Pairings**:
+  - Background (Dark Navy oklch(0.15 0.01 250)): Light text (oklch(0.95 0.01 250)) - Ratio 11.8:1 ✓
+  - Card (Slate oklch(0.20 0.015 250)): Light text (oklch(0.95 0.01 250)) - Ratio 10.2:1 ✓
+  - Primary (Cyan oklch(0.70 0.15 200)): Dark text (oklch(0.15 0.01 250)) - Ratio 9.5:1 ✓
+  - Muted (Dark Slate oklch(0.25 0.015 250)): Muted text (oklch(0.65 0.02 250)) - Ratio 4.8:1 ✓
 
 ## Font Selection
 The typeface should convey modern professionalism with excellent readability for financial data. Inter font family provides technical precision with geometric proportions, perfect for a tech company's expense platform.
@@ -103,7 +121,7 @@ Motion should feel purposeful and efficient, reinforcing the professional nature
   - Inputs: Default, focus (cyan ring), error (red border), filled
   - Cards: Default, hover (subtle elevation), selected
   
-- **Icon Selection**: Phosphor icons for consistent geometric style - Wallet, Plus, ChartBar, Tag, SignOut, User, Pencil, Trash
+- **Icon Selection**: Phosphor icons for consistent geometric style - Wallet, Plus, ChartBar, Tag, SignOut, User, Pencil, Trash, Moon, Sun (for theme toggle)
   
 - **Spacing**: Consistent 4px base unit - gaps use gap-4, gap-6, gap-8; padding uses p-4, p-6, p-8; margins minimal with grid/flex gaps preferred
   
