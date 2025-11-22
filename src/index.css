@@ -13,7 +13,7 @@
 }
 
 :root {
-  --background: oklch(0.98 0.005 250);
+  --background: oklch(96.8% 0.007 247.896);
   --foreground: oklch(0.25 0.05 250);
   
   --card: oklch(1 0 0);
@@ -48,6 +48,8 @@
   --ring: oklch(0.65 0.15 200);
   
   --radius: 0.625rem;
+  
+  --spacing: 0.20rem;
 }
 
 @theme {

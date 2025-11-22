@@ -141,10 +141,10 @@ function App() {
   }
 
   const handleBudgetChange = (category: Category, amount: number) => {
-    setBudgets(current => ({
+    setBudgets(current => (({
       ...(current || {}),
       [category]: amount
-    }) as BudgetMap)
+    }) as BudgetMap))
   }
 
   const handleDialogOpenChange = (open: boolean) => {
