@@ -1,152 +1,161 @@
-# Bitflow Nova Digital Solutions Website
+# Bitflow Nova - Modern Corporate Digital Solutions Website
 
-A modern, professional marketing website for Bitflow Nova, a digital solutions company showcasing services, projects, and enabling client engagement through quote requests.
+A comprehensive, professional marketing website for Bitflow Nova showcasing digital solutions expertise with a modern corporate tech aesthetic optimized for enterprise audiences.
 
 **Experience Qualities**: 
-1. **Professional** - Polished, trustworthy design that establishes credibility and expertise
-2. **Innovative** - Modern aesthetic with smooth interactions that reflect cutting-edge digital solutions
-3. **Engaging** - Clear calls-to-action and intuitive navigation that guides visitors toward conversion
+1. **Professional** - Clean, corporate design establishing trust and credibility with enterprise clients
+2. **Precise** - Clear information architecture with action-oriented messaging emphasizing expertise
+3. **Confident** - Bold visual hierarchy and compelling differentiators highlighting competitive advantages
 
 **Complexity Level**: Content Showcase (information-focused)
-- Multi-section marketing site with forms, smooth scrolling, and theme switching
+- Multi-page marketing site with routing, forms, legal pages, and strict enterprise branding guidelines
 
 ## Essential Features
 
-### Hero Section
-- **Functionality**: Impactful first impression with company tagline and primary CTAs
-- **Purpose**: Immediately communicate value proposition and drive consultation requests
-- **Trigger**: Page load - hero is first element visitors see
-- **Progression**: View tagline "Design. Protect. Automate." → see CTA buttons → click "Request a Free Consultation" or "Contact Us" → scroll to contact form
-- **Success criteria**: Hero fills viewport, CTAs are prominent, smooth transition to contact section
+### Mandatory Brand Identity
+- **Functionality**: Consistent global header logo structure across all pages
+- **Purpose**: Establish brand recognition and professional identity
+- **Trigger**: Page load - logo appears in sticky header
+- **Progression**: View "# BITFLOW #" brand mark → tagline "Design. Protect. automate." displayed beneath
+- **Success criteria**: Logo structure exactly matches specification, visible on all pages, maintains hierarchy
 
-### Process Section
-- **Functionality**: Four-step visual breakdown of client engagement process
-- **Purpose**: Build trust by clarifying the path from inquiry to results
-- **Trigger**: Scroll to process section
-- **Progression**: View step 1 (Discuss requirements) → step 2 (Solution in 1 week) → step 3 (Implementation in 2 weeks) → step 4 (Experience results)
-- **Success criteria**: Steps display in logical order, icons/visuals enhance understanding
+### Multi-Page Architecture
+- **Functionality**: Four primary pages plus three legal policy pages
+- **Purpose**: Comprehensive information architecture for enterprise audiences
+- **Trigger**: Navigation link clicks
+- **Progression**: Click nav link → route to page (/, /services, /s-projects-side-by-side, /about) → footer links to policies (/privacy-policy, /terms-and-conditions, /refund-policy)
+- **Success criteria**: All seven pages accessible, clean URLs, proper routing, sticky nav on all pages
 
-### Services Showcase
-- **Functionality**: Grid display of six core services
-- **Purpose**: Communicate breadth of expertise and help visitors identify relevant offerings
-- **Trigger**: Scroll to services section
-- **Progression**: View "Our Diverse Services" header → browse service cards (AI Development, Cyber Security, Software Development, Automation Tools, App Development, Digital Marketing) → click "View All Services" → scroll to detailed view
-- **Success criteria**: Services are scannable, cards are interactive, clear hierarchy
+### Consultation Request Form
+- **Functionality**: Dual-placement contact form capturing five specific data points
+- **Purpose**: Generate qualified leads from enterprise clients
+- **Trigger**: Appears in Hero section AND dedicated footer block
+- **Progression**: Fill first name → last name → email → phone number → select service from dropdown (9 options) → click "Request a Quote" → confirmation message
+- **Success criteria**: Form validates all fields, stores data persistently, dropdown shows all 9 services, exact button text
 
-### Projects/Case Studies
-- **Functionality**: Showcase recent work with Sage Helix 360 highlight
-- **Purpose**: Demonstrate capabilities through real-world results
-- **Trigger**: Scroll to projects section
-- **Progression**: View "Our Work in Action" header → see Sage Helix 360 project → click "View All Projects" → expand project details
-- **Success criteria**: Project looks impressive, clear project description, professional presentation
+### Nine Core Services
+- **Functionality**: Complete service portfolio displayed on homepage and detailed /services page
+- **Purpose**: Communicate comprehensive digital solutions expertise
+- **Trigger**: Scroll to services section or navigate to /services
+- **Progression**: View service grid → see all 9 services (AI Development, Cyber Security, Software Development, Automation Tools, App Development, Digital Marketing, Web Development, CMS Development, SEO) → click for details
+- **Success criteria**: All 9 services listed with minimalist SVG icons, linked to services page
 
-### Why Choose Us
-- **Functionality**: Four key differentiators presented clearly
-- **Purpose**: Address objections and establish competitive advantages
-- **Trigger**: Scroll to "Choose Bitflow Nova" section
-- **Progression**: View differentiators → Expert Professionals → Unmatched Support → Fast Turnaround → Sustainable Practices
-- **Success criteria**: Benefits are clear and credible, icons support messaging
+### 4-Step Time-Bound Process
+- **Functionality**: Visual breakdown of engagement timeline
+- **Purpose**: Build trust through transparent, rapid delivery promise
+- **Trigger**: Scroll to process section on homepage
+- **Progression**: Step 1 (Discuss) → Step 2 (Craft solution in 1 week) → Step 3 (Implement in 2 weeks) → Step 4 (Results)
+- **Success criteria**: Timeline clearly shows 1 week + 2 weeks = 3-week deployment, visually prominent
 
-### Contact/Quote Form
-- **Functionality**: Multi-field form for quote requests
-- **Purpose**: Capture qualified leads and enable easy outreach
-- **Trigger**: Click CTA or scroll to contact section
-- **Progression**: Fill first name → last name → email → phone → select service → click "Request a Quote" → see confirmation "Thank you! We'll be in touch soon."
-- **Success criteria**: Form validates inputs, stores submissions, shows success message, clears on submit
+### Three Featured Projects Portfolio
+- **Functionality**: Detailed case study narratives with external links
+- **Purpose**: Demonstrate real-world results and vertical expertise
+- **Trigger**: Scroll to portfolio section or navigate to /s-projects-side-by-side
+- **Progression**: View Sage Helix 360 case study → APPICON 2024 → Forensic Medicon 2025 → click external links
+- **Success criteria**: Each project has unique 5-6 sentence narrative, correct URLs, no placeholder text
 
-### Theme Toggle
-- **Functionality**: Switch between light and dark mode with persistent preference
-- **Purpose**: Improve readability and user comfort across different contexts
-- **Trigger**: Click theme toggle button in header/nav
-- **Progression**: Click toggle → theme switches instantly → preference saved → persists across page reloads
-- **Success criteria**: Smooth transition, all colors adapt properly, preference persists
+### Four Mandatory Differentiators
+- **Functionality**: USP section visually highlighting competitive advantages
+- **Purpose**: Address objections and establish market position
+- **Trigger**: Scroll to differentiators section
+- **Progression**: View "Expert Professionals" → "Unmatched Support" → "Fast Turnaround" → "Sustainable Practices"
+- **Success criteria**: All four USPs prominently displayed, frequently referenced throughout copy
+
+### About Page with Leadership
+- **Functionality**: Three-segment about page with founder profiles
+- **Purpose**: Establish credibility and human connection
+- **Trigger**: Navigate to /about
+- **Progression**: Read Mission → Specialization (Education, Healthcare, Enterprise) → Meet Gauri Dumbare (CEO) → Meet Manthan Pawale (CTO)
+- **Success criteria**: Two distinct leadership profiles with role-specific descriptions
+
+### Legal Policy Pages
+- **Functionality**: Three boilerplate legal pages for digital services
+- **Purpose**: Compliance and professional risk management
+- **Trigger**: Footer quick links
+- **Progression**: Click privacy-policy → terms-and-conditions → refund-policy
+- **Success criteria**: Robust, standard legal content tailored for custom digital service contracts
+
+### Footer Contact & Social
+- **Functionality**: Quick links, contact email, and LinkedIn social icon
+- **Purpose**: Enable multiple conversion paths and social proof
+- **Trigger**: Scroll to footer on any page
+- **Progression**: View quick links (policies) → see email bitflownova@gmail.com → click LinkedIn icon
+- **Success criteria**: Email is clickable mailto link, LinkedIn icon links correctly
 
 ## Edge Case Handling
-- **Form Validation**: Required fields show clear error states, email/phone format validation
-- **Empty Form**: Submit button disabled until required fields filled
-- **Smooth Scrolling**: Navigation links scroll smoothly to sections, accounting for fixed header
-- **Mobile Navigation**: Hamburger menu on small screens with slide-in drawer
-- **Theme Persistence**: Theme choice saved to localStorage/useKV and restored on load
+- **Form Validation**: Email format, phone number format, required field indicators, inline error messages
+- **No Authentication**: Strictly prohibit any login/registration UI or logic
+- **No Search**: No site search functionality allowed
+- **No E-commerce**: No checkout, cart, or payment processing
+- **Mobile Navigation**: Responsive hamburger menu, touch-friendly targets
+- **External Links**: Project URLs open in new tabs with proper security attributes
 
 ## Design Direction
-The design should evoke professionalism, innovation, and trustworthiness - befitting a digital solutions company that handles AI development, cybersecurity, and automation. The interface should feel cutting-edge yet approachable, with a tech-forward aesthetic balanced by clear information hierarchy. Minimal approach with strategic use of gradients, shadows, and animations to create depth and engagement.
+The design should evoke corporate professionalism, precision, and technological expertise - reflecting a trusted partner for enterprise digital transformation. The aesthetic must be modern corporate tech: clean, minimalist, with high-quality abstract technology imagery. The interface prioritizes clarity and conversion over decorative elements, with strategic use of the accent color for high-visibility CTAs.
 
 ## Color Selection
-Custom palette using deep blues for trust and professionalism, with cyan/teal accents for innovation and technology. Full dark mode support with adjusted saturation for comfortable viewing.
+Custom palette strictly adhering to mandated brand colors: Primary Blue for trust and corporate identity, neutral gray for sophistication, and Gold accent for conversion urgency.
 
-**Light Mode:**
-- **Primary Color**: Deep Blue (oklch(0.35 0.10 240)) - Represents trust, expertise, and corporate professionalism
-- **Secondary Colors**: Slate (oklch(0.50 0.02 240)) for supporting elements, Light backgrounds (oklch(0.98 0.005 240))
-- **Accent Color**: Bright Cyan (oklch(0.65 0.18 195)) - Innovation, technology, energy for CTAs
+**Mandated Color Palette:**
+- **Primary Color**: Royal Blue #0047AB (oklch(0.42 0.18 264)) - Corporate professionalism, trust, technology leadership
+- **Secondary/Background Color**: Light Gray #F5F5F5 (oklch(0.97 0 0)) - Clean, minimalist foundation for content
+- **Accent/CTA Color**: Gold #FFD700 (oklch(0.87 0.15 95)) - High-visibility conversion trigger, premium positioning
 - **Foreground/Background Pairings**: 
-  - Background (Light Gray oklch(0.98 0.005 240)): Deep Blue text (oklch(0.25 0.08 240)) - Ratio 10.5:1 ✓
-  - Card (White oklch(1 0 0)): Deep Blue text (oklch(0.25 0.08 240)) - Ratio 12.1:1 ✓
-  - Primary (Deep Blue oklch(0.35 0.10 240)): White text (oklch(1 0 0)) - Ratio 8.2:1 ✓
-  - Accent (Cyan oklch(0.65 0.18 195)): White text (oklch(1 0 0)) - Ratio 5.1:1 ✓
-  - Secondary (Slate oklch(0.50 0.02 240)): White text (oklch(1 0 0)) - Ratio 6.8:1 ✓
-
-**Dark Mode:**
-- **Primary Color**: Bright Blue (oklch(0.60 0.15 230)) - Maintains visibility and energy on dark background
-- **Secondary Colors**: Medium Gray (oklch(0.40 0.02 240)) for supporting elements
-- **Accent Color**: Electric Cyan (oklch(0.70 0.18 195)) - High contrast, tech aesthetic
-- **Foreground/Background Pairings**:
-  - Background (Dark Blue oklch(0.15 0.02 240)): Light text (oklch(0.95 0.01 240)) - Ratio 12.5:1 ✓
-  - Card (Slate oklch(0.20 0.025 240)): Light text (oklch(0.95 0.01 240)) - Ratio 10.8:1 ✓
-  - Primary (Bright Blue oklch(0.60 0.15 230)): Dark text (oklch(0.15 0.02 240)) - Ratio 7.2:1 ✓
-  - Accent (Cyan oklch(0.70 0.18 195)): Dark text (oklch(0.15 0.02 240)) - Ratio 9.1:1 ✓
+  - Background (#F5F5F5 oklch(0.97 0 0)): Dark text (oklch(0.20 0 0)) - Ratio 13.2:1 ✓
+  - Primary (#0047AB oklch(0.42 0.18 264)): White text (oklch(1 0 0)) - Ratio 6.8:1 ✓
+  - Accent (#FFD700 oklch(0.87 0.15 95)): Dark text (oklch(0.20 0 0)) - Ratio 11.5:1 ✓
+  - Card (White oklch(1 0 0)): Dark text (oklch(0.20 0 0)) - Ratio 15.1:1 ✓
 
 ## Font Selection
-The typeface should convey modern professionalism with a tech-forward personality. Space Grotesk for headings provides geometric precision and contemporary style, while Inter for body text ensures excellent readability and pairs beautifully with the heading font.
+Modern, highly legible sans-serif typography conveying clarity and professionalism appropriate for corporate enterprise audiences. Inter throughout for consistent, clean readability.
 
 - **Typographic Hierarchy**: 
-  - H1 (Hero Title): Space Grotesk Bold/56px/tight letter spacing/-0.02em
-  - H2 (Section Headers): Space Grotesk Semibold/40px/tight spacing
-  - H3 (Subsections): Space Grotesk Medium/28px/normal spacing
-  - H4 (Card Titles): Inter Semibold/20px/normal spacing
+  - H1 (Page Titles): Inter Bold/48px/tight letter spacing/-0.01em
+  - H2 (Section Headers): Inter Semibold/36px/normal spacing
+  - H3 (Subsections): Inter Semibold/24px/normal spacing
+  - H4 (Card Titles): Inter Medium/18px/normal spacing
   - Body (Content): Inter Regular/16px/1.6 line height
   - Caption (Meta info): Inter Regular/14px/1.5 line height
-  - Button Labels: Inter Semibold/16px/0.01em tracking
+  - Button Labels: Inter Semibold/16px/0.02em tracking
 
 ## Animations
-Motion should feel smooth and purposeful, reinforcing the innovative nature while maintaining professionalism. Animations should create a sense of polish and attention to detail, with scroll-triggered reveals and hover interactions that feel responsive and delightful.
+Motion should be subtle and functional, reinforcing professionalism over playfulness. Animations create polish and guide attention without distracting from content or slowing task completion.
 
-- **Purposeful Meaning**: Section reveals fade up on scroll to create progressive disclosure, service cards lift on hover to indicate interactivity, CTA buttons scale subtly to invite clicks, theme toggle has smooth color transitions
-- **Hierarchy of Movement**: Hero elements animate in sequence on load (tagline → CTAs), process steps reveal progressively, form inputs focus with smooth transitions, successful form submission shows celebration micro-interaction
+- **Purposeful Meaning**: Smooth scroll to sections, subtle hover lifts on cards, form field focus transitions, CTA button subtle scale on hover
+- **Hierarchy of Movement**: Minimize hero animations, prioritize interaction feedback, form submission success indicator, lazy-load images for performance
 
 ## Component Selection
 - **Components**: 
-  - Button (primary CTAs, secondary actions, form submit)
+  - Button (primary accent CTAs, secondary outline actions)
   - Card (service cards, project cards, differentiator cards)
-  - Input (text fields for name, email, phone)
-  - Select (service dropdown)
+  - Input (text fields for form)
+  - Select (service dropdown with 9 options)
   - Sheet/Drawer (mobile navigation)
-  - ScrollArea (smooth section navigation)
   - Separator (section dividers)
-  - Badge (service tags, status indicators)
+  - Label (form field labels)
   
 - **Customizations**: 
-  - Custom navigation with smooth scroll to section anchors
-  - Theme toggle component with sun/moon icons
-  - Custom hero gradient background
-  - Service card hover effects with gradient borders
-  - Footer with social media icon links
-  - Success toast/alert for form submission
+  - Custom routing for 7 pages
+  - Sticky navigation with Contact Us accent button
+  - Minimalist SVG icons for services
+  - Footer quick links section
+  - Dual-form placement (hero + footer)
+  - External link handling for projects
   
 - **States**: 
-  - Buttons: Default, hover (lift + glow), active (pressed), disabled (reduced opacity), loading (spinner)
-  - Inputs: Default, focus (accent glow), error (red border + message), filled, disabled
-  - Cards: Default, hover (elevation + border glow), active/selected
-  - Nav links: Default, hover (accent underline), active (accent color)
+  - Buttons: Default, hover (subtle lift), active, disabled
+  - Inputs: Default, focus (accent border), error (red border + message), filled
+  - Cards: Default, hover (subtle shadow)
+  - Nav links: Default, hover (accent underline), active page indicator
   
-- **Icon Selection**: Phosphor icons for modern, clean aesthetic - Rocket, ShieldCheck, Code, Lightning, DeviceMobile, ChartLine, ArrowRight, CheckCircle, Phone, Envelope, Sun, Moon, List, X
+- **Icon Selection**: Minimalist, professional icons - LinkedIn social, simple geometric shapes for services, chevrons for navigation
   
-- **Spacing**: Consistent 4px base unit - section padding py-16 to py-24, container max-w-7xl, card padding p-6 to p-8, grid gaps gap-6 to gap-8
+- **Spacing**: Corporate spacing scale - generous whitespace, section padding py-20, container max-w-7xl, card padding p-8, consistent gap-8
   
 - **Mobile**: 
-  - Mobile-first responsive design
-  - Single column layouts on mobile (< 768px)
-  - Hamburger menu with slide-in drawer navigation
-  - Service grid: 1 column mobile, 2 columns tablet, 3 columns desktop
-  - Hero text scales down proportionally
-  - Form full-width on mobile with stacked fields
-  - Footer links stack vertically on mobile
+  - Fully responsive design optimized for desktop but functional on all devices
+  - Single column on mobile < 768px
+  - Hamburger menu with drawer
+  - Service grid: 1 col mobile, 2 col tablet, 3 col desktop
+  - Form fields stack vertically on mobile
+  - Footer reorganizes on mobile

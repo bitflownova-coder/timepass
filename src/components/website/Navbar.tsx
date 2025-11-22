@@ -1,88 +1,111 @@
 import { Button } from '@/components/ui/button'
-import { Sun, Moon, List, X } from '@phosphor-icons/react'
-import { useTheme } from '@/hooks/use-theme'
+import { List, X } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 
 interface NavbarProps {
-  onContactClick: () => void
+  currentPath: string
+  navigate: (path: string) => void
 }
 
-export function Navbar({ onContactClick }: NavbarProps) {
-  const { theme, setTheme } = useTheme()
+export function Navbar({ currentPath, navigate }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false)
 
-  const scrollToSection = (id: string) => {
-    const section = document.getElementById(id)
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' })
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact')
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' })
       setIsOpen(false)
+    } else {
+      navigate('/')
+      setTimeout(() => {
+        const section = document.getElementById('contact')
+        section?.scrollIntoView({ behavior: 'smooth' })
+      }, 100)
     }
   }
 
   const navLinks = [
-    { label: 'Home', id: 'hero' },
-    { label: 'Services', id: 'services' },
-    { label: 'Our Work', id: 'projects' },
-    { label: 'About', id: 'why-choose-us' },
-    { label: 'Contact', id: 'contact' }
+    { label: 'Home', path: '/' },
+    { label: 'Our Work', path: '/s-projects-side-by-side' },
+    { label: 'About', path: '/about' }
   ]
 
+  const handleNavClick = (path: string) => {
+    navigate(path)
+    setIsOpen(false)
+  }
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-sm border-b border-border shadow-sm">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-md" />
-            <span className="text-xl font-bold text-foreground">Bitflow Nova</span>
-          </div>
+          <button 
+            onClick={() => handleNavClick('/')}
+            className="flex flex-col items-start gap-0 hover:opacity-80 transition-opacity"
+          >
+            <div className="text-xl md:text-2xl font-bold text-foreground tracking-tight">
+              # BITFLOW #
+            </div>
+            <div className="text-xs md:text-sm text-muted-foreground font-medium">
+              Design. Protect. automate.
+            </div>
+          </button>
 
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
               <button
-                key={link.id}
-                onClick={() => scrollToSection(link.id)}
-                className="text-sm font-medium text-muted-foreground hover:text-accent transition-colors"
+                key={link.path}
+                onClick={() => handleNavClick(link.path)}
+                className={`text-sm font-medium transition-colors ${
+                  currentPath === link.path
+                    ? 'text-primary'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
               >
                 {link.label}
               </button>
             ))}
-          </div>
-
-          <div className="flex items-center gap-3">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            
+            <Button 
+              onClick={scrollToContact}
+              className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold"
             >
-              {theme === 'dark' ? (
-                <Sun className="w-5 h-5" />
-              ) : (
-                <Moon className="w-5 h-5" />
-              )}
+              Contact Us
             </Button>
-
-            <Sheet open={isOpen} onOpenChange={setIsOpen}>
-              <SheetTrigger asChild className="md:hidden">
-                <Button variant="ghost" size="icon">
-                  <List className="w-6 h-6" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent className="p-6">
-                <div className="flex flex-col gap-6 mt-8">
-                  {navLinks.map((link) => (
-                    <button
-                      key={link.id}
-                      onClick={() => scrollToSection(link.id)}
-                      className="text-lg font-medium text-foreground hover:text-accent transition-colors text-left"
-                    >
-                      {link.label}
-                    </button>
-                  ))}
-                </div>
-              </SheetContent>
-            </Sheet>
           </div>
+
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild className="md:hidden">
+              <Button variant="ghost" size="icon">
+                <List className="w-6 h-6" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-64">
+              <div className="flex flex-col gap-6 mt-8">
+                {navLinks.map((link) => (
+                  <button
+                    key={link.path}
+                    onClick={() => handleNavClick(link.path)}
+                    className={`text-left text-base font-medium transition-colors ${
+                      currentPath === link.path
+                        ? 'text-primary'
+                        : 'text-muted-foreground hover:text-foreground'
+                    }`}
+                  >
+                    {link.label}
+                  </button>
+                ))}
+                
+                <Button 
+                  onClick={scrollToContact}
+                  className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold w-full"
+                >
+                  Contact Us
+                </Button>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </nav>

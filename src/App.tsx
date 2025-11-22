@@ -1,35 +1,58 @@
-import { useState } from 'react'
-import { useTheme } from '@/hooks/use-theme'
+import { useState, useEffect } from 'react'
 import { Navbar } from '@/components/website/Navbar'
-import { Hero } from '@/components/website/Hero'
-import { Process } from '@/components/website/Process'
-import { Services } from '@/components/website/Services'
-import { Projects } from '@/components/website/Projects'
-import { WhyChooseUs } from '@/components/website/WhyChooseUs'
-import { Contact } from '@/components/website/Contact'
 import { Footer } from '@/components/website/Footer'
+import { HomePage } from '@/components/website/pages/HomePage'
+import { ServicesPage } from '@/components/website/pages/ServicesPage'
+import { ProjectsPage } from '@/components/website/pages/ProjectsPage'
+import { AboutPage } from '@/components/website/pages/AboutPage'
+import { PrivacyPolicyPage } from '@/components/website/pages/PrivacyPolicyPage'
+import { TermsAndConditionsPage } from '@/components/website/pages/TermsAndConditionsPage'
+import { RefundPolicyPage } from '@/components/website/pages/RefundPolicyPage'
 
 function App() {
-  useTheme()
-  const [showContact, setShowContact] = useState(false)
+  const [currentPath, setCurrentPath] = useState(window.location.pathname)
 
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contact')
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' })
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPath(window.location.pathname)
+    }
+
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [])
+
+  const navigate = (path: string) => {
+    window.history.pushState({}, '', path)
+    setCurrentPath(path)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const renderPage = () => {
+    switch (currentPath) {
+      case '/':
+        return <HomePage navigate={navigate} />
+      case '/services':
+        return <ServicesPage navigate={navigate} />
+      case '/s-projects-side-by-side':
+        return <ProjectsPage navigate={navigate} />
+      case '/about':
+        return <AboutPage navigate={navigate} />
+      case '/privacy-policy':
+        return <PrivacyPolicyPage navigate={navigate} />
+      case '/terms-and-conditions':
+        return <TermsAndConditionsPage navigate={navigate} />
+      case '/refund-policy':
+        return <RefundPolicyPage navigate={navigate} />
+      default:
+        return <HomePage navigate={navigate} />
     }
   }
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar onContactClick={scrollToContact} />
-      <Hero onConsultationClick={scrollToContact} onContactClick={scrollToContact} />
-      <Process />
-      <Services />
-      <Projects />
-      <WhyChooseUs />
-      <Contact />
-      <Footer onContactClick={scrollToContact} />
+      <Navbar currentPath={currentPath} navigate={navigate} />
+      {renderPage()}
+      <Footer navigate={navigate} />
     </div>
   )
 }
