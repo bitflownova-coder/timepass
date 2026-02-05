@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bitflow Nova - Login Gatekeeper</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Space Grotesk -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b7cee",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101822",
+                        "surface-dark": "#1c2430",
+                        "border-dark": "#3b4554",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display antialiased text-slate-900 dark:text-white bg-background-light dark:bg-background-dark min-h-screen flex flex-col justify-center relative overflow-hidden">
+<!-- Background Decoration -->
+<div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[100px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[100px]"></div>
+</div>
+<div class="relative w-full max-w-md mx-auto px-6 py-8 flex flex-col gap-6 z-10">
+<!-- Header Section -->
+<div class="flex flex-col items-center gap-4 text-center">
+<!-- App Logo Placeholder -->
+<div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-blue-900 flex items-center justify-center shadow-lg shadow-primary/20 mb-2">
+<span class="material-symbols-outlined text-white text-4xl">hub</span>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Bitflow Nova</h2>
+<p class="text-slate-500 dark:text-slate-400 text-base font-medium">Secure Access Gateway</p>
+</div>
+</div>
+<!-- Form Section -->
+<form class="flex flex-col gap-5 mt-4" onsubmit="event.preventDefault();">
+<!-- Username Input -->
+<div class="flex flex-col gap-2">
+<label class="text-slate-700 dark:text-slate-300 text-sm font-medium ml-1">Username or Email</label>
+<div class="relative flex items-center">
+<input class="w-full h-14 pl-4 pr-12 rounded-lg bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200" placeholder="user@bitflow.com" type="text" value=""/>
+<div class="absolute right-4 text-slate-400 dark:text-slate-500 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-2xl">person</span>
+</div>
+</div>
+</div>
+<!-- Password Input -->
+<div class="flex flex-col gap-2">
+<label class="text-slate-700 dark:text-slate-300 text-sm font-medium ml-1">Password</label>
+<div class="relative flex items-center">
+<input class="w-full h-14 pl-4 pr-12 rounded-lg bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 tracking-widest" placeholder="••••••••" type="password" value=""/>
+<button class="absolute right-4 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors flex items-center cursor-pointer" type="button">
+<span class="material-symbols-outlined text-2xl">visibility_off</span>
+</button>
+</div>
+<!-- Forgot Password -->
+<div class="flex justify-end mt-1">
+<a class="text-sm font-medium text-primary hover:text-blue-400 transition-colors" href="#">Forgot Password?</a>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col gap-4 mt-2">
+<button class="w-full h-14 bg-primary hover:bg-blue-600 active:scale-[0.98] transition-all rounded-lg text-white font-bold text-lg shadow-lg shadow-primary/25 flex items-center justify-center gap-2">
+<span>Login</span>
+<span class="material-symbols-outlined text-xl">login</span>
+</button>
+<div class="relative flex items-center gap-2 py-2">
+<div class="h-px bg-slate-200 dark:bg-border-dark flex-1"></div>
+<span class="text-slate-400 dark:text-slate-500 text-xs font-medium uppercase">Or login with</span>
+<div class="h-px bg-slate-200 dark:bg-border-dark flex-1"></div>
+</div>
+<button class="w-full h-12 bg-transparent border border-slate-200 dark:border-border-dark hover:bg-slate-50 dark:hover:bg-white/5 active:scale-[0.98] transition-all rounded-lg text-slate-700 dark:text-slate-300 font-medium flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined">face</span>
+<span>Biometrics</span>
+</button>
+</div>
+</form>
+<!-- Footer -->
+<div class="mt-auto pt-6 flex flex-col items-center gap-1 opacity-60">
+<p class="text-xs text-slate-500 dark:text-slate-400">Bitflow Nova Application v2.4.0</p>
+<p class="text-[10px] text-slate-400 dark:text-slate-500">© 2024 Secure Build</p>
+</div>
+</div>
+</body></html>
