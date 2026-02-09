@@ -1,0 +1,2248 @@
+cmd : 
+At line:1 char:63
++ ... tudio\jbr"; cmd /c gradlew.bat 
+:app:assembleDebug --stacktrace > buil 
+...
++                 ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpeci 
+   fied: (:String) [], RemoteExceptio  
+  n
+    + FullyQualifiedErrorId : NativeCo 
+   mmandError
+ 
+FAILURE: Build completed with 2 
+failures.
+
+1: Task failed with an exception.
+-----------
+* What went wrong:
+A problem occurred configuring project 
+':app'.
+> Variant 'debug': Python 3.12 is not 
+available for the ABI 'armeabi-v7a'. 
+Supported ABIs are [arm64-v8a, x86_64].
+
+* Try:
+> Run with --info or --debug option to 
+get more log output.
+> Run with --scan to get full insights.
+> Get more help at 
+https://help.gradle.org.
+
+* Exception is:
+org.gradle.api.ProjectConfigurationExce
+ption: A problem occurred configuring 
+project ':app'.
+	at org.gradle.configuration.project.Li
+fecycleProjectEvaluator.wrapException(L
+ifecycleProjectEvaluator.java:84)
+	at org.gradle.configuration.project.Li
+fecycleProjectEvaluator.addConfiguratio
+nFailure(LifecycleProjectEvaluator.java
+:77)
+	at org.gradle.configuration.project.Li
+fecycleProjectEvaluator.access$400(Life
+cycleProjectEvaluator.java:55)
+	at org.gradle.configuration.project.Li
+fecycleProjectEvaluator$NotifyAfterEval
+uate.run(LifecycleProjectEvaluator.java
+:255)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$1.execute(Defau
+ltBuildOperationRunner.java:29)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$1.execute(Defau
+ltBuildOperationRunner.java:26)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:157)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.run(DefaultBuil
+dOperationRunner.java:47)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationExecutor.run(DefaultBu
+ildOperationExecutor.java:68)
+	at org.gradle.configuration.project.Li
+fecycleProjectEvaluator$EvaluateProject
+.lambda$run$0(LifecycleProjectEvaluator
+.java:114)
+	at org.gradle.api.internal.project.Def
+aultProjectStateRegistry$ProjectStateIm
+pl.lambda$applyToMutableState$1(Default
+ProjectStateRegistry.java:395)
+	at org.gradle.api.internal.project.Def
+aultProjectStateRegistry$ProjectStateIm
+pl.lambda$fromMutableState$2(DefaultPro
+jectStateRegistry.java:418)
+	at org.gradle.internal.work.DefaultWor
+kerLeaseService.withReplacedLocks(Defau
+ltWorkerLeaseService.java:345)
+	at org.gradle.api.internal.project.Def
+aultProjectStateRegistry$ProjectStateIm
+pl.fromMutableState(DefaultProjectState
+Registry.java:418)
+	at org.gradle.api.internal.project.Def
+aultProjectStateRegistry$ProjectStateIm
+pl.applyToMutableState(DefaultProjectSt
+ateRegistry.java:394)
+	at org.gradle.configuration.project.Li
+fecycleProjectEvaluator$EvaluateProject
+.run(LifecycleProjectEvaluator.java:100
+)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$1.execute(Defau
+ltBuildOperationRunner.java:29)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$1.execute(Defau
+ltBuildOperationRunner.java:26)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:157)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.run(DefaultBuil
+dOperationRunner.java:47)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationExecutor.run(DefaultBu
+ildOperationExecutor.java:68)
+	at org.gradle.configuration.project.Li
+fecycleProjectEvaluator.evaluate(Lifecy
+cleProjectEvaluator.java:72)
+	at org.gradle.api.internal.project.Def
+aultProject.evaluate(DefaultProject.jav
+a:782)
+	at org.gradle.api.internal.project.Def
+aultProject.evaluate(DefaultProject.jav
+a:156)
+	at org.gradle.api.internal.project.Pro
+jectLifecycleController.lambda$ensureSe
+lfConfigured$2(ProjectLifecycleControll
+er.java:84)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$doTransition$14
+(StateTransitionController.java:255)
+	at org.gradle.internal.model.StateTran
+sitionController.doTransition(StateTran
+sitionController.java:266)
+	at org.gradle.internal.model.StateTran
+sitionController.doTransition(StateTran
+sitionController.java:254)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$maybeTransition
+IfNotCurrentlyTransitioning$10(StateTra
+nsitionController.java:199)
+	at org.gradle.internal.work.DefaultSyn
+chronizer.withLock(DefaultSynchronizer.
+java:34)
+	at org.gradle.internal.model.StateTran
+sitionController.maybeTransitionIfNotCu
+rrentlyTransitioning(StateTransitionCon
+troller.java:195)
+	at org.gradle.api.internal.project.Pro
+jectLifecycleController.ensureSelfConfi
+gured(ProjectLifecycleController.java:8
+4)
+	at org.gradle.api.internal.project.Def
+aultProjectStateRegistry$ProjectStateIm
+pl.ensureConfigured(DefaultProjectState
+Registry.java:369)
+	at org.gradle.execution.TaskPathProjec
+tEvaluator.configure(TaskPathProjectEva
+luator.java:33)
+	at org.gradle.execution.TaskPathProjec
+tEvaluator.configureHierarchy(TaskPathP
+rojectEvaluator.java:49)
+	at org.gradle.configuration.DefaultPro
+jectsPreparer.prepareProjects(DefaultPr
+ojectsPreparer.java:42)
+	at org.gradle.configuration.BuildTreeP
+reparingProjectsPreparer.prepareProject
+s(BuildTreePreparingProjectsPreparer.ja
+va:65)
+	at org.gradle.configuration.BuildOpera
+tionFiringProjectsPreparer$ConfigureBui
+ld.run(BuildOperationFiringProjectsPrep
+arer.java:52)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$1.execute(Defau
+ltBuildOperationRunner.java:29)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$1.execute(Defau
+ltBuildOperationRunner.java:26)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:157)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.run(DefaultBuil
+dOperationRunner.java:47)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationExecutor.run(DefaultBu
+ildOperationExecutor.java:68)
+	at org.gradle.configuration.BuildOpera
+tionFiringProjectsPreparer.prepareProje
+cts(BuildOperationFiringProjectsPrepare
+r.java:40)
+	at org.gradle.initialization.VintageBu
+ildModelController.lambda$prepareProjec
+ts$2(VintageBuildModelController.java:8
+4)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$doTransition$14
+(StateTransitionController.java:255)
+	at org.gradle.internal.model.StateTran
+sitionController.doTransition(StateTran
+sitionController.java:266)
+	at org.gradle.internal.model.StateTran
+sitionController.doTransition(StateTran
+sitionController.java:254)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$transitionIfNot
+Previously$11(StateTransitionController
+.java:213)
+	at org.gradle.internal.work.DefaultSyn
+chronizer.withLock(DefaultSynchronizer.
+java:34)
+	at org.gradle.internal.model.StateTran
+sitionController.transitionIfNotPreviou
+sly(StateTransitionController.java:209)
+	at org.gradle.initialization.VintageBu
+ildModelController.prepareProjects(Vint
+ageBuildModelController.java:84)
+	at org.gradle.initialization.VintageBu
+ildModelController.prepareToScheduleTas
+ks(VintageBuildModelController.java:71)
+	at org.gradle.internal.build.DefaultBu
+ildLifecycleController.lambda$prepareTo
+ScheduleTasks$6(DefaultBuildLifecycleCo
+ntroller.java:172)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$doTransition$14
+(StateTransitionController.java:255)
+	at org.gradle.internal.model.StateTran
+sitionController.doTransition(StateTran
+sitionController.java:266)
+	at org.gradle.internal.model.StateTran
+sitionController.doTransition(StateTran
+sitionController.java:254)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$maybeTransition
+$9(StateTransitionController.java:190)
+	at org.gradle.internal.work.DefaultSyn
+chronizer.withLock(DefaultSynchronizer.
+java:34)
+	at org.gradle.internal.model.StateTran
+sitionController.maybeTransition(StateT
+ransitionController.java:186)
+	at org.gradle.internal.build.DefaultBu
+ildLifecycleController.prepareToSchedul
+eTasks(DefaultBuildLifecycleController.
+java:170)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeWorkPreparer.scheduleRequest
+edTasks(DefaultBuildTreeWorkPreparer.ja
+va:36)
+	at org.gradle.configurationcache.Vinta
+geBuildTreeWorkController$scheduleAndRu
+nRequestedTasks$1.apply(VintageBuildTre
+eWorkController.kt:36)
+	at org.gradle.configurationcache.Vinta
+geBuildTreeWorkController$scheduleAndRu
+nRequestedTasks$1.apply(VintageBuildTre
+eWorkController.kt:35)
+	at org.gradle.composite.internal.Defau
+ltIncludedBuildTaskGraph.withNewWorkGra
+ph(DefaultIncludedBuildTaskGraph.java:1
+12)
+	at org.gradle.configurationcache.Vinta
+geBuildTreeWorkController.scheduleAndRu
+nRequestedTasks(VintageBuildTreeWorkCon
+troller.kt:35)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeLifecycleController.lambda$s
+cheduleAndRunTasks$1(DefaultBuildTreeLi
+fecycleController.java:68)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeLifecycleController.lambda$r
+unBuild$4(DefaultBuildTreeLifecycleCont
+roller.java:98)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$transition$6(St
+ateTransitionController.java:169)
+	at org.gradle.internal.model.StateTran
+sitionController.doTransition(StateTran
+sitionController.java:266)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$transition$7(St
+ateTransitionController.java:169)
+	at org.gradle.internal.work.DefaultSyn
+chronizer.withLock(DefaultSynchronizer.
+java:44)
+	at org.gradle.internal.model.StateTran
+sitionController.transition(StateTransi
+tionController.java:169)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeLifecycleController.runBuild
+(DefaultBuildTreeLifecycleController.ja
+va:95)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeLifecycleController.schedule
+AndRunTasks(DefaultBuildTreeLifecycleCo
+ntroller.java:68)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeLifecycleController.schedule
+AndRunTasks(DefaultBuildTreeLifecycleCo
+ntroller.java:63)
+	at org.gradle.tooling.internal.provide
+r.ExecuteBuildActionRunner.run(ExecuteB
+uildActionRunner.java:31)
+	at org.gradle.launcher.exec.ChainingBu
+ildActionRunner.run(ChainingBuildAction
+Runner.java:35)
+	at org.gradle.internal.buildtree.Probl
+emReportingBuildActionRunner.run(Proble
+mReportingBuildActionRunner.java:49)
+	at org.gradle.launcher.exec.BuildOutco
+meReportingBuildActionRunner.run(BuildO
+utcomeReportingBuildActionRunner.java:6
+5)
+	at org.gradle.tooling.internal.provide
+r.FileSystemWatchingBuildActionRunner.r
+un(FileSystemWatchingBuildActionRunner.
+java:140)
+	at org.gradle.launcher.exec.BuildCompl
+etionNotifyingBuildActionRunner.run(Bui
+ldCompletionNotifyingBuildActionRunner.
+java:41)
+	at org.gradle.launcher.exec.RootBuildL
+ifecycleBuildActionExecutor.lambda$exec
+ute$0(RootBuildLifecycleBuildActionExec
+utor.java:40)
+	at org.gradle.composite.internal.Defau
+ltRootBuildState.run(DefaultRootBuildSt
+ate.java:122)
+	at org.gradle.launcher.exec.RootBuildL
+ifecycleBuildActionExecutor.execute(Roo
+tBuildLifecycleBuildActionExecutor.java
+:40)
+	at org.gradle.internal.buildtree.InitD
+eprecationLoggingActionExecutor.execute
+(InitDeprecationLoggingActionExecutor.j
+ava:58)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeContext.execute(DefaultBuild
+TreeContext.java:40)
+	at org.gradle.launcher.exec.BuildTreeL
+ifecycleBuildActionExecutor.lambda$exec
+ute$0(BuildTreeLifecycleBuildActionExec
+utor.java:65)
+	at org.gradle.internal.buildtree.Build
+TreeState.run(BuildTreeState.java:53)
+	at org.gradle.launcher.exec.BuildTreeL
+ifecycleBuildActionExecutor.execute(Bui
+ldTreeLifecycleBuildActionExecutor.java
+:65)
+	at org.gradle.launcher.exec.RunAsBuild
+OperationBuildActionExecutor$3.call(Run
+AsBuildOperationBuildActionExecutor.jav
+a:61)
+	at org.gradle.launcher.exec.RunAsBuild
+OperationBuildActionExecutor$3.call(Run
+AsBuildOperationBuildActionExecutor.jav
+a:57)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$CallableBuildOp
+erationWorker.execute(DefaultBuildOpera
+tionRunner.java:204)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$CallableBuildOp
+erationWorker.execute(DefaultBuildOpera
+tionRunner.java:199)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:157)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.call(DefaultBui
+ldOperationRunner.java:53)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationExecutor.call(DefaultB
+uildOperationExecutor.java:73)
+	at org.gradle.launcher.exec.RunAsBuild
+OperationBuildActionExecutor.execute(Ru
+nAsBuildOperationBuildActionExecutor.ja
+va:57)
+	at org.gradle.launcher.exec.RunAsWorke
+rThreadBuildActionExecutor.lambda$execu
+te$0(RunAsWorkerThreadBuildActionExecut
+or.java:36)
+	at org.gradle.internal.work.DefaultWor
+kerLeaseService.withLocks(DefaultWorker
+LeaseService.java:249)
+	at org.gradle.internal.work.DefaultWor
+kerLeaseService.runAsWorkerThread(Defau
+ltWorkerLeaseService.java:109)
+	at org.gradle.launcher.exec.RunAsWorke
+rThreadBuildActionExecutor.execute(RunA
+sWorkerThreadBuildActionExecutor.java:3
+6)
+	at org.gradle.tooling.internal.provide
+r.continuous.ContinuousBuildActionExecu
+tor.execute(ContinuousBuildActionExecut
+or.java:110)
+	at org.gradle.tooling.internal.provide
+r.SubscribableBuildActionExecutor.execu
+te(SubscribableBuildActionExecutor.java
+:64)
+	at org.gradle.internal.session.Default
+BuildSessionContext.execute(DefaultBuil
+dSessionContext.java:46)
+	at org.gradle.tooling.internal.provide
+r.BuildSessionLifecycleBuildActionExecu
+ter$ActionImpl.apply(BuildSessionLifecy
+cleBuildActionExecuter.java:100)
+	at org.gradle.tooling.internal.provide
+r.BuildSessionLifecycleBuildActionExecu
+ter$ActionImpl.apply(BuildSessionLifecy
+cleBuildActionExecuter.java:88)
+	at org.gradle.internal.session.BuildSe
+ssionState.run(BuildSessionState.java:6
+9)
+	at org.gradle.tooling.internal.provide
+r.BuildSessionLifecycleBuildActionExecu
+ter.execute(BuildSessionLifecycleBuildA
+ctionExecuter.java:62)
+	at org.gradle.tooling.internal.provide
+r.BuildSessionLifecycleBuildActionExecu
+ter.execute(BuildSessionLifecycleBuildA
+ctionExecuter.java:41)
+	at org.gradle.tooling.internal.provide
+r.StartParamsValidatingActionExecuter.e
+xecute(StartParamsValidatingActionExecu
+ter.java:64)
+	at org.gradle.tooling.internal.provide
+r.StartParamsValidatingActionExecuter.e
+xecute(StartParamsValidatingActionExecu
+ter.java:32)
+	at org.gradle.tooling.internal.provide
+r.SessionFailureReportingActionExecuter
+.execute(SessionFailureReportingActionE
+xecuter.java:50)
+	at org.gradle.tooling.internal.provide
+r.SessionFailureReportingActionExecuter
+.execute(SessionFailureReportingActionE
+xecuter.java:38)
+	at org.gradle.tooling.internal.provide
+r.SetupLoggingActionExecuter.execute(Se
+tupLoggingActionExecuter.java:47)
+	at org.gradle.tooling.internal.provide
+r.SetupLoggingActionExecuter.execute(Se
+tupLoggingActionExecuter.java:31)
+	at org.gradle.launcher.daemon.server.e
+xec.ExecuteBuild.doBuild(ExecuteBuild.j
+ava:65)
+	at org.gradle.launcher.daemon.server.e
+xec.BuildCommandOnly.execute(BuildComma
+ndOnly.java:37)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.WatchForDisconnection.execute(Watch
+ForDisconnection.java:39)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.ResetDeprecationLogger.execute(Rese
+tDeprecationLogger.java:29)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.RequestStopIfSingleUsedDaemon.execu
+te(RequestStopIfSingleUsedDaemon.java:3
+5)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.ForwardClientInput$2.create(Forward
+ClientInput.java:78)
+	at org.gradle.launcher.daemon.server.e
+xec.ForwardClientInput$2.create(Forward
+ClientInput.java:75)
+	at org.gradle.util.internal.Swapper.sw
+ap(Swapper.java:38)
+	at org.gradle.launcher.daemon.server.e
+xec.ForwardClientInput.execute(ForwardC
+lientInput.java:75)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.LogAndCheckHealth.execute(LogAndChe
+ckHealth.java:64)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.LogToClient.doBuild(LogToClient.jav
+a:63)
+	at org.gradle.launcher.daemon.server.e
+xec.BuildCommandOnly.execute(BuildComma
+ndOnly.java:37)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.EstablishBuildEnvironment.doBuild(E
+stablishBuildEnvironment.java:84)
+	at org.gradle.launcher.daemon.server.e
+xec.BuildCommandOnly.execute(BuildComma
+ndOnly.java:37)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.StartBuildOrRespondWithBusy$1.run(S
+tartBuildOrRespondWithBusy.java:52)
+	at org.gradle.launcher.daemon.server.D
+aemonStateCoordinator$1.run(DaemonState
+Coordinator.java:297)
+	at org.gradle.internal.concurrent.Exec
+utorPolicy$CatchAndRecordFailures.onExe
+cute(ExecutorPolicy.java:64)
+	at org.gradle.internal.concurrent.Abst
+ractManagedExecutor$1.run(AbstractManag
+edExecutor.java:47)
+Caused by: 
+org.gradle.api.GradleException: 
+Variant 'debug': Python 3.12 is not 
+available for the ABI 'armeabi-v7a'. 
+Supported ABIs are [arm64-v8a, x86_64].
+	at com.chaquo.python.PythonPlugin.getA
+bis(PythonPlugin.kt:281)
+	at com.chaquo.python.PythonPlugin.afte
+rVariant(PythonPlugin.kt:254)
+	at com.chaquo.python.PythonPlugin$appl
+y$2$3.execute(PythonPlugin.kt:93)
+	at com.chaquo.python.PythonPlugin$appl
+y$2$3.execute(PythonPlugin.kt:22)
+	at org.gradle.configuration.internal.D
+efaultUserCodeApplicationContext$Curren
+tApplication$1.execute(DefaultUserCodeA
+pplicationContext.java:123)
+	at org.gradle.configuration.internal.D
+efaultListenerBuildOperationDecorator$B
+uildOperationEmittingAction$1.run(Defau
+ltListenerBuildOperationDecorator.java:
+171)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$1.execute(Defau
+ltBuildOperationRunner.java:29)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$1.execute(Defau
+ltBuildOperationRunner.java:26)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:157)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.run(DefaultBuil
+dOperationRunner.java:47)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationExecutor.run(DefaultBu
+ildOperationExecutor.java:68)
+	at org.gradle.configuration.internal.D
+efaultListenerBuildOperationDecorator$B
+uildOperationEmittingAction.execute(Def
+aultListenerBuildOperationDecorator.jav
+a:168)
+	at org.gradle.internal.event.Broadcast
+Dispatch$ActionInvocationHandler.dispat
+ch(BroadcastDispatch.java:97)
+	at org.gradle.internal.event.Broadcast
+Dispatch$ActionInvocationHandler.dispat
+ch(BroadcastDispatch.java:85)
+	at org.gradle.internal.event.AbstractB
+roadcastDispatch.dispatch(AbstractBroad
+castDispatch.java:43)
+	at org.gradle.internal.event.Broadcast
+Dispatch$SingletonDispatch.dispatch(Bro
+adcastDispatch.java:257)
+	at org.gradle.internal.event.Broadcast
+Dispatch$SingletonDispatch.dispatch(Bro
+adcastDispatch.java:164)
+	at org.gradle.internal.event.AbstractB
+roadcastDispatch.dispatch(AbstractBroad
+castDispatch.java:83)
+	at org.gradle.internal.event.AbstractB
+roadcastDispatch.dispatch(AbstractBroad
+castDispatch.java:69)
+	at org.gradle.internal.event.Broadcast
+Dispatch$CompositeDispatch.dispatch(Bro
+adcastDispatch.java:363)
+	at org.gradle.internal.event.Broadcast
+Dispatch$CompositeDispatch.dispatch(Bro
+adcastDispatch.java:261)
+	at org.gradle.internal.event.ListenerB
+roadcast.dispatch(ListenerBroadcast.jav
+a:148)
+	at org.gradle.internal.event.ListenerB
+roadcast.dispatch(ListenerBroadcast.jav
+a:37)
+	at org.gradle.internal.dispatch.ProxyD
+ispatchAdapter$DispatchingInvocationHan
+dler.invoke(ProxyDispatchAdapter.java:9
+4)
+	at jdk.proxy1/jdk.proxy1.$Proxy61.afte
+rEvaluate(Unknown Source)
+	at org.gradle.configuration.project.Li
+fecycleProjectEvaluator$NotifyAfterEval
+uate$1.execute(LifecycleProjectEvaluato
+r.java:247)
+	at org.gradle.configuration.project.Li
+fecycleProjectEvaluator$NotifyAfterEval
+uate$1.execute(LifecycleProjectEvaluato
+r.java:244)
+	at org.gradle.api.internal.project.Def
+aultProject.stepEvaluationListener(Defa
+ultProject.java:1486)
+	at org.gradle.configuration.project.Li
+fecycleProjectEvaluator$NotifyAfterEval
+uate.run(LifecycleProjectEvaluator.java
+:253)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$1.execute(Defau
+ltBuildOperationRunner.java:29)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$1.execute(Defau
+ltBuildOperationRunner.java:26)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:157)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.run(DefaultBuil
+dOperationRunner.java:47)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationExecutor.run(DefaultBu
+ildOperationExecutor.java:68)
+	at org.gradle.configuration.project.Li
+fecycleProjectEvaluator$EvaluateProject
+.lambda$run$0(LifecycleProjectEvaluator
+.java:114)
+	at org.gradle.api.internal.project.Def
+aultProjectStateRegistry$ProjectStateIm
+pl.lambda$applyToMutableState$1(Default
+ProjectStateRegistry.java:395)
+	at org.gradle.api.internal.project.Def
+aultProjectStateRegistry$ProjectStateIm
+pl.lambda$fromMutableState$2(DefaultPro
+jectStateRegistry.java:418)
+	at org.gradle.internal.work.DefaultWor
+kerLeaseService.withReplacedLocks(Defau
+ltWorkerLeaseService.java:345)
+	at org.gradle.api.internal.project.Def
+aultProjectStateRegistry$ProjectStateIm
+pl.fromMutableState(DefaultProjectState
+Registry.java:418)
+	at org.gradle.api.internal.project.Def
+aultProjectStateRegistry$ProjectStateIm
+pl.applyToMutableState(DefaultProjectSt
+ateRegistry.java:394)
+	at org.gradle.configuration.project.Li
+fecycleProjectEvaluator$EvaluateProject
+.run(LifecycleProjectEvaluator.java:100
+)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$1.execute(Defau
+ltBuildOperationRunner.java:29)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$1.execute(Defau
+ltBuildOperationRunner.java:26)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:157)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.run(DefaultBuil
+dOperationRunner.java:47)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationExecutor.run(DefaultBu
+ildOperationExecutor.java:68)
+	at org.gradle.configuration.project.Li
+fecycleProjectEvaluator.evaluate(Lifecy
+cleProjectEvaluator.java:72)
+	at org.gradle.api.internal.project.Def
+aultProject.evaluate(DefaultProject.jav
+a:782)
+	at org.gradle.api.internal.project.Def
+aultProject.evaluate(DefaultProject.jav
+a:156)
+	at org.gradle.api.internal.project.Pro
+jectLifecycleController.lambda$ensureSe
+lfConfigured$2(ProjectLifecycleControll
+er.java:84)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$doTransition$14
+(StateTransitionController.java:255)
+	at org.gradle.internal.model.StateTran
+sitionController.doTransition(StateTran
+sitionController.java:266)
+	at org.gradle.internal.model.StateTran
+sitionController.doTransition(StateTran
+sitionController.java:254)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$maybeTransition
+IfNotCurrentlyTransitioning$10(StateTra
+nsitionController.java:199)
+	at org.gradle.internal.work.DefaultSyn
+chronizer.withLock(DefaultSynchronizer.
+java:34)
+	at org.gradle.internal.model.StateTran
+sitionController.maybeTransitionIfNotCu
+rrentlyTransitioning(StateTransitionCon
+troller.java:195)
+	at org.gradle.api.internal.project.Pro
+jectLifecycleController.ensureSelfConfi
+gured(ProjectLifecycleController.java:8
+4)
+	at org.gradle.api.internal.project.Def
+aultProjectStateRegistry$ProjectStateIm
+pl.ensureConfigured(DefaultProjectState
+Registry.java:369)
+	at org.gradle.execution.TaskPathProjec
+tEvaluator.configure(TaskPathProjectEva
+luator.java:33)
+	at org.gradle.execution.TaskPathProjec
+tEvaluator.configureHierarchy(TaskPathP
+rojectEvaluator.java:49)
+	at org.gradle.configuration.DefaultPro
+jectsPreparer.prepareProjects(DefaultPr
+ojectsPreparer.java:42)
+	at org.gradle.configuration.BuildTreeP
+reparingProjectsPreparer.prepareProject
+s(BuildTreePreparingProjectsPreparer.ja
+va:65)
+	at org.gradle.configuration.BuildOpera
+tionFiringProjectsPreparer$ConfigureBui
+ld.run(BuildOperationFiringProjectsPrep
+arer.java:52)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$1.execute(Defau
+ltBuildOperationRunner.java:29)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$1.execute(Defau
+ltBuildOperationRunner.java:26)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:157)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.run(DefaultBuil
+dOperationRunner.java:47)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationExecutor.run(DefaultBu
+ildOperationExecutor.java:68)
+	at org.gradle.configuration.BuildOpera
+tionFiringProjectsPreparer.prepareProje
+cts(BuildOperationFiringProjectsPrepare
+r.java:40)
+	at org.gradle.initialization.VintageBu
+ildModelController.lambda$prepareProjec
+ts$2(VintageBuildModelController.java:8
+4)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$doTransition$14
+(StateTransitionController.java:255)
+	at org.gradle.internal.model.StateTran
+sitionController.doTransition(StateTran
+sitionController.java:266)
+	at org.gradle.internal.model.StateTran
+sitionController.doTransition(StateTran
+sitionController.java:254)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$transitionIfNot
+Previously$11(StateTransitionController
+.java:213)
+	at org.gradle.internal.work.DefaultSyn
+chronizer.withLock(DefaultSynchronizer.
+java:34)
+	at org.gradle.internal.model.StateTran
+sitionController.transitionIfNotPreviou
+sly(StateTransitionController.java:209)
+	at org.gradle.initialization.VintageBu
+ildModelController.prepareProjects(Vint
+ageBuildModelController.java:84)
+	at org.gradle.initialization.VintageBu
+ildModelController.prepareToScheduleTas
+ks(VintageBuildModelController.java:71)
+	at org.gradle.internal.build.DefaultBu
+ildLifecycleController.lambda$prepareTo
+ScheduleTasks$6(DefaultBuildLifecycleCo
+ntroller.java:172)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$doTransition$14
+(StateTransitionController.java:255)
+	at org.gradle.internal.model.StateTran
+sitionController.doTransition(StateTran
+sitionController.java:266)
+	at org.gradle.internal.model.StateTran
+sitionController.doTransition(StateTran
+sitionController.java:254)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$maybeTransition
+$9(StateTransitionController.java:190)
+	at org.gradle.internal.work.DefaultSyn
+chronizer.withLock(DefaultSynchronizer.
+java:34)
+	at org.gradle.internal.model.StateTran
+sitionController.maybeTransition(StateT
+ransitionController.java:186)
+	at org.gradle.internal.build.DefaultBu
+ildLifecycleController.prepareToSchedul
+eTasks(DefaultBuildLifecycleController.
+java:170)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeWorkPreparer.scheduleRequest
+edTasks(DefaultBuildTreeWorkPreparer.ja
+va:36)
+	at org.gradle.configurationcache.Vinta
+geBuildTreeWorkController$scheduleAndRu
+nRequestedTasks$1.apply(VintageBuildTre
+eWorkController.kt:36)
+	at org.gradle.configurationcache.Vinta
+geBuildTreeWorkController$scheduleAndRu
+nRequestedTasks$1.apply(VintageBuildTre
+eWorkController.kt:35)
+	at org.gradle.composite.internal.Defau
+ltIncludedBuildTaskGraph.withNewWorkGra
+ph(DefaultIncludedBuildTaskGraph.java:1
+12)
+	at org.gradle.configurationcache.Vinta
+geBuildTreeWorkController.scheduleAndRu
+nRequestedTasks(VintageBuildTreeWorkCon
+troller.kt:35)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeLifecycleController.lambda$s
+cheduleAndRunTasks$1(DefaultBuildTreeLi
+fecycleController.java:68)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeLifecycleController.lambda$r
+unBuild$4(DefaultBuildTreeLifecycleCont
+roller.java:98)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$transition$6(St
+ateTransitionController.java:169)
+	at org.gradle.internal.model.StateTran
+sitionController.doTransition(StateTran
+sitionController.java:266)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$transition$7(St
+ateTransitionController.java:169)
+	at org.gradle.internal.work.DefaultSyn
+chronizer.withLock(DefaultSynchronizer.
+java:44)
+	at org.gradle.internal.model.StateTran
+sitionController.transition(StateTransi
+tionController.java:169)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeLifecycleController.runBuild
+(DefaultBuildTreeLifecycleController.ja
+va:95)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeLifecycleController.schedule
+AndRunTasks(DefaultBuildTreeLifecycleCo
+ntroller.java:68)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeLifecycleController.schedule
+AndRunTasks(DefaultBuildTreeLifecycleCo
+ntroller.java:63)
+	at org.gradle.tooling.internal.provide
+r.ExecuteBuildActionRunner.run(ExecuteB
+uildActionRunner.java:31)
+	at org.gradle.launcher.exec.ChainingBu
+ildActionRunner.run(ChainingBuildAction
+Runner.java:35)
+	at org.gradle.internal.buildtree.Probl
+emReportingBuildActionRunner.run(Proble
+mReportingBuildActionRunner.java:49)
+	at org.gradle.launcher.exec.BuildOutco
+meReportingBuildActionRunner.run(BuildO
+utcomeReportingBuildActionRunner.java:6
+5)
+	at org.gradle.tooling.internal.provide
+r.FileSystemWatchingBuildActionRunner.r
+un(FileSystemWatchingBuildActionRunner.
+java:140)
+	at org.gradle.launcher.exec.BuildCompl
+etionNotifyingBuildActionRunner.run(Bui
+ldCompletionNotifyingBuildActionRunner.
+java:41)
+	at org.gradle.launcher.exec.RootBuildL
+ifecycleBuildActionExecutor.lambda$exec
+ute$0(RootBuildLifecycleBuildActionExec
+utor.java:40)
+	at org.gradle.composite.internal.Defau
+ltRootBuildState.run(DefaultRootBuildSt
+ate.java:122)
+	at org.gradle.launcher.exec.RootBuildL
+ifecycleBuildActionExecutor.execute(Roo
+tBuildLifecycleBuildActionExecutor.java
+:40)
+	at org.gradle.internal.buildtree.InitD
+eprecationLoggingActionExecutor.execute
+(InitDeprecationLoggingActionExecutor.j
+ava:58)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeContext.execute(DefaultBuild
+TreeContext.java:40)
+	at org.gradle.launcher.exec.BuildTreeL
+ifecycleBuildActionExecutor.lambda$exec
+ute$0(BuildTreeLifecycleBuildActionExec
+utor.java:65)
+	at org.gradle.internal.buildtree.Build
+TreeState.run(BuildTreeState.java:53)
+	at org.gradle.launcher.exec.BuildTreeL
+ifecycleBuildActionExecutor.execute(Bui
+ldTreeLifecycleBuildActionExecutor.java
+:65)
+	at org.gradle.launcher.exec.RunAsBuild
+OperationBuildActionExecutor$3.call(Run
+AsBuildOperationBuildActionExecutor.jav
+a:61)
+	at org.gradle.launcher.exec.RunAsBuild
+OperationBuildActionExecutor$3.call(Run
+AsBuildOperationBuildActionExecutor.jav
+a:57)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$CallableBuildOp
+erationWorker.execute(DefaultBuildOpera
+tionRunner.java:204)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$CallableBuildOp
+erationWorker.execute(DefaultBuildOpera
+tionRunner.java:199)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:157)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.call(DefaultBui
+ldOperationRunner.java:53)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationExecutor.call(DefaultB
+uildOperationExecutor.java:73)
+	at org.gradle.launcher.exec.RunAsBuild
+OperationBuildActionExecutor.execute(Ru
+nAsBuildOperationBuildActionExecutor.ja
+va:57)
+	at org.gradle.launcher.exec.RunAsWorke
+rThreadBuildActionExecutor.lambda$execu
+te$0(RunAsWorkerThreadBuildActionExecut
+or.java:36)
+	at org.gradle.internal.work.DefaultWor
+kerLeaseService.withLocks(DefaultWorker
+LeaseService.java:249)
+	at org.gradle.internal.work.DefaultWor
+kerLeaseService.runAsWorkerThread(Defau
+ltWorkerLeaseService.java:109)
+	at org.gradle.launcher.exec.RunAsWorke
+rThreadBuildActionExecutor.execute(RunA
+sWorkerThreadBuildActionExecutor.java:3
+6)
+	at org.gradle.tooling.internal.provide
+r.continuous.ContinuousBuildActionExecu
+tor.execute(ContinuousBuildActionExecut
+or.java:110)
+	at org.gradle.tooling.internal.provide
+r.SubscribableBuildActionExecutor.execu
+te(SubscribableBuildActionExecutor.java
+:64)
+	at org.gradle.internal.session.Default
+BuildSessionContext.execute(DefaultBuil
+dSessionContext.java:46)
+	at org.gradle.tooling.internal.provide
+r.BuildSessionLifecycleBuildActionExecu
+ter$ActionImpl.apply(BuildSessionLifecy
+cleBuildActionExecuter.java:100)
+	at org.gradle.tooling.internal.provide
+r.BuildSessionLifecycleBuildActionExecu
+ter$ActionImpl.apply(BuildSessionLifecy
+cleBuildActionExecuter.java:88)
+	at org.gradle.internal.session.BuildSe
+ssionState.run(BuildSessionState.java:6
+9)
+	at org.gradle.tooling.internal.provide
+r.BuildSessionLifecycleBuildActionExecu
+ter.execute(BuildSessionLifecycleBuildA
+ctionExecuter.java:62)
+	at org.gradle.tooling.internal.provide
+r.BuildSessionLifecycleBuildActionExecu
+ter.execute(BuildSessionLifecycleBuildA
+ctionExecuter.java:41)
+	at org.gradle.tooling.internal.provide
+r.StartParamsValidatingActionExecuter.e
+xecute(StartParamsValidatingActionExecu
+ter.java:64)
+	at org.gradle.tooling.internal.provide
+r.StartParamsValidatingActionExecuter.e
+xecute(StartParamsValidatingActionExecu
+ter.java:32)
+	at org.gradle.tooling.internal.provide
+r.SessionFailureReportingActionExecuter
+.execute(SessionFailureReportingActionE
+xecuter.java:50)
+	at org.gradle.tooling.internal.provide
+r.SessionFailureReportingActionExecuter
+.execute(SessionFailureReportingActionE
+xecuter.java:38)
+	at org.gradle.tooling.internal.provide
+r.SetupLoggingActionExecuter.execute(Se
+tupLoggingActionExecuter.java:47)
+	at org.gradle.tooling.internal.provide
+r.SetupLoggingActionExecuter.execute(Se
+tupLoggingActionExecuter.java:31)
+	at org.gradle.launcher.daemon.server.e
+xec.ExecuteBuild.doBuild(ExecuteBuild.j
+ava:65)
+	at org.gradle.launcher.daemon.server.e
+xec.BuildCommandOnly.execute(BuildComma
+ndOnly.java:37)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.WatchForDisconnection.execute(Watch
+ForDisconnection.java:39)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.ResetDeprecationLogger.execute(Rese
+tDeprecationLogger.java:29)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.RequestStopIfSingleUsedDaemon.execu
+te(RequestStopIfSingleUsedDaemon.java:3
+5)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.ForwardClientInput$2.create(Forward
+ClientInput.java:78)
+	at org.gradle.launcher.daemon.server.e
+xec.ForwardClientInput$2.create(Forward
+ClientInput.java:75)
+	at org.gradle.util.internal.Swapper.sw
+ap(Swapper.java:38)
+	at org.gradle.launcher.daemon.server.e
+xec.ForwardClientInput.execute(ForwardC
+lientInput.java:75)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.LogAndCheckHealth.execute(LogAndChe
+ckHealth.java:64)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.LogToClient.doBuild(LogToClient.jav
+a:63)
+	at org.gradle.launcher.daemon.server.e
+xec.BuildCommandOnly.execute(BuildComma
+ndOnly.java:37)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.EstablishBuildEnvironment.doBuild(E
+stablishBuildEnvironment.java:84)
+	at org.gradle.launcher.daemon.server.e
+xec.BuildCommandOnly.execute(BuildComma
+ndOnly.java:37)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.StartBuildOrRespondWithBusy$1.run(S
+tartBuildOrRespondWithBusy.java:52)
+	at org.gradle.launcher.daemon.server.D
+aemonStateCoordinator$1.run(DaemonState
+Coordinator.java:297)
+	at org.gradle.internal.concurrent.Exec
+utorPolicy$CatchAndRecordFailures.onExe
+cute(ExecutorPolicy.java:64)
+	at org.gradle.internal.concurrent.Abst
+ractManagedExecutor$1.run(AbstractManag
+edExecutor.java:47)
+
+=======================================
+=======================================
+
+2: Task failed with an exception.
+-----------
+* What went wrong:
+Failed to query the value of property 
+'buildFlowServiceProperty'.
+> Could not isolate value org.jetbrains
+.kotlin.gradle.plugin.statistics.BuildF
+lowService$Parameters_Decorated@24aad9d
+a of type BuildFlowService.Parameters
+   > A problem occurred configuring 
+project ':app'.
+      > Variant 'debug': Python 3.12 
+is not available for the ABI 
+'armeabi-v7a'. Supported ABIs are 
+[arm64-v8a, x86_64].
+
+* Try:
+> Run with --info or --debug option to 
+get more log output.
+> Run with --scan to get full insights.
+> Get more help at 
+https://help.gradle.org.
+
+* Exception is:
+org.gradle.api.internal.provider.Abstra
+ctProperty$PropertyQueryException: 
+Failed to query the value of property 
+'buildFlowServiceProperty'.
+	at org.gradle.api.internal.provider.Ab
+stractProperty.doCalculateValue(Abstrac
+tProperty.java:145)
+	at org.gradle.api.internal.provider.Ab
+stractProperty.calculateOwnValue(Abstra
+ctProperty.java:136)
+	at org.gradle.api.internal.provider.Ab
+stractMinimalProvider.calculateOwnPrese
+ntValue(AbstractMinimalProvider.java:73
+)
+	at org.gradle.api.internal.provider.Ab
+stractMinimalProvider.get(AbstractMinim
+alProvider.java:93)
+	at org.jetbrains.kotlin.gradle.plugin.
+BuildFinishFlowAction.execute(Statistic
+sBuildFlowManager.kt:75)
+	at org.jetbrains.kotlin.gradle.plugin.
+BuildFinishFlowAction.execute(Statistic
+sBuildFlowManager.kt:61)
+	at org.gradle.configurationcache.flow.
+FlowScheduler.schedule(FlowScheduler.kt
+:48)
+	at org.gradle.configurationcache.flow.
+BuildFlowScope.schedulePendingActions(B
+uildFlowScope.kt:140)
+	at org.gradle.configurationcache.flow.
+BuildFlowScope.buildFinished(BuildFlowS
+cope.kt:118)
+	at java.base/jdk.internal.reflect.Dire
+ctMethodHandleAccessor.invoke(Unknown 
+Source)
+	at java.base/java.lang.reflect.Method.
+invoke(Unknown Source)
+	at org.gradle.internal.dispatch.Reflec
+tionDispatch.dispatch(ReflectionDispatc
+h.java:36)
+	at org.gradle.internal.dispatch.Reflec
+tionDispatch.dispatch(ReflectionDispatc
+h.java:24)
+	at org.gradle.internal.event.DefaultLi
+stenerManager$ListenerDetails.dispatch(
+DefaultListenerManager.java:472)
+	at org.gradle.internal.event.DefaultLi
+stenerManager$ListenerDetails.dispatch(
+DefaultListenerManager.java:454)
+	at org.gradle.internal.event.AbstractB
+roadcastDispatch.dispatch(AbstractBroad
+castDispatch.java:83)
+	at org.gradle.internal.event.AbstractB
+roadcastDispatch.dispatch(AbstractBroad
+castDispatch.java:69)
+	at org.gradle.internal.event.DefaultLi
+stenerManager$EventBroadcast$ListenerDi
+spatch.dispatch(DefaultListenerManager.
+java:443)
+	at org.gradle.internal.event.DefaultLi
+stenerManager$EventBroadcast$ListenerDi
+spatch.dispatch(DefaultListenerManager.
+java:431)
+	at org.gradle.internal.event.AbstractB
+roadcastDispatch.dispatch(AbstractBroad
+castDispatch.java:43)
+	at org.gradle.internal.event.Broadcast
+Dispatch$SingletonDispatch.dispatch(Bro
+adcastDispatch.java:257)
+	at org.gradle.internal.event.Broadcast
+Dispatch$SingletonDispatch.dispatch(Bro
+adcastDispatch.java:164)
+	at org.gradle.internal.event.AbstractB
+roadcastDispatch.dispatch(AbstractBroad
+castDispatch.java:83)
+	at org.gradle.internal.event.AbstractB
+roadcastDispatch.dispatch(AbstractBroad
+castDispatch.java:69)
+	at org.gradle.internal.event.Broadcast
+Dispatch$CompositeDispatch.dispatch(Bro
+adcastDispatch.java:363)
+	at org.gradle.internal.event.Broadcast
+Dispatch$CompositeDispatch.dispatch(Bro
+adcastDispatch.java:261)
+	at org.gradle.internal.event.ListenerB
+roadcast.dispatch(ListenerBroadcast.jav
+a:148)
+	at org.gradle.internal.event.ListenerB
+roadcast.dispatch(ListenerBroadcast.jav
+a:37)
+	at org.gradle.internal.dispatch.ProxyD
+ispatchAdapter$DispatchingInvocationHan
+dler.invoke(ProxyDispatchAdapter.java:9
+4)
+	at jdk.proxy1/jdk.proxy1.$Proxy36.buil
+dFinished(Unknown Source)
+	at org.gradle.internal.build.DefaultBu
+ildLifecycleController.lambda$finishBui
+ld$11(DefaultBuildLifecycleController.j
+ava:293)
+	at org.gradle.internal.build.Execution
+Result.maybeFailing(ExecutionResult.jav
+a:94)
+	at org.gradle.internal.build.DefaultBu
+ildLifecycleController.lambda$finishBui
+ld$12(DefaultBuildLifecycleController.j
+ava:293)
+	at org.gradle.internal.model.StateTran
+sitionController.doTransitionWithFailur
+es(StateTransitionController.java:241)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$transition$13(S
+tateTransitionController.java:232)
+	at org.gradle.internal.work.DefaultSyn
+chronizer.withLock(DefaultSynchronizer.
+java:44)
+	at org.gradle.internal.model.StateTran
+sitionController.transition(StateTransi
+tionController.java:229)
+	at org.gradle.internal.build.DefaultBu
+ildLifecycleController.finishBuild(Defa
+ultBuildLifecycleController.java:283)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeFinishExecutor.finishBuildTr
+ee(DefaultBuildTreeFinishExecutor.java:
+57)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeLifecycleController.lambda$r
+unBuild$4(DefaultBuildTreeLifecycleCont
+roller.java:103)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$transition$6(St
+ateTransitionController.java:169)
+	at org.gradle.internal.model.StateTran
+sitionController.doTransition(StateTran
+sitionController.java:266)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$transition$7(St
+ateTransitionController.java:169)
+	at org.gradle.internal.work.DefaultSyn
+chronizer.withLock(DefaultSynchronizer.
+java:44)
+	at org.gradle.internal.model.StateTran
+sitionController.transition(StateTransi
+tionController.java:169)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeLifecycleController.runBuild
+(DefaultBuildTreeLifecycleController.ja
+va:95)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeLifecycleController.schedule
+AndRunTasks(DefaultBuildTreeLifecycleCo
+ntroller.java:68)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeLifecycleController.schedule
+AndRunTasks(DefaultBuildTreeLifecycleCo
+ntroller.java:63)
+	at org.gradle.tooling.internal.provide
+r.ExecuteBuildActionRunner.run(ExecuteB
+uildActionRunner.java:31)
+	at org.gradle.launcher.exec.ChainingBu
+ildActionRunner.run(ChainingBuildAction
+Runner.java:35)
+	at org.gradle.internal.buildtree.Probl
+emReportingBuildActionRunner.run(Proble
+mReportingBuildActionRunner.java:49)
+	at org.gradle.launcher.exec.BuildOutco
+meReportingBuildActionRunner.run(BuildO
+utcomeReportingBuildActionRunner.java:6
+5)
+	at org.gradle.tooling.internal.provide
+r.FileSystemWatchingBuildActionRunner.r
+un(FileSystemWatchingBuildActionRunner.
+java:140)
+	at org.gradle.launcher.exec.BuildCompl
+etionNotifyingBuildActionRunner.run(Bui
+ldCompletionNotifyingBuildActionRunner.
+java:41)
+	at org.gradle.launcher.exec.RootBuildL
+ifecycleBuildActionExecutor.lambda$exec
+ute$0(RootBuildLifecycleBuildActionExec
+utor.java:40)
+	at org.gradle.composite.internal.Defau
+ltRootBuildState.run(DefaultRootBuildSt
+ate.java:122)
+	at org.gradle.launcher.exec.RootBuildL
+ifecycleBuildActionExecutor.execute(Roo
+tBuildLifecycleBuildActionExecutor.java
+:40)
+	at org.gradle.internal.buildtree.InitD
+eprecationLoggingActionExecutor.execute
+(InitDeprecationLoggingActionExecutor.j
+ava:58)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeContext.execute(DefaultBuild
+TreeContext.java:40)
+	at org.gradle.launcher.exec.BuildTreeL
+ifecycleBuildActionExecutor.lambda$exec
+ute$0(BuildTreeLifecycleBuildActionExec
+utor.java:65)
+	at org.gradle.internal.buildtree.Build
+TreeState.run(BuildTreeState.java:53)
+	at org.gradle.launcher.exec.BuildTreeL
+ifecycleBuildActionExecutor.execute(Bui
+ldTreeLifecycleBuildActionExecutor.java
+:65)
+	at org.gradle.launcher.exec.RunAsBuild
+OperationBuildActionExecutor$3.call(Run
+AsBuildOperationBuildActionExecutor.jav
+a:61)
+	at org.gradle.launcher.exec.RunAsBuild
+OperationBuildActionExecutor$3.call(Run
+AsBuildOperationBuildActionExecutor.jav
+a:57)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$CallableBuildOp
+erationWorker.execute(DefaultBuildOpera
+tionRunner.java:204)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$CallableBuildOp
+erationWorker.execute(DefaultBuildOpera
+tionRunner.java:199)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:157)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.call(DefaultBui
+ldOperationRunner.java:53)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationExecutor.call(DefaultB
+uildOperationExecutor.java:73)
+	at org.gradle.launcher.exec.RunAsBuild
+OperationBuildActionExecutor.execute(Ru
+nAsBuildOperationBuildActionExecutor.ja
+va:57)
+	at org.gradle.launcher.exec.RunAsWorke
+rThreadBuildActionExecutor.lambda$execu
+te$0(RunAsWorkerThreadBuildActionExecut
+or.java:36)
+	at org.gradle.internal.work.DefaultWor
+kerLeaseService.withLocks(DefaultWorker
+LeaseService.java:249)
+	at org.gradle.internal.work.DefaultWor
+kerLeaseService.runAsWorkerThread(Defau
+ltWorkerLeaseService.java:109)
+	at org.gradle.launcher.exec.RunAsWorke
+rThreadBuildActionExecutor.execute(RunA
+sWorkerThreadBuildActionExecutor.java:3
+6)
+	at org.gradle.tooling.internal.provide
+r.continuous.ContinuousBuildActionExecu
+tor.execute(ContinuousBuildActionExecut
+or.java:110)
+	at org.gradle.tooling.internal.provide
+r.SubscribableBuildActionExecutor.execu
+te(SubscribableBuildActionExecutor.java
+:64)
+	at org.gradle.internal.session.Default
+BuildSessionContext.execute(DefaultBuil
+dSessionContext.java:46)
+	at org.gradle.tooling.internal.provide
+r.BuildSessionLifecycleBuildActionExecu
+ter$ActionImpl.apply(BuildSessionLifecy
+cleBuildActionExecuter.java:100)
+	at org.gradle.tooling.internal.provide
+r.BuildSessionLifecycleBuildActionExecu
+ter$ActionImpl.apply(BuildSessionLifecy
+cleBuildActionExecuter.java:88)
+	at org.gradle.internal.session.BuildSe
+ssionState.run(BuildSessionState.java:6
+9)
+	at org.gradle.tooling.internal.provide
+r.BuildSessionLifecycleBuildActionExecu
+ter.execute(BuildSessionLifecycleBuildA
+ctionExecuter.java:62)
+	at org.gradle.tooling.internal.provide
+r.BuildSessionLifecycleBuildActionExecu
+ter.execute(BuildSessionLifecycleBuildA
+ctionExecuter.java:41)
+	at org.gradle.tooling.internal.provide
+r.StartParamsValidatingActionExecuter.e
+xecute(StartParamsValidatingActionExecu
+ter.java:64)
+	at org.gradle.tooling.internal.provide
+r.StartParamsValidatingActionExecuter.e
+xecute(StartParamsValidatingActionExecu
+ter.java:32)
+	at org.gradle.tooling.internal.provide
+r.SessionFailureReportingActionExecuter
+.execute(SessionFailureReportingActionE
+xecuter.java:50)
+	at org.gradle.tooling.internal.provide
+r.SessionFailureReportingActionExecuter
+.execute(SessionFailureReportingActionE
+xecuter.java:38)
+	at org.gradle.tooling.internal.provide
+r.SetupLoggingActionExecuter.execute(Se
+tupLoggingActionExecuter.java:47)
+	at org.gradle.tooling.internal.provide
+r.SetupLoggingActionExecuter.execute(Se
+tupLoggingActionExecuter.java:31)
+	at org.gradle.launcher.daemon.server.e
+xec.ExecuteBuild.doBuild(ExecuteBuild.j
+ava:65)
+	at org.gradle.launcher.daemon.server.e
+xec.BuildCommandOnly.execute(BuildComma
+ndOnly.java:37)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.WatchForDisconnection.execute(Watch
+ForDisconnection.java:39)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.ResetDeprecationLogger.execute(Rese
+tDeprecationLogger.java:29)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.RequestStopIfSingleUsedDaemon.execu
+te(RequestStopIfSingleUsedDaemon.java:3
+5)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.ForwardClientInput$2.create(Forward
+ClientInput.java:78)
+	at org.gradle.launcher.daemon.server.e
+xec.ForwardClientInput$2.create(Forward
+ClientInput.java:75)
+	at org.gradle.util.internal.Swapper.sw
+ap(Swapper.java:38)
+	at org.gradle.launcher.daemon.server.e
+xec.ForwardClientInput.execute(ForwardC
+lientInput.java:75)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.LogAndCheckHealth.execute(LogAndChe
+ckHealth.java:64)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.LogToClient.doBuild(LogToClient.jav
+a:63)
+	at org.gradle.launcher.daemon.server.e
+xec.BuildCommandOnly.execute(BuildComma
+ndOnly.java:37)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.EstablishBuildEnvironment.doBuild(E
+stablishBuildEnvironment.java:84)
+	at org.gradle.launcher.daemon.server.e
+xec.BuildCommandOnly.execute(BuildComma
+ndOnly.java:37)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.StartBuildOrRespondWithBusy$1.run(S
+tartBuildOrRespondWithBusy.java:52)
+	at org.gradle.launcher.daemon.server.D
+aemonStateCoordinator$1.run(DaemonState
+Coordinator.java:297)
+	at org.gradle.internal.concurrent.Exec
+utorPolicy$CatchAndRecordFailures.onExe
+cute(ExecutorPolicy.java:64)
+	at org.gradle.internal.concurrent.Abst
+ractManagedExecutor$1.run(AbstractManag
+edExecutor.java:47)
+	at java.base/java.util.concurrent.Thre
+adPoolExecutor.runWorker(Unknown 
+Source)
+	at java.base/java.util.concurrent.Thre
+adPoolExecutor$Worker.run(Unknown 
+Source)
+	at 
+java.base/java.lang.Thread.run(Unknown 
+Source)
+Caused by: org.gradle.internal.snapshot
+.impl.IsolationException: Could not 
+isolate value org.jetbrains.kotlin.grad
+le.plugin.statistics.BuildFlowService$P
+arameters_Decorated@24aad9da of type 
+BuildFlowService.Parameters
+	at org.gradle.internal.snapshot.impl.D
+efaultIsolatableFactory.isolate(Default
+IsolatableFactory.java:51)
+	at org.gradle.api.services.internal.Re
+gisteredBuildServiceProvider.instantiat
+e(RegisteredBuildServiceProvider.java:1
+27)
+	at org.gradle.api.services.internal.Re
+gisteredBuildServiceProvider.getInstanc
+e(RegisteredBuildServiceProvider.java:1
+18)
+	at org.gradle.api.services.internal.Re
+gisteredBuildServiceProvider.calculateO
+wnValue(RegisteredBuildServiceProvider.
+java:111)
+	at org.gradle.api.internal.provider.Ab
+stractMinimalProvider.calculateValue(Ab
+stractMinimalProvider.java:108)
+	at org.gradle.api.internal.provider.De
+faultProperty.calculateValueFrom(Defaul
+tProperty.java:128)
+	at org.gradle.api.internal.provider.De
+faultProperty.calculateValueFrom(Defaul
+tProperty.java:26)
+	at org.gradle.api.internal.provider.Ab
+stractProperty.doCalculateValue(Abstrac
+tProperty.java:142)
+	... 119 more
+Caused by: org.gradle.api.ProjectConfig
+urationException: A problem occurred 
+configuring project ':app'.
+	at org.gradle.configuration.project.Li
+fecycleProjectEvaluator.wrapException(L
+ifecycleProjectEvaluator.java:84)
+	at org.gradle.configuration.project.Li
+fecycleProjectEvaluator.addConfiguratio
+nFailure(LifecycleProjectEvaluator.java
+:77)
+	at org.gradle.configuration.project.Li
+fecycleProjectEvaluator.access$400(Life
+cycleProjectEvaluator.java:55)
+	at org.gradle.configuration.project.Li
+fecycleProjectEvaluator$NotifyAfterEval
+uate.run(LifecycleProjectEvaluator.java
+:255)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$1.execute(Defau
+ltBuildOperationRunner.java:29)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$1.execute(Defau
+ltBuildOperationRunner.java:26)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:157)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.run(DefaultBuil
+dOperationRunner.java:47)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationExecutor.run(DefaultBu
+ildOperationExecutor.java:68)
+	at org.gradle.configuration.project.Li
+fecycleProjectEvaluator$EvaluateProject
+.lambda$run$0(LifecycleProjectEvaluator
+.java:114)
+	at org.gradle.api.internal.project.Def
+aultProjectStateRegistry$ProjectStateIm
+pl.lambda$applyToMutableState$1(Default
+ProjectStateRegistry.java:395)
+	at org.gradle.api.internal.project.Def
+aultProjectStateRegistry$ProjectStateIm
+pl.lambda$fromMutableState$2(DefaultPro
+jectStateRegistry.java:418)
+	at org.gradle.internal.work.DefaultWor
+kerLeaseService.withReplacedLocks(Defau
+ltWorkerLeaseService.java:345)
+	at org.gradle.api.internal.project.Def
+aultProjectStateRegistry$ProjectStateIm
+pl.fromMutableState(DefaultProjectState
+Registry.java:418)
+	at org.gradle.api.internal.project.Def
+aultProjectStateRegistry$ProjectStateIm
+pl.applyToMutableState(DefaultProjectSt
+ateRegistry.java:394)
+	at org.gradle.configuration.project.Li
+fecycleProjectEvaluator$EvaluateProject
+.run(LifecycleProjectEvaluator.java:100
+)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$1.execute(Defau
+ltBuildOperationRunner.java:29)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$1.execute(Defau
+ltBuildOperationRunner.java:26)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:157)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.run(DefaultBuil
+dOperationRunner.java:47)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationExecutor.run(DefaultBu
+ildOperationExecutor.java:68)
+	at org.gradle.configuration.project.Li
+fecycleProjectEvaluator.evaluate(Lifecy
+cleProjectEvaluator.java:72)
+	at org.gradle.api.internal.project.Def
+aultProject.evaluate(DefaultProject.jav
+a:782)
+	at org.gradle.api.internal.project.Def
+aultProject.evaluate(DefaultProject.jav
+a:156)
+	at org.gradle.api.internal.project.Pro
+jectLifecycleController.lambda$ensureSe
+lfConfigured$2(ProjectLifecycleControll
+er.java:84)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$doTransition$14
+(StateTransitionController.java:255)
+	at org.gradle.internal.model.StateTran
+sitionController.doTransition(StateTran
+sitionController.java:266)
+	at org.gradle.internal.model.StateTran
+sitionController.doTransition(StateTran
+sitionController.java:254)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$maybeTransition
+IfNotCurrentlyTransitioning$10(StateTra
+nsitionController.java:199)
+	at org.gradle.internal.work.DefaultSyn
+chronizer.withLock(DefaultSynchronizer.
+java:34)
+	at org.gradle.internal.model.StateTran
+sitionController.maybeTransitionIfNotCu
+rrentlyTransitioning(StateTransitionCon
+troller.java:195)
+	at org.gradle.api.internal.project.Pro
+jectLifecycleController.ensureSelfConfi
+gured(ProjectLifecycleController.java:8
+4)
+	at org.gradle.api.internal.project.Def
+aultProjectStateRegistry$ProjectStateIm
+pl.ensureConfigured(DefaultProjectState
+Registry.java:369)
+	at org.gradle.execution.TaskPathProjec
+tEvaluator.configure(TaskPathProjectEva
+luator.java:33)
+	at org.gradle.execution.TaskPathProjec
+tEvaluator.configureHierarchy(TaskPathP
+rojectEvaluator.java:49)
+	at org.gradle.configuration.DefaultPro
+jectsPreparer.prepareProjects(DefaultPr
+ojectsPreparer.java:42)
+	at org.gradle.configuration.BuildTreeP
+reparingProjectsPreparer.prepareProject
+s(BuildTreePreparingProjectsPreparer.ja
+va:65)
+	at org.gradle.configuration.BuildOpera
+tionFiringProjectsPreparer$ConfigureBui
+ld.run(BuildOperationFiringProjectsPrep
+arer.java:52)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$1.execute(Defau
+ltBuildOperationRunner.java:29)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$1.execute(Defau
+ltBuildOperationRunner.java:26)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:157)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.run(DefaultBuil
+dOperationRunner.java:47)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationExecutor.run(DefaultBu
+ildOperationExecutor.java:68)
+	at org.gradle.configuration.BuildOpera
+tionFiringProjectsPreparer.prepareProje
+cts(BuildOperationFiringProjectsPrepare
+r.java:40)
+	at org.gradle.initialization.VintageBu
+ildModelController.lambda$prepareProjec
+ts$2(VintageBuildModelController.java:8
+4)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$doTransition$14
+(StateTransitionController.java:255)
+	at org.gradle.internal.model.StateTran
+sitionController.doTransition(StateTran
+sitionController.java:266)
+	at org.gradle.internal.model.StateTran
+sitionController.doTransition(StateTran
+sitionController.java:254)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$transitionIfNot
+Previously$11(StateTransitionController
+.java:213)
+	at org.gradle.internal.work.DefaultSyn
+chronizer.withLock(DefaultSynchronizer.
+java:34)
+	at org.gradle.internal.model.StateTran
+sitionController.transitionIfNotPreviou
+sly(StateTransitionController.java:209)
+	at org.gradle.initialization.VintageBu
+ildModelController.prepareProjects(Vint
+ageBuildModelController.java:84)
+	at org.gradle.initialization.VintageBu
+ildModelController.prepareToScheduleTas
+ks(VintageBuildModelController.java:71)
+	at org.gradle.internal.build.DefaultBu
+ildLifecycleController.lambda$prepareTo
+ScheduleTasks$6(DefaultBuildLifecycleCo
+ntroller.java:172)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$doTransition$14
+(StateTransitionController.java:255)
+	at org.gradle.internal.model.StateTran
+sitionController.doTransition(StateTran
+sitionController.java:266)
+	at org.gradle.internal.model.StateTran
+sitionController.doTransition(StateTran
+sitionController.java:254)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$maybeTransition
+$9(StateTransitionController.java:190)
+	at org.gradle.internal.work.DefaultSyn
+chronizer.withLock(DefaultSynchronizer.
+java:34)
+	at org.gradle.internal.model.StateTran
+sitionController.maybeTransition(StateT
+ransitionController.java:186)
+	at org.gradle.internal.build.DefaultBu
+ildLifecycleController.prepareToSchedul
+eTasks(DefaultBuildLifecycleController.
+java:170)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeWorkPreparer.scheduleRequest
+edTasks(DefaultBuildTreeWorkPreparer.ja
+va:36)
+	at org.gradle.configurationcache.Vinta
+geBuildTreeWorkController$scheduleAndRu
+nRequestedTasks$1.apply(VintageBuildTre
+eWorkController.kt:36)
+	at org.gradle.configurationcache.Vinta
+geBuildTreeWorkController$scheduleAndRu
+nRequestedTasks$1.apply(VintageBuildTre
+eWorkController.kt:35)
+	at org.gradle.composite.internal.Defau
+ltIncludedBuildTaskGraph.withNewWorkGra
+ph(DefaultIncludedBuildTaskGraph.java:1
+12)
+	at org.gradle.configurationcache.Vinta
+geBuildTreeWorkController.scheduleAndRu
+nRequestedTasks(VintageBuildTreeWorkCon
+troller.kt:35)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeLifecycleController.lambda$s
+cheduleAndRunTasks$1(DefaultBuildTreeLi
+fecycleController.java:68)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeLifecycleController.lambda$r
+unBuild$4(DefaultBuildTreeLifecycleCont
+roller.java:98)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$transition$6(St
+ateTransitionController.java:169)
+	at org.gradle.internal.model.StateTran
+sitionController.doTransition(StateTran
+sitionController.java:266)
+	at org.gradle.internal.model.StateTran
+sitionController.lambda$transition$7(St
+ateTransitionController.java:169)
+	at org.gradle.internal.work.DefaultSyn
+chronizer.withLock(DefaultSynchronizer.
+java:44)
+	at org.gradle.internal.model.StateTran
+sitionController.transition(StateTransi
+tionController.java:169)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeLifecycleController.runBuild
+(DefaultBuildTreeLifecycleController.ja
+va:95)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeLifecycleController.schedule
+AndRunTasks(DefaultBuildTreeLifecycleCo
+ntroller.java:68)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeLifecycleController.schedule
+AndRunTasks(DefaultBuildTreeLifecycleCo
+ntroller.java:63)
+	at org.gradle.tooling.internal.provide
+r.ExecuteBuildActionRunner.run(ExecuteB
+uildActionRunner.java:31)
+	at org.gradle.launcher.exec.ChainingBu
+ildActionRunner.run(ChainingBuildAction
+Runner.java:35)
+	at org.gradle.internal.buildtree.Probl
+emReportingBuildActionRunner.run(Proble
+mReportingBuildActionRunner.java:49)
+	at org.gradle.launcher.exec.BuildOutco
+meReportingBuildActionRunner.run(BuildO
+utcomeReportingBuildActionRunner.java:6
+5)
+	at org.gradle.tooling.internal.provide
+r.FileSystemWatchingBuildActionRunner.r
+un(FileSystemWatchingBuildActionRunner.
+java:140)
+	at org.gradle.launcher.exec.BuildCompl
+etionNotifyingBuildActionRunner.run(Bui
+ldCompletionNotifyingBuildActionRunner.
+java:41)
+	at org.gradle.launcher.exec.RootBuildL
+ifecycleBuildActionExecutor.lambda$exec
+ute$0(RootBuildLifecycleBuildActionExec
+utor.java:40)
+	at org.gradle.composite.internal.Defau
+ltRootBuildState.run(DefaultRootBuildSt
+ate.java:122)
+	at org.gradle.launcher.exec.RootBuildL
+ifecycleBuildActionExecutor.execute(Roo
+tBuildLifecycleBuildActionExecutor.java
+:40)
+	at org.gradle.internal.buildtree.InitD
+eprecationLoggingActionExecutor.execute
+(InitDeprecationLoggingActionExecutor.j
+ava:58)
+	at org.gradle.internal.buildtree.Defau
+ltBuildTreeContext.execute(DefaultBuild
+TreeContext.java:40)
+	at org.gradle.launcher.exec.BuildTreeL
+ifecycleBuildActionExecutor.lambda$exec
+ute$0(BuildTreeLifecycleBuildActionExec
+utor.java:65)
+	at org.gradle.internal.buildtree.Build
+TreeState.run(BuildTreeState.java:53)
+	at org.gradle.launcher.exec.BuildTreeL
+ifecycleBuildActionExecutor.execute(Bui
+ldTreeLifecycleBuildActionExecutor.java
+:65)
+	at org.gradle.launcher.exec.RunAsBuild
+OperationBuildActionExecutor$3.call(Run
+AsBuildOperationBuildActionExecutor.jav
+a:61)
+	at org.gradle.launcher.exec.RunAsBuild
+OperationBuildActionExecutor$3.call(Run
+AsBuildOperationBuildActionExecutor.jav
+a:57)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$CallableBuildOp
+erationWorker.execute(DefaultBuildOpera
+tionRunner.java:204)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$CallableBuildOp
+erationWorker.execute(DefaultBuildOpera
+tionRunner.java:199)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:157)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.call(DefaultBui
+ldOperationRunner.java:53)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationExecutor.call(DefaultB
+uildOperationExecutor.java:73)
+	at org.gradle.launcher.exec.RunAsBuild
+OperationBuildActionExecutor.execute(Ru
+nAsBuildOperationBuildActionExecutor.ja
+va:57)
+	at org.gradle.launcher.exec.RunAsWorke
+rThreadBuildActionExecutor.lambda$execu
+te$0(RunAsWorkerThreadBuildActionExecut
+or.java:36)
+	at org.gradle.internal.work.DefaultWor
+kerLeaseService.withLocks(DefaultWorker
+LeaseService.java:249)
+	at org.gradle.internal.work.DefaultWor
+kerLeaseService.runAsWorkerThread(Defau
+ltWorkerLeaseService.java:109)
+	at org.gradle.launcher.exec.RunAsWorke
+rThreadBuildActionExecutor.execute(RunA
+sWorkerThreadBuildActionExecutor.java:3
+6)
+	at org.gradle.tooling.internal.provide
+r.continuous.ContinuousBuildActionExecu
+tor.execute(ContinuousBuildActionExecut
+or.java:110)
+	at org.gradle.tooling.internal.provide
+r.SubscribableBuildActionExecutor.execu
+te(SubscribableBuildActionExecutor.java
+:64)
+	at org.gradle.internal.session.Default
+BuildSessionContext.execute(DefaultBuil
+dSessionContext.java:46)
+	at org.gradle.tooling.internal.provide
+r.BuildSessionLifecycleBuildActionExecu
+ter$ActionImpl.apply(BuildSessionLifecy
+cleBuildActionExecuter.java:100)
+	at org.gradle.tooling.internal.provide
+r.BuildSessionLifecycleBuildActionExecu
+ter$ActionImpl.apply(BuildSessionLifecy
+cleBuildActionExecuter.java:88)
+	at org.gradle.internal.session.BuildSe
+ssionState.run(BuildSessionState.java:6
+9)
+	at org.gradle.tooling.internal.provide
+r.BuildSessionLifecycleBuildActionExecu
+ter.execute(BuildSessionLifecycleBuildA
+ctionExecuter.java:62)
+	at org.gradle.tooling.internal.provide
+r.BuildSessionLifecycleBuildActionExecu
+ter.execute(BuildSessionLifecycleBuildA
+ctionExecuter.java:41)
+	at org.gradle.tooling.internal.provide
+r.StartParamsValidatingActionExecuter.e
+xecute(StartParamsValidatingActionExecu
+ter.java:64)
+	at org.gradle.tooling.internal.provide
+r.StartParamsValidatingActionExecuter.e
+xecute(StartParamsValidatingActionExecu
+ter.java:32)
+	at org.gradle.tooling.internal.provide
+r.SessionFailureReportingActionExecuter
+.execute(SessionFailureReportingActionE
+xecuter.java:50)
+	at org.gradle.tooling.internal.provide
+r.SessionFailureReportingActionExecuter
+.execute(SessionFailureReportingActionE
+xecuter.java:38)
+	at org.gradle.tooling.internal.provide
+r.SetupLoggingActionExecuter.execute(Se
+tupLoggingActionExecuter.java:47)
+	at org.gradle.tooling.internal.provide
+r.SetupLoggingActionExecuter.execute(Se
+tupLoggingActionExecuter.java:31)
+	at org.gradle.launcher.daemon.server.e
+xec.ExecuteBuild.doBuild(ExecuteBuild.j
+ava:65)
+	at org.gradle.launcher.daemon.server.e
+xec.BuildCommandOnly.execute(BuildComma
+ndOnly.java:37)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.WatchForDisconnection.execute(Watch
+ForDisconnection.java:39)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.ResetDeprecationLogger.execute(Rese
+tDeprecationLogger.java:29)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.RequestStopIfSingleUsedDaemon.execu
+te(RequestStopIfSingleUsedDaemon.java:3
+5)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.ForwardClientInput$2.create(Forward
+ClientInput.java:78)
+	at org.gradle.launcher.daemon.server.e
+xec.ForwardClientInput$2.create(Forward
+ClientInput.java:75)
+	at org.gradle.util.internal.Swapper.sw
+ap(Swapper.java:38)
+	at org.gradle.launcher.daemon.server.e
+xec.ForwardClientInput.execute(ForwardC
+lientInput.java:75)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.LogAndCheckHealth.execute(LogAndChe
+ckHealth.java:64)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.LogToClient.doBuild(LogToClient.jav
+a:63)
+	at org.gradle.launcher.daemon.server.e
+xec.BuildCommandOnly.execute(BuildComma
+ndOnly.java:37)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.EstablishBuildEnvironment.doBuild(E
+stablishBuildEnvironment.java:84)
+	at org.gradle.launcher.daemon.server.e
+xec.BuildCommandOnly.execute(BuildComma
+ndOnly.java:37)
+	at org.gradle.launcher.daemon.server.a
+pi.DaemonCommandExecution.proceed(Daemo
+nCommandExecution.java:104)
+	at org.gradle.launcher.daemon.server.e
+xec.StartBuildOrRespondWithBusy$1.run(S
+tartBuildOrRespondWithBusy.java:52)
+	at org.gradle.launcher.daemon.server.D
+aemonStateCoordinator$1.run(DaemonState
+Coordinator.java:297)
+	at org.gradle.internal.concurrent.Exec
+utorPolicy$CatchAndRecordFailures.onExe
+cute(ExecutorPolicy.java:64)
+	at org.gradle.internal.concurrent.Abst
+ractManagedExecutor$1.run(AbstractManag
+edExecutor.java:47)
+Caused by: 
+org.gradle.api.GradleException: 
+Variant 'debug': Python 3.12 is not 
+available for the ABI 'armeabi-v7a'. 
+Supported ABIs are [arm64-v8a, x86_64].
+	at com.chaquo.python.PythonPlugin.getA
+bis(PythonPlugin.kt:281)
+	at com.chaquo.python.PythonPlugin.afte
+rVariant(PythonPlugin.kt:254)
+	at com.chaquo.python.PythonPlugin$appl
+y$2$3.execute(PythonPlugin.kt:93)
+	at com.chaquo.python.PythonPlugin$appl
+y$2$3.execute(PythonPlugin.kt:22)
+	at org.gradle.configuration.internal.D
+efaultUserCodeApplicationContext$Curren
+tApplication$1.execute(DefaultUserCodeA
+pplicationContext.java:123)
+	at org.gradle.configuration.internal.D
+efaultListenerBuildOperationDecorator$B
+uildOperationEmittingAction$1.run(Defau
+ltListenerBuildOperationDecorator.java:
+171)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$1.execute(Defau
+ltBuildOperationRunner.java:29)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$1.execute(Defau
+ltBuildOperationRunner.java:26)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner$2.execute(Defau
+ltBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:157)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.execute(Default
+BuildOperationRunner.java:59)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationRunner.run(DefaultBuil
+dOperationRunner.java:47)
+	at org.gradle.internal.operations.Defa
+ultBuildOperationExecutor.run(DefaultBu
+ildOperationExecutor.java:68)
+	at org.gradle.configuration.internal.D
+efaultListenerBuildOperationDecorator$B
+uildOperationEmittingAction.execute(Def
+aultListenerBuildOperationDecorator.jav
+a:168)
+	at org.gradle.internal.event.Broadcast
+Dispatch$ActionInvocationHandler.dispat
+ch(BroadcastDispatch.java:97)
+	at org.gradle.internal.event.Broadcast
+Dispatch$ActionInvocationHandler.dispat
+ch(BroadcastDispatch.java:85)
+	at org.gradle.internal.event.AbstractB
+roadcastDispatch.dispatch(AbstractBroad
+castDispatch.java:43)
+	at org.gradle.internal.event.Broadcast
+Dispatch$SingletonDispatch.dispatch(Bro
+adcastDispatch.java:257)
+	at org.gradle.internal.event.Broadcast
+Dispatch$SingletonDispatch.dispatch(Bro
+adcastDispatch.java:164)
+	at org.gradle.internal.event.AbstractB
+roadcastDispatch.dispatch(AbstractBroad
+castDispatch.java:83)
+	at org.gradle.internal.event.AbstractB
+roadcastDispatch.dispatch(AbstractBroad
+castDispatch.java:69)
+	at org.gradle.internal.event.Broadcast
+Dispatch$CompositeDispatch.dispatch(Bro
+adcastDispatch.java:363)
+	at org.gradle.internal.event.Broadcast
+Dispatch$CompositeDispatch.dispatch(Bro
+adcastDispatch.java:261)
+	at org.gradle.internal.event.ListenerB
+roadcast.dispatch(ListenerBroadcast.jav
+a:148)
+	at org.gradle.internal.event.ListenerB
+roadcast.dispatch(ListenerBroadcast.jav
+a:37)
+	at org.gradle.internal.dispatch.ProxyD
+ispatchAdapter$DispatchingInvocationHan
+dler.invoke(ProxyDispatchAdapter.java:9
+4)
+	at jdk.proxy1/jdk.proxy1.$Proxy61.afte
+rEvaluate(Unknown Source)
+	at org.gradle.configuration.project.Li
+fecycleProjectEvaluator$NotifyAfterEval
+uate$1.execute(LifecycleProjectEvaluato
+r.java:247)
+	at org.gradle.configuration.project.Li
+fecycleProjectEvaluator$NotifyAfterEval
+uate$1.execute(LifecycleProjectEvaluato
+r.java:244)
+	at org.gradle.api.internal.project.Def
+aultProject.stepEvaluationListener(Defa
+ultProject.java:1486)
+	at org.gradle.configuration.project.Li
+fecycleProjectEvaluator$NotifyAfterEval
+uate.run(LifecycleProjectEvaluator.java
+:253)
+	... 150 more
+
+=======================================
+=======================================
+
+BUILD FAILED in 21s

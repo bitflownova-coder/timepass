@@ -1,0 +1,61 @@
+# Core GUI Framework
+PyQt6>=6.6.0
+PyQt6-WebEngine>=6.6.0
+qt-material>=2.14
+
+# Database
+sqlalchemy>=2.0.0
+
+# Networking & API
+httpx>=0.25.0
+aiohttp>=3.9.0
+websockets>=12.0
+
+# Web Scraping (Crawler Integration)
+playwright>=1.40.0
+beautifulsoup4>=4.12.0
+markdownify>=0.11.6
+fake-useragent>=1.4.0
+tldextract>=5.1.0
+
+# Data Processing
+pandas>=2.1.0
+openpyxl>=3.1.0
+
+# Code Analysis & Parsing
+pygments>=2.17.0
+tree-sitter>=0.20.4
+
+# QR Code
+qrcode[pil]>=7.4.0
+pillow>=10.1.0
+
+# Markdown
+markdown>=3.5.0
+pymdown-extensions>=10.5
+
+# Security & Encoding
+pyjwt>=2.8.0
+cryptography>=41.0.0
+bcrypt>=4.1.0
+
+# System & Networking
+psutil>=5.9.0
+netifaces>=0.11.0
+
+# Async
+asyncio-compat>=0.1.0
+qasync>=0.27.0
+
+# Charts & Visualization
+pyqtgraph>=0.13.0
+
+# Utilities
+python-dotenv>=1.0.0
+faker>=22.0.0
+watchdog>=3.0.0
+chardet>=5.2.0
+jsonschema>=4.20.0
+xmltodict>=0.13.0
+pyyaml>=6.0.0
+toml>=0.10.0

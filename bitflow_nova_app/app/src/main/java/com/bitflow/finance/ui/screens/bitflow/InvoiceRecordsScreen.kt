@@ -190,18 +190,7 @@ fun InvoiceRecordItem(
                             if (invoice.isPaid) {
                                 Icon(Icons.Default.Check, contentDescription = null, modifier = Modifier.size(18.dp))
                             }
-                        },
-                        colors = FilterChipDefaults.filterChipColors(
-                            selectedContainerColor = Color(0xFFE8F5E9),
-                            selectedLabelColor = Color(0xFF2E7D32),
-                            selectedLeadingIconColor = Color(0xFF2E7D32),
-                            containerColor = Color(0xFFFFEBEE),
-                            labelColor = Color(0xFFC62828)
-                        ),
-                        border = FilterChipDefaults.filterChipBorder(
-                            borderColor = Color.Transparent,
-                            selectedBorderColor = Color.Transparent
-                        )
+                        }
                     )
 
                     IconButton(onClick = onDeleteClick) {

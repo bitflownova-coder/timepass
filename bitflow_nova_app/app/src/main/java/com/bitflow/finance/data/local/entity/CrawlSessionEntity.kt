@@ -11,6 +11,9 @@ data class CrawlSessionEntity(
     val startTime: Long,
     val endTime: Long? = null,
     val pagesCrawled: Int = 0,
+    val pagesTotal: Int = 0,
+    val pagesQueued: Int = 0,
+    val currentUrl: String = "",
     val outputPath: String,
     val depth: Int,
     val remoteId: String? = null // UUID from Python backend

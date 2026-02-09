@@ -2,88 +2,75 @@ import os
 import uuid
 import threading
 import json
-import time
+import asyncio
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory, jsonify
-from crawler import Crawler
+from crawler import AsyncCrawler
+from database import DatabaseManager
 
 app = Flask(__name__)
 app.config['OUTPUT_FOLDER'] = os.path.abspath('output')
-app.config['HISTORY_FILE'] = os.path.join(app.config['OUTPUT_FOLDER'], 'crawls.json')
+app.config['DB_FILE'] = os.path.join(app.config['OUTPUT_FOLDER'], 'crawler.db')
 
 # Ensure output directory exists
 os.makedirs(app.config['OUTPUT_FOLDER'], exist_ok=True)
 
-# Store crawler *objects* in memory to control them
-# Key: crawl_id, Value: Crawler instance
+# Initialize DB
+db = DatabaseManager(app.config['DB_FILE'])
+
+# Active Crawler Instances (InMemory for control)
 active_crawlers_objs = {}
 
-# Crawl Metadata (Loaded from JSON)
-crawl_history = {}
-
-def load_history():
-    global crawl_history
-    if os.path.exists(app.config['HISTORY_FILE']):
-        with open(app.config['HISTORY_FILE'], 'r') as f:
-            crawl_history = json.load(f)
-    else:
-        crawl_history = {}
-
-def save_history():
-    with open(app.config['HISTORY_FILE'], 'w') as f:
-        json.dump(crawl_history, f, indent=4)
-
-# Load immediately on start
-load_history()
-
-def run_crawler(crawl_id, url, depth):
-    output_dir = os.path.join(app.config['OUTPUT_FOLDER'], crawl_id)
-    
-    # Create Crawler Instance
-    crawler = Crawler(url, output_dir, depth)
-    active_crawlers_objs[crawl_id] = crawler
-    
-    # Update Status
-    crawl_history[crawl_id]['status'] = 'running'
-    save_history()
-    
+def run_async_crawler(crawl_id, output_dir, config):
+    """Wrapper to run async crawler in a thread"""
     try:
-        crawler.run()
-        if crawler.stopped:
-             crawl_history[crawl_id]['status'] = 'stopped'
-        else:
-             crawl_history[crawl_id]['status'] = 'completed'
+        # Re-init DB connection inside thread if needed, but Manager handles it
+        crawler = AsyncCrawler(crawl_id, output_dir, db, config)
+        active_crawlers_objs[crawl_id] = crawler
+        
+        # Determine if we are resuming or starting?
+        # The crawler itself just looks at DB queue. 
+        # But we need to update status to running if not already.
+        db.update_crawl_status(crawl_id, 'running')
+        
+        asyncio.run(crawler.run())
+        
     except Exception as e:
-        crawl_history[crawl_id]['status'] = 'failed'
-        crawl_history[crawl_id]['error'] = str(e)
+        print(f"Crawler Thread Error: {e}")
+        db.update_crawl_status(crawl_id, 'failed')
     finally:
-        save_history()
-        # Clean up object reference to free memory, but keep metadata
         if crawl_id in active_crawlers_objs:
             del active_crawlers_objs[crawl_id]
 
 @app.route('/')
 def index():
-    # Sort history by date (newest first) - assuming insertion order or we could add timestamp
-    # We'll just pass the dict items
-    return render_template('index.html', history=crawl_history)
+    history = db.get_all_crawls()
+    return render_template('index.html', history=history)
 
 @app.route('/crawl', methods=['POST'])
 def start_crawl():
     url = request.form.get('url')
+    if not url:
+        return "URL required", 400
+        
     depth = int(request.form.get('depth', 1))
     
-    crawl_id = str(uuid.uuid4())
-    crawl_history[crawl_id] = {
-        'id': crawl_id,
-        'url': url,
+    # Advanced Config
+    config = {
         'depth': depth,
-        'status': 'pending',
-        'timestamp': time.time(),
-        'output_dir': os.path.join(app.config['OUTPUT_FOLDER'], crawl_id)
+        'concurrency': int(request.form.get('concurrency', 3)),
+        'delay': float(request.form.get('delay', 1.0)),
+        'proxy': request.form.get('proxy') or None,
+        'user_agent_strategy': request.form.get('user_agent_strategy', 'random'),
+        'allow_regex': request.form.get('allow_regex') or None,
+        'deny_regex': request.form.get('deny_regex') or None
     }
-    save_history()
     
-    thread = threading.Thread(target=run_crawler, args=(crawl_id, url, depth))
+    crawl_id = str(uuid.uuid4())
+    db.create_crawl(crawl_id, url, depth, config)
+    
+    # Start Thread
+    output_dir = os.path.join(app.config['OUTPUT_FOLDER'], crawl_id)
+    thread = threading.Thread(target=run_async_crawler, args=(crawl_id, output_dir, config))
     thread.start()
     
     if request.headers.get('Accept') == 'application/json':
@@ -93,11 +80,11 @@ def start_crawl():
 
 @app.route('/report/<crawl_id>')
 def report(crawl_id):
-    if crawl_id not in crawl_history:
+    crawl = db.get_crawl(crawl_id)
+    if not crawl:
         return "Crawl not found", 404
-        
-    crawl_data = crawl_history[crawl_id]
-    output_dir = crawl_data['output_dir']
+    
+    output_dir = os.path.join(app.config['OUTPUT_FOLDER'], crawl_id)
     
     # Collect generated files
     files = {'content': [], 'images': [], 'documents': []}
@@ -115,36 +102,45 @@ def report(crawl_id):
         if os.path.exists(docs_dir):
             files['documents'] = os.listdir(docs_dir)
 
-    if request.headers.get('Accept') == 'application/json':
-        return jsonify({'crawl': crawl_data, 'files': files})
-
-    return render_template('report.html', crawl=crawl_data, crawl_id=crawl_id, files=files)
+    return render_template('report.html', crawl_id=crawl_id, files=files, crawl=crawl)
 
 @app.route('/status/<crawl_id>')
 def status(crawl_id):
-    if crawl_id not in crawl_history:
+    data = db.get_crawl_status(crawl_id)
+    if not data:
         return jsonify({'status': 'not_found'})
-    return jsonify(crawl_history[crawl_id])
+        
+    # Add pending count
+    pending = db.get_pending_count(crawl_id)
+    return jsonify({'status': data['status'], 'pending_queue': pending})
 
 @app.route('/control/<crawl_id>/<action>', methods=['POST'])
 def control_crawl(crawl_id, action):
-    if crawl_id not in active_crawlers_objs:
-        return jsonify({'success': False, 'message': 'Crawler not active or finished'}), 400
-    
-    crawler = active_crawlers_objs[crawl_id]
+    # Check if active
+    crawler = active_crawlers_objs.get(crawl_id)
     
     if action == 'pause':
-        crawler.pause()
-        crawl_history[crawl_id]['status'] = 'paused'
+        if crawler: crawler.pause()
+        db.update_crawl_status(crawl_id, 'paused')
+        
     elif action == 'resume':
-        crawler.resume()
-        crawl_history[crawl_id]['status'] = 'running'
+        if crawler:
+            crawler.resume()
+            db.update_crawl_status(crawl_id, 'running')
+        else:
+            # Cold Resume (Restart process)
+            crawl_info = db.get_crawl_status(crawl_id)
+            if crawl_info and crawl_info['status'] != 'running':
+                output_dir = os.path.join(app.config['OUTPUT_FOLDER'], crawl_id)
+                config = crawl_info.get('config', {})
+                thread = threading.Thread(target=run_async_crawler, args=(crawl_id, output_dir, config))
+                thread.start()
+                
     elif action == 'stop':
-        crawler.stop()
-        # Status update happens in the thread finally block or after run()
-    
-    save_history()
-    return jsonify({'success': True, 'status': crawl_history[crawl_id]['status']})
+        if crawler: crawler.stop()
+        # Status update handled by thread exit
+        
+    return jsonify({'success': True})
 
 @app.route('/download/<crawl_id>/<file_type>/<filename>')
 def download_file(crawl_id, file_type, filename):

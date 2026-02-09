@@ -15,6 +15,9 @@ import com.bitflow.finance.data.local.dao.SavingsGoalDao
 import com.bitflow.finance.data.local.dao.BillReminderDao
 import com.bitflow.finance.data.local.dao.TransactionTemplateDao
 import com.bitflow.finance.data.local.dao.ClientDao
+import com.bitflow.finance.data.local.dao.ClientDiscussionDao
+import com.bitflow.finance.data.local.dao.IncomePaymentDao
+import com.bitflow.finance.data.local.dao.ExpenseRecordDao
 import com.bitflow.finance.data.local.dao.DebtDao
 import com.bitflow.finance.data.local.dao.HoldingDao
 import com.bitflow.finance.data.local.dao.RecurringPatternDao
@@ -33,9 +36,18 @@ import com.bitflow.finance.data.local.entity.SavingsGoalEntity
 import com.bitflow.finance.data.local.entity.BillReminderEntity
 import com.bitflow.finance.data.local.entity.TransactionTemplateEntity
 import com.bitflow.finance.data.local.entity.ClientEntity
+import com.bitflow.finance.data.local.entity.ClientDiscussionEntity
+import com.bitflow.finance.data.local.entity.IncomePaymentEntity
+import com.bitflow.finance.data.local.entity.ExpenseRecordEntity
 import com.bitflow.finance.data.local.entity.DebtEntity
 import com.bitflow.finance.data.local.entity.HoldingEntity
 import com.bitflow.finance.data.local.entity.RecurringPatternEntity
+import com.bitflow.finance.data.local.entity.TimeEntryEntity
+import com.bitflow.finance.data.local.entity.QuickNoteEntity
+import com.bitflow.finance.data.local.entity.PasswordHistoryEntity
+import com.bitflow.finance.data.local.dao.TimeEntryDao
+import com.bitflow.finance.data.local.dao.QuickNoteDao
+import com.bitflow.finance.data.local.dao.PasswordHistoryDao
 
 
 @Database(
@@ -59,9 +71,15 @@ import com.bitflow.finance.data.local.entity.RecurringPatternEntity
         HoldingEntity::class,
         RecurringPatternEntity::class,
         com.bitflow.finance.data.local.entity.TransactionAuditLogEntity::class,
-        com.bitflow.finance.data.local.entity.CrawlSessionEntity::class
+        com.bitflow.finance.data.local.entity.CrawlSessionEntity::class,
+        ClientDiscussionEntity::class,
+        IncomePaymentEntity::class,
+        ExpenseRecordEntity::class,
+        TimeEntryEntity::class,
+        QuickNoteEntity::class,
+        PasswordHistoryEntity::class
     ],
-    version = 27,
+    version = 31,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -78,11 +96,17 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun billReminderDao(): BillReminderDao
     abstract fun transactionTemplateDao(): TransactionTemplateDao
     abstract fun clientDao(): ClientDao
+    abstract fun clientDiscussionDao(): ClientDiscussionDao
+    abstract fun incomePaymentDao(): IncomePaymentDao
+    abstract fun expenseRecordDao(): ExpenseRecordDao
     abstract fun debtDao(): DebtDao
     abstract fun holdingDao(): HoldingDao
     abstract fun recurringPatternDao(): RecurringPatternDao
     abstract fun transactionAuditDao(): com.bitflow.finance.data.local.dao.TransactionAuditDao
     abstract fun crawlSessionDao(): com.bitflow.finance.data.local.dao.CrawlSessionDao
+    abstract fun timeEntryDao(): TimeEntryDao
+    abstract fun quickNoteDao(): QuickNoteDao
+    abstract fun passwordHistoryDao(): PasswordHistoryDao
     
     companion object {
         @Volatile
@@ -95,7 +119,16 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "finance_app_db"
                 )
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9, MIGRATION_9_10, MIGRATION_10_11, MIGRATION_11_12, MIGRATION_12_13, MIGRATION_13_14, MIGRATION_14_15, MIGRATION_15_16, MIGRATION_16_17, MIGRATION_17_18, MIGRATION_18_19, MIGRATION_19_20, MIGRATION_20_21, MIGRATION_21_22, MIGRATION_22_23, MIGRATION_23_24, MIGRATION_24_25, MIGRATION_25_26, MIGRATION_26_27)
+                .addMigrations(
+                    MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, 
+                    MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9, MIGRATION_9_10, MIGRATION_10_11, 
+                    MIGRATION_11_12, MIGRATION_12_13, MIGRATION_13_14, MIGRATION_14_15, MIGRATION_15_16, 
+                    MIGRATION_16_17, MIGRATION_17_18, MIGRATION_18_19, MIGRATION_19_20, MIGRATION_20_21, 
+                    MIGRATION_21_22, MIGRATION_22_23, MIGRATION_23_24, MIGRATION_24_25, MIGRATION_25_26, 
+                    MIGRATION_26_27, MIGRATION_27_28, MIGRATION_28_29, MIGRATION_29_30,
+                    MIGRATION_30_31
+                )
+                .fallbackToDestructiveMigration()
                 .build()
                 INSTANCE = instance
                 instance
@@ -730,6 +763,148 @@ abstract class AppDatabase : RoomDatabase() {
                         pagesCrawled INTEGER NOT NULL,
                         outputPath TEXT NOT NULL,
                         depth INTEGER NOT NULL
+                    )
+                """)
+            }
+        }
+
+        val MIGRATION_27_28 = object : androidx.room.migration.Migration(27, 28) {
+            override fun migrate(database: androidx.sqlite.db.SupportSQLiteDatabase) {
+                // Add remoteId column to crawl_sessions
+                database.execSQL("ALTER TABLE crawl_sessions ADD COLUMN remoteId TEXT")
+            }
+        }
+
+        val MIGRATION_28_29 = object : androidx.room.migration.Migration(28, 29) {
+            override fun migrate(database: androidx.sqlite.db.SupportSQLiteDatabase) {
+                // Add new progress tracking columns to crawl_sessions
+                database.execSQL("ALTER TABLE crawl_sessions ADD COLUMN pagesTotal INTEGER NOT NULL DEFAULT 0")
+                database.execSQL("ALTER TABLE crawl_sessions ADD COLUMN pagesQueued INTEGER NOT NULL DEFAULT 0")
+                database.execSQL("ALTER TABLE crawl_sessions ADD COLUMN currentUrl TEXT NOT NULL DEFAULT ''")
+            }
+        }
+
+        val MIGRATION_29_30 = object : androidx.room.migration.Migration(29, 30) {
+            override fun migrate(database: androidx.sqlite.db.SupportSQLiteDatabase) {
+                // Create client_discussions table
+                database.execSQL("""
+                    CREATE TABLE IF NOT EXISTS client_discussions (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        userId TEXT NOT NULL,
+                        clientId INTEGER NOT NULL,
+                        title TEXT NOT NULL,
+                        description TEXT NOT NULL DEFAULT '',
+                        expectedAmount REAL NOT NULL,
+                        discussionDate INTEGER NOT NULL,
+                        lastUpdated INTEGER NOT NULL,
+                        status TEXT NOT NULL DEFAULT 'pending',
+                        notes TEXT NOT NULL DEFAULT '',
+                        createdAt INTEGER NOT NULL,
+                        FOREIGN KEY(clientId) REFERENCES clients(id) ON DELETE CASCADE
+                    )
+                """)
+                database.execSQL("CREATE INDEX IF NOT EXISTS index_client_discussions_clientId ON client_discussions(clientId)")
+
+                // Create income_payments table
+                database.execSQL("""
+                    CREATE TABLE IF NOT EXISTS income_payments (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        userId TEXT NOT NULL,
+                        clientId INTEGER,
+                        discussionId INTEGER,
+                        invoiceId INTEGER,
+                        amount REAL NOT NULL,
+                        description TEXT NOT NULL,
+                        paymentDate INTEGER NOT NULL,
+                        paymentMode TEXT NOT NULL DEFAULT 'bank',
+                        reference TEXT NOT NULL DEFAULT '',
+                        invoiceGenerated INTEGER NOT NULL DEFAULT 0,
+                        invoiceNumber TEXT,
+                        notes TEXT NOT NULL DEFAULT '',
+                        createdAt INTEGER NOT NULL,
+                        FOREIGN KEY(clientId) REFERENCES clients(id) ON DELETE SET NULL,
+                        FOREIGN KEY(discussionId) REFERENCES client_discussions(id) ON DELETE SET NULL
+                    )
+                """)
+                database.execSQL("CREATE INDEX IF NOT EXISTS index_income_payments_clientId ON income_payments(clientId)")
+                database.execSQL("CREATE INDEX IF NOT EXISTS index_income_payments_discussionId ON income_payments(discussionId)")
+                database.execSQL("CREATE INDEX IF NOT EXISTS index_income_payments_invoiceId ON income_payments(invoiceId)")
+
+                // Create expense_records table
+                database.execSQL("""
+                    CREATE TABLE IF NOT EXISTS expense_records (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        userId TEXT NOT NULL,
+                        amount REAL NOT NULL,
+                        description TEXT NOT NULL,
+                        reason TEXT NOT NULL,
+                        expenseType TEXT NOT NULL,
+                        category TEXT NOT NULL,
+                        expenseDate INTEGER NOT NULL,
+                        paymentMode TEXT NOT NULL DEFAULT 'bank',
+                        vendor TEXT NOT NULL DEFAULT '',
+                        isRecurring INTEGER NOT NULL DEFAULT 0,
+                        recurringPeriod TEXT,
+                        nextDueDate INTEGER,
+                        billAttached INTEGER NOT NULL DEFAULT 0,
+                        billPath TEXT,
+                        billNote TEXT NOT NULL DEFAULT '',
+                        notes TEXT NOT NULL DEFAULT '',
+                        createdAt INTEGER NOT NULL
+                    )
+                """)
+            }
+        }
+
+        val MIGRATION_30_31 = object : androidx.room.migration.Migration(30, 31) {
+            override fun migrate(database: androidx.sqlite.db.SupportSQLiteDatabase) {
+                // Create time_entries table for Time Tracker
+                database.execSQL("""
+                    CREATE TABLE IF NOT EXISTS time_entries (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        userId TEXT NOT NULL,
+                        projectName TEXT NOT NULL,
+                        clientId INTEGER,
+                        clientName TEXT NOT NULL DEFAULT '',
+                        taskDescription TEXT NOT NULL DEFAULT '',
+                        tags TEXT NOT NULL DEFAULT '',
+                        hourlyRate REAL NOT NULL DEFAULT 0.0,
+                        startTime INTEGER NOT NULL,
+                        endTime INTEGER,
+                        durationMinutes INTEGER NOT NULL DEFAULT 0,
+                        isManualEntry INTEGER NOT NULL DEFAULT 0,
+                        notes TEXT NOT NULL DEFAULT '',
+                        createdAt INTEGER NOT NULL
+                    )
+                """)
+
+                // Create quick_notes table for Notes app
+                database.execSQL("""
+                    CREATE TABLE IF NOT EXISTS quick_notes (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        userId TEXT NOT NULL,
+                        title TEXT NOT NULL DEFAULT '',
+                        content TEXT NOT NULL,
+                        isPinned INTEGER NOT NULL DEFAULT 0,
+                        color INTEGER NOT NULL DEFAULT 0,
+                        tags TEXT NOT NULL DEFAULT '',
+                        folder TEXT NOT NULL DEFAULT 'default',
+                        createdAt INTEGER NOT NULL,
+                        updatedAt INTEGER NOT NULL
+                    )
+                """)
+
+                // Create password_history table for Password Generator
+                database.execSQL("""
+                    CREATE TABLE IF NOT EXISTS password_history (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        userId TEXT NOT NULL,
+                        password TEXT NOT NULL,
+                        length INTEGER NOT NULL,
+                        type TEXT NOT NULL,
+                        strength TEXT NOT NULL,
+                        label TEXT NOT NULL DEFAULT '',
+                        createdAt INTEGER NOT NULL
                     )
                 """)
             }

@@ -27,8 +27,14 @@ interface CrawlSessionDao {
     @Query("UPDATE crawl_sessions SET pagesCrawled = :count WHERE id = :id")
     suspend fun updateProgress(id: Long, count: Int)
 
+    @Query("UPDATE crawl_sessions SET pagesCrawled = :crawled, pagesTotal = :total, pagesQueued = :queued, currentUrl = :currentUrl WHERE id = :id")
+    suspend fun updateFullProgress(id: Long, crawled: Int, total: Int, queued: Int, currentUrl: String)
+
     @Query("UPDATE crawl_sessions SET remoteId = :remoteId WHERE id = :id")
     suspend fun updateRemoteId(id: Long, remoteId: String)
+
+    @Query("UPDATE crawl_sessions SET outputPath = :outputPath WHERE id = :id")
+    suspend fun updateOutputPath(id: Long, outputPath: String)
 
     @Query("DELETE FROM crawl_sessions")
     suspend fun clearAll()

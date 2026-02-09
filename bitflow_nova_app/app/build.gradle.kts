@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.hiltAndroid)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.chaquopy)
 }
 
 android {
@@ -19,6 +20,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
+        }
+        
+        ndk {
+            abiFilters += listOf("arm64-v8a", "x86_64")
         }
     }
 
@@ -54,6 +59,19 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+}
+
+chaquopy {
+    defaultConfig {
+        version = "3.12"
+        pip {
+            install("httpx")
+            install("beautifulsoup4")
+            install("tldextract")
+            install("markdownify")
+            install("reportlab")
         }
     }
 }
@@ -121,6 +139,9 @@ dependencies {
     // Security Crypto for encrypted preferences
     implementation("androidx.security:security-crypto:1.1.0-alpha06")
 
+    // ZXing for QR Code generation
+    implementation("com.google.zxing:core:3.5.3")
+
     // Jsoup for HTML parsing
     implementation("org.jsoup:jsoup:1.17.2")
 
@@ -141,4 +162,16 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+chaquopy {
+    defaultConfig {
+        version = "3.12"
+        pip {
+            install("httpx")
+            install("beautifulsoup4")
+            install("markdownify")
+            install("tldextract")
+            install("reportlab")
+        }
+    }
 }

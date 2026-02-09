@@ -15,9 +15,15 @@ import com.bitflow.finance.data.local.dao.SavingsGoalDao
 import com.bitflow.finance.data.local.dao.BillReminderDao
 import com.bitflow.finance.data.local.dao.TransactionTemplateDao
 import com.bitflow.finance.data.local.dao.ClientDao
+import com.bitflow.finance.data.local.dao.ClientDiscussionDao
+import com.bitflow.finance.data.local.dao.IncomePaymentDao
+import com.bitflow.finance.data.local.dao.ExpenseRecordDao
 import com.bitflow.finance.data.local.dao.DebtDao
 import com.bitflow.finance.data.local.dao.HoldingDao
 import com.bitflow.finance.data.local.dao.RecurringPatternDao
+import com.bitflow.finance.data.local.dao.TimeEntryDao
+import com.bitflow.finance.data.local.dao.QuickNoteDao
+import com.bitflow.finance.data.local.dao.PasswordHistoryDao
 import com.bitflow.finance.data.parser.UniversalStatementParser
 import com.bitflow.finance.data.parser.StatementParser
 import dagger.Module
@@ -64,7 +70,11 @@ object AppModule {
             AppDatabase.MIGRATION_23_24,
             AppDatabase.MIGRATION_24_25,
             AppDatabase.MIGRATION_25_26,
-            AppDatabase.MIGRATION_26_27
+            AppDatabase.MIGRATION_26_27,
+            AppDatabase.MIGRATION_27_28,
+            AppDatabase.MIGRATION_28_29,
+            AppDatabase.MIGRATION_29_30,
+            AppDatabase.MIGRATION_30_31
         )
         .addCallback(object : androidx.room.RoomDatabase.Callback() {
             override fun onCreate(db: androidx.sqlite.db.SupportSQLiteDatabase) {
@@ -114,6 +124,15 @@ object AppModule {
     fun provideClientDao(database: AppDatabase): ClientDao = database.clientDao()
 
     @Provides
+    fun provideClientDiscussionDao(database: AppDatabase): ClientDiscussionDao = database.clientDiscussionDao()
+
+    @Provides
+    fun provideIncomePaymentDao(database: AppDatabase): IncomePaymentDao = database.incomePaymentDao()
+
+    @Provides
+    fun provideExpenseRecordDao(database: AppDatabase): ExpenseRecordDao = database.expenseRecordDao()
+
+    @Provides
     fun provideDebtDao(database: AppDatabase): DebtDao = database.debtDao()
 
     @Provides
@@ -127,6 +146,15 @@ object AppModule {
 
     @Provides
     fun provideCrawlSessionDao(database: AppDatabase): com.bitflow.finance.data.local.dao.CrawlSessionDao = database.crawlSessionDao()
+
+    @Provides
+    fun provideTimeEntryDao(database: AppDatabase): TimeEntryDao = database.timeEntryDao()
+
+    @Provides
+    fun provideQuickNoteDao(database: AppDatabase): QuickNoteDao = database.quickNoteDao()
+
+    @Provides
+    fun providePasswordHistoryDao(database: AppDatabase): PasswordHistoryDao = database.passwordHistoryDao()
 
     @Provides
     fun provideStatementParser(@ApplicationContext context: Context): StatementParser {

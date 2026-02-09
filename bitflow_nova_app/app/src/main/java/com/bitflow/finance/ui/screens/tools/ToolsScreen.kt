@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.CurrencyExchange
 import androidx.compose.material.icons.filled.Group
 import androidx.compose.material.icons.filled.MoneyOff
 import androidx.compose.material.icons.filled.TrendingUp
+import androidx.compose.material.icons.filled.AccountBalanceWallet
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -50,6 +51,12 @@ fun ToolsScreen(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+            ToolItem(
+                title = "Simple Finance",
+                subtitle = "Clients, Income, Expenses & Invoice",
+                icon = Icons.Default.AccountBalanceWallet,
+                onClick = { onNavigate("simple_finance") }
+            )
             ToolItem(
                 title = "Debt Snowball",
                 subtitle = "Track payoffs & become debt-free",

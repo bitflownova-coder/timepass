@@ -17,9 +17,6 @@ import javax.inject.Singleton
 object NetworkModule {
 
 
-    // Use the URL from BuildConfig (Debug vs Release)
-    private val BASE_URL = com.bitflow.finance.BuildConfig.BASE_URL
-
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
@@ -38,7 +35,7 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(com.bitflow.finance.BuildConfig.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
