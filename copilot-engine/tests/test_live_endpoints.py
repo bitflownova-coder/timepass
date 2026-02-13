@@ -7,9 +7,11 @@ import requests
 import json
 import sys
 import time
+import os
 
 BASE = "http://127.0.0.1:7779"
-WS = r"D:\Bitflow_softwares\timepass"
+# Auto-detect workspace: parent of copilot-engine directory
+WS = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
 
 passed = 0
 failed = 0

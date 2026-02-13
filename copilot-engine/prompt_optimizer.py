@@ -12,6 +12,14 @@ from typing import Optional
 class PromptOptimizer:
     """Builds optimized prompts for AI code assistants."""
 
+    @staticmethod
+    def _safe_format(template: str, context: dict) -> str:
+        """Safe string substitution that won't crash on source code with {} braces."""
+        result = template
+        for key, value in context.items():
+            result = result.replace('{' + key + '}', str(value))
+        return result
+
     # Token budget allocation (approximate)
     TOKEN_BUDGET = {
         'system_context': 200,
@@ -171,11 +179,11 @@ Generate comprehensive unit tests covering:
         # Add conventions
         context['conventions'] = self._detect_conventions(workspace_path, project_info)
 
-        # Build prompt
+        # Build prompt using safe substitution (source code may contain {} braces)
         try:
-            prompt = template.format(**context)
-        except KeyError:
-            prompt = self.PROMPT_TEMPLATES['general'].format(**context)
+            prompt = self._safe_format(template, context)
+        except Exception:
+            prompt = self._safe_format(self.PROMPT_TEMPLATES['general'], context)
 
         # Estimate tokens
         token_estimate = len(prompt.split()) * 1.3
@@ -233,7 +241,7 @@ Generate comprehensive unit tests covering:
                         info['framework'] = 'Flask'
                     elif 'django' in dep_lower:
                         info['framework'] = 'Django'
-                    elif 'PyQt6' in deps or 'PyQt5' in deps:
+                    elif 'pyqt6' in dep_lower or 'pyqt5' in dep_lower:
                         info['framework'] = 'PyQt'
             except Exception:
                 pass
@@ -321,7 +329,7 @@ Generate comprehensive unit tests covering:
                 return
             try:
                 entries = sorted(os.listdir(path))
-            except PermissionError:
+            except (PermissionError, FileNotFoundError, OSError):
                 return
 
             dirs = [e for e in entries if os.path.isdir(os.path.join(path, e)) and e not in skip_dirs and not e.startswith('.')]

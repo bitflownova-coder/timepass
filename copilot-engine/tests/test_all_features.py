@@ -11,8 +11,10 @@ import urllib.error
 from typing import Any, Optional
 
 BASE = "http://127.0.0.1:7779"
-WS_PATH = r"D:\Bitflow_softwares\timepass\copilot-engine"
-WS_PATH_ENCODED = "D%3A%5CBitflow_softwares%5Ctimepass%5Ccopilot-engine"
+# Auto-detect workspace path relative to this test file
+import os as _os
+WS_PATH = _os.path.normpath(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), '..'))
+WS_PATH_ENCODED = urllib.request.pathname2url(WS_PATH).lstrip('/')
 
 passed = 0
 failed = 0

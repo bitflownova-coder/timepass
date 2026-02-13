@@ -194,14 +194,16 @@ class ContextBuilder:
             scripts=scripts
         )
     
-    def get_file_context(self, file_path: str, include_content: bool = True) -> FileContext:
+    def get_file_context(self, file_path: str, include_content: bool = True,
+                         workspace_path: str = None) -> FileContext:
         """Build file context"""
         path = Path(file_path)
         language = self.detect_language(file_path)
         
         relative_path = str(path)
-        if self.workspace_path and path.is_relative_to(self.workspace_path):
-            relative_path = str(path.relative_to(self.workspace_path))
+        ws = Path(workspace_path) if workspace_path else self.workspace_path
+        if ws and path.is_relative_to(ws):
+            relative_path = str(path.relative_to(ws))
         
         content = None
         imports = []

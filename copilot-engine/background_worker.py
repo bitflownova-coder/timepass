@@ -192,8 +192,9 @@ class BackgroundWorker:
         Full initialization for a workspace (called once on register).
         Runs full index, builds graph, runs all analysis.
         """
-        if workspace_path in self._initialized_workspaces:
-            return {'already_initialized': True}
+        with self._lock:
+            if workspace_path in self._initialized_workspaces:
+                return {'already_initialized': True}
 
         result = {'workspace': workspace_path, 'steps': {}}
 
@@ -206,6 +207,17 @@ class BackgroundWorker:
                 idx_result = self._indexer.full_index(workspace_path, db_session=session)
                 result['steps']['index'] = idx_result
                 logger.info(f"✓ Indexed {idx_result.get('indexed', 0)} files, {idx_result.get('entities_found', 0)} entities")
+
+                # Bail out early if indexing failed (e.g. workspace path doesn't exist)
+                if idx_result.get('error'):
+                    logger.warning(f"⚠️  Index returned error: {idx_result['error']} — skipping graph/snapshot steps")
+                    result['steps']['graph'] = {'built': False, 'reason': idx_result['error']}
+                    result['steps']['snapshots'] = 0
+                    result['steps']['risk'] = self._compute_full_risk(workspace_path)
+                    with self._lock:
+                        self._initialized_workspaces.add(workspace_path)
+                    result['initialized'] = True
+                    return result
 
                 # 2. Build dependency graph
                 logger.info(f"📊 Step 2/4: Building dependency graph...")
@@ -236,7 +248,8 @@ class BackgroundWorker:
             result['steps']['risk'] = risk_result
             logger.info(f"✓ Risk analysis complete (score: {risk_result.get('overall_score', 0):.1f}/10)")
 
-            self._initialized_workspaces.add(workspace_path)
+            with self._lock:
+                self._initialized_workspaces.add(workspace_path)
             result['initialized'] = True
             logger.info(f"✅ Workspace initialization complete!")
             
@@ -268,7 +281,7 @@ class BackgroundWorker:
             try:
                 event = self._queue.get(timeout=1.0)
                 if event is None:
-                    continue
+                    break  # Poison pill — stop the worker
 
                 # Debounce
                 now = time.time()
@@ -378,7 +391,9 @@ class BackgroundWorker:
                 time.sleep(10)  # Check every 10 seconds if it's time
 
                 now = time.time()
-                for workspace_path in list(self._initialized_workspaces):
+                with self._lock:
+                    workspaces = list(self._initialized_workspaces)
+                for workspace_path in workspaces:
                     last_run = self._last_idle_run.get(workspace_path, 0)
                     if now - last_run >= self._idle_interval:
                         self._run_idle_path(workspace_path)

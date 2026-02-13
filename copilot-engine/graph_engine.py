@@ -285,36 +285,58 @@ class GraphEngine:
         return affected
 
     def detect_circular_dependencies(self) -> List[List[str]]:
-        """Find all circular dependency cycles in the file graph."""
+        """Find all circular dependency cycles in the file graph (iterative DFS)."""
         cycles: List[List[str]] = []
         visited: Set[str] = set()
         rec_stack: Set[str] = set()
         path: List[str] = []
 
-        def dfs(node: str):
-            visited.add(node)
-            rec_stack.add(node)
-            path.append(node)
+        for start_node in list(self._all_files):
+            if start_node in visited:
+                continue
 
-            for neighbor in self._forward.get(node, set()):
-                if neighbor not in visited:
-                    dfs(neighbor)
-                elif neighbor in rec_stack:
-                    # Found a cycle
-                    cycle_start = path.index(neighbor)
-                    cycle = path[cycle_start:] + [neighbor]
-                    # Normalize: start from smallest
-                    min_idx = cycle.index(min(cycle[:-1]))
-                    normalized = cycle[min_idx:-1] + cycle[:min_idx] + [cycle[min_idx]]
-                    if normalized not in cycles:
-                        cycles.append(normalized)
+            # Iterative DFS using explicit stack
+            # Each frame: (node, iterator_over_neighbors, entered)
+            # entered=False means we're visiting the node for the first time
+            stack = [(start_node, iter(self._forward.get(start_node, set())), False)]
 
-            path.pop()
-            rec_stack.discard(node)
+            while stack:
+                node, neighbors_iter, entered = stack[-1]
 
-        for node in list(self._all_files):
-            if node not in visited:
-                dfs(node)
+                if not entered:
+                    # First visit — mark as visited and on recursion stack
+                    if node in visited:
+                        stack.pop()
+                        continue
+                    visited.add(node)
+                    rec_stack.add(node)
+                    path.append(node)
+                    stack[-1] = (node, neighbors_iter, True)
+
+                # Try to advance to the next neighbor
+                advanced = False
+                for neighbor in neighbors_iter:
+                    if neighbor not in visited:
+                        stack.append((neighbor, iter(self._forward.get(neighbor, set())), False))
+                        advanced = True
+                        break
+                    elif neighbor in rec_stack:
+                        # Found a cycle
+                        cycle_start = path.index(neighbor)
+                        cycle = path[cycle_start:] + [neighbor]
+                        # Normalize: start from smallest
+                        min_idx = cycle.index(min(cycle[:-1]))
+                        normalized = cycle[min_idx:-1] + cycle[:min_idx] + [cycle[min_idx]]
+                        if normalized not in cycles:
+                            cycles.append(normalized)
+                            if len(cycles) >= 50:
+                                return cycles
+
+                if not advanced:
+                    # All neighbors exhausted — backtrack
+                    path.pop()
+                    rec_stack.discard(node)
+                    stack.pop()
 
         return cycles[:50]  # Cap at 50 cycles
 

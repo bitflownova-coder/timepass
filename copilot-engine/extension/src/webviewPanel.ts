@@ -1,10 +1,13 @@
 /**
- * Copilot Engine - Autonomous Monitoring Dashboard
- * Live structural health monitor + backend management controls.
- * Receives data from AutonomousEngine and renders real-time state.
+ * Copilot Engine - Redesigned Dashboard
+ * Features:
+ *  - Manual + Automatic scanning controls
+ *  - Scan results displayed inline (not just output channel)
+ *  - Clear loading/empty states
+ *  - One-click actions with visible results
  */
 import * as vscode from 'vscode';
-import { EngineClient, HealthResponse } from './engineClient';
+import { EngineClient } from './engineClient';
 import { AutonomousEngine, DashboardData } from './autonomousEngine';
 import { BackendManager, BackendStatus } from './backendManager';
 
@@ -44,16 +47,9 @@ export class DashboardPanel {
             this.pushDashboardData(data);
         });
 
-        // Send initial data if available
-        const latest = this.autonomousEngine.getLatestDashboard();
-        if (latest) {
-            this.pushDashboardData(latest);
-        }
-
         // Subscribe to backend status changes
         this.backendManager.onStatusChange((status) => {
             this.pushBackendStatus(status);
-            // Also push logs during startup
             if (status.health === 'starting') {
                 this.panel.webview.postMessage({ 
                     command: 'backendLogs', 
@@ -61,8 +57,6 @@ export class DashboardPanel {
                 });
             }
         });
-
-        // Initial status will be sent when webview signals ready via 'webviewReady' message
     }
 
     static show(
@@ -78,7 +72,7 @@ export class DashboardPanel {
 
         const panel = vscode.window.createWebviewPanel(
             'copilotEngineDashboard',
-            '⚡ Copilot Engine — Monitor',
+            '⚡ Copilot Engine',
             vscode.ViewColumn.One,
             { enableScripts: true, retainContextWhenHidden: true }
         );
@@ -95,101 +89,295 @@ export class DashboardPanel {
     }
 
     private async handleMessage(msg: any): Promise<void> {
-        switch (msg.command) {
-            case 'openSettings':
-                await vscode.commands.executeCommand('workbench.action.openSettings', 'copilotEngine');
-                break;
-            case 'webviewReady': {
-                // Webview is ready to receive messages - send all initial data
-                await this.backendManager.detectExisting();
-                this.pushBackendStatus(this.backendManager.getStatus());
-                this.panel.webview.postMessage({ 
-                    command: 'backendLogs', 
-                    logs: this.backendManager.getLogs() 
-                });
-                // Send latest dashboard data or force poll
-                const workspacePath = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
-                let dashData = this.autonomousEngine.getLatestDashboard();
-                if (!dashData && workspacePath) {
-                    // No cached data - force poll with workspace path
-                    dashData = await this.autonomousEngine.refreshDashboard(workspacePath);
+        const workspacePath = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+        
+        // Debug logging - shows in Output channel
+        console.log(`[Dashboard] Received message: ${msg.command}`);
+        
+        try {
+            switch (msg.command) {
+                // === Initialization ===
+                case 'webviewReady': {
+                    console.log('[Dashboard] Webview ready, detecting backend...');
+                    await this.backendManager.detectExisting();
+                    this.pushBackendStatus(this.backendManager.getStatus());
+                    this.panel.webview.postMessage({ 
+                        command: 'backendLogs', 
+                        logs: this.backendManager.getLogs() 
+                    });
+                    // Try to get dashboard data
+                    if (workspacePath) {
+                        const dashData = await this.autonomousEngine.refreshDashboard(workspacePath);
+                        if (dashData) {
+                            this.pushDashboardData(dashData);
+                        }
+                    }
+                    break;
                 }
-                if (dashData) {
-                    this.pushDashboardData(dashData);
+
+                // === Backend Controls ===
+                case 'startBackend': {
+                    console.log('[Dashboard] Starting backend...');
+                    await this.backendManager.start();
+                    this.pushBackendStatus(this.backendManager.getStatus());
+                    this.panel.webview.postMessage({ 
+                        command: 'backendLogs', 
+                        logs: this.backendManager.getLogs() 
+                    });
+                    break;
                 }
-                break;
-            }
-            case 'toggleFocus':
-                await vscode.commands.executeCommand('copilotEngine.toggleFocusMode');
-                break;
-            case 'openFile': {
-                if (msg.filePath) {
-                    const doc = await vscode.workspace.openTextDocument(msg.filePath);
-                    await vscode.window.showTextDocument(doc, {
-                        selection: msg.line ? new vscode.Range(msg.line - 1, 0, msg.line - 1, 0) : undefined,
+                case 'stopBackend': {
+                    console.log('[Dashboard] Stopping backend...');
+                    this.backendManager.stop();
+                    this.pushBackendStatus(this.backendManager.getStatus());
+                    this.panel.webview.postMessage({ 
+                        command: 'backendLogs', 
+                        logs: this.backendManager.getLogs() 
+                    });
+                    break;
+                }
+                case 'restartBackend': {
+                    console.log('[Dashboard] Restarting backend...');
+                    await this.backendManager.restart();
+                    this.pushBackendStatus(this.backendManager.getStatus());
+                    this.panel.webview.postMessage({ 
+                        command: 'backendLogs', 
+                        logs: this.backendManager.getLogs() 
+                    });
+                    break;
+                }
+                case 'refreshBackend': {
+                    console.log('[Dashboard] Refreshing backend status...');
+                    await this.backendManager.detectExisting();
+                    this.pushBackendStatus(this.backendManager.getStatus());
+                    this.panel.webview.postMessage({ 
+                        command: 'backendLogs', 
+                        logs: this.backendManager.getLogs() 
+                    });
+                    break;
+                }
+
+            // === Manual Scans with Results ===
+            case 'initializeWorkspace': {
+                if (!workspacePath) {
+                    console.log('[Dashboard] No workspace folder open');
+                    vscode.window.showWarningMessage('No workspace folder open');
+                    break;
+                }
+                console.log(`[Dashboard] Initializing workspace: ${workspacePath}`);
+                this.panel.webview.postMessage({ command: 'scanStarted', scanType: 'initialize' });
+                try {
+                    const result = await this.client.post<any>('/autonomous/initialize', {
+                        workspace_path: workspacePath
+                    });
+                    console.log('[Dashboard] Initialize complete:', result);
+                    this.panel.webview.postMessage({ 
+                        command: 'scanResults', 
+                        scanType: 'initialize',
+                        result 
+                    });
+                    // Refresh dashboard after init
+                    const dashData = await this.autonomousEngine.refreshDashboard(workspacePath);
+                    if (dashData) this.pushDashboardData(dashData);
+                } catch (e: any) {
+                    console.error('[Dashboard] Initialize error:', e);
+                    this.panel.webview.postMessage({ 
+                        command: 'scanComplete', 
+                        scanType: 'initialize',
+                        success: false,
+                        error: e.message 
                     });
                 }
                 break;
             }
-            case 'startBackend':
-                await this.backendManager.start();
-                break;
-            case 'stopBackend':
-                this.backendManager.stop();
-                break;
-            case 'restartBackend':
-                await this.backendManager.restart();
-                break;
-            case 'refreshBackend': {
-                // Try to detect if backend is already running externally
-                await this.backendManager.detectExisting();
-                this.pushBackendStatus(this.backendManager.getStatus());
-                this.panel.webview.postMessage({ 
-                    command: 'backendLogs', 
-                    logs: this.backendManager.getLogs() 
-                });
-                // Also refresh dashboard data
-                const wsPath = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
-                const refreshedData = await this.autonomousEngine.refreshDashboard(wsPath);
-                if (refreshedData) {
-                    this.pushDashboardData(refreshedData);
+
+            case 'runFullScan': {
+                if (!workspacePath) {
+                    console.log('[Dashboard] No workspace folder open');
+                    vscode.window.showWarningMessage('No workspace folder open');
+                    break;
+                }
+                console.log(`[Dashboard] Running full scan on: ${workspacePath}`);
+                this.panel.webview.postMessage({ command: 'scanStarted', scanType: 'fullScan' });
+                try {
+                    const result = await this.client.post<any>('/pipeline/full-scan', {
+                        workspace_path: workspacePath
+                    });
+                    console.log('[Dashboard] Full scan complete, issues:', result?.issues?.length || 0);
+                    this.panel.webview.postMessage({ 
+                        command: 'scanResults', 
+                        scanType: 'fullScan',
+                        result 
+                    });
+                } catch (e: any) {
+                    console.error('[Dashboard] Full scan error:', e);
+                    this.panel.webview.postMessage({ 
+                        command: 'scanComplete', 
+                        scanType: 'fullScan',
+                        success: false,
+                        error: e.message 
+                    });
                 }
                 break;
             }
-            // Quick Actions
-            case 'fullScan':
-                await vscode.commands.executeCommand('copilotEngine.fullScan');
+
+            case 'runSecurityScan': {
+                if (!workspacePath) break;
+                this.panel.webview.postMessage({ command: 'scanStarted', scanType: 'security' });
+                try {
+                    const result = await this.client.post<any>('/security/scan-workspace', {
+                        workspace_path: workspacePath
+                    });
+                    this.panel.webview.postMessage({ 
+                        command: 'scanResults', 
+                        scanType: 'security',
+                        result 
+                    });
+                } catch (e: any) {
+                    this.panel.webview.postMessage({ 
+                        command: 'scanComplete', 
+                        scanType: 'security',
+                        success: false,
+                        error: e.message 
+                    });
+                }
                 break;
-            case 'securityScan':
-                await vscode.commands.executeCommand('copilotEngine.checkSecurity');
+            }
+
+            case 'runContractScan': {
+                if (!workspacePath) break;
+                this.panel.webview.postMessage({ command: 'scanStarted', scanType: 'contracts' });
+                try {
+                    const result = await this.client.post<any>('/contracts/validate', {
+                        workspace_path: workspacePath
+                    });
+                    this.panel.webview.postMessage({ 
+                        command: 'scanResults', 
+                        scanType: 'contracts',
+                        result 
+                    });
+                } catch (e: any) {
+                    this.panel.webview.postMessage({ 
+                        command: 'scanComplete', 
+                        scanType: 'contracts',
+                        success: false,
+                        error: e.message 
+                    });
+                }
                 break;
-            case 'gitAnalysis':
-                await vscode.commands.executeCommand('copilotEngine.analyzeGitChanges');
+            }
+
+            case 'runGitAnalysis': {
+                if (!workspacePath) break;
+                this.panel.webview.postMessage({ command: 'scanStarted', scanType: 'git' });
+                try {
+                    const result = await this.client.post<any>('/git/diff', {
+                        workspace_path: workspacePath
+                    });
+                    this.panel.webview.postMessage({ 
+                        command: 'scanResults', 
+                        scanType: 'git',
+                        result 
+                    });
+                } catch (e: any) {
+                    this.panel.webview.postMessage({ 
+                        command: 'scanComplete', 
+                        scanType: 'git',
+                        success: false,
+                        error: e.message 
+                    });
+                }
                 break;
-            case 'preCommit':
-                await vscode.commands.executeCommand('copilotEngine.preCommitCheck');
+            }
+
+            case 'detectEndpoints': {
+                if (!workspacePath) break;
+                this.panel.webview.postMessage({ command: 'scanStarted', scanType: 'endpoints' });
+                try {
+                    const result = await this.client.post<any>('/api/detect', {
+                        workspace_path: workspacePath
+                    });
+                    this.panel.webview.postMessage({ 
+                        command: 'scanResults', 
+                        scanType: 'endpoints',
+                        result 
+                    });
+                } catch (e: any) {
+                    this.panel.webview.postMessage({ 
+                        command: 'scanComplete', 
+                        scanType: 'endpoints',
+                        success: false,
+                        error: e.message 
+                    });
+                }
                 break;
-            case 'validateContracts':
-                await vscode.commands.executeCommand('copilotEngine.validateContracts');
+            }
+
+            case 'detectStack': {
+                if (!workspacePath) break;
+                this.panel.webview.postMessage({ command: 'scanStarted', scanType: 'stack' });
+                try {
+                    const result = await this.client.post<any>('/stack/detect', {
+                        workspace_path: workspacePath
+                    });
+                    this.panel.webview.postMessage({ 
+                        command: 'scanResults', 
+                        scanType: 'stack',
+                        result 
+                    });
+                } catch (e: any) {
+                    this.panel.webview.postMessage({ 
+                        command: 'scanComplete', 
+                        scanType: 'stack',
+                        success: false,
+                        error: e.message 
+                    });
+                }
                 break;
-            case 'validateSchema':
-                await vscode.commands.executeCommand('copilotEngine.validateSchema');
+            }
+
+            // === Refresh Dashboard Data ===
+            case 'refreshDashboard': {
+                if (!workspacePath) break;
+                this.panel.webview.postMessage({ command: 'refreshing' });
+                const dashData = await this.autonomousEngine.refreshDashboard(workspacePath);
+                if (dashData) {
+                    this.pushDashboardData(dashData);
+                }
+                this.panel.webview.postMessage({ command: 'refreshComplete' });
                 break;
-            case 'detectStack':
-                await vscode.commands.executeCommand('copilotEngine.detectStack');
+            }
+
+            // === File Navigation ===
+            case 'openFile': {
+                if (msg.filePath) {
+                    try {
+                        const doc = await vscode.workspace.openTextDocument(msg.filePath);
+                        await vscode.window.showTextDocument(doc, {
+                            selection: msg.line ? new vscode.Range(msg.line - 1, 0, msg.line - 1, 0) : undefined,
+                        });
+                    } catch (e) {
+                        vscode.window.showErrorMessage(`Could not open file: ${msg.filePath}`);
+                    }
+                }
                 break;
-            case 'detectEndpoints':
-                await vscode.commands.executeCommand('copilotEngine.detectEndpoints');
-                break;
-            case 'analyzeCode':
-                await vscode.commands.executeCommand('copilotEngine.analyzeCode');
-                break;
-            case 'buildContext':
-                await vscode.commands.executeCommand('copilotEngine.buildContext');
+            }
+
+            // === Settings ===
+            case 'openSettings':
+                await vscode.commands.executeCommand('workbench.action.openSettings', 'copilotEngine');
                 break;
             case 'showOutput':
                 await vscode.commands.executeCommand('copilotEngine.showStatus');
                 break;
+            
+            default:
+                console.log(`[Dashboard] Unknown command: ${msg.command}`);
+                break;
+            }
+        } catch (err: any) {
+            console.error(`[Dashboard] Error handling message ${msg.command}:`, err);
+            vscode.window.showErrorMessage(`Dashboard error: ${err.message}`);
         }
     }
 
@@ -211,493 +399,622 @@ body{
 ::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-thumb{background:var(--vscode-scrollbarSlider-background);border-radius:3px}
 
-.shell{max-width:1000px;margin:0 auto;padding:24px 20px 60px}
+.shell{max-width:1100px;margin:0 auto;padding:20px}
 
-/* ── Header ── */
-.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--vscode-panel-border)}
-.header h1{font-size:20px;font-weight:700;letter-spacing:-.3px}
-.header h1 span{opacity:.4;font-weight:400;font-size:12px;margin-left:6px}
-.header-right{display:flex;align-items:center;gap:10px}
-.pill{display:inline-flex;align-items:center;gap:5px;padding:3px 12px;border-radius:16px;font-size:11px;font-weight:600}
-.pill-dot{width:7px;height:7px;border-radius:50%}
-.pill-healthy{background:#22c55e18;color:#4ade80}.pill-healthy .pill-dot{background:#4ade80;box-shadow:0 0 6px #4ade80}
-.pill-caution{background:#eab30818;color:#facc15}.pill-caution .pill-dot{background:#facc15}
-.pill-atrisk{background:#f9731618;color:#fb923c}.pill-atrisk .pill-dot{background:#fb923c}
-.pill-degraded{background:#ef444418;color:#f87171}.pill-degraded .pill-dot{background:#f87171}
-.pill-critical{background:#dc262618;color:#ef4444}.pill-critical .pill-dot{background:#ef4444;box-shadow:0 0 6px #ef4444}
+/* Header */
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--vscode-panel-border)}
+.header h1{font-size:18px;font-weight:700;display:flex;align-items:center;gap:8px}
+.header h1 .emoji{font-size:22px}
+.header-actions{display:flex;gap:8px}
+.icon-btn{padding:6px 10px;border-radius:4px;background:var(--vscode-button-secondaryBackground);color:var(--vscode-button-secondaryForeground);border:none;cursor:pointer;font-size:12px;display:flex;align-items:center;gap:4px}
+.icon-btn:hover{background:var(--vscode-button-secondaryHoverBackground)}
+.icon-btn.primary{background:var(--vscode-button-background);color:var(--vscode-button-foreground)}
+.icon-btn.primary:hover{background:var(--vscode-button-hoverBackground)}
+.icon-btn:disabled{opacity:.4;cursor:not-allowed}
 
-/* ── Health Gauge ── */
-.gauge-wrap{display:flex;align-items:center;gap:20px;margin-bottom:24px;padding:20px;background:var(--vscode-editor-inactiveSelectionBackground);border:1px solid var(--vscode-panel-border);border-radius:12px}
-.gauge{width:120px;height:120px;position:relative;flex-shrink:0}
-.gauge svg{width:100%;height:100%;transform:rotate(-90deg)}
-.gauge-bg{fill:none;stroke:var(--vscode-panel-border);stroke-width:8}
-.gauge-fill{fill:none;stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset .8s ease,stroke .5s}
-.gauge-text{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.gauge-score{font-size:28px;font-weight:800;line-height:1}
-.gauge-label{font-size:10px;opacity:.5;text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
-.gauge-info{flex:1}
-.gauge-level{font-size:18px;font-weight:700;margin-bottom:6px}
-.gauge-meta{font-size:12px;opacity:.55;line-height:1.7}
-
-/* ── Risk Category Grid ── */
-.categories{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:24px}
-.cat-card{background:var(--vscode-editor-inactiveSelectionBackground);border:1px solid var(--vscode-panel-border);border-radius:10px;padding:12px 14px;text-align:center;transition:border-color .3s}
-.cat-card.warn{border-color:#eab30866}
-.cat-card.danger{border-color:#ef444466}
-.cat-val{font-size:22px;font-weight:700}
-.cat-lbl{font-size:10px;opacity:.5;text-transform:uppercase;letter-spacing:.4px;margin-top:2px}
-.c-green{color:#4ade80}.c-yellow{color:#facc15}.c-orange{color:#fb923c}.c-red{color:#ef4444}
-
-/* ── Section ── */
-.section{margin-bottom:24px}
-.section-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;opacity:.5;margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.section-title::after{content:'';flex:1;height:1px;background:var(--vscode-panel-border)}
-.section-title .count{background:var(--vscode-badge-background);color:var(--vscode-badge-foreground);padding:1px 7px;border-radius:10px;font-size:10px;font-weight:700}
-
-/* ── Panels ── */
-.panel{background:var(--vscode-editor-inactiveSelectionBackground);border:1px solid var(--vscode-panel-border);border-radius:10px;overflow:hidden;max-height:280px;overflow-y:auto}
-.panel-empty{padding:24px;text-align:center;opacity:.4;font-size:12px}
-
-/* ── Issue rows ── */
-.row{display:flex;align-items:flex-start;gap:8px;padding:8px 14px;border-bottom:1px solid var(--vscode-panel-border);font-size:12px;cursor:pointer;transition:background .1s}
-.row:hover{background:var(--vscode-list-hoverBackground)}
-.row:last-child{border-bottom:none}
-.row-icon{flex-shrink:0;font-size:13px;margin-top:1px}
-.row-body{flex:1;min-width:0}
-.row-msg{font-size:12px}
-.row-meta{font-size:11px;opacity:.45;margin-top:1px}
-.sev-crit{color:#ef4444}.sev-high{color:#fb923c}.sev-med{color:#facc15}.sev-low{color:#4ade80}
-
-/* ── Trend sparkline ── */
-.trend-wrap{background:var(--vscode-editor-inactiveSelectionBackground);border:1px solid var(--vscode-panel-border);border-radius:10px;padding:14px;height:100px;position:relative;overflow:hidden}
-.trend-label{position:absolute;top:10px;left:14px;font-size:10px;opacity:.4;text-transform:uppercase;letter-spacing:.5px}
-.trend-svg{width:100%;height:100%}
-
-/* ── Worker stats bar ── */
-.worker-bar{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:24px;font-size:11px;opacity:.55}
-.worker-bar span{display:inline-flex;align-items:center;gap:4px}
-.wdot{width:6px;height:6px;border-radius:50%;background:#4ade80}
-.wdot.off{background:#f87171}
-
-/* ── Minimal controls ── */
-.controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
-.cbtn{
-  padding:5px 12px;border-radius:5px;font-size:11px;font-weight:500;
-  border:1px solid var(--vscode-panel-border);
-  background:transparent;color:var(--vscode-foreground);
-  cursor:pointer;transition:all .12s;opacity:.7
-}
-.cbtn:hover{opacity:1;border-color:var(--vscode-focusBorder)}
-
-/* ── Quick Actions Grid ── */
-.actions-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-bottom:16px}
-.action-btn{
-  display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:8px;
-  background:var(--vscode-editor-inactiveSelectionBackground);
-  border:1px solid var(--vscode-panel-border);
-  color:var(--vscode-foreground);cursor:pointer;transition:all .15s;
-  font-size:12px;font-weight:500;text-align:left
-}
-.action-btn:hover{background:var(--vscode-list-hoverBackground);border-color:var(--vscode-focusBorder);transform:translateY(-1px)}
-.action-btn .icon{font-size:16px;flex-shrink:0}
-.action-btn .label{flex:1;line-height:1.3}
-.action-btn .label small{display:block;font-size:10px;opacity:.5;font-weight:400}
-.action-btn.primary{background:var(--vscode-button-background);color:var(--vscode-button-foreground);border-color:var(--vscode-button-background)}
-.action-btn.primary:hover{background:var(--vscode-button-hoverBackground)}
-.action-btn.warning{border-color:#eab308;background:#eab30815}
-.action-btn.danger{border-color:#ef4444;background:#ef444415}
-
-.footer{text-align:center;opacity:.25;font-size:10px;margin-top:28px}
-
-/* ── Backend Management ── */
-.backend-panel{background:var(--vscode-editor-inactiveSelectionBackground);border:1px solid var(--vscode-panel-border);border-radius:10px;padding:16px;margin-bottom:24px}
-.backend-status{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px;flex-wrap:wrap}
-.backend-indicator{display:flex;align-items:center;gap:12px;flex:1;min-width:220px}
-.status-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
-.status-dot.status-stopped{background:#6b7280;box-shadow:0 0 0 2px #6b72804d}
-.status-dot.status-starting{background:#facc15;box-shadow:0 0 8px #facc15;animation:pulse 1.5s ease-in-out infinite}
-.status-dot.status-healthy{background:#4ade80;box-shadow:0 0 8px #4ade80}
-.status-dot.status-unhealthy{background:#ef4444;box-shadow:0 0 8px #ef4444;animation:pulse 1s ease-in-out infinite}
+/* Status Indicator */
+.status-bar{display:flex;align-items:center;gap:16px;padding:12px 16px;background:var(--vscode-editor-inactiveSelectionBackground);border-radius:8px;margin-bottom:20px;flex-wrap:wrap}
+.status-item{display:flex;align-items:center;gap:6px;font-size:12px}
+.status-dot{width:8px;height:8px;border-radius:50%}
+.status-dot.green{background:#4ade80;box-shadow:0 0 6px #4ade80}
+.status-dot.yellow{background:#facc15;animation:pulse 1s ease-in-out infinite}
+.status-dot.red{background:#ef4444}
+.status-dot.gray{background:#6b7280}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
-.backend-info{flex:1}
-.backend-state{font-size:14px;font-weight:600;margin-bottom:2px}
+
+/* Tabs */
+.tabs{display:flex;gap:4px;margin-bottom:20px;border-bottom:1px solid var(--vscode-panel-border);padding-bottom:0}
+.tab{padding:8px 16px;cursor:pointer;font-size:13px;font-weight:500;border-bottom:2px solid transparent;opacity:.6;transition:all .15s}
+.tab:hover{opacity:.8}
+.tab.active{opacity:1;border-bottom-color:var(--vscode-focusBorder)}
+
+/* Tab Content */
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* Cards */
+.card{background:var(--vscode-editor-inactiveSelectionBackground);border:1px solid var(--vscode-panel-border);border-radius:8px;margin-bottom:16px;overflow:hidden}
+.card-header{padding:12px 16px;border-bottom:1px solid var(--vscode-panel-border);display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.02)}
+.card-title{font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
+.card-body{padding:16px}
+.card-body.no-pad{padding:0}
+
+/* Scan Buttons Grid */
+.scan-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.scan-btn{display:flex;flex-direction:column;align-items:center;padding:20px 16px;background:var(--vscode-editor-inactiveSelectionBackground);border:1px solid var(--vscode-panel-border);border-radius:8px;cursor:pointer;transition:all .15s;text-align:center}
+.scan-btn:hover{background:var(--vscode-list-hoverBackground);border-color:var(--vscode-focusBorder);transform:translateY(-2px)}
+.scan-btn:active{transform:translateY(0)}
+.scan-btn.loading{opacity:.6;pointer-events:none}
+.scan-btn .icon{font-size:28px;margin-bottom:8px}
+.scan-btn .label{font-size:13px;font-weight:600;margin-bottom:4px}
+.scan-btn .desc{font-size:11px;opacity:.5}
+.scan-btn.primary{border-color:var(--vscode-button-background);background:rgba(0,122,204,.1)}
+
+/* Results Panel */
+.results-panel{margin-top:16px}
+.results-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--vscode-editor-inactiveSelectionBackground);border-radius:6px 6px 0 0;border:1px solid var(--vscode-panel-border);border-bottom:none}
+.results-title{font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px}
+.results-body{border:1px solid var(--vscode-panel-border);border-radius:0 0 6px 6px;max-height:400px;overflow-y:auto}
+.result-row{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-bottom:1px solid var(--vscode-panel-border);font-size:12px;cursor:pointer;transition:background .1s}
+.result-row:hover{background:var(--vscode-list-hoverBackground)}
+.result-row:last-child{border-bottom:none}
+.result-icon{flex-shrink:0;font-size:14px}
+.result-content{flex:1;min-width:0}
+.result-msg{font-weight:500;word-break:break-word}
+.result-meta{font-size:11px;opacity:.5;margin-top:2px}
+.result-badge{padding:2px 6px;border-radius:4px;font-size:10px;font-weight:600}
+.badge-critical{background:#dc262633;color:#ef4444}
+.badge-high{background:#ea580c33;color:#fb923c}
+.badge-medium{background:#ca8a0433;color:#facc15}
+.badge-low{background:#16a34a33;color:#4ade80}
+
+/* Empty State */
+.empty-state{text-align:center;padding:40px 20px;opacity:.5}
+.empty-state .icon{font-size:48px;margin-bottom:12px}
+.empty-state .title{font-size:14px;font-weight:600;margin-bottom:4px}
+.empty-state .desc{font-size:12px}
+
+/* Loading State */
+.loading-state{text-align:center;padding:40px 20px}
+.loading-state .spinner{width:32px;height:32px;border:3px solid var(--vscode-panel-border);border-top-color:var(--vscode-focusBorder);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-state .text{font-size:13px;opacity:.7}
+
+/* Summary Stats */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:12px}
+.stat-card{text-align:center;padding:16px 12px;background:var(--vscode-editor-background);border-radius:6px;border:1px solid var(--vscode-panel-border)}
+.stat-value{font-size:24px;font-weight:700;line-height:1}
+.stat-label{font-size:10px;text-transform:uppercase;letter-spacing:.5px;opacity:.5;margin-top:4px}
+.stat-card.danger .stat-value{color:#ef4444}
+.stat-card.warning .stat-value{color:#fb923c}
+.stat-card.success .stat-value{color:#4ade80}
+
+/* Backend Panel */
+.backend-panel{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.backend-info{flex:1;min-width:200px}
+.backend-state{font-weight:600;margin-bottom:2px}
 .backend-meta{font-size:11px;opacity:.5}
-.backend-controls{display:flex;gap:6px;flex-wrap:wrap}
-.bbtn{padding:6px 14px;border-radius:6px;font-size:11px;font-weight:600;border:1px solid var(--vscode-panel-border);background:var(--vscode-button-secondaryBackground);color:var(--vscode-button-secondaryForeground);cursor:pointer;transition:all .15s;opacity:.9}
-.bbtn:hover:not(:disabled){opacity:1;transform:translateY(-1px);background:var(--vscode-button-secondaryHoverBackground)}
-.bbtn:disabled{opacity:.3;cursor:not-allowed}
-.bbtn-primary{background:var(--vscode-button-background);color:var(--vscode-button-foreground)}
-.bbtn-primary:hover:not(:disabled){background:var(--vscode-button-hoverBackground)}
-.bbtn-danger{background:#dc262626;color:#ef4444;border-color:#dc2626}
-.bbtn-danger:hover:not(:disabled){background:#dc26264d}
-.bbtn-warning{background:#eab30826;color:#facc15;border-color:#eab308}
-.bbtn-warning:hover:not(:disabled){background:#eab3084d}
-.backend-logs{border-top:1px solid var(--vscode-panel-border);padding-top:12px;margin-top:4px}
-.logs-header{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;opacity:.5;margin-bottom:8px}
-.logs-content{background:var(--vscode-editor-background);border:1px solid var(--vscode-panel-border);border-radius:6px;padding:10px;font-family:var(--vscode-editor-font-family);font-size:10px;line-height:1.6;max-height:180px;overflow-y:auto;color:#a1a1aa}
-.logs-content.empty{opacity:.4;font-style:italic}
-.log-line{margin-bottom:2px}
+.backend-actions{display:flex;gap:6px}
+
+/* Log Output */
+.log-output{background:var(--vscode-editor-background);border:1px solid var(--vscode-panel-border);border-radius:4px;padding:12px;font-family:var(--vscode-editor-font-family);font-size:11px;max-height:200px;overflow-y:auto;line-height:1.6}
+.log-output:empty::before{content:'No logs yet';opacity:.4}
+
+/* Issues List */
+.issues-summary{display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.issue-count{display:flex;align-items:center;gap:4px;font-size:12px;padding:4px 10px;border-radius:4px;background:var(--vscode-editor-background)}
+.issue-count.critical{color:#ef4444}
+.issue-count.high{color:#fb923c}
+.issue-count.medium{color:#facc15}
+.issue-count.low{color:#4ade80}
 </style>
 </head>
 <body>
 <div class="shell">
 
-  <!-- ── Header ── -->
-  <div class="header">
-    <h1>⚡ Copilot Engine <span>Autonomous Monitor</span></h1>
-    <div class="header-right">
-      <div id="healthPill" class="pill pill-healthy">
-        <span class="pill-dot"></span>
-        <span id="healthText">Initializing...</span>
-      </div>
+<!-- Header -->
+<div class="header">
+  <h1><span class="emoji">⚡</span> Copilot Engine</h1>
+  <div class="header-actions">
+    <button class="icon-btn" onclick="send('refreshDashboard')" id="btnRefresh">↻ Refresh</button>
+    <button class="icon-btn" onclick="send('showOutput')">📋 Output</button>
+    <button class="icon-btn" onclick="send('openSettings')">⚙️ Settings</button>
+  </div>
+</div>
+
+<!-- Status Bar -->
+<div class="status-bar">
+  <div class="status-item">
+    <span id="backendDot" class="status-dot gray"></span>
+    <span id="backendLabel">Backend: Checking...</span>
+  </div>
+  <div class="status-item">
+    <span>Port:</span>
+    <strong id="portNum">7779</strong>
+  </div>
+  <div class="status-item">
+    <span>Worker:</span>
+    <strong id="workerStatus">—</strong>
+  </div>
+  <div class="status-item">
+    <span>Events:</span>
+    <strong id="eventCount">0</strong>
+  </div>
+</div>
+
+<!-- Tabs -->
+<div class="tabs">
+  <div class="tab active" data-tab="scans">🔍 Scan & Analyze</div>
+  <div class="tab" data-tab="results">📊 Results</div>
+  <div class="tab" data-tab="health">❤️ Health</div>
+  <div class="tab" data-tab="backend">🖥️ Backend</div>
+</div>
+
+<!-- Tab: Scans -->
+<div class="tab-content active" id="tab-scans">
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">🎯 Manual Scans</span>
+      <span style="font-size:11px;opacity:.5">Click to run — results appear below</span>
     </div>
-  </div>
-
-  <!-- ── Worker Status ── -->
-  <div class="worker-bar">
-    <span><span id="wdot" class="wdot off"></span> <span id="workerLabel">Worker starting...</span></span>
-    <span>Events: <strong id="evtCount">0</strong></span>
-    <span>Fast runs: <strong id="fastCount">0</strong></span>
-    <span>Idle scans: <strong id="idleCount">0</strong></span>
-    <span>Errors: <strong id="errCount">0</strong></span>
-    <span>Last: <strong id="lastEvt">—</strong></span>
-  </div>
-
-  <!-- ── Health Gauge ── -->
-  <div class="gauge-wrap">
-    <div class="gauge">
-      <svg viewBox="0 0 36 36">
-        <path class="gauge-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
-        <path id="gaugeFill" class="gauge-fill" stroke="#4ade80" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
-      </svg>
-      <div class="gauge-text">
-        <div id="scoreVal" class="gauge-score">—</div>
-        <div class="gauge-label">/ 10</div>
-      </div>
-    </div>
-    <div class="gauge-info">
-      <div id="levelText" class="gauge-level">Waiting for data...</div>
-      <div id="gaugeMeta" class="gauge-meta"></div>
-    </div>
-  </div>
-
-  <!-- ── Risk Categories ── -->
-  <div class="categories">
-    <div class="cat-card" id="cat-schema"><div id="v-schema" class="cat-val c-green">—</div><div class="cat-lbl">Schema</div></div>
-    <div class="cat-card" id="cat-contract"><div id="v-contract" class="cat-val c-green">—</div><div class="cat-lbl">Contracts</div></div>
-    <div class="cat-card" id="cat-drift"><div id="v-drift" class="cat-val c-green">—</div><div class="cat-lbl">Drift</div></div>
-    <div class="cat-card" id="cat-security"><div id="v-security" class="cat-val c-green">—</div><div class="cat-lbl">Security</div></div>
-    <div class="cat-card" id="cat-dependency"><div id="v-dependency" class="cat-val c-green">—</div><div class="cat-lbl">Deps</div></div>
-    <div class="cat-card" id="cat-migration"><div id="v-migration" class="cat-val c-green">—</div><div class="cat-lbl">Migration</div></div>
-    <div class="cat-card" id="cat-naming"><div id="v-naming" class="cat-val c-green">—</div><div class="cat-lbl">Naming</div></div>
-  </div>
-
-  <!-- ── Risk Trend ── -->
-  <div class="section">
-    <div class="section-title">Risk Trend</div>
-    <div class="trend-wrap">
-      <div class="trend-label">Score / time</div>
-      <svg id="trendSvg" class="trend-svg" preserveAspectRatio="none" viewBox="0 0 400 60"></svg>
-    </div>
-  </div>
-
-  <!-- ── Structural Drift ── -->
-  <div class="section">
-    <div class="section-title">Structural Drift <span id="driftCount" class="count">0</span></div>
-    <div id="driftPanel" class="panel">
-      <div class="panel-empty">No drift events detected</div>
-    </div>
-  </div>
-
-  <!-- ── Circular Dependencies ── -->
-  <div class="section">
-    <div class="section-title">Circular Dependencies <span id="circCount" class="count">0</span></div>
-    <div id="circPanel" class="panel">
-      <div class="panel-empty">No circular dependencies</div>
-    </div>
-  </div>
-
-  <!-- ── Dead Code ── -->
-  <div class="section">
-    <div class="section-title">Dead Code (Never Imported) <span id="deadCount" class="count">0</span></div>
-    <div id="deadPanel" class="panel">
-      <div class="panel-empty">No dead code files detected</div>
-    </div>
-  </div>
-
-  <!-- ── Backend Management ── -->
-  <div class="section">
-    <div class="section-title">Backend Server</div>
-    <div class="backend-panel">
-      <div class="backend-status">
-        <div class="backend-indicator">
-          <div id="backendDot" class="status-dot status-stopped"></div>
-          <div class="backend-info">
-            <div id="backendState" class="backend-state">Stopped</div>
-            <div id="backendMeta" class="backend-meta">Port: — | PID: — | Uptime: —</div>
-          </div>
+    <div class="card-body">
+      <div class="scan-grid">
+        <div class="scan-btn primary" onclick="runScan('initializeWorkspace')" id="btn-initialize">
+          <span class="icon">🚀</span>
+          <span class="label">Initialize</span>
+          <span class="desc">Index workspace & build graph</span>
         </div>
-        <div class="backend-controls">
-          <button id="btnStart" class="bbtn bbtn-primary" onclick="send('startBackend')">▶ Start</button>
-          <button id="btnStop" class="bbtn bbtn-danger" onclick="send('stopBackend')" disabled>⏹ Stop</button>
-          <button id="btnRestart" class="bbtn bbtn-warning" onclick="send('restartBackend')" disabled>🔄 Restart</button>
-          <button class="bbtn" onclick="send('refreshBackend')">↻ Refresh</button>
+        <div class="scan-btn" onclick="runScan('runFullScan')" id="btn-fullscan">
+          <span class="icon">🔍</span>
+          <span class="label">Full Scan</span>
+          <span class="desc">Security + Contracts + All</span>
+        </div>
+        <div class="scan-btn" onclick="runScan('runSecurityScan')" id="btn-security">
+          <span class="icon">🛡️</span>
+          <span class="label">Security</span>
+          <span class="desc">Find vulnerabilities</span>
+        </div>
+        <div class="scan-btn" onclick="runScan('runContractScan')" id="btn-contracts">
+          <span class="icon">📋</span>
+          <span class="label">API Contracts</span>
+          <span class="desc">Validate endpoints</span>
+        </div>
+        <div class="scan-btn" onclick="runScan('runGitAnalysis')" id="btn-git">
+          <span class="icon">📊</span>
+          <span class="label">Git Analysis</span>
+          <span class="desc">Review changes & risk</span>
+        </div>
+        <div class="scan-btn" onclick="runScan('detectEndpoints')" id="btn-endpoints">
+          <span class="icon">🌐</span>
+          <span class="label">Detect Endpoints</span>
+          <span class="desc">Find API routes</span>
+        </div>
+        <div class="scan-btn" onclick="runScan('detectStack')" id="btn-stack">
+          <span class="icon">🔧</span>
+          <span class="label">Detect Stack</span>
+          <span class="desc">Languages & frameworks</span>
         </div>
       </div>
-      <div class="backend-logs">
-        <div class="logs-header">Recent Logs</div>
-        <div id="logsContent" class="logs-content">Waiting for backend status...</div>
+    </div>
+  </div>
+
+  <!-- Inline Results -->
+  <div id="scanResultsPanel" style="display:none">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title" id="resultsTitle">📊 Scan Results</span>
+        <button class="icon-btn" onclick="clearResults()">✕ Clear</button>
+      </div>
+      <div class="card-body no-pad">
+        <div id="resultsSummary" class="issues-summary" style="padding:12px 16px;border-bottom:1px solid var(--vscode-panel-border)"></div>
+        <div id="resultsBody" class="results-body"></div>
       </div>
     </div>
   </div>
 
-  <!-- ── Quick Actions ── -->
-  <div class="section">
-    <div class="section-title">Quick Actions</div>
-    <div class="actions-grid">
-      <button class="action-btn primary" onclick="send('fullScan')">
-        <span class="icon">🔍</span>
-        <span class="label">Full Scan<small>Complete analysis</small></span>
-      </button>
-      <button class="action-btn warning" onclick="send('securityScan')">
-        <span class="icon">🛡️</span>
-        <span class="label">Security<small>Find vulnerabilities</small></span>
-      </button>
-      <button class="action-btn" onclick="send('gitAnalysis')">
-        <span class="icon">📊</span>
-        <span class="label">Git Analysis<small>Review changes</small></span>
-      </button>
-      <button class="action-btn" onclick="send('preCommit')">
-        <span class="icon">✅</span>
-        <span class="label">Pre-Commit<small>Validate before commit</small></span>
-      </button>
-      <button class="action-btn" onclick="send('validateContracts')">
-        <span class="icon">📋</span>
-        <span class="label">Contracts<small>API validation</small></span>
-      </button>
-      <button class="action-btn" onclick="send('validateSchema')">
-        <span class="icon">🗄️</span>
-        <span class="label">Schema<small>Prisma / DB</small></span>
-      </button>
-      <button class="action-btn" onclick="send('detectStack')">
-        <span class="icon">🔧</span>
-        <span class="label">Detect Stack<small>Languages & frameworks</small></span>
-      </button>
-      <button class="action-btn" onclick="send('detectEndpoints')">
-        <span class="icon">🌐</span>
-        <span class="label">Endpoints<small>API routes</small></span>
-      </button>
-      <button class="action-btn" onclick="send('analyzeCode')">
-        <span class="icon">📝</span>
-        <span class="label">Analyze Code<small>Current selection</small></span>
-      </button>
-      <button class="action-btn" onclick="send('buildContext')">
-        <span class="icon">🧠</span>
-        <span class="label">Build Context<small>For Copilot</small></span>
-      </button>
+  <!-- Loading State -->
+  <div id="scanLoading" style="display:none">
+    <div class="card">
+      <div class="card-body">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <div class="text" id="loadingText">Running scan...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tab: Results History -->
+<div class="tab-content" id="tab-results">
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">📊 Last Scan Results</span>
+    </div>
+    <div class="card-body">
+      <div id="lastResults">
+        <div class="empty-state">
+          <div class="icon">📭</div>
+          <div class="title">No scan results yet</div>
+          <div class="desc">Run a scan from the "Scan & Analyze" tab</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tab: Health -->
+<div class="tab-content" id="tab-health">
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">❤️ Workspace Health</span>
+      <button class="icon-btn" onclick="send('refreshDashboard')">↻ Refresh</button>
+    </div>
+    <div class="card-body">
+      <div id="healthContent">
+        <div class="empty-state">
+          <div class="icon">📊</div>
+          <div class="title">No health data</div>
+          <div class="desc">Click "Initialize" to index your workspace first</div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- ── Minimal Controls ── -->
-  <div class="controls">
-    <button class="cbtn" onclick="send('toggleFocus')">Toggle Focus Mode</button>
-    <button class="cbtn" onclick="send('showOutput')">Show Output</button>
-    <button class="cbtn" onclick="send('openSettings')">Settings</button>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">🔄 Circular Dependencies</span>
+      <span class="result-badge badge-low" id="circularCount">0</span>
+    </div>
+    <div class="card-body no-pad">
+      <div id="circularList" class="results-body" style="max-height:200px">
+        <div class="empty-state" style="padding:20px">
+          <div class="desc">No circular dependencies detected</div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="footer">Copilot Engine — Autonomous Structural Auditor + Backend Manager</div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">📄 Dead Code Files</span>
+      <span class="result-badge badge-low" id="deadCodeCount">0</span>
+    </div>
+    <div class="card-body no-pad">
+      <div id="deadCodeList" class="results-body" style="max-height:200px">
+        <div class="empty-state" style="padding:20px">
+          <div class="desc">All files are imported somewhere</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tab: Backend -->
+<div class="tab-content" id="tab-backend">
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">🖥️ Backend Server</span>
+    </div>
+    <div class="card-body">
+      <div class="backend-panel">
+        <div class="backend-info">
+          <div class="backend-state" id="backendState">Stopped</div>
+          <div class="backend-meta" id="backendMeta">Port: — | PID: — | Uptime: —</div>
+        </div>
+        <div class="backend-actions">
+          <button class="icon-btn primary" id="btnStart" onclick="send('startBackend')">▶ Start</button>
+          <button class="icon-btn" id="btnStop" onclick="send('stopBackend')" disabled>⏹ Stop</button>
+          <button class="icon-btn" id="btnRestart" onclick="send('restartBackend')" disabled>🔄 Restart</button>
+          <button class="icon-btn" onclick="send('refreshBackend')">↻ Check</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">📜 Server Logs</span>
+    </div>
+    <div class="card-body">
+      <div id="logsContent" class="log-output"></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- Debug output -->
+<div id="debugOutput" style="position:fixed;bottom:0;left:0;right:0;background:#1e1e1e;border-top:2px solid #007acc;padding:8px;font-family:monospace;font-size:11px;max-height:150px;overflow-y:auto;z-index:9999;display:block;">
+  <strong style="color:#007acc;">Debug Log:</strong>
+  <div id="debugLog" style="margin-top:4px;color:#ccc;"></div>
 </div>
 
 <script>
-const vscode = acquireVsCodeApi();
-function send(cmd, payload) { vscode.postMessage({ command: cmd, ...(payload||{}) }); }
-function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
-function scoreColor(v) {
-  if (v <= 2) return '#4ade80';
-  if (v <= 4) return '#facc15';
-  if (v <= 6) return '#fb923c';
-  return '#ef4444';
-}
-function scoreClass(v) {
-  if (v <= 2) return 'c-green';
-  if (v <= 4) return 'c-yellow';
-  if (v <= 6) return 'c-orange';
-  return 'c-red';
-}
-function cardClass(v) {
-  if (v <= 3) return '';
-  if (v <= 6) return 'warn';
-  return 'danger';
-}
-function pillClass(level) {
-  const l = (level||'').toLowerCase();
-  if (l === 'healthy') return 'pill-healthy';
-  if (l === 'caution') return 'pill-caution';
-  if (l === 'at_risk' || l === 'at-risk') return 'pill-atrisk';
-  if (l === 'degraded') return 'pill-degraded';
-  if (l === 'critical') return 'pill-critical';
-  return 'pill-healthy';
-}
-function sevIcon(s) {
-  const l = (s||'').toLowerCase();
-  if (l === 'critical') return '🔴';
-  if (l === 'high') return '🟠';
-  if (l === 'medium') return '🟡';
-  return '🟢';
+// Debug helper
+function debug(msg) {
+  const log = document.getElementById('debugLog');
+  if (log) {
+    const time = new Date().toLocaleTimeString();
+    log.innerHTML = '<div>[' + time + '] ' + msg + '</div>' + log.innerHTML;
+    if (log.childNodes.length > 20) log.removeChild(log.lastChild);
+  }
+  console.log('[Webview]', msg);
 }
 
-function basename(p) { return (p||'').replace(/\\\\/g,'/').split('/').pop() || p; }
+// Wrap everything in try-catch
+try {
+  debug('Script starting...');
+  
+  const vscode = acquireVsCodeApi();
+  debug('acquireVsCodeApi OK');
+  
+  function send(cmd, payload) { 
+    debug('Sending: ' + cmd);
+    vscode.postMessage({ command: cmd, ...(payload||{}) }); 
+  }
+  function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function basename(p) { return (p||'').replace(/\\\\/g,'/').split('/').pop() || p; }
 
-// ── Render dashboard data ──
-function renderDashboard(data) {
-  const risk = data.health?.risk_scores || {};
-  const worker = data.health?.worker || {};
-  const graph = data.health?.graph || {};
-  const drift = data.health?.drift || {};
+  // State
+  let currentScan = null;
+  let lastResults = null;
 
-  // Health pill
-  const pill = document.getElementById('healthPill');
-  pill.className = 'pill ' + pillClass(risk.health_level);
-  document.getElementById('healthText').textContent = (risk.health_level || 'UNKNOWN').replace('_', ' ');
+  debug('Setting up tab switching...');
+  
+  // Tab switching
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      debug('Tab clicked: ' + tab.dataset.tab);
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+    });
+  });
 
-  // Worker bar
-  document.getElementById('wdot').className = 'wdot' + (worker.started_at ? '' : ' off');
-  document.getElementById('workerLabel').textContent = worker.started_at ? 'Worker running' : 'Worker stopped';
-  document.getElementById('evtCount').textContent = worker.events_processed || 0;
-  document.getElementById('fastCount').textContent = worker.fast_path_runs || 0;
-  document.getElementById('idleCount').textContent = worker.idle_runs || 0;
-  document.getElementById('errCount').textContent = worker.errors || 0;
-  document.getElementById('lastEvt').textContent = worker.last_event ? basename(worker.last_event) : '—';
+  // Run scan
+  function runScan(scanType) {
+    debug('runScan called: ' + scanType);
+    currentScan = scanType;
+  send(scanType);
+}
 
-  // Gauge
-  const score = risk.overall_score ?? 0;
-  const pct = Math.min(score * 10, 100);
-  const color = scoreColor(score);
-  const fill = document.getElementById('gaugeFill');
-  fill.setAttribute('stroke-dasharray', pct + ', 100');
-  fill.setAttribute('stroke', color);
-  document.getElementById('scoreVal').textContent = score.toFixed(1);
-  document.getElementById('scoreVal').style.color = color;
-  document.getElementById('levelText').textContent = (risk.health_level || 'UNKNOWN').replace('_', ' ');
-  document.getElementById('levelText').style.color = color;
+// Clear results
+function clearResults() {
+  document.getElementById('scanResultsPanel').style.display = 'none';
+  document.getElementById('resultsBody').innerHTML = '';
+  document.getElementById('resultsSummary').innerHTML = '';
+}
 
-  const meta = [];
-  if (graph.total_files) meta.push(graph.total_files + ' files indexed');
-  if (graph.file_edges) meta.push(graph.file_edges + ' dependencies');
-  if (graph.circular_count) meta.push(graph.circular_count + ' cycles');
-  if (drift.affected_files) meta.push(drift.affected_files + ' drifted files');
-  document.getElementById('gaugeMeta').innerHTML = meta.join(' &middot; ');
+// Render scan results
+function renderScanResults(scanType, result) {
+  const panel = document.getElementById('scanResultsPanel');
+  const title = document.getElementById('resultsTitle');
+  const summary = document.getElementById('resultsSummary');
+  const body = document.getElementById('resultsBody');
 
-  // Category cards
-  const cats = ['schema','contract','drift','security','dependency','migration','naming'];
-  for (const c of cats) {
-    const v = risk[c + '_risk'] ?? 0;
-    const el = document.getElementById('v-' + c);
-    el.textContent = v.toFixed(1);
-    el.className = 'cat-val ' + scoreClass(v);
-    document.getElementById('cat-' + c).className = 'cat-card ' + cardClass(v);
+  panel.style.display = 'block';
+  document.getElementById('scanLoading').style.display = 'none';
+
+  // Enable button again
+  enableScanButtons();
+
+  // Store results
+  lastResults = { scanType, result, timestamp: new Date().toISOString() };
+
+  if (scanType === 'fullScan') {
+    title.innerHTML = '🔍 Full Scan Results';
+    const issues = result.issues || [];
+    const critical = issues.filter(i => i.severity === 'CRITICAL').length;
+    const high = issues.filter(i => i.severity === 'HIGH').length;
+    const medium = issues.filter(i => i.severity === 'MEDIUM').length;
+    const low = issues.filter(i => i.severity === 'LOW').length;
+
+    summary.innerHTML = 
+      '<div class="issue-count critical">🔴 ' + critical + ' Critical</div>' +
+      '<div class="issue-count high">🟠 ' + high + ' High</div>' +
+      '<div class="issue-count medium">🟡 ' + medium + ' Medium</div>' +
+      '<div class="issue-count low">🟢 ' + low + ' Low</div>' +
+      '<div class="issue-count">Total: ' + issues.length + '</div>';
+
+    body.innerHTML = issues.slice(0, 100).map(i => renderIssueRow(i)).join('');
+  } 
+  else if (scanType === 'security') {
+    title.innerHTML = '🛡️ Security Scan Results';
+    const findings = result.findings || result.issues || [];
+    const critical = findings.filter(i => i.severity === 'CRITICAL' || i.severity === 'critical').length;
+    const high = findings.filter(i => i.severity === 'HIGH' || i.severity === 'high').length;
+    const medium = findings.filter(i => i.severity === 'MEDIUM' || i.severity === 'medium').length;
+
+    summary.innerHTML = 
+      '<div class="issue-count critical">🔴 ' + critical + ' Critical</div>' +
+      '<div class="issue-count high">🟠 ' + high + ' High</div>' +
+      '<div class="issue-count medium">🟡 ' + medium + ' Medium</div>' +
+      '<div class="issue-count">Total: ' + findings.length + '</div>';
+
+    body.innerHTML = findings.slice(0, 100).map(i => renderIssueRow(i)).join('');
+  }
+  else if (scanType === 'contracts') {
+    title.innerHTML = '📋 Contract Validation Results';
+    const violations = result.violations || [];
+    summary.innerHTML = '<div class="issue-count">' + violations.length + ' violations found</div>';
+    body.innerHTML = violations.length ? violations.map(v => 
+      '<div class="result-row">' +
+        '<span class="result-icon">⚠️</span>' +
+        '<div class="result-content">' +
+          '<div class="result-msg">' + esc(v.message || v.rule) + '</div>' +
+          '<div class="result-meta">' + esc(v.endpoint || v.file_path || '') + '</div>' +
+        '</div>' +
+      '</div>'
+    ).join('') : '<div class="empty-state" style="padding:20px"><div class="desc">✅ All contracts valid!</div></div>';
+  }
+  else if (scanType === 'git') {
+    title.innerHTML = '📊 Git Analysis Results';
+    const changes = result.changes || [];
+    const risk = result.risk_score || 0;
+    summary.innerHTML = 
+      '<div class="issue-count">Risk Score: ' + risk + '/10</div>' +
+      '<div class="issue-count">' + changes.length + ' changed files</div>';
+    body.innerHTML = changes.length ? changes.map(c => 
+      '<div class="result-row" onclick="send(\'openFile\', {filePath: \'' + esc(c.file) + '\'})">' +
+        '<span class="result-icon">' + (c.risk_level === 'high' ? '🔴' : c.risk_level === 'medium' ? '🟡' : '🟢') + '</span>' +
+        '<div class="result-content">' +
+          '<div class="result-msg">' + esc(c.file) + '</div>' +
+          '<div class="result-meta">' + esc(c.change_type) + '</div>' +
+        '</div>' +
+      '</div>'
+    ).join('') : '<div class="empty-state" style="padding:20px"><div class="desc">No changes detected</div></div>';
+  }
+  else if (scanType === 'endpoints') {
+    title.innerHTML = '🌐 Detected Endpoints';
+    const endpoints = result.endpoints || [];
+    summary.innerHTML = '<div class="issue-count">' + endpoints.length + ' endpoints found</div>';
+    body.innerHTML = endpoints.length ? endpoints.map(e => 
+      '<div class="result-row" onclick="send(\'openFile\', {filePath: \'' + esc(e.file) + '\', line: ' + (e.line||1) + '})">' +
+        '<span class="result-icon">🔗</span>' +
+        '<div class="result-content">' +
+          '<div class="result-msg"><strong>' + esc(e.method) + '</strong> ' + esc(e.route) + '</div>' +
+          '<div class="result-meta">' + basename(e.file) + ':' + (e.line||'?') + '</div>' +
+        '</div>' +
+      '</div>'
+    ).join('') : '<div class="empty-state" style="padding:20px"><div class="desc">No endpoints detected</div></div>';
+  }
+  else if (scanType === 'stack') {
+    title.innerHTML = '🔧 Stack Detection Results';
+    summary.innerHTML = '';
+    body.innerHTML = 
+      '<div style="padding:16px">' +
+        '<div style="margin-bottom:12px"><strong>Languages:</strong> ' + esc((result.languages || []).join(', ') || 'Unknown') + '</div>' +
+        '<div style="margin-bottom:12px"><strong>Frameworks:</strong> ' + esc((result.frameworks || []).join(', ') || 'Unknown') + '</div>' +
+        '<div style="margin-bottom:12px"><strong>ORM:</strong> ' + esc(result.orm || 'None detected') + '</div>' +
+        '<div><strong>API Style:</strong> ' + esc(result.api_style || 'Unknown') + '</div>' +
+      '</div>';
+  }
+  else if (scanType === 'initialize') {
+    title.innerHTML = '🚀 Initialization Results';
+    const steps = result.steps || {};
+    summary.innerHTML = result.initialized || result.already_initialized ? 
+      '<div class="issue-count" style="color:#4ade80">✅ Workspace initialized</div>' : 
+      '<div class="issue-count critical">❌ Initialization failed</div>';
+    body.innerHTML = 
+      '<div style="padding:16px">' +
+        (steps.index ? '<div style="margin-bottom:8px">📁 Indexed ' + (steps.index.indexed || 0) + ' files, ' + (steps.index.entities_found || 0) + ' entities</div>' : '') +
+        (steps.graph ? '<div style="margin-bottom:8px">🔗 Built graph: ' + (steps.graph.file_edges || 0) + ' dependencies</div>' : '') +
+        (steps.snapshots ? '<div style="margin-bottom:8px">📸 Created ' + steps.snapshots + ' AST snapshots</div>' : '') +
+        (result.already_initialized ? '<div style="opacity:.6">Already initialized previously</div>' : '') +
+      '</div>';
   }
 
-  // Trend sparkline
-  renderTrend(data.risk_trend || []);
+  // Update last results tab
+  document.getElementById('lastResults').innerHTML = body.innerHTML;
+}
 
-  // Drift events
-  renderDrifts(data.unresolved_drifts || []);
+function renderIssueRow(issue) {
+  const sev = (issue.severity || 'medium').toUpperCase();
+  const icon = sev === 'CRITICAL' ? '🔴' : sev === 'HIGH' ? '🟠' : sev === 'MEDIUM' ? '🟡' : '🟢';
+  const badgeClass = sev === 'CRITICAL' ? 'badge-critical' : sev === 'HIGH' ? 'badge-high' : sev === 'MEDIUM' ? 'badge-medium' : 'badge-low';
+  const filePath = issue.file_path || issue.file || '';
+  const line = issue.line_number || issue.line || '';
 
-  // Circular dependencies
-  renderCircular(data.circular_dependencies || []);
+  return '<div class="result-row" onclick="send(\'openFile\', {filePath: \'' + esc(filePath) + '\', line: ' + (line||1) + '})">' +
+    '<span class="result-icon">' + icon + '</span>' +
+    '<div class="result-content">' +
+      '<div class="result-msg">' + esc(issue.message || issue.category) + '</div>' +
+      '<div class="result-meta">' + basename(filePath) + (line ? ':' + line : '') + ' • ' + esc(issue.category || issue.pillar || '') + '</div>' +
+    '</div>' +
+    '<span class="result-badge ' + badgeClass + '">' + sev + '</span>' +
+  '</div>';
+}
+
+function enableScanButtons() {
+  document.querySelectorAll('.scan-btn').forEach(btn => btn.classList.remove('loading'));
+}
+
+// Render dashboard data (from autonomous engine)
+function renderDashboard(data) {
+  const health = data.health || {};
+  const risk = health.risk_scores || {};
+  const worker = health.worker || {};
+  const graph = health.graph || {};
+
+  // Update status bar
+  document.getElementById('workerStatus').textContent = worker.started_at ? 'Running' : 'Stopped';
+  document.getElementById('eventCount').textContent = worker.events_processed || 0;
+
+  // Update health tab
+  const healthContent = document.getElementById('healthContent');
+  if (graph.total_files > 0 || Object.keys(risk).length > 0) {
+    healthContent.innerHTML = 
+      '<div class="stats-grid">' +
+        '<div class="stat-card"><div class="stat-value">' + (graph.total_files || 0) + '</div><div class="stat-label">Files Indexed</div></div>' +
+        '<div class="stat-card"><div class="stat-value">' + (graph.file_edges || 0) + '</div><div class="stat-label">Dependencies</div></div>' +
+        '<div class="stat-card"><div class="stat-value">' + (graph.entity_edges || 0) + '</div><div class="stat-label">Entity Edges</div></div>' +
+        '<div class="stat-card ' + (graph.circular_count > 0 ? 'warning' : 'success') + '"><div class="stat-value">' + (graph.circular_count || 0) + '</div><div class="stat-label">Circular Deps</div></div>' +
+        '<div class="stat-card ' + (graph.dead_code_files > 0 ? 'warning' : 'success') + '"><div class="stat-value">' + (graph.dead_code_files || 0) + '</div><div class="stat-label">Dead Code</div></div>' +
+        '<div class="stat-card"><div class="stat-value">' + (worker.fast_path_runs || 0) + '</div><div class="stat-label">Fast Scans</div></div>' +
+        '<div class="stat-card"><div class="stat-value">' + (worker.idle_runs || 0) + '</div><div class="stat-label">Deep Scans</div></div>' +
+        '<div class="stat-card ' + (worker.errors > 0 ? 'danger' : 'success') + '"><div class="stat-value">' + (worker.errors || 0) + '</div><div class="stat-label">Errors</div></div>' +
+      '</div>';
+  }
+
+  // Circular deps
+  const circularList = document.getElementById('circularList');
+  const circular = data.circular_dependencies || [];
+  document.getElementById('circularCount').textContent = circular.length;
+  if (circular.length > 0) {
+    circularList.innerHTML = circular.map(c =>
+      '<div class="result-row"><span class="result-icon">🔄</span><div class="result-content"><div class="result-msg">' + c.map(basename).join(' → ') + '</div></div></div>'
+    ).join('');
+  }
 
   // Dead code
-  renderDeadCode(data.dead_code_files || []);
-}
-
-function renderTrend(trend) {
-  const svg = document.getElementById('trendSvg');
-  if (!trend.length) {
-    svg.innerHTML = '<text x="200" y="35" text-anchor="middle" fill="currentColor" opacity="0.3" font-size="8">No trend data yet</text>';
-    return;
+  const deadCodeList = document.getElementById('deadCodeList');
+  const deadCode = data.dead_code_files || [];
+  document.getElementById('deadCodeCount').textContent = deadCode.length;
+  if (deadCode.length > 0) {
+    deadCodeList.innerHTML = deadCode.map(f =>
+      '<div class="result-row" onclick="send(\'openFile\', {filePath: \'' + esc(f) + '\'})"><span class="result-icon">📄</span><div class="result-content"><div class="result-msg">' + basename(f) + '</div><div class="result-meta">' + esc(f) + '</div></div></div>'
+    ).join('');
   }
-  const w = 400, h = 60, pad = 4;
-  const maxVal = Math.max(...trend.map(t => t.overall_score || 0), 10);
-  const points = trend.map((t, i) => {
-    const x = pad + (i / Math.max(trend.length - 1, 1)) * (w - pad * 2);
-    const y = h - pad - ((t.overall_score || 0) / maxVal) * (h - pad * 2);
-    return x + ',' + y;
-  });
-  const last = trend[trend.length - 1]?.overall_score || 0;
-  const col = scoreColor(last);
-  svg.innerHTML = '<polyline points="' + points.join(' ') + '" fill="none" stroke="' + col + '" stroke-width="1.5" stroke-linejoin="round"/>'
-    + '<circle cx="' + points[points.length-1].split(',')[0] + '" cy="' + points[points.length-1].split(',')[1] + '" r="3" fill="' + col + '"/>';
 }
 
-function renderDrifts(drifts) {
-  document.getElementById('driftCount').textContent = drifts.length;
-  const panel = document.getElementById('driftPanel');
-  if (!drifts.length) {
-    panel.innerHTML = '<div class="panel-empty">No drift events — structure is stable</div>';
-    return;
-  }
-  panel.innerHTML = drifts.slice(0, 50).map(d =>
-    '<div class="row" onclick="send(\'openFile\',{filePath:\'' + esc(d.file_path||'') + '\'})">'
-    + '<span class="row-icon">' + sevIcon(d.severity) + '</span>'
-    + '<div class="row-body">'
-    + '<div class="row-msg sev-' + (d.severity||'low').toLowerCase() + '"><strong>' + esc(d.drift_type||'') + '</strong> on ' + esc(d.entity_name||'?') + '</div>'
-    + '<div class="row-meta">' + basename(d.file_path) + (d.old_value && d.new_value ? ' — ' + esc(d.old_value) + ' → ' + esc(d.new_value) : '') + '</div>'
-    + '</div></div>'
-  ).join('');
-}
-
-function renderCircular(cycles) {
-  document.getElementById('circCount').textContent = cycles.length;
-  const panel = document.getElementById('circPanel');
-  if (!cycles.length) {
-    panel.innerHTML = '<div class="panel-empty">No circular dependencies — graph is clean</div>';
-    return;
-  }
-  panel.innerHTML = cycles.slice(0, 20).map(c =>
-    '<div class="row">'
-    + '<span class="row-icon">🔄</span>'
-    + '<div class="row-body"><div class="row-msg">' + c.map(f => basename(f)).join(' → ') + '</div></div>'
-    + '</div>'
-  ).join('');
-}
-
-function renderDeadCode(files) {
-  document.getElementById('deadCount').textContent = files.length;
-  const panel = document.getElementById('deadPanel');
-  if (!files.length) {
-    panel.innerHTML = '<div class="panel-empty">All files are imported somewhere</div>';
-    return;
-  }
-  panel.innerHTML = files.slice(0, 30).map(f =>
-    '<div class="row" onclick="send(\'openFile\',{filePath:\'' + esc(f) + '\'})">'
-    + '<span class="row-icon">📄</span>'
-    + '<div class="row-body"><div class="row-msg">' + basename(f) + '</div>'
-    + '<div class="row-meta">' + esc(f) + '</div>'
-    + '</div></div>'
-  ).join('');
-}
-
-// ── Render backend status ──
+// Render backend status
 function renderBackendStatus(status) {
   const dot = document.getElementById('backendDot');
+  const label = document.getElementById('backendLabel');
   const state = document.getElementById('backendState');
   const meta = document.getElementById('backendMeta');
   const btnStart = document.getElementById('btnStart');
   const btnStop = document.getElementById('btnStop');
   const btnRestart = document.getElementById('btnRestart');
 
-  // Update dot and state
-  dot.className = 'status-dot status-' + status.health;
-  state.textContent = status.running ? (status.health === 'starting' ? 'Starting...' : 'Running') : 'Stopped';
-  state.style.color = status.health === 'healthy' ? '#4ade80' : status.health === 'starting' ? '#facc15' : status.health === 'unhealthy' ? '#ef4444' : '#6b7280';
+  if (status.health === 'healthy') {
+    dot.className = 'status-dot green';
+    label.textContent = 'Backend: Running';
+    state.textContent = 'Running';
+    state.style.color = '#4ade80';
+  } else if (status.health === 'starting') {
+    dot.className = 'status-dot yellow';
+    label.textContent = 'Backend: Starting...';
+    state.textContent = 'Starting...';
+    state.style.color = '#facc15';
+  } else if (status.health === 'unhealthy') {
+    dot.className = 'status-dot red';
+    label.textContent = 'Backend: Error';
+    state.textContent = 'Unhealthy';
+    state.style.color = '#ef4444';
+  } else {
+    dot.className = 'status-dot gray';
+    label.textContent = 'Backend: Stopped';
+    state.textContent = 'Stopped';
+    state.style.color = '#6b7280';
+  }
 
-  // Update metadata
-  const uptimeStr = status.uptime > 0 ? (status.uptime < 60 ? status.uptime + 's' : Math.floor(status.uptime / 60) + 'm ' + (status.uptime % 60) + 's') : '—';
-  meta.textContent = 'Port: ' + (status.port || '—') + ' | PID: ' + (status.pid || '—') + ' | Uptime: ' + uptimeStr;
+  const uptimeStr = status.uptime > 0 ? (status.uptime < 60 ? status.uptime + 's' : Math.floor(status.uptime / 60) + 'm') : '—';
+  meta.textContent = 'Port: ' + (status.port || 7779) + ' | PID: ' + (status.pid || '—') + ' | Uptime: ' + uptimeStr;
+  document.getElementById('portNum').textContent = status.port || 7779;
 
-  // Update button states
   btnStart.disabled = status.running;
   btnStop.disabled = !status.running;
   btnRestart.disabled = !status.running;
@@ -705,30 +1022,69 @@ function renderBackendStatus(status) {
 
 function renderBackendLogs(logs) {
   const content = document.getElementById('logsContent');
-  if (!logs || !logs.length) {
-    content.className = 'logs-content empty';
-    content.textContent = 'No logs available';
-    return;
-  }
-  content.className = 'logs-content';
-  content.innerHTML = logs.map(line => '<div class="log-line">' + esc(line) + '</div>').join('');
+  content.innerHTML = (logs || []).map(l => '<div>' + esc(l) + '</div>').join('');
   content.scrollTop = content.scrollHeight;
 }
 
-// ── Message handler ──
+// Message handler
 window.addEventListener('message', (event) => {
   const msg = event.data;
-  if (msg.command === 'dashboard') {
-    renderDashboard(msg.data);
-  } else if (msg.command === 'backendStatus') {
-    renderBackendStatus(msg.status);
-  } else if (msg.command === 'backendLogs') {
-    renderBackendLogs(msg.logs);
+  
+  switch (msg.command) {
+    case 'dashboard':
+      renderDashboard(msg.data);
+      break;
+    case 'backendStatus':
+      renderBackendStatus(msg.status);
+      break;
+    case 'backendLogs':
+      renderBackendLogs(msg.logs);
+      break;
+    case 'scanStarted':
+      document.getElementById('scanLoading').style.display = 'block';
+      document.getElementById('scanResultsPanel').style.display = 'none';
+      document.getElementById('loadingText').textContent = 'Running scan...';
+      // Disable all scan buttons
+      document.querySelectorAll('.scan-btn').forEach(btn => btn.classList.add('loading'));
+      break;
+    case 'scanResults':
+      renderScanResults(msg.scanType, msg.result);
+      break;
+    case 'scanComplete':
+      document.getElementById('scanLoading').style.display = 'none';
+      enableScanButtons();
+      if (!msg.success) {
+        const panel = document.getElementById('scanResultsPanel');
+        panel.style.display = 'block';
+        document.getElementById('resultsTitle').innerHTML = '❌ Scan Failed';
+        document.getElementById('resultsSummary').innerHTML = '';
+        document.getElementById('resultsBody').innerHTML = '<div class="empty-state" style="padding:20px"><div class="desc">Error: ' + esc(msg.error) + '</div></div>';
+      }
+      break;
+    case 'refreshing':
+      document.getElementById('btnRefresh').disabled = true;
+      document.getElementById('btnRefresh').textContent = '↻ ...';
+      break;
+    case 'refreshComplete':
+      document.getElementById('btnRefresh').disabled = false;
+      document.getElementById('btnRefresh').textContent = '↻ Refresh';
+      break;
   }
 });
 
-// Signal that webview is ready to receive messages
-vscode.postMessage({ command: 'webviewReady' });
+  // Signal ready
+  debug('Signaling webviewReady...');
+  vscode.postMessage({ command: 'webviewReady' });
+  debug('Initialization complete!');
+  
+} catch (err) {
+  // Show error visibly
+  debug('ERROR: ' + err.message);
+  const errDiv = document.createElement('div');
+  errDiv.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#dc2626;color:white;padding:20px;border-radius:8px;z-index:10000;max-width:80%;';
+  errDiv.innerHTML = '<h3>Script Error</h3><pre>' + err.message + '\\n' + err.stack + '</pre>';
+  document.body.appendChild(errDiv);
+}
 </script>
 </body>
 </html>`;

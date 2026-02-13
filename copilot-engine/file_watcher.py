@@ -41,7 +41,12 @@ class WorkspaceWatcher(FileSystemEventHandler):
         self.observer = Observer()
         self._running = False
         self._change_buffer: List[FileChange] = []
-        self._buffer_lock = asyncio.Lock() if asyncio.get_event_loop().is_running() else None
+        self._buffer_lock = None
+        try:
+            loop = asyncio.get_running_loop()
+            self._buffer_lock = asyncio.Lock()
+        except RuntimeError:
+            pass  # No running event loop — skip async lock
         self._debounce_task: Optional[asyncio.Task] = None
         self._debounce_delay = 0.5  # seconds
         

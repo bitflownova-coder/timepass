@@ -108,13 +108,13 @@ class ValidationPipeline:
         try:
             security_result = self.security.scan_workspace(workspace_path)
             report.security = security_result
-            report.security_findings = security_result.get('total_issues', 0)
+            report.security_findings = security_result.get('total_findings', 0)
             for finding in security_result.get('findings', []):
                 report.issues.append({
                     'pillar': 'security',
                     'severity': finding.get('severity', 'MEDIUM'),
                     'category': finding.get('category', 'security'),
-                    'message': finding.get('description', ''),
+                    'message': finding.get('issue', ''),
                     'file_path': finding.get('file', ''),
                     'line_number': finding.get('line', 0),
                 })
@@ -160,14 +160,15 @@ class ValidationPipeline:
         # Always run security scan on changed file
         try:
             security_result = self.security.scan_file(file_path)
-            report.security = security_result
-            report.security_findings = security_result.get('total_issues', 0)
-            for finding in security_result.get('findings', []):
+            # scan_file() returns a list of finding dicts
+            report.security = {'findings': security_result, 'total_issues': len(security_result)}
+            report.security_findings = len(security_result)
+            for finding in security_result:
                 report.issues.append({
                     'pillar': 'security',
                     'severity': finding.get('severity', 'MEDIUM'),
                     'category': finding.get('category', 'security'),
-                    'message': finding.get('description', ''),
+                    'message': finding.get('issue', ''),
                     'file_path': finding.get('file', file_path),
                     'line_number': finding.get('line', 0),
                 })

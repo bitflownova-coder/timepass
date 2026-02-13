@@ -6,7 +6,7 @@ and root cause analysis for errors.
 import os
 import re
 import subprocess
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional
 from pathlib import Path
 
@@ -318,8 +318,8 @@ class GitAnalyzer:
 
     def _time_ago(self, timestamp: int) -> str:
         """Convert unix timestamp to human-readable time ago."""
-        now = datetime.now()
-        then = datetime.fromtimestamp(timestamp)
+        now = datetime.now(timezone.utc)
+        then = datetime.fromtimestamp(timestamp, tz=timezone.utc)
         diff = now - then
 
         if diff.days > 30:

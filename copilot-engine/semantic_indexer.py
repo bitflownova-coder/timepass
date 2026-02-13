@@ -1050,6 +1050,7 @@ class SemanticIndexer:
 
         ws = db_session.query(Workspace).filter(Workspace.path == workspace_path).first()
         if not ws:
+            logger.warning(f"_persist_parse: workspace '{workspace_path}' not found in DB — {len(parse_result.entities)} entities from {parse_result.file_path} will not be stored")
             return
 
         # Delete old entities for this file

@@ -146,7 +146,7 @@ class RiskEngine:
             'timestamp': datetime.now(timezone.utc).isoformat(),
         }
 
-        self._scores[workspace_path] = scores
+        self._scores[workspace_path] = result
         return result
 
     def persist_snapshot(self, workspace_path: str, risk_result: Dict[str, Any],

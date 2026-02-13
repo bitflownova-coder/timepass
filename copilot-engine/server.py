@@ -31,6 +31,12 @@ from contract_analyzer import ContractAnalyzer
 from impact_analyzer import ImpactAnalyzer
 from validation_pipeline import ValidationPipeline, StackDetector
 from semantic_indexer import SemanticIndexer
+from ast_security_scanner import ASTSecurityScanner
+from dead_code_detector import DeadCodeDetector
+from code_quality_analyzer import CodeQualityAnalyzer
+from runtime_error_predictor import RuntimeErrorPredictor
+from dependency_analyzer import DependencyAnalyzer
+from copilot_style_detector import CopilotStyleDetector
 from graph_engine import GraphEngine
 from drift_detector import DriftDetector
 from migration_monitor import MigrationMonitor
@@ -46,6 +52,11 @@ logger = logging.getLogger(__name__)
 
 # Reduce SQLAlchemy logging verbosity (only show warnings and errors)
 logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
+
+
+def _normalize_ws_path(workspace_path: str) -> str:
+    """Normalize workspace path from URL (forward slashes) to OS-native format."""
+    return str(Path(workspace_path))
 
 
 # ============== Pydantic Models ==============
@@ -202,17 +213,15 @@ async def lifespan(app: FastAPI):
         try:
             # Schedule the async broadcast on the main event loop from this thread
             main_loop.call_soon_threadsafe(
-                lambda: asyncio.ensure_future(
-                    manager.broadcast(workspace_path, {
-                        "type": "file_change",
-                        "data": {
-                            "path": str(change.path),
-                            "event_type": change.event_type,
-                            "timestamp": change.timestamp.isoformat()
-                        }
-                    }),
-                    loop=main_loop
-                )
+                main_loop.create_task,
+                manager.broadcast(workspace_path, {
+                    "type": "file_change",
+                    "data": {
+                        "path": str(change.path),
+                        "event_type": change.event_type,
+                        "timestamp": change.timestamp.isoformat()
+                    }
+                })
             )
         except Exception:
             pass  # Silently ignore if loop is closed
@@ -224,13 +233,11 @@ async def lifespan(app: FastAPI):
         """Bridge sync background worker → async WebSocket broadcast."""
         try:
             main_loop.call_soon_threadsafe(
-                lambda: asyncio.ensure_future(
-                    manager.broadcast(workspace_path, {
-                        "type": event_type,
-                        "data": data,
-                    }),
-                    loop=main_loop
-                )
+                main_loop.create_task,
+                manager.broadcast(workspace_path, {
+                    "type": event_type,
+                    "data": data,
+                })
             )
         except Exception:
             pass  # Silently ignore if loop is closed
@@ -490,7 +497,8 @@ async def build_context(request: ContextRequest):
     
     current_file = None
     if request.current_file:
-        current_file = context_builder.get_file_context(request.current_file)
+        current_file = context_builder.get_file_context(request.current_file,
+                                                         workspace_path=request.workspace_path)
     
     error_ctx = None
     if request.error_text:
@@ -634,6 +642,7 @@ async def websocket_endpoint(websocket: WebSocket, workspace_path: str):
 @app.get("/files/{workspace_path:path}")
 async def list_files(workspace_path: str, extension: str = None):
     """List files in workspace"""
+    workspace_path = _normalize_ws_path(workspace_path)
     path = Path(workspace_path)
     
     if not path.exists():
@@ -1079,6 +1088,7 @@ async def autonomous_init(request: AutonomousWorkspaceRequest, bg: BackgroundTas
 @app.get("/autonomous/health/{workspace_path:path}")
 async def autonomous_health(workspace_path: str):
     """Get full autonomous health report for a workspace."""
+    workspace_path = _normalize_ws_path(workspace_path)
     return background_worker.get_health(workspace_path)
 
 @app.get("/autonomous/status")
@@ -1092,11 +1102,13 @@ async def autonomous_status():
 @app.get("/autonomous/risk-trend/{workspace_path:path}")
 async def autonomous_risk_trend(workspace_path: str, limit: int = 50):
     """Get risk score trend over time for trend graph."""
+    workspace_path = _normalize_ws_path(workspace_path)
     return background_worker.get_risk_trend(workspace_path, limit)
 
 @app.get("/autonomous/drifts/{workspace_path:path}")
 async def autonomous_drifts(workspace_path: str):
     """Get unresolved structural drift events."""
+    workspace_path = _normalize_ws_path(workspace_path)
     return background_worker.get_unresolved_drifts(workspace_path)
 
 @app.get("/autonomous/circular-deps")
@@ -1130,6 +1142,7 @@ async def autonomous_graph_stats():
 @app.get("/autonomous/entities/{workspace_path:path}")
 async def autonomous_entities(workspace_path: str, entity_type: str = None):
     """Get indexed entities, optionally filtered by type."""
+    workspace_path = _normalize_ws_path(workspace_path)
     try:
         with db.get_session() as session:
             return semantic_indexer.get_entities(workspace_path, entity_type=entity_type, db_session=session)
@@ -1142,6 +1155,7 @@ async def autonomous_dashboard(workspace_path: str):
     Single endpoint for the monitoring dashboard.
     Returns all data needed for the dashboard in one call.
     """
+    workspace_path = _normalize_ws_path(workspace_path)
     health = background_worker.get_health(workspace_path)
     trend = background_worker.get_risk_trend(workspace_path, 20)
     drifts = background_worker.get_unresolved_drifts(workspace_path)
@@ -1155,6 +1169,145 @@ async def autonomous_dashboard(workspace_path: str):
         "circular_dependencies": circular,
         "dead_code_files": dead_code,
         "timestamp": datetime.now(timezone.utc).isoformat(),
+    }
+
+
+# ============== Advanced Analysis APIs ==============
+
+# Initialize new analyzers
+ast_security_scanner = ASTSecurityScanner()
+dead_code_detector = DeadCodeDetector()
+code_quality_analyzer = CodeQualityAnalyzer()
+runtime_error_predictor = RuntimeErrorPredictor()
+dependency_analyzer = DependencyAnalyzer()
+copilot_style_detector = CopilotStyleDetector()
+
+
+class AdvancedScanRequest(BaseModel):
+    workspace_path: str
+    max_files: int = 500
+
+
+@app.post("/analysis/security-ast")
+async def scan_security_ast(request: AdvancedScanRequest):
+    """AST-based security scan with reduced false positives"""
+    result = ast_security_scanner.scan_workspace(request.workspace_path, request.max_files)
+    return result
+
+
+@app.post("/analysis/dead-code")
+async def analyze_dead_code(request: AdvancedScanRequest):
+    """Detect unused imports, functions, and dead API endpoints"""
+    result = dead_code_detector.analyze_workspace(request.workspace_path, request.max_files)
+    return result
+
+
+@app.post("/analysis/code-quality")
+async def analyze_code_quality(request: AdvancedScanRequest):
+    """Analyze code quality: complexity, nesting, function length, etc."""
+    result = code_quality_analyzer.analyze_workspace(request.workspace_path, request.max_files)
+    return result
+
+
+@app.post("/analysis/runtime-errors")
+async def predict_runtime_errors(request: AdvancedScanRequest):
+    """Predict potential runtime errors: null access, division by zero, etc."""
+    result = runtime_error_predictor.analyze_workspace(request.workspace_path, request.max_files)
+    return result
+
+
+@app.post("/analysis/dependencies")
+async def analyze_dependencies(request: AdvancedScanRequest):
+    """Analyze dependencies: vulnerabilities, circular imports, unused packages"""
+    result = dependency_analyzer.analyze_workspace(request.workspace_path)
+    return result
+
+
+@app.post("/analysis/copilot-issues")
+async def detect_copilot_issues(request: AdvancedScanRequest):
+    """Detect copilot-style issues: TODOs, magic numbers, debug code, etc."""
+    result = copilot_style_detector.analyze_workspace(request.workspace_path, request.max_files)
+    return result
+
+
+@app.post("/analysis/full")
+async def run_full_analysis(request: AdvancedScanRequest):
+    """Run ALL analyzers and return comprehensive results"""
+    workspace = request.workspace_path
+    max_files = request.max_files
+    
+    # Run all analyzers
+    security = ast_security_scanner.scan_workspace(workspace, max_files)
+    dead_code = dead_code_detector.analyze_workspace(workspace, max_files)
+    quality = code_quality_analyzer.analyze_workspace(workspace, max_files)
+    runtime = runtime_error_predictor.analyze_workspace(workspace, max_files)
+    deps = dependency_analyzer.analyze_workspace(workspace)
+    copilot = copilot_style_detector.analyze_workspace(workspace, max_files)
+    
+    # Combine all findings
+    all_findings = []
+    
+    for f in security.get('findings', []):
+        f['pillar'] = 'security'
+        all_findings.append(f)
+    
+    for f in dead_code.get('findings', []):
+        f['pillar'] = 'dead_code'
+        all_findings.append(f)
+    
+    for f in quality.get('findings', []):
+        f['pillar'] = 'quality'
+        all_findings.append(f)
+    
+    for f in runtime.get('findings', []):
+        f['pillar'] = 'runtime'
+        all_findings.append(f)
+    
+    for f in deps.get('findings', []):
+        f['pillar'] = 'dependencies'
+        all_findings.append(f)
+    
+    for f in copilot.get('findings', []):
+        f['pillar'] = 'copilot_style'
+        all_findings.append(f)
+    
+    # Sort by severity
+    severity_order = {'CRITICAL': 0, 'HIGH': 1, 'MEDIUM': 2, 'LOW': 3, 'INFO': 4}
+    all_findings.sort(key=lambda f: severity_order.get(f.get('severity', 'INFO'), 99))
+    
+    # Calculate summary
+    summary = {
+        'total_findings': len(all_findings),
+        'by_severity': {
+            'critical': sum(1 for f in all_findings if f.get('severity') == 'CRITICAL'),
+            'high': sum(1 for f in all_findings if f.get('severity') == 'HIGH'),
+            'medium': sum(1 for f in all_findings if f.get('severity') == 'MEDIUM'),
+            'low': sum(1 for f in all_findings if f.get('severity') == 'LOW'),
+            'info': sum(1 for f in all_findings if f.get('severity') == 'INFO'),
+        },
+        'by_pillar': {
+            'security': security.get('total_findings', 0),
+            'dead_code': dead_code.get('total_findings', 0),
+            'quality': quality.get('total_findings', 0),
+            'runtime': runtime.get('total_findings', 0),
+            'dependencies': deps.get('total_findings', 0),
+            'copilot_style': copilot.get('total_findings', 0),
+        }
+    }
+    
+    return {
+        'workspace': workspace,
+        'timestamp': datetime.now(timezone.utc).isoformat(),
+        'summary': summary,
+        'findings': all_findings[:200],  # Limit to 200 most important
+        'detailed_results': {
+            'security': security.get('summary', {}),
+            'dead_code': dead_code.get('summary', {}),
+            'quality': quality.get('summary', {}),
+            'runtime': runtime.get('summary', {}),
+            'dependencies': deps.get('summary', {}),
+            'copilot_style': copilot.get('summary', {}),
+        }
     }
 
 

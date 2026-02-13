@@ -2,14 +2,16 @@
 Copilot Engine — Full Feature Test on bitflow_nova_app
 Tests ALL engine features against a real Android/Kotlin project (243 .kt files).
 """
-import sys, json, time, urllib.request, urllib.error
+import sys, json, time, urllib.request, urllib.error, os
 from typing import Any
 
 BASE = "http://127.0.0.1:7779"
-WS = r"D:\Bitflow_softwares\timepass\bitflow_nova_app"
-WS_ENC = "D%3A%5CBitflow_softwares%5Ctimepass%5Cbitflow_nova_app"
-SAMPLE_KT = WS + r"\app\src\main\java\com\bitflow\finance\FinanceApp.kt"
-SAMPLE_GRADLE = WS + r"\app\build.gradle.kts"
+# Auto-detect: bitflow_nova_app should be a sibling of copilot-engine
+_REPO_ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
+WS = os.path.join(_REPO_ROOT, 'bitflow_nova_app')
+WS_ENC = urllib.request.pathname2url(WS).lstrip('/')
+SAMPLE_KT = os.path.join(WS, 'app', 'src', 'main', 'java', 'com', 'bitflow', 'finance', 'FinanceApp.kt')
+SAMPLE_GRADLE = os.path.join(WS, 'app', 'build.gradle.kts')
 
 passed = 0
 failed = 0
