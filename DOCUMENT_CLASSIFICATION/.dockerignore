@@ -1,0 +1,57 @@
+# Version control
+.git
+.gitignore
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info
+dist/
+build/
+*.egg
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Test and coverage
+tests/
+pytest.ini
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
+
+# Dev tools
+.env
+.env.*
+!.env.example
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data (mounted as Docker volumes)
+data/uploads/
+models/
+instance/
+
+# Documentation
+*.md
+docs/
+
+# SSL (should be passed via secrets)
+ssl/

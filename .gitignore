@@ -16,3 +16,7 @@ local.properties
 .DS_Store
 Thumbs.db
 node_modules/
+
+# ChromaDB / vector database binaries
+**/data/chroma/
+*.bin

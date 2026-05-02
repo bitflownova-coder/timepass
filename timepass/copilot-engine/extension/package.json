@@ -1,0 +1,334 @@
+{
+  "name": "copilot-engine",
+  "displayName": "Copilot Engine - Dev Intelligence Layer",
+  "description": "Invisible AI-powered development intelligence that enhances VS Code and GitHub Copilot with auto error capture, smart context, CodeLens actions, git awareness, and security scanning.",
+  "version": "0.1.0",
+  "publisher": "bitflow",
+  "license": "MIT",
+  "icon": "icon.png",
+  "galleryBanner": {
+    "color": "#1a1a2e",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bitflow/copilot-engine"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters",
+    "Other"
+  ],
+  "keywords": [
+    "copilot",
+    "ai",
+    "error",
+    "debug",
+    "intelligence",
+    "context",
+    "security"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "copilotEngine.start",
+        "title": "Copilot Engine: Start Engine"
+      },
+      {
+        "command": "copilotEngine.stop",
+        "title": "Copilot Engine: Stop Engine"
+      },
+      {
+        "command": "copilotEngine.showStatus",
+        "title": "Copilot Engine: Show Status"
+      },
+      {
+        "command": "copilotEngine.clearHistory",
+        "title": "Copilot Engine: Clear Error History"
+      },
+      {
+        "command": "copilotEngine.analyzeCode",
+        "title": "Copilot Engine: Analyze Selected Code"
+      },
+      {
+        "command": "copilotEngine.buildContext",
+        "title": "Copilot Engine: Build Context for Copilot"
+      },
+      {
+        "command": "copilotEngine.checkSecurity",
+        "title": "Copilot Engine: Security Check"
+      },
+      {
+        "command": "copilotEngine.findSimilarErrors",
+        "title": "Copilot Engine: Find Similar Past Errors"
+      },
+      {
+        "command": "copilotEngine.injectContext",
+        "title": "Copilot Engine: Inject Context Comment"
+      },
+      {
+        "command": "copilotEngine.showDashboard",
+        "title": "Copilot Engine: Open Dashboard"
+      },
+      {
+        "command": "copilotEngine.startBackend",
+        "title": "Copilot Engine: Start Backend Server"
+      },
+      {
+        "command": "copilotEngine.stopBackend",
+        "title": "Copilot Engine: Stop Backend Server"
+      },
+      {
+        "command": "copilotEngine.restartBackend",
+        "title": "Copilot Engine: Restart Backend Server"
+      },
+      {
+        "command": "copilotEngine.analyzeFunction",
+        "title": "Analyze Function"
+      },
+      {
+        "command": "copilotEngine.generateTests",
+        "title": "Generate Tests"
+      },
+      {
+        "command": "copilotEngine.securityCheckLens",
+        "title": "Security Check"
+      },
+      {
+        "command": "copilotEngine.improveCode",
+        "title": "Improve Code"
+      },
+      {
+        "command": "copilotEngine.toggleFocusMode",
+        "title": "Copilot Engine: Toggle Focus Mode"
+      },
+      {
+        "command": "copilotEngine.analyzeGitChanges",
+        "title": "Copilot Engine: Analyze Git Changes"
+      },
+      {
+        "command": "copilotEngine.detectEndpoints",
+        "title": "Copilot Engine: Detect API Endpoints"
+      },
+      {
+        "command": "copilotEngine.fullScan",
+        "title": "Copilot Engine: Full Enforcement Scan"
+      },
+      {
+        "command": "copilotEngine.preCommitCheck",
+        "title": "Copilot Engine: Pre-Commit Check"
+      },
+      {
+        "command": "copilotEngine.validateContracts",
+        "title": "Copilot Engine: Validate API Contracts"
+      },
+      {
+        "command": "copilotEngine.validateSchema",
+        "title": "Copilot Engine: Validate Schema"
+      },
+      {
+        "command": "copilotEngine.removeContext",
+        "title": "Copilot Engine: Remove Context Block"
+      },
+      {
+        "command": "copilotEngine.detectStack",
+        "title": "Copilot Engine: Detect Tech Stack"
+      },
+      {
+        "command": "copilotEngine.checkImpact",
+        "title": "Copilot Engine: Check Impact"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "copilotEngine.buildContext",
+        "key": "ctrl+shift+c",
+        "mac": "cmd+shift+c",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "copilotEngine.analyzeCode",
+        "key": "ctrl+shift+a",
+        "mac": "cmd+shift+a",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "copilotEngine.injectContext",
+        "key": "ctrl+shift+i",
+        "mac": "cmd+shift+i",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "copilotEngine.fullScan",
+        "key": "ctrl+shift+f5",
+        "mac": "cmd+shift+f5"
+      },
+      {
+        "command": "copilotEngine.preCommitCheck",
+        "key": "ctrl+shift+k",
+        "mac": "cmd+shift+k"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "submenu": "copilotEngine.submenu",
+          "group": "copilotEngine"
+        }
+      ],
+      "copilotEngine.submenu": [
+        {
+          "command": "copilotEngine.analyzeCode",
+          "group": "1_analysis"
+        },
+        {
+          "command": "copilotEngine.buildContext",
+          "group": "1_analysis"
+        },
+        {
+          "command": "copilotEngine.checkSecurity",
+          "group": "2_security"
+        },
+        {
+          "command": "copilotEngine.injectContext",
+          "group": "3_context"
+        },
+        {
+          "command": "copilotEngine.findSimilarErrors",
+          "group": "4_errors"
+        },
+        {
+          "command": "copilotEngine.fullScan",
+          "group": "5_enforcement"
+        },
+        {
+          "command": "copilotEngine.validateContracts",
+          "group": "5_enforcement"
+        },
+        {
+          "command": "copilotEngine.removeContext",
+          "group": "3_context"
+        }
+      ]
+    },
+    "submenus": [
+      {
+        "id": "copilotEngine.submenu",
+        "label": "Copilot Engine"
+      }
+    ],
+    "configuration": {
+      "title": "Copilot Engine",
+      "properties": {
+        "copilotEngine.host": {
+          "type": "string",
+          "default": "127.0.0.1",
+          "description": "Engine server host"
+        },
+        "copilotEngine.port": {
+          "type": "number",
+          "default": 7779,
+          "description": "Engine server port"
+        },
+        "copilotEngine.autoStart": {
+          "type": "boolean",
+          "default": true,
+          "description": "Auto-start backend server on VS Code launch"
+        },
+        "copilotEngine.backendPort": {
+          "type": "number",
+          "default": 7779,
+          "description": "Backend server port (requires restart if changed)"
+        },
+        "copilotEngine.autoRestartBackend": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically restart backend if it crashes"
+        },
+        "copilotEngine.backendStartupTimeout": {
+          "type": "number",
+          "default": 600,
+          "description": "Backend startup timeout in seconds (default: 600 = 10 minutes for large projects)"
+        },
+        "copilotEngine.serverPath": {
+          "type": "string",
+          "default": "",
+          "description": "Absolute path to server.py (leave empty for auto-detection)"
+        },
+        "copilotEngine.terminalCapture": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable automatic terminal error capture"
+        },
+        "copilotEngine.codeLensEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show CodeLens actions above functions"
+        },
+        "copilotEngine.securityWarnings": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show inline security warnings"
+        },
+        "copilotEngine.notificationLevel": {
+          "type": "string",
+          "enum": ["all", "errors", "critical", "none"],
+          "default": "errors",
+          "description": "Notification verbosity level"
+        },
+        "copilotEngine.debugMode": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable debug logging"
+        },
+        "copilotEngine.autoInjectContext": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically inject context comments"
+        },
+        "copilotEngine.autoInjectOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Auto-inject enforcement context on file save (lightweight, debounced)"
+        },
+        "copilotEngine.focusModeThreshold": {
+          "type": "number",
+          "default": 5,
+          "description": "Number of repeated errors before triggering focus mode"
+        },
+        "copilotEngine.enginePath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to copilot-engine run.py (auto-detected if empty)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "webpack --mode production",
+    "watch": "webpack --mode development --watch",
+    "lint": "eslint src --ext ts",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@types/ws": "^8.5.10",
+    "typescript": "^5.3.0",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.0",
+    "ts-loader": "^9.5.0",
+    "@vscode/vsce": "^2.22.0"
+  },
+  "dependencies": {
+    "ws": "^8.16.0"
+  }
+}

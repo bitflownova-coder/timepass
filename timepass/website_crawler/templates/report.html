@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crawl Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-white min-h-screen p-8">
+    <div class="max-w-6xl mx-auto">
+        <header class="flex justify-between items-center mb-10 border-b border-gray-700 pb-6">
+            <div>
+                <a href="/" class="text-sm text-gray-500 hover:text-white mb-2 inline-block">← Back to Dashboard</a>
+                <h1
+                    class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500">
+                    Crawl Report</h1>
+                <p class="text-gray-400 mt-2">{{ crawl.url }} (Depth: {{ crawl.depth }})</p>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div id="status-badge" class="px-4 py-2 rounded-full font-semibold text-sm uppercase border">
+                    {{ crawl.status }}
+                </div>
+
+                <!-- Controls -->
+                <div id="controls"
+                    class="flex gap-2 {% if crawl.status in ['completed', 'failed', 'stopped'] %}hidden{% endif %}">
+                    <button onclick="controlCrawl('pause')" id="btn-pause"
+                        class="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition {% if crawl.status == 'paused' %}hidden{% endif %}">
+                        Pause
+                    </button>
+                    <button onclick="controlCrawl('resume')" id="btn-resume"
+                        class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition {% if crawl.status != 'paused' %}hidden{% endif %}">
+                        Resume
+                    </button>
+                    <button onclick="controlCrawl('stop')"
+                        class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition">
+                        Stop
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div class="bg-gray-800 p-6 rounded-xl border border-gray-700">
+                <h3 class="text-gray-400 text-sm font-medium mb-2">Pages Extracted</h3>
+                <p class="text-3xl font-bold text-white">{{ files.content|length }}</p>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-xl border border-gray-700">
+                <h3 class="text-gray-400 text-sm font-medium mb-2">Images Found</h3>
+                <p class="text-3xl font-bold text-white">{{ files.images|length }}</p>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-xl border border-gray-700">
+                <h3 class="text-gray-400 text-sm font-medium mb-2">Documents Found</h3>
+                <p class="text-3xl font-bold text-white">{{ files.documents|length }}</p>
+            </div>
+        </div>
+
+        <!-- Content Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Pages -->
+            <div class="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden">
+                <div class="p-4 bg-gray-750 border-b border-gray-700">
+                    <h2 class="font-semibold text-lg text-blue-400">Extracted Content</h2>
+                </div>
+                <ul class="p-4 space-y-2 max-h-96 overflow-y-auto custom-scrollbar">
+                    {% for file in files.content %}
+                    <li
+                        class="flex justify-between items-center bg-gray-700/50 p-3 rounded-lg hover:bg-gray-700 transition">
+                        <span class="text-sm text-gray-300 truncate max-w-[70%]">{{ file }}</span>
+                        <a href="{{ url_for('download_file', crawl_id=crawl_id, file_type='content', filename=file) }}"
+                            class="text-xs bg-blue-600 hover:bg-blue-700 px-3 py-1.5 rounded transition">Download</a>
+                    </li>
+                    {% else %}
+                    <li class="text-gray-500 text-center py-4">No content found yet...</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Assets -->
+            <div class="space-y-8">
+                <!-- Documents -->
+                <div class="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden">
+                    <div class="p-4 bg-gray-750 border-b border-gray-700">
+                        <h2 class="font-semibold text-lg text-purple-400">Documents</h2>
+                    </div>
+                    <ul class="p-4 space-y-2 max-h-60 overflow-y-auto custom-scrollbar">
+                        {% for file in files.documents %}
+                        <li
+                            class="flex justify-between items-center bg-gray-700/50 p-3 rounded-lg hover:bg-gray-700 transition">
+                            <span class="text-sm text-gray-300 truncate max-w-[70%]">{{ file }}</span>
+                            <a href="{{ url_for('download_file', crawl_id=crawl_id, file_type='document', filename=file) }}"
+                                class="text-xs bg-purple-600 hover:bg-purple-700 px-3 py-1.5 rounded transition">Download</a>
+                        </li>
+                        {% else %}
+                        <li class="text-gray-500 text-center py-4">No documents found yet...</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <!-- Images -->
+                <div class="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden">
+                    <div class="p-4 bg-gray-750 border-b border-gray-700">
+                        <h2 class="font-semibold text-lg text-green-400">Images</h2>
+                    </div>
+                    <div class="p-4 grid grid-cols-3 gap-2 max-h-60 overflow-y-auto custom-scrollbar">
+                        {% for file in files.images %}
+                        <div class="relative group">
+                            <a href="{{ url_for('download_file', crawl_id=crawl_id, file_type='image', filename=file) }}"
+                                target="_blank">
+                                <div
+                                    class="aspect-square bg-gray-700 rounded-lg flex items-center justify-center overflow-hidden border border-gray-600 hover:border-green-500 transition">
+                                    <span class="text-xs text-gray-400 truncate px-1">{{ file }}</span>
+                                </div>
+                            </a>
+                        </div>
+                        {% else %}
+                        <p class="col-span-3 text-gray-500 text-center py-4">No images found yet...</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const crawlId = "{{ crawl_id }}";
+
+        function updateBadge(status) {
+            const badge = document.getElementById('status-badge');
+            badge.innerText = status;
+
+            let colorClass = "";
+            if (status === 'running') colorClass = "bg-blue-500/20 text-blue-400 border-blue-500/30";
+            else if (status === 'completed') colorClass = "bg-green-500/20 text-green-400 border-green-500/30";
+            else if (status === 'paused') colorClass = "bg-yellow-500/20 text-yellow-400 border-yellow-500/30";
+            else if (status === 'stopped') colorClass = "bg-orange-500/20 text-orange-400 border-orange-500/30";
+            else colorClass = "bg-red-500/20 text-red-400 border-red-500/30";
+
+            badge.className = `px-4 py-2 rounded-full font-semibold text-sm uppercase border ${colorClass}`;
+
+            // Show/Hide controls
+            const controls = document.getElementById('controls');
+            if (['completed', 'failed', 'stopped'].includes(status)) {
+                controls.classList.add('hidden');
+                // stop polling
+            } else {
+                controls.classList.remove('hidden');
+                if (status === 'paused') {
+                    document.getElementById('btn-pause').classList.add('hidden');
+                    document.getElementById('btn-resume').classList.remove('hidden');
+                } else {
+                    document.getElementById('btn-pause').classList.remove('hidden');
+                    document.getElementById('btn-resume').classList.add('hidden');
+                }
+            }
+        }
+
+        function controlCrawl(action) {
+            fetch(`/control/${crawlId}/${action}`, { method: 'POST' })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        updateBadge(data.status);
+                    }
+                });
+        }
+
+        // Initialize badge
+        updateBadge("{{ crawl.status }}");
+
+        // Polling
+        if (['running', 'pending', 'paused'].includes("{{ crawl.status }}")) {
+            setInterval(() => {
+                fetch(`/status/${crawlId}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        updateBadge(data.status);
+                        if (['completed', 'failed', 'stopped'].includes(data.status)) {
+                            // If finished, reload to show all files final state
+                            setTimeout(() => window.location.reload(), 1000);
+                        }
+                    });
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>

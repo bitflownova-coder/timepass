@@ -1,0 +1,134 @@
+# ─────────────────────────────────────────────────────────────────
+#  SmartDoc AI — .gitignore
+# ─────────────────────────────────────────────────────────────────
+
+# Unrelated local downloads folder
+Downloadds/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Distribution / build
+build/
+dist/
+*.egg-info/
+*.egg
+MANIFEST
+wheels/
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Environment & secrets  ← IMPORTANT: never commit these
+.env
+.env.*
+!.env.example
+
+# Flask instance folder
+instance/
+.webassets-cache
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+logs/
+*.log
+*.pot
+
+# Trained model artefacts (large binary files — distribute separately)
+models/*.pkl
+models/*.joblib
+models/*.h5
+models/*.pt
+models/*.bin
+
+# User uploads (encrypted files, not for version control)
+data/uploads/
+data/temp/
+data/previews/
+
+# Backups
+backups/
+*.bak
+
+# SSL certificates
+ssl/
+*.pem
+*.crt
+*.key
+*.p12
+
+# Test artefacts
+.coverage
+.pytest_cache/
+htmlcov/
+.tox/
+
+# Node (if a JS frontend is added)
+node_modules/
+npm-debug.log
+yarn-error.log
+.next/
+
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Temporary files
+*.tmp
+temp/
+.cache/
+
+# IDE settings
+*.iml
+.gradle
+.idea/
+local.properties
+
+# OSX
+.AppleDouble
+.LSOverride
+.localized
+
+# Windows
+*.lnk
+$RECYCLE.BIN/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre
+.pyre/
+
+# Models and training data (optional, can be large)
+# models/*.pkl
+# data/training/
+
+# Sensitive files
+secrets.txt
+.ssh/
+*.pem
