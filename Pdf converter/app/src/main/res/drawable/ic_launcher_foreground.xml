@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Back document (slight offset, gives depth) -->
+    <path
+        android:fillColor="#90CAF9"
+        android:pathData="M44,18 L68,18 L76,26 L76,82 L44,82 Z" />
+    <path
+        android:fillColor="#64B5F6"
+        android:pathData="M68,18 L68,26 L76,26 Z" />
+
+    <!-- Main document body -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M32,24 L58,24 L66,32 L66,90 L32,90 Z" />
+
+    <!-- Folded corner shadow -->
+    <path
+        android:fillColor="#BBDEFB"
+        android:pathData="M58,24 L58,32 L66,32 Z" />
+
+    <!-- PDF red badge -->
+    <path
+        android:fillColor="#E53935"
+        android:pathData="M32,52 L66,52 L66,68 L32,68 Z" />
+
+    <!-- Badge rounded ends -->
+    <path
+        android:fillColor="#E53935"
+        android:pathData="M32,52 Q28,52 28,60 Q28,68 32,68 Z" />
+    <path
+        android:fillColor="#E53935"
+        android:pathData="M66,52 Q70,52 70,60 Q70,68 66,68 Z" />
+
+    <!-- "PDF" letter P -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2.2"
+        android:strokeLineCap="round"
+        android:pathData="M36,58 L36,65 M36,58 L40,58 Q43,58 43,61.5 Q43,65 40,65 L36,65"
+        android:fillColor="@android:color/transparent" />
+
+    <!-- "PDF" letter D -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2.2"
+        android:strokeLineCap="round"
+        android:pathData="M46,58 L46,65 M46,58 L49,58 Q54,58 54,61.5 Q54,65 49,65 L46,65"
+        android:fillColor="@android:color/transparent" />
+
+    <!-- "PDF" letter F -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2.2"
+        android:strokeLineCap="round"
+        android:pathData="M57,58 L63,58 M57,58 L57,65 M57,61.5 L62,61.5"
+        android:fillColor="@android:color/transparent" />
+
+    <!-- Document lines (content preview) -->
+    <path
+        android:strokeColor="#90CAF9"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:pathData="M37,75 L61,75"
+        android:fillColor="@android:color/transparent" />
+    <path
+        android:strokeColor="#90CAF9"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:pathData="M37,80 L54,80"
+        android:fillColor="@android:color/transparent" />
+    <path
+        android:strokeColor="#BBDEFB"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:pathData="M37,38 L57,38"
+        android:fillColor="@android:color/transparent" />
+    <path
+        android:strokeColor="#BBDEFB"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:pathData="M37,44 L57,44"
+        android:fillColor="@android:color/transparent" />
+
+    <!-- Conversion spark / arrow (bottom-right) -->
+    <path
+        android:fillColor="#FFC107"
+        android:pathData="M72,68 Q78,62 84,68 L80,68 L80,76 L76,76 L76,68 Z" />
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M84,68 L78,63 L78,73 Z" />
+
+</vector>

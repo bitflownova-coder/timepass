@@ -416,7 +416,17 @@ def discover_parameters(url, deep_scan=False):
         
     except Exception as e:
         result['error'] = str(e)
-    
+
+    # Normalize output keys to match Kotlin ParamFuzzingResult data class
+    result['discovered_params'] = result['discovered']
+    result['reflected_params'] = result['reflected']
+    result['sensitive_params'] = [
+        p.get('name', '') if isinstance(p, dict) else str(p)
+        for p in result['sensitive']
+    ]
+    result['total_found'] = len(result['discovered'])
+    result['total_tested'] = result['summary'].get('total_discovered', 0)
+
     return result
 
 # Alias for compatibility with import in crawler_engine.py

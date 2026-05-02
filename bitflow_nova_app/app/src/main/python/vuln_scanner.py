@@ -11,6 +11,11 @@ except ImportError:
     httpx = None
 
 try:
+    from http_client import VERIFY_SSL
+except ImportError:
+    VERIFY_SSL = False
+
+try:
     from bs4 import BeautifulSoup
 except ImportError:
     BeautifulSoup = None
@@ -111,7 +116,7 @@ def test_cors_misconfiguration(url, user_agent='Mozilla/5.0'):
     
     for origin in test_origins:
         try:
-            with httpx.Client(timeout=5, follow_redirects=True, verify=False) as client:
+            with httpx.Client(timeout=5, follow_redirects=True, verify=VERIFY_SSL) as client:
                 headers = {
                     'User-Agent': user_agent,
                     'Origin': origin
@@ -176,7 +181,7 @@ def test_http_methods(url, user_agent='Mozilla/5.0'):
     
     # First, check OPTIONS to see allowed methods
     try:
-        with httpx.Client(timeout=5, follow_redirects=False, verify=False) as client:
+        with httpx.Client(timeout=5, follow_redirects=False, verify=VERIFY_SSL) as client:
             response = client.options(url, headers={'User-Agent': user_agent})
             allowed = response.headers.get('allow', '')
             
@@ -197,7 +202,7 @@ def test_http_methods(url, user_agent='Mozilla/5.0'):
     
     # Test TRACE specifically
     try:
-        with httpx.Client(timeout=5, follow_redirects=False, verify=False) as client:
+        with httpx.Client(timeout=5, follow_redirects=False, verify=VERIFY_SSL) as client:
             response = client.request('TRACE', url, headers={'User-Agent': user_agent})
             if response.status_code == 200:
                 findings.append({
@@ -270,7 +275,7 @@ def detect_waf(url_or_headers, cookies=None):
         url = url_or_headers
         if not httpx: return {'detected': False}
         try:
-            with httpx.Client(timeout=5, follow_redirects=True, verify=False) as client:
+            with httpx.Client(timeout=5, follow_redirects=True, verify=VERIFY_SSL) as client:
                 resp = client.HEAD(url) # HEAD might be enough for WAF headers
                 # frequent false negatives with HEAD for some WAFs, but faster. 
                 # Let's use GET but stream to avoid body download? 
@@ -341,7 +346,7 @@ def check_clickjacking(url_or_headers, url_context=None):
         url = url_or_headers
         if not httpx: return {'vulnerable': False}
         try:
-            with httpx.Client(timeout=5, verify=False) as client:
+            with httpx.Client(timeout=5, verify=VERIFY_SSL) as client:
                 resp = client.get(url)
                 findings = analyze(resp.headers, url)
                 if findings:
@@ -517,7 +522,7 @@ def trigger_error_pages(base_url, user_agent='Mozilla/5.0'):
     for path, error_type in error_triggers:
         try:
             url = urljoin(base_url, path)
-            with httpx.Client(timeout=5, follow_redirects=True, verify=False) as client:
+            with httpx.Client(timeout=5, follow_redirects=True, verify=VERIFY_SSL) as client:
                 response = client.get(url, headers={'User-Agent': user_agent})
                 body = response.text.lower()
                 
@@ -589,7 +594,7 @@ def check_subdomain_takeover(subdomain_results, user_agent='Mozilla/5.0'):
             continue
         
         try:
-            with httpx.Client(timeout=5, follow_redirects=True, verify=False) as client:
+            with httpx.Client(timeout=5, follow_redirects=True, verify=VERIFY_SSL) as client:
                 response = client.get(url, headers={'User-Agent': user_agent})
                 body = response.text.lower()
                 

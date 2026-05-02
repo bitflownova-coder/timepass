@@ -1,6 +1,7 @@
 package com.bitflow.finance.ui.screens.crawler
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,31 +13,35 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun StatusChip(status: String, color: Color) {
-    Surface(
-        color = color.copy(alpha = 0.15f),
-        shape = RoundedCornerShape(50),
-        modifier = Modifier.height(24.dp)
+    Box(
+        modifier = Modifier
+            .clip(RoundedCornerShape(4.dp))
+            .background(color.copy(alpha = 0.1f))
+            .border(1.dp, color.copy(alpha = 0.4f), RoundedCornerShape(4.dp))
+            .padding(horizontal = 8.dp, vertical = 4.dp)
     ) {
         Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(horizontal = 8.dp)
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
                 modifier = Modifier
-                    .size(6.dp)
+                    .size(5.dp)
                     .clip(CircleShape)
                     .background(color)
             )
-            Spacer(Modifier.width(6.dp))
+            Spacer(Modifier.width(5.dp))
             Text(
                 text = status,
+                fontFamily = FontFamily.Monospace,
                 color = color,
-                style = MaterialTheme.typography.labelSmall,
+                fontSize = 10.sp,
                 fontWeight = FontWeight.Bold
             )
         }
@@ -45,11 +50,11 @@ fun StatusChip(status: String, color: Color) {
 
 fun getStatusColor(status: String): Color {
     return when (status) {
-        "COMPLETED" -> Color(0xFF10B981) // Emerald
-        "FAILED" -> Color(0xFFEF4444) // Red
-        "RUNNING" -> Color(0xFF3B82F6) // Blue
-        "PAUSED" -> Color(0xFFF59E0B) // Amber
-        else -> Color.Gray
+        "COMPLETED" -> Cyber.Green
+        "FAILED" -> Cyber.Red
+        "RUNNING" -> Cyber.Cyan
+        "PAUSED" -> Cyber.Yellow
+        else -> Cyber.TextSecondary
     }
 }
 

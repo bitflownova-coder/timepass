@@ -1,4 +1,4 @@
-# auth_tester.py
+﻿# auth_tester.py
 # Authentication Testing - Rate limiting, Default credentials, Account enumeration
 
 import re
@@ -9,6 +9,11 @@ try:
     import httpx
 except ImportError:
     httpx = None
+
+try:
+    from http_client import VERIFY_SSL
+except ImportError:
+    VERIFY_SSL = False
 
 # Common login paths
 LOGIN_PATHS = [
@@ -107,7 +112,7 @@ def find_login_page(base_url, timeout=10):
     if not httpx:
         return None
     
-    with httpx.Client(timeout=timeout, verify=False, follow_redirects=True) as client:
+    with httpx.Client(timeout=timeout, verify=VERIFY_SSL, follow_redirects=True) as client:
         for path in LOGIN_PATHS:
             url = urljoin(base_url, path)
             try:
@@ -237,7 +242,7 @@ def test_rate_limiting(url, requests_count=10, delay=0.1, timeout=10):
         'issues': [],
     }
     
-    with httpx.Client(timeout=timeout, verify=False) as client:
+    with httpx.Client(timeout=timeout, verify=VERIFY_SSL) as client:
         for i in range(requests_count):
             start_time = time.time()
             try:
@@ -305,7 +310,7 @@ def test_account_lockout(login_url, username='admin', attempts=5, timeout=10):
         'issues': [],
     }
     
-    with httpx.Client(timeout=timeout, verify=False, follow_redirects=True) as client:
+    with httpx.Client(timeout=timeout, verify=VERIFY_SSL, follow_redirects=True) as client:
         # First, get the login page to find fields
         try:
             page_response = client.get(login_url)
@@ -392,7 +397,7 @@ def test_username_enumeration(login_url, timeout=10):
         'issues': [],
     }
     
-    with httpx.Client(timeout=timeout, verify=False, follow_redirects=True) as client:
+    with httpx.Client(timeout=timeout, verify=VERIFY_SSL, follow_redirects=True) as client:
         # Get login page fields
         try:
             page_response = client.get(login_url)
@@ -507,7 +512,7 @@ def test_default_credentials(login_url, credentials=None, timeout=10, max_attemp
         'issues': [],
     }
     
-    with httpx.Client(timeout=timeout, verify=False, follow_redirects=True) as client:
+    with httpx.Client(timeout=timeout, verify=VERIFY_SSL, follow_redirects=True) as client:
         # Get login page fields
         try:
             page_response = client.get(login_url)
@@ -632,6 +637,41 @@ def analyze_authentication(url):
             'issue_count': len(result['issues']),
             'critical_issues': len([i for i in result['issues'] if i['severity'] == 'Critical']),
         }
+
+        # Normalize keys to match Kotlin AuthTestingResult / LoginPage / RateLimitingResult
+        if result['login_page']:
+            lp = result['login_page']
+            result['login_pages'] = [{
+                'url': lp.get('url', ''),
+                'form_action': lp.get('form_action', lp.get('action', '')),
+                'has_captcha': lp.get('has_captcha', False),
+                'has_mfa': lp.get('has_mfa', False),
+                'uses_https': lp.get('uses_https', lp.get('url', '').startswith('https')),
+            }]
+        else:
+            result['login_pages'] = []
+
+        if result['rate_limiting']:
+            rl = result['rate_limiting']
+            result['rate_limiting'] = {
+                'implemented': rl.get('rate_limited', False),
+                'requests_before_limit': rl.get('blocked_after'),
+                'lockout_duration': rl.get('lockout_duration'),
+            }
+
+        if result['account_lockout']:
+            al = result['account_lockout']
+            result['account_lockout'] = {
+                'detected': al.get('lockout_detected', False),
+                'attempts_before_lockout': al.get('attempts_before_lockout'),
+            }
+
+        if result['username_enumeration']:
+            ue = result['username_enumeration']
+            result['username_enumeration'] = {
+                'vulnerable': ue.get('enumerable', False),
+                'evidence': ue.get('evidence', ''),
+            }
         
     except Exception as e:
         result['error'] = str(e)

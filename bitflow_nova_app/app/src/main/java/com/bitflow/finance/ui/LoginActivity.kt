@@ -20,7 +20,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -61,17 +60,16 @@ fun LoginScreen(onLoginSuccess: () -> Unit) {
 
     Box(modifier = Modifier.fillMaxSize()) {
         // 1. Background Decoration (Glows)
-        // Top Left Glow
+        // Top Left Glow — radialGradient fades to transparent naturally, no blur needed
         Box(
             modifier = Modifier
                 .offset(x = (-100).dp, y = (-100).dp)
                 .size(300.dp)
                 .background(
                     brush = Brush.radialGradient(
-                        colors = listOf(MaterialTheme.colorScheme.primary.copy(alpha = 0.2f), Color.Transparent)
+                        colors = listOf(MaterialTheme.colorScheme.primary.copy(alpha = 0.15f), Color.Transparent)
                     )
                 )
-                .blur(50.dp) // Soft blur for glow effect
         )
         // Bottom Right Glow
         Box(
@@ -81,10 +79,9 @@ fun LoginScreen(onLoginSuccess: () -> Unit) {
                 .size(300.dp)
                 .background(
                     brush = Brush.radialGradient(
-                        colors = listOf(MaterialTheme.colorScheme.primary.copy(alpha = 0.2f), Color.Transparent)
+                        colors = listOf(MaterialTheme.colorScheme.primary.copy(alpha = 0.15f), Color.Transparent)
                     )
                 )
-                .blur(50.dp)
         )
 
         // 2. Main Content

@@ -42,6 +42,10 @@ from drift_detector import DriftDetector
 from migration_monitor import MigrationMonitor
 from risk_engine import RiskEngine
 from background_worker import BackgroundWorker, ChangeEvent
+import system_monitor as sysmon
+import project_analytics
+import meeting_manager as meetings
+import infra_monitor
 
 # Configure logging
 logging.basicConfig(
@@ -244,6 +248,10 @@ async def lifespan(app: FastAPI):
 
     background_worker._broadcast = ws_broadcast_sync
     background_worker.start()
+
+    # ── Initialize meeting manager & infra monitor ──
+    meetings.init(".")
+    infra_monitor.init(".")
 
     logger.info(f"Copilot Engine started on {settings.host}:{settings.port}")
     
@@ -1309,6 +1317,282 @@ async def run_full_analysis(request: AdvancedScanRequest):
             'copilot_style': copilot.get('summary', {}),
         }
     }
+
+
+# ============== System Monitor ==============
+
+@app.get("/system/stats")
+async def system_stats():
+    """Real-time system resource snapshot (CPU, RAM, disk, network, battery)."""
+    if not sysmon.is_available():
+        raise HTTPException(503, "psutil not installed")
+    snap = sysmon.record_snapshot()
+    return snap
+
+
+@app.get("/system/processes")
+async def system_processes(limit: int = 15, sort_by: str = "cpu"):
+    """Top processes sorted by CPU or memory usage."""
+    if not sysmon.is_available():
+        raise HTTPException(503, "psutil not installed")
+    return {"processes": sysmon.get_top_processes(limit=limit, sort_by=sort_by)}
+
+
+@app.get("/system/disks")
+async def system_disks():
+    """Mounted disk partitions with usage."""
+    if not sysmon.is_available():
+        raise HTTPException(503, "psutil not installed")
+    return {"partitions": sysmon.get_disk_partitions()}
+
+
+@app.get("/system/history")
+async def system_history():
+    """Ring-buffer of recent system snapshots for charts."""
+    return {"history": sysmon.get_history()}
+
+
+# ============== Project Analytics ==============
+
+@app.post("/analytics/workspace-summary")
+async def analytics_workspace_summary(body: dict):
+    """Detailed file/LOC/language breakdown for a workspace."""
+    workspace_path = body.get("workspace_path", "")
+    if not workspace_path:
+        raise HTTPException(400, "workspace_path required")
+    result = project_analytics.analyze_workspace(workspace_path)
+    if "error" in result:
+        raise HTTPException(400, result["error"])
+    return result
+
+
+@app.post("/analytics/project-health")
+async def analytics_project_health(body: dict):
+    """Composite project health score from all available metrics."""
+    workspace_path = body.get("workspace_path", "")
+    if not workspace_path:
+        raise HTTPException(400, "workspace_path required")
+
+    # Gather scores from existing analyzers
+    risk_score = None
+    security_issues = 0
+    contract_violations = 0
+    drift_events = 0
+
+    try:
+        health = background_worker.get_workspace_health(workspace_path)
+        if health:
+            risk_score = health.get("overall_score", 0)
+    except Exception:
+        pass
+
+    try:
+        drifts = background_worker.get_unresolved_drifts(workspace_path)
+        drift_events = len(drifts) if drifts else 0
+    except Exception:
+        pass
+
+    result = project_analytics.get_workspace_health_score(
+        workspace_path,
+        risk_score=risk_score,
+        security_issues=security_issues,
+        contract_violations=contract_violations,
+        drift_events=drift_events,
+    )
+    return result
+
+
+@app.post("/analytics/compare")
+async def analytics_compare(body: dict):
+    """Analyze and compare multiple workspaces side by side."""
+    paths = body.get("workspace_paths", [])
+    if not paths:
+        raise HTTPException(400, "workspace_paths array required")
+    return {"workspaces": project_analytics.compare_workspaces(paths)}
+
+
+# ============== Meeting Manager ==============
+
+@app.post("/meetings")
+async def create_meeting(body: dict):
+    """Create a new meeting."""
+    title = body.get("title", "")
+    if not title:
+        raise HTTPException(400, "title required")
+    return meetings.create_meeting(
+        title=title,
+        date=body.get("date", ""),
+        attendees=body.get("attendees", []),
+        category=body.get("category", "general"),
+        notes=body.get("notes", ""),
+        status=body.get("status", "upcoming"),
+    )
+
+
+@app.get("/meetings")
+async def list_meetings_route(filter: Optional[str] = None, category: Optional[str] = None):
+    """List meetings with optional filters."""
+    return {"meetings": meetings.list_meetings(filter_type=filter, category=category)}
+
+
+@app.get("/meetings/pending-actions")
+async def pending_actions():
+    """All incomplete action items across meetings."""
+    return {"actions": meetings.get_pending_actions()}
+
+
+@app.get("/meetings/pending-follow-ups")
+async def pending_follow_ups():
+    """All pending follow-ups across meetings."""
+    return {"follow_ups": meetings.get_pending_follow_ups()}
+
+
+@app.get("/meetings/stats")
+async def meeting_stats():
+    """Meeting statistics."""
+    return meetings.get_stats()
+
+
+@app.get("/meetings/{meeting_id}")
+async def get_meeting_route(meeting_id: str):
+    """Get single meeting with action items and follow-ups."""
+    m = meetings.get_meeting(meeting_id)
+    if not m:
+        raise HTTPException(404, "Meeting not found")
+    return m
+
+
+@app.put("/meetings/{meeting_id}")
+async def update_meeting_route(meeting_id: str, body: dict):
+    """Update meeting details."""
+    return meetings.update_meeting(meeting_id, body)
+
+
+@app.delete("/meetings/{meeting_id}")
+async def delete_meeting_route(meeting_id: str):
+    """Delete a meeting."""
+    ok = meetings.delete_meeting(meeting_id)
+    if not ok:
+        raise HTTPException(404, "Meeting not found")
+    return {"deleted": True}
+
+
+@app.post("/meetings/{meeting_id}/action-items")
+async def add_action_item_route(meeting_id: str, body: dict):
+    """Add an action item to a meeting."""
+    text = body.get("text", "")
+    if not text:
+        raise HTTPException(400, "text required")
+    return meetings.add_action_item(
+        meeting_id=meeting_id,
+        text=text,
+        assignee=body.get("assignee", ""),
+        due_date=body.get("due_date", ""),
+        priority=body.get("priority", "medium"),
+    )
+
+
+@app.put("/meetings/action-items/{item_id}")
+async def update_action_item_route(item_id: str, body: dict):
+    """Update or complete an action item."""
+    return meetings.update_action_item(item_id, body)
+
+
+@app.post("/meetings/{meeting_id}/follow-ups")
+async def add_follow_up_route(meeting_id: str, body: dict):
+    """Add a follow-up to a meeting."""
+    text = body.get("text", "")
+    if not text:
+        raise HTTPException(400, "text required")
+    return meetings.add_follow_up(
+        meeting_id=meeting_id,
+        text=text,
+        due_date=body.get("due_date", ""),
+    )
+
+
+# ============== Infrastructure Monitor ==============
+
+@app.post("/infra/endpoints")
+async def add_infra_endpoint(body: dict):
+    """Add a monitored endpoint."""
+    name = body.get("name", "")
+    url = body.get("url", "")
+    if not name or not url:
+        raise HTTPException(400, "name and url required")
+    return infra_monitor.add_endpoint(
+        name=name,
+        url=url,
+        method=body.get("method", "GET"),
+        expected_status=body.get("expected_status", 200),
+        timeout_seconds=body.get("timeout_seconds", 10),
+        check_interval_seconds=body.get("check_interval_seconds", 60),
+        category=body.get("category", "api"),
+    )
+
+
+@app.get("/infra/endpoints")
+async def list_infra_endpoints():
+    """List all monitored endpoints with latest status."""
+    return {"endpoints": infra_monitor.list_endpoints()}
+
+
+@app.put("/infra/endpoints/{endpoint_id}")
+async def update_infra_endpoint(endpoint_id: str, body: dict):
+    """Update endpoint configuration."""
+    return infra_monitor.update_endpoint(endpoint_id, body)
+
+
+@app.delete("/infra/endpoints/{endpoint_id}")
+async def delete_infra_endpoint(endpoint_id: str):
+    """Remove a monitored endpoint."""
+    ok = infra_monitor.delete_endpoint(endpoint_id)
+    if not ok:
+        raise HTTPException(404, "Endpoint not found")
+    return {"deleted": True}
+
+
+@app.post("/infra/check/{endpoint_id}")
+async def check_single_endpoint(endpoint_id: str):
+    """Trigger a manual health check on one endpoint."""
+    result = infra_monitor.check_endpoint(endpoint_id)
+    if "error" in result:
+        raise HTTPException(404, result["error"])
+    return result
+
+
+@app.post("/infra/check-all")
+async def check_all_endpoints():
+    """Check all enabled endpoints."""
+    results = infra_monitor.check_all()
+    return {"results": results}
+
+
+@app.get("/infra/history/{endpoint_id}")
+async def infra_check_history(endpoint_id: str, limit: int = 100):
+    """Check result history for an endpoint."""
+    return {"history": infra_monitor.get_check_history(endpoint_id, limit)}
+
+
+@app.get("/infra/alerts")
+async def infra_alerts(acknowledged: Optional[bool] = None):
+    """Get alerts, optionally filtered by acknowledged status."""
+    return {"alerts": infra_monitor.get_alerts(acknowledged=acknowledged)}
+
+
+@app.put("/infra/alerts/{alert_id}/acknowledge")
+async def acknowledge_infra_alert(alert_id: str):
+    """Acknowledge an alert."""
+    ok = infra_monitor.acknowledge_alert(alert_id)
+    if not ok:
+        raise HTTPException(404, "Alert not found")
+    return {"acknowledged": True}
+
+
+@app.get("/infra/stats")
+async def infra_stats():
+    """Infrastructure monitoring statistics."""
+    return infra_monitor.get_stats()
 
 
 # ============== Main ==============

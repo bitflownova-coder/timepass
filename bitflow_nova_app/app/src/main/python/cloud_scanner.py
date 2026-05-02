@@ -1,4 +1,4 @@
-# cloud_scanner.py
+﻿# cloud_scanner.py
 # Cloud Bucket Scanner - S3, Azure Blob, GCP Storage exposure detection
 
 import re
@@ -9,6 +9,11 @@ try:
     import httpx
 except ImportError:
     httpx = None
+
+try:
+    from http_client import VERIFY_SSL
+except ImportError:
+    VERIFY_SSL = False
 
 # S3 bucket URL patterns
 S3_PATTERNS = [
@@ -175,7 +180,7 @@ def check_s3_bucket(bucket_name, timeout=10):
         f"https://s3.amazonaws.com/{bucket_name}",
     ]
     
-    with httpx.Client(timeout=timeout, verify=False) as client:
+    with httpx.Client(timeout=timeout, verify=VERIFY_SSL) as client:
         for url in urls_to_try:
             try:
                 response = client.get(url)
@@ -242,7 +247,7 @@ def check_azure_blob(storage_account, container=None, timeout=10):
             f"https://{storage_account}.blob.core.windows.net/$root?restype=container&comp=list",
         ]
     
-    with httpx.Client(timeout=timeout, verify=False) as client:
+    with httpx.Client(timeout=timeout, verify=VERIFY_SSL) as client:
         for url in urls_to_try:
             try:
                 response = client.get(url)
@@ -299,7 +304,7 @@ def check_gcp_bucket(bucket_name, timeout=10):
         f"https://{bucket_name}.storage.googleapis.com",
     ]
     
-    with httpx.Client(timeout=timeout, verify=False) as client:
+    with httpx.Client(timeout=timeout, verify=VERIFY_SSL) as client:
         for url in urls_to_try:
             try:
                 response = client.get(url)
@@ -351,7 +356,7 @@ def check_do_space(space_name, region, timeout=10):
     }
     
     try:
-        with httpx.Client(timeout=timeout, verify=False) as client:
+        with httpx.Client(timeout=timeout, verify=VERIFY_SSL) as client:
             response = client.get(result['url'])
             
             if response.status_code == 200:
@@ -432,6 +437,19 @@ def brute_force_buckets(domain, providers=None, max_workers=10, timeout=10):
     return found_buckets
 
 
+def _normalize_bucket(b):
+    """Normalize a bucket dict to match Kotlin CloudBucket/ExposedBucket shapes."""
+    return {
+        'name': b.get('bucket', b.get('name', '')),
+        'provider': b.get('provider', ''),
+        'url': b.get('url', ''),
+        'source': b.get('source', 'scan'),
+        'public_access': b.get('public_read', False),
+        'listing_enabled': b.get('public_list', False),
+        'sample_files': b.get('sample_files', []),
+    }
+
+
 def scan_cloud_resources(url, content=None, brute_force=True):
     """Main function - scan for cloud storage exposure"""
     result = {
@@ -442,11 +460,11 @@ def scan_cloud_resources(url, content=None, brute_force=True):
         'issues': [],
         'summary': {}
     }
-    
+
     # If content provided, search for bucket references
     if content:
         result['referenced_buckets'] = find_buckets_in_content(content)
-        
+
         # Check each referenced bucket
         for bucket in result['referenced_buckets']['s3']:
             bucket_result = check_s3_bucket(bucket)
@@ -455,7 +473,7 @@ def scan_cloud_resources(url, content=None, brute_force=True):
                 if bucket_result['public_read']:
                     result['exposed_buckets'].append(bucket_result)
                     result['issues'].extend(bucket_result.get('issues', []))
-        
+
         for bucket in result['referenced_buckets']['gcp']:
             bucket_result = check_gcp_bucket(bucket)
             if bucket_result:
@@ -463,7 +481,7 @@ def scan_cloud_resources(url, content=None, brute_force=True):
                 if bucket_result['public_read']:
                     result['exposed_buckets'].append(bucket_result)
                     result['issues'].extend(bucket_result.get('issues', []))
-        
+
         for bucket_id in result['referenced_buckets']['azure']:
             parts = bucket_id.split('/')
             storage_account = parts[0]
@@ -474,30 +492,38 @@ def scan_cloud_resources(url, content=None, brute_force=True):
                 if bucket_result['public_read']:
                     result['exposed_buckets'].append(bucket_result)
                     result['issues'].extend(bucket_result.get('issues', []))
-    
+
     # Brute force common bucket names
     if brute_force:
         brute_results = brute_force_buckets(url, max_workers=15)
         for bucket_result in brute_results:
             # Avoid duplicates
             bucket_id = bucket_result['bucket']
-            if not any(b['bucket'] == bucket_id for b in result['found_buckets']):
+            if not any(b.get('bucket', b.get('name', '')) == bucket_id for b in result['found_buckets']):
                 result['found_buckets'].append(bucket_result)
                 if bucket_result['public_read']:
                     result['exposed_buckets'].append(bucket_result)
                     result['issues'].extend(bucket_result.get('issues', []))
-    
+
+    # Normalize bucket dicts before returning (match Kotlin CloudBucket/ExposedBucket)
+    buckets_normalized = [_normalize_bucket(b) for b in result['found_buckets']]
+    exposed_normalized = [_normalize_bucket(b) for b in result['exposed_buckets']]
+
     # Build summary
     result['summary'] = {
-        'buckets_found': len(result['found_buckets']),
-        'buckets_exposed': len(result['exposed_buckets']),
-        'buckets_with_listing': len([b for b in result['exposed_buckets'] if b.get('public_list')]),
-        's3_count': len([b for b in result['found_buckets'] if b['provider'] == 's3']),
-        'azure_count': len([b for b in result['found_buckets'] if b['provider'] == 'azure']),
-        'gcp_count': len([b for b in result['found_buckets'] if b['provider'] == 'gcp']),
-        'do_count': len([b for b in result['found_buckets'] if b['provider'] == 'digitalocean']),
+        'buckets_found': len(buckets_normalized),
+        'buckets_exposed': len(exposed_normalized),
+        'buckets_with_listing': len([b for b in exposed_normalized if b.get('listing_enabled')]),
+        's3_count': len([b for b in buckets_normalized if b['provider'] == 's3']),
+        'azure_count': len([b for b in buckets_normalized if b['provider'] == 'azure']),
+        'gcp_count': len([b for b in buckets_normalized if b['provider'] == 'gcp']),
+        'do_count': len([b for b in buckets_normalized if b['provider'] == 'digitalocean']),
         'critical_issues': len([i for i in result['issues'] if i['severity'] == 'Critical']),
         'issue_count': len(result['issues']),
     }
-    
+
+    # Use normalized key names that match Kotlin @SerializedName("buckets_found")
+    result['buckets_found'] = buckets_normalized
+    result['exposed_buckets'] = exposed_normalized
+
     return result

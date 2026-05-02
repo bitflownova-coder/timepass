@@ -243,6 +243,14 @@ data class AnalysisReport(
     @SerializedName("auth_testing") val authTesting: AuthTestingResult? = null,
     @SerializedName("cloud_scanner") val cloudScanner: CloudScannerResult? = null,
     @SerializedName("security_headers") val securityHeaders: SecurityHeadersResult? = null,
+    // Pro security scan results
+    @SerializedName("redirect_testing") val redirectTesting: RedirectTestResult? = null,
+    @SerializedName("header_injection") val headerInjection: HeaderInjectionResult? = null,
+    @SerializedName("jwt_analysis") val jwtAnalysis: JwtAnalysisResult? = null,
+    @SerializedName("graphql_testing") val graphqlTesting: GraphQLTestResult? = null,
+    @SerializedName("info_disclosure") val infoDisclosure: InfoDisclosureResult? = null,
+    @SerializedName("sqli_detection") val sqliDetection: SqliDetectionResult? = null,
+    @SerializedName("rate_limit_check") val rateLimitCheck: RateLimitResult? = null,
     // Security summary from Python
     @SerializedName("security_score") val securityScore: Int? = null,
     @SerializedName("security_grade") val securityGrade: String? = null,
@@ -778,4 +786,170 @@ data class SecurityIssue(
     val severity: String = "",
     val issue: String = "",
     val recommendation: String = ""
+)
+
+// ─── Pro Security Module Data Classes ────────────────────────────────────────
+
+data class RedirectFinding(
+    val url: String = "",
+    val param: String = "",
+    val method: String = "",
+    val payload: String = "",
+    @SerializedName("redirect_to") val redirectTo: String = "",
+    @SerializedName("status_code") val statusCode: Int = 0,
+    val severity: String = "",
+    val type: String = ""
+)
+
+data class RedirectTestResult(
+    val findings: List<RedirectFinding> = emptyList(),
+    @SerializedName("tested_params") val testedParams: Int = 0,
+    @SerializedName("vulnerable_count") val vulnerableCount: Int = 0,
+    val summary: String = ""
+)
+
+data class CrlfFinding(
+    val url: String = "",
+    val payload: String = "",
+    @SerializedName("injected_header") val injectedHeader: String = "",
+    val severity: String = "",
+    val type: String = "",
+    val description: String = ""
+)
+
+data class HostHeaderFinding(
+    val url: String = "",
+    @SerializedName("injected_host") val injectedHost: String = "",
+    val severity: String = "",
+    val type: String = "",
+    val description: String = "",
+    @SerializedName("reflected_in") val reflectedIn: String = ""
+)
+
+data class HeaderInjectionResult(
+    @SerializedName("crlf_findings") val crlfFindings: List<CrlfFinding> = emptyList(),
+    @SerializedName("host_header_findings") val hostHeaderFindings: List<HostHeaderFinding> = emptyList(),
+    @SerializedName("total_issues") val totalIssues: Int = 0,
+    val summary: String = ""
+)
+
+data class JwtIssue(
+    val issue: String = "",
+    val severity: String = ""
+)
+
+data class JwtFinding(
+    @SerializedName("token_preview") val tokenPreview: String = "",
+    val source: String = "",
+    val algorithm: String = "",
+    val subject: String = "",
+    val issuer: String = "",
+    val expiry: String = "",
+    val issues: List<JwtIssue> = emptyList(),
+    val severity: String = "",
+    @SerializedName("payload_claims") val payloadClaims: List<String> = emptyList()
+)
+
+data class JwtAnalysisResult(
+    val findings: List<JwtFinding> = emptyList(),
+    @SerializedName("unique_tokens_analyzed") val uniqueTokensAnalyzed: Int = 0,
+    @SerializedName("vulnerable_tokens") val vulnerableTokens: Int = 0,
+    val critical: Int = 0,
+    val high: Int = 0,
+    val summary: String = ""
+)
+
+data class GraphQLEndpointResult(
+    val url: String = "",
+    @SerializedName("introspection_enabled") val introspectionEnabled: Boolean = false,
+    @SerializedName("depth_limiting") val depthLimiting: Boolean? = null,
+    @SerializedName("mutations_exposed") val mutationsExposed: Boolean = false,
+    @SerializedName("auth_required") val authRequired: Boolean = false,
+    @SerializedName("type_count") val typeCount: Int = 0,
+    @SerializedName("types_preview") val typesPreview: List<String> = emptyList(),
+    val issues: List<String> = emptyList()
+)
+
+data class GraphQLFinding(
+    val url: String = "",
+    val type: String = "",
+    val severity: String = "",
+    val description: String = ""
+)
+
+data class GraphQLTestResult(
+    val findings: List<GraphQLFinding> = emptyList(),
+    @SerializedName("endpoints_tested") val endpointsTested: List<GraphQLEndpointResult> = emptyList(),
+    @SerializedName("vulnerable_count") val vulnerableCount: Int = 0,
+    val summary: String = ""
+)
+
+data class DisclosureFinding(
+    val url: String = "",
+    val path: String = "",
+    val description: String = "",
+    val severity: String = "",
+    @SerializedName("status_code") val statusCode: Int = 0,
+    val type: String = "",
+    @SerializedName("content_type") val contentType: String = "",
+    @SerializedName("size_bytes") val sizeBytes: Int = 0,
+    @SerializedName("env_keys_found") val envKeysFound: List<String> = emptyList(),
+    @SerializedName("content_preview") val contentPreview: String = ""
+)
+
+data class InfoDisclosureResult(
+    val findings: List<DisclosureFinding> = emptyList(),
+    @SerializedName("security_txt") val securityTxt: String? = null,
+    @SerializedName("total_issues") val totalIssues: Int = 0,
+    val critical: Int = 0,
+    val high: Int = 0,
+    val summary: String = ""
+)
+
+data class SqliFinding(
+    val url: String = "",
+    val param: String? = null,
+    val method: String = "",
+    val payload: String = "",
+    @SerializedName("payload_description") val payloadDescription: String = "",
+    val type: String = "",
+    @SerializedName("db_engine") val dbEngine: String = "",
+    val snippet: String = "",
+    val severity: String = "",
+    val description: String = ""
+)
+
+data class SqliDetectionResult(
+    val findings: List<SqliFinding> = emptyList(),
+    @SerializedName("passive_hits") val passiveHits: Int = 0,
+    @SerializedName("active_hits") val activeHits: Int = 0,
+    @SerializedName("params_tested") val paramsTested: Int = 0,
+    val critical: Int = 0,
+    val summary: String = ""
+)
+
+data class RateLimitEndpoint(
+    val url: String = "",
+    val method: String = "",
+    @SerializedName("rate_limited") val rateLimited: Boolean = false,
+    @SerializedName("has_retry_after") val hasRetryAfter: Boolean = false,
+    @SerializedName("has_ratelimit_headers") val hasRateLimitHeaders: Boolean = false,
+    @SerializedName("rate_limit_triggered_at") val rateLimitTriggeredAt: Int? = null
+)
+
+data class RateLimitFinding(
+    val url: String = "",
+    val method: String = "",
+    val type: String = "",
+    val severity: String = "",
+    @SerializedName("requests_sent") val requestsSent: Int = 0,
+    val description: String = ""
+)
+
+data class RateLimitResult(
+    val findings: List<RateLimitFinding> = emptyList(),
+    @SerializedName("endpoints_tested") val endpointsTested: List<RateLimitEndpoint> = emptyList(),
+    @SerializedName("endpoints_protected") val endpointsProtected: Int = 0,
+    @SerializedName("endpoints_unprotected") val endpointsUnprotected: Int = 0,
+    val summary: String = ""
 )

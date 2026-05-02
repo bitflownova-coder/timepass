@@ -405,7 +405,7 @@ def check_deprecated_headers(headers):
                     'severity': 'Low',
                     'header': header,
                     'value': value,
-                    'issue': f'{info["reason"]}: {value}',
+                    'reason': f'{info["reason"]}: {value}',  # matches Kotlin DeprecatedHeader.reason
                     'recommendation': f'Remove {header} header'
                 })
                 penalty += info['penalty']
@@ -515,7 +515,7 @@ def analyze_security_headers(url):
             result['recommendations'].append({
                 'priority': 'High' if info['weight'] >= 20 else 'Medium',
                 'header': header,
-                'recommendation': f'Add {info["name"]} header'
+                'value': f'Add {info["name"]} header',  # matches Kotlin HeaderRecommendation.value
             })
     
     # Check for deprecated headers

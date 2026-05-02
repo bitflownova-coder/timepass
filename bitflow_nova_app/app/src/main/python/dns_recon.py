@@ -1,4 +1,4 @@
-# dns_recon.py
+﻿# dns_recon.py
 # DNS & WHOIS Reconnaissance - MX, SPF, DKIM, TXT records, WHOIS lookups
 
 import re
@@ -9,6 +9,11 @@ try:
     import httpx
 except ImportError:
     httpx = None
+
+try:
+    from http_client import VERIFY_SSL
+except ImportError:
+    VERIFY_SSL = False
 
 # Common DNS record types to query
 DNS_RECORD_TYPES = ['A', 'AAAA', 'MX', 'TXT', 'NS', 'CNAME', 'SOA']
@@ -82,7 +87,7 @@ def query_dns_over_https(domain, record_type='A'):
         url = f"https://cloudflare-dns.com/dns-query?name={domain}&type={record_type}"
         headers = {'Accept': 'application/dns-json'}
         
-        with httpx.Client(timeout=10, verify=False) as client:
+        with httpx.Client(timeout=10, verify=VERIFY_SSL) as client:
             response = client.get(url, headers=headers)
             if response.status_code == 200:
                 data = response.json()
@@ -98,7 +103,7 @@ def query_dns_over_https(domain, record_type='A'):
     if not results:
         try:
             url = f"https://dns.google/resolve?name={domain}&type={record_type}"
-            with httpx.Client(timeout=10, verify=False) as client:
+            with httpx.Client(timeout=10, verify=VERIFY_SSL) as client:
                 response = client.get(url)
                 if response.status_code == 200:
                     data = response.json()
@@ -320,7 +325,7 @@ def query_whois_via_api(domain):
     try:
         # Try rdap.org (free RDAP lookup)
         rdap_url = f"https://rdap.org/domain/{domain}"
-        with httpx.Client(timeout=15, verify=False, follow_redirects=True) as client:
+        with httpx.Client(timeout=15, verify=VERIFY_SSL, follow_redirects=True) as client:
             response = client.get(rdap_url, headers={'Accept': 'application/rdap+json'})
             if response.status_code == 200:
                 data = response.json()
@@ -491,7 +496,7 @@ def analyze_email_security(domain):
         'mx_records': [],
         'spf': None,
         'dmarc': None,
-        'dkim': [],
+        'dkim': {'checked': False, 'selectors_found': []},
         'bimi': None,
         'mta_sts': None,
         'issues': [],
@@ -513,9 +518,16 @@ def analyze_email_security(domain):
     txt_records = get_txt_records(domain)
     for record in txt_records:
         if record.startswith('v=spf1') or 'v=spf1' in record:
-            analysis['spf'] = analyze_spf_record(record)
-            analysis['score'] = min(analysis['score'], analysis['spf']['score'])
-            analysis['issues'].extend(analysis['spf']['issues'])
+            spf_raw = analyze_spf_record(record)
+            analysis['spf'] = {
+                'present': True,
+                'record': spf_raw['record'],
+                'valid': '-all' in spf_raw['record'].lower() and '+all' not in spf_raw['record'].lower(),
+                'mechanisms': [f"{m['type']}:{m['value']}" for m in spf_raw.get('mechanisms', [])],
+                'issues': [i['issue'] for i in spf_raw.get('issues', [])]
+            }
+            analysis['score'] = min(analysis['score'], spf_raw['score'])
+            analysis['issues'].extend(spf_raw['issues'])
             break
     
     if not analysis['spf']:
@@ -531,9 +543,16 @@ def analyze_email_security(domain):
     dmarc_records = query_dns_over_https(dmarc_domain, 'TXT')
     for record in dmarc_records:
         if record.startswith('v=DMARC1') or 'v=DMARC1' in record:
-            analysis['dmarc'] = analyze_dmarc_record(record)
-            analysis['score'] = min(analysis['score'], analysis['dmarc']['score'])
-            analysis['issues'].extend(analysis['dmarc']['issues'])
+            dmarc_raw = analyze_dmarc_record(record)
+            analysis['dmarc'] = {
+                'present': True,
+                'record': dmarc_raw['record'],
+                'policy': dmarc_raw.get('policy'),
+                'subdomain_policy': dmarc_raw.get('subdomain_policy'),
+                'issues': [i['issue'] for i in dmarc_raw.get('issues', [])]
+            }
+            analysis['score'] = min(analysis['score'], dmarc_raw['score'])
+            analysis['issues'].extend(dmarc_raw['issues'])
             break
     
     if not analysis['dmarc']:
@@ -545,8 +564,12 @@ def analyze_email_security(domain):
         analysis['score'] -= 25
     
     # Check DKIM (common selectors)
-    analysis['dkim'] = check_dkim_selector(domain)
-    if not analysis['dkim']:
+    dkim_found = check_dkim_selector(domain)
+    analysis['dkim'] = {
+        'checked': True,
+        'selectors_found': [d['selector'] for d in dkim_found]
+    }
+    if not dkim_found:
         analysis['issues'].append({
             'severity': 'Medium',
             'issue': 'No DKIM records found with common selectors',
@@ -630,7 +653,7 @@ def perform_dns_recon(url):
             'email_grade': result['email_security']['grade'] if result['email_security'] else 'N/A',
             'has_spf': result['email_security']['spf'] is not None if result['email_security'] else False,
             'has_dmarc': result['email_security']['dmarc'] is not None if result['email_security'] else False,
-            'has_dkim': len(result['email_security']['dkim']) > 0 if result['email_security'] else False,
+            'has_dkim': len(result['email_security']['dkim'].get('selectors_found', [])) > 0 if result['email_security'] else False,
             'issue_count': len(result['issues']),
             'email_provider': result['mx_records'][0]['provider'] if result['mx_records'] else 'none',
             'dns_provider': result['ns_records'][0]['provider'] if result['ns_records'] else 'unknown',
@@ -638,7 +661,23 @@ def perform_dns_recon(url):
         
     except Exception as e:
         result['error'] = str(e)
-    
+
+    # ── Normalize output to match Kotlin DnsReconResult / Gson ──────────────
+    # records: Map<String, List<String>> — merge all flat record lists
+    result['records'] = {
+        'A':    result.get('a_records', []),
+        'AAAA': result.get('aaaa_records', []),
+        'TXT':  result.get('txt_records', []),
+        'NS':   [r['hostname'] for r in result.get('ns_records', []) if isinstance(r, dict)],
+    }
+    # mx_records: hostname → host  (matches Kotlin MxRecord.host)
+    result['mx_records'] = [
+        {'host': r.get('hostname', ''), 'priority': r.get('priority', 0), 'provider': r.get('provider', '')}
+        for r in result.get('mx_records', [])
+    ]
+    # nameservers: List<String>
+    result['nameservers'] = [r['hostname'] for r in result.get('ns_records', []) if isinstance(r, dict)]
+
     return result
 
 # Alias for compatibility with import in crawler_engine.py

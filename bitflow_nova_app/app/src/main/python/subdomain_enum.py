@@ -246,7 +246,7 @@ def resolve_subdomain(subdomain, timeout=3):
         return {'subdomain': subdomain, 'ip': None, 'alive': False}
 
 
-def bruteforce_subdomains(domain, wordlist=None, max_workers=20, timeout=3):
+def bruteforce_subdomains(domain, wordlist=None, max_workers=6, timeout=3):
     """Brute force subdomains using wordlist"""
     if wordlist is None:
         wordlist = COMMON_SUBDOMAINS
@@ -467,7 +467,7 @@ def enumerate_subdomains(url, deep_scan=False, bruteforce=True, max_results=200)
         crt_results = query_crt_sh(domain)
         all_subdomains.update(crt_results)
         if crt_results:
-            result['sources'].append({'source': 'crt.sh', 'count': len(crt_results)})
+            result['sources'].append('crt.sh')
     except Exception:
         pass
     
@@ -476,7 +476,7 @@ def enumerate_subdomains(url, deep_scan=False, bruteforce=True, max_results=200)
         ht_results = query_hackertarget(domain)
         all_subdomains.update(ht_results)
         if ht_results:
-            result['sources'].append({'source': 'HackerTarget', 'count': len(ht_results)})
+            result['sources'].append('HackerTarget')
     except Exception:
         pass
     
@@ -485,7 +485,7 @@ def enumerate_subdomains(url, deep_scan=False, bruteforce=True, max_results=200)
         av_results = query_alienvault(domain)
         all_subdomains.update(av_results)
         if av_results:
-            result['sources'].append({'source': 'AlienVault', 'count': len(av_results)})
+            result['sources'].append('AlienVault')
     except Exception:
         pass
     
@@ -496,15 +496,15 @@ def enumerate_subdomains(url, deep_scan=False, bruteforce=True, max_results=200)
         for item in brute_results:
             all_subdomains.add(item['subdomain'])
         if brute_results:
-            result['sources'].append({'source': 'Bruteforce', 'count': len(brute_results)})
+            result['sources'].append('Bruteforce')
             result['alive_subdomains'].extend(brute_results)
     
-    # Remove duplicates and limit
-    result['subdomains'] = sorted(list(all_subdomains))[:max_results]
+    # Remove duplicates and limit - keep as strings for processing
+    all_subs_sorted = sorted(list(all_subdomains))[:max_results]
     
     # Verify subdomains that weren't already verified by bruteforce
     verified_subs = {item['subdomain'] for item in result['alive_subdomains']}
-    unverified = [s for s in result['subdomains'] if s not in verified_subs]
+    unverified = [s for s in all_subs_sorted if s not in verified_subs]
     
     # Resolve unverified subdomains
     with ThreadPoolExecutor(max_workers=15) as executor:
@@ -528,6 +528,24 @@ def enumerate_subdomains(url, deep_scan=False, bruteforce=True, max_results=200)
         sub_info['category'] = categorize_subdomain(sub_info['subdomain'], domain)
         risks = identify_subdomain_risks(sub_info)
         result['risks'].extend(risks)
+    
+    # Build http_info lookup for status codes and technologies
+    http_lookup = {h['subdomain']: h for h in result['http_info']}
+    
+    # Convert to DiscoveredSubdomain objects expected by the Android Kotlin model
+    alive_set = {item['subdomain'] for item in result['alive_subdomains']}
+    result['subdomains'] = [
+        {
+            'subdomain': s,
+            'url': f'https://{s}',
+            'live': s in alive_set,
+            'status_code': http_lookup.get(s, {}).get('https_status') or http_lookup.get(s, {}).get('http_status'),
+            'source': '',
+            'technologies': http_lookup.get(s, {}).get('technologies', []),
+            'risk_level': '',
+        }
+        for s in all_subs_sorted
+    ]
     
     # Build summary
     categories = {}

@@ -5,9 +5,11 @@ import android.net.Uri
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.*
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -35,6 +37,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -88,7 +91,7 @@ fun CrawlerDetailScreen(
     }
 
     Scaffold(
-        containerColor = MaterialTheme.colorScheme.background,
+        containerColor = Cyber.Bg,
         topBar = {
             session?.let { s ->
                 val statusColor = getStatusColor(s.status)
@@ -98,8 +101,8 @@ fun CrawlerDetailScreen(
                         .background(
                             Brush.verticalGradient(
                                 colors = listOf(
-                                    statusColor.copy(alpha = 0.2f),
-                                    MaterialTheme.colorScheme.background
+                                    statusColor.copy(alpha = 0.15f),
+                                    Cyber.Bg
                                 )
                             )
                         )
@@ -108,9 +111,11 @@ fun CrawlerDetailScreen(
                         title = { 
                             Column {
                                 Text(
-                                    "Crawl Results",
-                                    style = MaterialTheme.typography.titleMedium,
-                                    fontWeight = FontWeight.Bold
+                                    "SCAN_RESULTS",
+                                    fontFamily = FontFamily.Monospace,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 14.sp,
+                                    color = Cyber.TextPrimary
                                 )
                                 Text(
                                     s.startUrl
@@ -119,15 +124,16 @@ fun CrawlerDetailScreen(
                                         .removePrefix("https://")
                                         .removePrefix("http://")
                                         .trimEnd('/'), 
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    fontFamily = FontFamily.Monospace,
+                                    fontSize = 11.sp,
+                                    color = Cyber.TextSecondary,
                                     maxLines = 1
                                 ) 
                             } 
                         },
                         navigationIcon = {
                             IconButton(onClick = { navController.popBackStack() }) {
-                                Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                                Icon(Icons.Default.ArrowBack, contentDescription = "Back", tint = Cyber.TextPrimary)
                             }
                         },
                         actions = {
@@ -136,55 +142,56 @@ fun CrawlerDetailScreen(
                             var showMenu by remember { mutableStateOf(false) }
                             
                             IconButton(onClick = { showMenu = true }) {
-                                Icon(Icons.Default.MoreVert, contentDescription = "More")
+                                Icon(Icons.Default.MoreVert, contentDescription = "More", tint = Cyber.TextSecondary)
                             }
                             
                             DropdownMenu(
                                 expanded = showMenu,
-                                onDismissRequest = { showMenu = false }
+                                onDismissRequest = { showMenu = false },
+                                modifier = Modifier.background(Cyber.BgElevated)
                             ) {
                                 DropdownMenuItem(
-                                    text = { Text("Export PDF Report") },
+                                    text = { Text("Export PDF Report", color = Cyber.TextPrimary, fontFamily = FontFamily.Monospace, fontSize = 13.sp) },
                                     onClick = { 
                                         showMenu = false
                                         viewModel.generatePdf(s.id) { result ->
                                             handleExportResult(context, result)
                                         }
                                     },
-                                    leadingIcon = { Icon(Icons.Default.PictureAsPdf, contentDescription = null) }
+                                    leadingIcon = { Icon(Icons.Default.PictureAsPdf, contentDescription = null, tint = Cyber.Red) }
                                 )
                                 DropdownMenuItem(
-                                    text = { Text("Export CSV") },
+                                    text = { Text("Export CSV", color = Cyber.TextPrimary, fontFamily = FontFamily.Monospace, fontSize = 13.sp) },
                                     onClick = { 
                                         showMenu = false
                                         viewModel.exportData(s.id, "csv") { result ->
                                             handleExportResult(context, result)
                                         }
                                     },
-                                    leadingIcon = { Icon(Icons.Default.TableChart, contentDescription = null) }
+                                    leadingIcon = { Icon(Icons.Default.TableChart, contentDescription = null, tint = Cyber.Green) }
                                 )
                                 DropdownMenuItem(
-                                    text = { Text("Export JSON") },
+                                    text = { Text("Export JSON", color = Cyber.TextPrimary, fontFamily = FontFamily.Monospace, fontSize = 13.sp) },
                                     onClick = { 
                                         showMenu = false
                                         viewModel.exportData(s.id, "json") { result ->
                                             handleExportResult(context, result)
                                         }
                                     },
-                                    leadingIcon = { Icon(Icons.Default.DataObject, contentDescription = null) }
+                                    leadingIcon = { Icon(Icons.Default.DataObject, contentDescription = null, tint = Cyber.Blue) }
                                 )
-                                Divider()
+                                HorizontalDivider(color = Cyber.Border)
                                 DropdownMenuItem(
-                                    text = { Text("Generate Sitemap") },
+                                    text = { Text("Generate Sitemap", color = Cyber.TextPrimary, fontFamily = FontFamily.Monospace, fontSize = 13.sp) },
                                     onClick = { 
                                         showMenu = false
                                         viewModel.generateSitemap(s.id) { result ->
                                             handleExportResult(context, result)
                                         }
                                     },
-                                    leadingIcon = { Icon(Icons.Default.Map, contentDescription = null) }
+                                    leadingIcon = { Icon(Icons.Default.Map, contentDescription = null, tint = Cyber.Purple) }
                                 )
-                                Divider()
+                                HorizontalDivider(color = Cyber.Border)
                             }
                             Spacer(Modifier.width(8.dp))
                         },
@@ -203,15 +210,15 @@ fun CrawlerDetailScreen(
             // Tab Row
             ScrollableTabRow(
                 selectedTabIndex = selectedTab,
-                containerColor = MaterialTheme.colorScheme.background,
-                contentColor = MaterialTheme.colorScheme.primary,
+                containerColor = Cyber.Bg,
+                contentColor = Cyber.Green,
                 edgePadding = 16.dp,
                 indicator = { tabPositions ->
                     if (selectedTab < tabPositions.size) {
-                        TabRowDefaults.Indicator(
+                        TabRowDefaults.SecondaryIndicator(
                             modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTab]),
-                            height = 3.dp,
-                            color = MaterialTheme.colorScheme.primary
+                            height = 2.dp,
+                            color = Cyber.Green
                         )
                     }
                 },
@@ -223,13 +230,19 @@ fun CrawlerDetailScreen(
                         selected = selected,
                         onClick = { selectedTab = index },
                         text = { 
-                            Text(title, fontWeight = if(selected) FontWeight.Bold else FontWeight.Normal)
+                            Text(
+                                title.uppercase(),
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 11.sp,
+                                fontWeight = if(selected) FontWeight.Bold else FontWeight.Normal,
+                                color = if(selected) Cyber.Green else Cyber.TextSecondary
+                            )
                         }
                     )
                 }
             }
             
-            Divider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha=0.3f))
+            HorizontalDivider(color = Cyber.Border)
 
             Box(modifier = Modifier.weight(1f)) {
                  when (selectedTab) {
@@ -265,35 +278,29 @@ fun OverviewTab(
         // Live Progress Section (when running)
         if (session.status == "RUNNING") {
             item {
-                Card(
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
-                    shape = RoundedCornerShape(16.dp)
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(10.dp))
+                        .background(Cyber.BgCard)
+                        .border(1.dp, Cyber.Cyan.copy(alpha = 0.4f), RoundedCornerShape(10.dp))
                 ) {
-                    Column(Modifier.padding(16.dp)) {
+                    Box(
+                        modifier = Modifier
+                            .width(3.dp)
+                            .matchParentSize()
+                            .background(Brush.verticalGradient(listOf(Cyber.Cyan, Cyber.Cyan.copy(alpha = 0.2f))))
+                    )
+                    Column(Modifier.padding(start = 16.dp, end = 16.dp, top = 14.dp, bottom = 14.dp)) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            // Animated scanning indicator
-                            val infiniteTransition = rememberInfiniteTransition(label = "scan")
-                            val alpha by infiniteTransition.animateFloat(
-                                initialValue = 0.3f,
-                                targetValue = 1f,
-                                animationSpec = infiniteRepeatable(
-                                    animation = tween(800),
-                                    repeatMode = RepeatMode.Reverse
-                                ),
-                                label = "pulse"
-                            )
-                            Box(
-                                modifier = Modifier
-                                    .size(12.dp)
-                                    .clip(CircleShape)
-                                    .background(MaterialTheme.colorScheme.primary.copy(alpha = alpha))
-                            )
-                            Spacer(Modifier.width(12.dp))
+                            ScannerPulse(color = Cyber.Cyan, rings = false)
+                            Spacer(Modifier.width(10.dp))
                             Text(
-                                "Scanning...",
-                                style = MaterialTheme.typography.titleMedium,
+                                "SCANNING_IN_PROGRESS",
+                                fontFamily = FontFamily.Monospace,
                                 fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                                fontSize = 13.sp,
+                                color = Cyber.Cyan
                             )
                         }
                         
@@ -305,10 +312,10 @@ fun OverviewTab(
                         } else 0.1f
                         
                         LinearProgressIndicator(
-                            progress = progress.coerceIn(0f, 1f),
-                            modifier = Modifier.fillMaxWidth().height(8.dp).clip(RoundedCornerShape(4.dp)),
-                            color = MaterialTheme.colorScheme.primary,
-                            trackColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f)
+                            progress = { progress.coerceIn(0f, 1f) },
+                            modifier = Modifier.fillMaxWidth().height(4.dp).clip(RoundedCornerShape(2.dp)),
+                            color = Cyber.Cyan,
+                            trackColor = Cyber.Border
                         )
                         
                         Spacer(Modifier.height(8.dp))
@@ -318,23 +325,26 @@ fun OverviewTab(
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             Text(
-                                "${session.pagesCrawled} pages crawled",
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                                "${session.pagesCrawled} crawled",
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 11.sp,
+                                color = Cyber.TextSecondary
                             )
                             Text(
                                 "${session.pagesQueued} queued",
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 11.sp,
+                                color = Cyber.TextSecondary
                             )
                         }
                         
                         if (session.currentUrl.isNotBlank()) {
-                            Spacer(Modifier.height(8.dp))
+                            Spacer(Modifier.height(6.dp))
                             Text(
-                                "Currently: ${session.currentUrl}",
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f),
+                                "> ${session.currentUrl}",
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 10.sp,
+                                color = Cyber.TextSecondary.copy(alpha = 0.6f),
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis
                             )
@@ -351,12 +361,22 @@ fun OverviewTab(
                     Button(
                         onClick = { viewModel.stopCrawl(session.id) },
                         modifier = Modifier.fillMaxWidth(),
-                        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Cyber.Red.copy(alpha = 0.15f),
+                            contentColor = Cyber.Red
+                        ),
+                        border = BorderStroke(1.dp, Cyber.Red.copy(alpha = 0.5f)),
+                        elevation = ButtonDefaults.buttonElevation(0.dp),
                         shape = RoundedCornerShape(8.dp)
                     ) {
                          Icon(Icons.Default.Stop, contentDescription = null)
                          Spacer(Modifier.width(8.dp))
-                         Text("Stop Crawl")
+                         Text(
+                             "TERMINATE_SCAN",
+                             fontFamily = FontFamily.Monospace,
+                             fontWeight = FontWeight.Bold,
+                             fontSize = 12.sp
+                         )
                     }
                 }
             }
@@ -364,28 +384,32 @@ fun OverviewTab(
 
         // Health Score Card
         item {
-            Card(
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                shape = RoundedCornerShape(16.dp),
-                elevation = CardDefaults.cardElevation(2.dp)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(12.dp))
+                    .background(Cyber.BgCard)
+                    .border(1.dp, Cyber.Border, RoundedCornerShape(12.dp))
             ) {
-                Column(Modifier.padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                Column(Modifier.padding(20.dp), horizontalAlignment = Alignment.CenterHorizontally) {
                     
                     // Health Score Circle
                     val score = report?.healthScore ?: 0
-                    val scoreColor = when {
-                        score >= 80 -> Color(0xFF10B981) // Green
-                        score >= 50 -> Color(0xFFF59E0B) // Yellow
-                        else -> Color(0xFFEF4444) // Red
-                    }
+                    val scoreColor = Cyber.gradeColor(report?.securityGrade ?: when {
+                        score >= 80 -> "A"
+                        score >= 65 -> "B"
+                        score >= 50 -> "C"
+                        score >= 35 -> "D"
+                        else -> "F"
+                    })
                     
-                    Box(contentAlignment = Alignment.Center, modifier = Modifier.size(160.dp)) {
-                        Canvas(modifier = Modifier.size(140.dp)) {
-                            val strokeWidth = 12.dp.toPx()
+                    Box(contentAlignment = Alignment.Center, modifier = Modifier.size(140.dp)) {
+                        Canvas(modifier = Modifier.size(120.dp)) {
+                            val strokeWidth = 10.dp.toPx()
                             
                             // Background circle
                             drawCircle(
-                                color = scoreColor.copy(alpha = 0.1f),
+                                color = scoreColor.copy(alpha = 0.08f),
                                 style = Stroke(width = strokeWidth)
                             )
                             
@@ -403,8 +427,9 @@ fun OverviewTab(
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             if (isLoading || session.status == "RUNNING") {
                                 CircularProgressIndicator(
-                                    modifier = Modifier.size(32.dp),
-                                    strokeWidth = 3.dp
+                                    modifier = Modifier.size(28.dp),
+                                    strokeWidth = 2.dp,
+                                    color = Cyber.Cyan
                                 )
                             } else {
                                 // Show grade letter if available, else score
@@ -412,69 +437,78 @@ fun OverviewTab(
                                 if (grade != null) {
                                     Text(
                                         grade,
-                                        style = MaterialTheme.typography.displayLarge,
+                                        fontFamily = FontFamily.Monospace,
+                                        fontSize = 48.sp,
                                         fontWeight = FontWeight.Black,
                                         color = scoreColor
                                     )
                                 } else {
                                     Text(
                                         "$score",
-                                        style = MaterialTheme.typography.displayMedium,
+                                        fontFamily = FontFamily.Monospace,
+                                        fontSize = 40.sp,
                                         fontWeight = FontWeight.Bold,
                                         color = scoreColor
                                     )
                                 }
                             }
                             Text(
-                                if (report?.securityGrade != null) "SECURITY GRADE" else "HEALTH SCORE",
-                                style = MaterialTheme.typography.labelSmall,
+                                if (report?.securityGrade != null) "SECURITY" else "HEALTH",
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 9.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                                letterSpacing = 1.sp,
+                                color = Cyber.TextSecondary
                             )
                         }
                     }
                     
                     if (report != null && score < 100) {
-                        Spacer(Modifier.height(16.dp))
+                        Spacer(Modifier.height(12.dp))
                         Column(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .background(MaterialTheme.colorScheme.errorContainer.copy(alpha=0.1f), RoundedCornerShape(8.dp))
-                                .padding(12.dp)
+                                .background(Cyber.Red.copy(alpha = 0.05f), RoundedCornerShape(6.dp))
+                                .border(1.dp, Cyber.Red.copy(alpha = 0.2f), RoundedCornerShape(6.dp))
+                                .padding(10.dp)
                         ) {
                             Text(
-                                "Why this score?",
-                                style = MaterialTheme.typography.labelSmall,
+                                "// SCORE_BREAKDOWN",
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 10.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onSurface
+                                color = Cyber.TextSecondary
                             )
                             Spacer(Modifier.height(4.dp))
                             
                             if (report.seoIssues.isNotEmpty()) {
                                 Text(
-                                    "• -${(report.seoIssues.size * 2).coerceAtMost(30)} pts: ${report.seoIssues.size} SEO Issues",
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.error
+                                    "-${(report.seoIssues.size * 2).coerceAtMost(30)}pts :: ${report.seoIssues.size} SEO issues",
+                                    fontFamily = FontFamily.Monospace,
+                                    fontSize = 11.sp,
+                                    color = Cyber.Yellow
                                 )
                             }
                             if (report.securityIssues.isNotEmpty()) {
                                 Text(
-                                    "• -${(report.securityIssues.size * 3).coerceAtMost(30)} pts: ${report.securityIssues.size} Security Issues",
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.error
+                                    "-${(report.securityIssues.size * 3).coerceAtMost(30)}pts :: ${report.securityIssues.size} SECURITY issues",
+                                    fontFamily = FontFamily.Monospace,
+                                    fontSize = 11.sp,
+                                    color = Cyber.Red
                                 )
                             }
                             if (report.ssl?.valid != true) {
                                 Text(
-                                    "• -20 pts: Missing or Invalid SSL",
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.error
+                                    "-20pts :: SSL invalid/missing",
+                                    fontFamily = FontFamily.Monospace,
+                                    fontSize = 11.sp,
+                                    color = Cyber.Red
                                 )
                             }
                         }
                     }
                     
-                    Spacer(Modifier.height(24.dp))
+                    Spacer(Modifier.height(20.dp))
                     
                     // Stats Row
                     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
@@ -662,28 +696,48 @@ fun QuickStatCard(
     description: String? = null,
     onClick: (() -> Unit)? = null
 ) {
-    Card(
-        modifier = modifier.then(
-            if (onClick != null) Modifier.clickable { onClick() } else Modifier
-        ),
-        colors = CardDefaults.cardColors(containerColor = color.copy(alpha = 0.1f)),
-        shape = RoundedCornerShape(12.dp)
+    Box(
+        modifier = modifier
+            .clip(RoundedCornerShape(8.dp))
+            .background(Cyber.BgCard)
+            .border(1.dp, color.copy(alpha = 0.3f), RoundedCornerShape(8.dp))
+            .then(if (onClick != null) Modifier.clickable { onClick() } else Modifier)
     ) {
+        // Left accent bar
+        Box(
+            modifier = Modifier
+                .width(2.dp)
+                .matchParentSize()
+                .background(color.copy(alpha = 0.6f))
+        )
         Row(
-            Modifier.padding(16.dp),
+            Modifier.padding(start = 12.dp, end = 10.dp, top = 12.dp, bottom = 12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(icon, contentDescription = null, tint = color, modifier = Modifier.size(24.dp))
-            Spacer(Modifier.width(12.dp))
+            Icon(icon, contentDescription = null, tint = color, modifier = Modifier.size(20.dp))
+            Spacer(Modifier.width(10.dp))
             Column {
-                Text(value, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = color)
-                Text(label, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(
+                    value,
+                    fontFamily = FontFamily.Monospace,
+                    fontWeight = FontWeight.Black,
+                    fontSize = 18.sp,
+                    color = color
+                )
+                Text(
+                    label.uppercase(),
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 9.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 0.5.sp,
+                    color = Cyber.TextSecondary
+                )
                 if (description != null) {
                     Text(
                         description, 
-                        style = MaterialTheme.typography.labelSmall, 
-                        color = color.copy(alpha = 0.8f),
-                        fontSize = 9.sp
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 9.sp,
+                        color = color.copy(alpha = 0.75f)
                     )
                 }
             }
@@ -704,20 +758,29 @@ fun SeoTab(report: AnalysisReport?) {
     ) {
         if (report.seoIssues.isEmpty()) {
             item {
-                Card(
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFF10B981).copy(alpha = 0.1f)),
-                    shape = RoundedCornerShape(12.dp)
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(Cyber.Green.copy(alpha = 0.06f))
+                        .border(1.dp, Cyber.Green.copy(alpha = 0.3f), RoundedCornerShape(8.dp))
+                        .padding(16.dp)
                 ) {
-                    Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Default.CheckCircle, contentDescription = null, tint = Color(0xFF10B981))
-                        Spacer(Modifier.width(12.dp))
-                        Text("No SEO issues found!", fontWeight = FontWeight.Medium)
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Default.CheckCircle, contentDescription = null, tint = Cyber.Green)
+                        Spacer(Modifier.width(10.dp))
+                        Text(
+                            "// NO_SEO_ISSUES_DETECTED",
+                            fontFamily = FontFamily.Monospace,
+                            fontWeight = FontWeight.Medium,
+                            color = Cyber.Green
+                        )
                     }
                 }
             }
         } else {
             items(report.seoIssues) { issue ->
-                IssueCard(url = issue.url, issue = issue.issue, color = Color(0xFFF59E0B))
+                IssueCard(url = issue.url, issue = issue.issue, color = Cyber.Yellow)
             }
         }
     }
@@ -740,25 +803,31 @@ fun SecurityTab(report: AnalysisReport?) {
         // Show error if one exists (Debugging)
         if (report.error != null) {
             item {
-                Card(
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer),
-                    modifier = Modifier.fillMaxWidth()
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(Cyber.RedDim)
+                        .border(1.dp, Cyber.BorderDanger, RoundedCornerShape(12.dp))
                 ) {
                     Column(Modifier.padding(16.dp)) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(Icons.Default.Warning, null, tint = MaterialTheme.colorScheme.onErrorContainer)
+                            Icon(Icons.Default.Warning, null, tint = Cyber.Red, modifier = Modifier.size(18.dp))
                             Spacer(Modifier.width(8.dp))
                             Text(
-                                "Scanner Error", 
+                                "SCANNER ERROR",
                                 fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onErrorContainer
+                                color = Cyber.Red,
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 13.sp
                             )
                         }
-                        Spacer(Modifier.height(4.dp))
+                        Spacer(Modifier.height(6.dp))
                         Text(
-                            report.error, 
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onErrorContainer
+                            report.error,
+                            fontSize = 12.sp,
+                            color = Cyber.TextSecondary,
+                            fontFamily = FontFamily.Monospace
                         )
                     }
                 }
@@ -767,11 +836,12 @@ fun SecurityTab(report: AnalysisReport?) {
 
         // ============ SECURITY SUMMARY HEADER ============
         item {
-            Card(
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
-                ),
-                shape = RoundedCornerShape(16.dp)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(Cyber.BgCard)
+                    .border(1.dp, Cyber.Border, RoundedCornerShape(16.dp))
             ) {
                 Column(
                     modifier = Modifier.padding(20.dp),
@@ -781,29 +851,31 @@ fun SecurityTab(report: AnalysisReport?) {
                     val grade = report.securityGrade ?: "?"
                     val score = report.healthScore
                     val gradeColor = when {
-                        score >= 90 -> Color(0xFF10B981)
-                        score >= 70 -> Color(0xFFF59E0B)
-                        score >= 50 -> Color(0xFFF97316)
-                        else -> Color(0xFFEF4444)
+                        score >= 90 -> Cyber.Green
+                        score >= 70 -> Cyber.Yellow
+                        score >= 50 -> Cyber.Orange
+                        else -> Cyber.Red
                     }
-                    
+
                     Box(
                         modifier = Modifier
-                            .size(80.dp)
+                            .size(88.dp)
                             .clip(CircleShape)
-                            .background(gradeColor.copy(alpha = 0.15f)),
+                            .background(gradeColor.copy(alpha = 0.12f))
+                            .border(2.dp, gradeColor.copy(alpha = 0.6f), CircleShape),
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
                             grade,
                             style = MaterialTheme.typography.displaySmall,
                             fontWeight = FontWeight.Black,
-                            color = gradeColor
+                            color = gradeColor,
+                            fontFamily = FontFamily.Monospace
                         )
                     }
-                    
+
                     Spacer(Modifier.height(8.dp))
-                    Text("Security Score: $score/100", fontWeight = FontWeight.Bold)
+                    Text("Security Score: $score/100", fontWeight = FontWeight.Bold, color = Cyber.TextPrimary)
                     
                     Spacer(Modifier.height(16.dp))
                     
@@ -815,22 +887,22 @@ fun SecurityTab(report: AnalysisReport?) {
                         MiniStat(
                             value = "${report.criticalVulnerabilities}",
                             label = "Critical",
-                            color = if (report.criticalVulnerabilities > 0) Color(0xFFEF4444) else Color(0xFF10B981)
+                            color = if (report.criticalVulnerabilities > 0) Cyber.Red else Cyber.Green
                         )
                         MiniStat(
                             value = "${report.highVulnerabilities}",
                             label = "High",
-                            color = if (report.highVulnerabilities > 0) Color(0xFFF97316) else Color(0xFF10B981)
+                            color = if (report.highVulnerabilities > 0) Cyber.Orange else Cyber.Green
                         )
                         MiniStat(
                             value = "${report.secretsFound.size}",
                             label = "Secrets",
-                            color = if (report.secretsFound.isNotEmpty()) Color(0xFFEF4444) else Color(0xFF10B981)
+                            color = if (report.secretsFound.isNotEmpty()) Cyber.Red else Cyber.Green
                         )
                         MiniStat(
                             value = if (report.ssl?.valid == true) "✓" else "✗",
                             label = "SSL",
-                            color = if (report.ssl?.valid == true) Color(0xFF10B981) else Color(0xFFEF4444)
+                            color = if (report.ssl?.valid == true) Cyber.Green else Cyber.Red
                         )
                     }
                 }
@@ -862,14 +934,14 @@ fun SecurityTab(report: AnalysisReport?) {
                 }
                 report.sslAnalysis?.let { analysis ->
                     Spacer(Modifier.height(8.dp))
-                    Text("Detailed Analysis", fontWeight = FontWeight.Bold, fontSize = 13.sp)
+                    Text("Detailed Analysis", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Cyber.TextPrimary)
                     analysis.certificate?.let { cert ->
                         DetailRow("Days Until Expiry", "${cert.daysUntilExpiry}")
                     }
                 }
             }
         }
-        
+
         // 2. Security Headers
         item {
             val hasData = report.securityHeaders != null
@@ -882,18 +954,18 @@ fun SecurityTab(report: AnalysisReport?) {
             ) {
                 report.securityHeaders?.let { headers ->
                     if (headers.missingHeaders.isNotEmpty()) {
-                        Text("Missing Headers:", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Color(0xFFEF4444))
+                        Text("Missing Headers:", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Cyber.Red)
                         Spacer(Modifier.height(4.dp))
                         headers.missingHeaders.forEach { h ->
-                            Text("• ${h.displayName}", fontSize = 12.sp)
+                            Text("• ${h.displayName}", fontSize = 12.sp, color = Cyber.TextPrimary)
                         }
                     }
                     if (headers.presentHeaders.isNotEmpty()) {
                         Spacer(Modifier.height(8.dp))
-                        Text("Present Headers:", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Color(0xFF10B981))
+                        Text("Present Headers:", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Cyber.Green)
                         Spacer(Modifier.height(4.dp))
                         headers.presentHeaders.take(5).forEach { h ->
-                            Text("✓ ${h.displayName}", fontSize = 12.sp, color = Color(0xFF10B981))
+                            Text("✓ ${h.displayName}", fontSize = 12.sp, color = Cyber.Green)
                         }
                     }
                 }
@@ -917,9 +989,9 @@ fun SecurityTab(report: AnalysisReport?) {
                     }
                     dns.mxRecords.takeIf { it.isNotEmpty() }?.let {
                         Spacer(Modifier.height(8.dp))
-                        Text("MX Records:", fontWeight = FontWeight.Bold, fontSize = 13.sp)
+                        Text("MX Records:", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Cyber.TextPrimary)
                         it.take(3).forEach { mx ->
-                            Text("• ${mx.host} (priority: ${mx.priority})", fontSize = 12.sp)
+                            Text("• ${mx.host} (priority: ${mx.priority})", fontSize = 12.sp, color = Cyber.TextPrimary)
                         }
                     }
                 }
@@ -966,15 +1038,15 @@ fun SecurityTab(report: AnalysisReport?) {
                     DetailRow("Live", "${subEnum.liveCount}")
                     if (subEnum.subdomains.isNotEmpty()) {
                         Spacer(Modifier.height(8.dp))
-                        Text("Discovered:", fontWeight = FontWeight.Bold, fontSize = 13.sp)
+                        Text("Discovered:", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Cyber.TextPrimary)
                         subEnum.subdomains.take(10).forEach { sub ->
                             val status = if (sub.live) "🟢" else "🔴"
-                            Text("$status ${sub.subdomain}", fontSize = 12.sp)
+                            Text("$status ${sub.subdomain}", fontSize = 12.sp, color = Cyber.TextPrimary)
                         }
                     }
                 } ?: run {
                     report.subdomains.take(10).forEach { sub ->
-                        Text("• ${sub.url}", fontSize = 12.sp)
+                        Text("• ${sub.url}", fontSize = 12.sp, color = Cyber.TextPrimary)
                     }
                 }
             }
@@ -992,23 +1064,23 @@ fun SecurityTab(report: AnalysisReport?) {
             ) {
                 report.apiDiscovery?.let { api ->
                     if (api.swaggerSpecs.isNotEmpty()) {
-                        Text("Swagger/OpenAPI:", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Color(0xFF10B981))
+                        Text("Swagger/OpenAPI:", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Cyber.Green)
                         api.swaggerSpecs.take(3).forEach { spec ->
-                            Text("• ${spec.title.ifEmpty { spec.url }}", fontSize = 12.sp)
+                            Text("• ${spec.title.ifEmpty { spec.url }}", fontSize = 12.sp, color = Cyber.TextPrimary)
                         }
                     }
                     if (api.graphqlEndpoints.isNotEmpty()) {
                         Spacer(Modifier.height(8.dp))
-                        Text("GraphQL Endpoints:", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Color(0xFFE535AB))
+                        Text("GraphQL Endpoints:", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Cyber.Purple)
                         api.graphqlEndpoints.take(3).forEach { ep ->
-                            Text("• ${ep.url}", fontSize = 12.sp)
+                            Text("• ${ep.url}", fontSize = 12.sp, color = Cyber.Cyan)
                         }
                     }
                     if (api.restEndpoints.isNotEmpty()) {
                         Spacer(Modifier.height(8.dp))
-                        Text("REST Endpoints:", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Color(0xFF3B82F6))
+                        Text("REST Endpoints:", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Cyber.Blue)
                         api.restEndpoints.take(5).forEach { ep ->
-                            Text("• ${ep.method} ${ep.path}", fontSize = 12.sp)
+                            Text("• ${ep.method} ${ep.path}", fontSize = 12.sp, color = Cyber.TextPrimary)
                         }
                     }
                 }
@@ -1027,16 +1099,16 @@ fun SecurityTab(report: AnalysisReport?) {
             ) {
                 report.paramFuzzing?.let { params ->
                     if (params.reflectedParams.isNotEmpty()) {
-                        Text("⚠️ Reflected Parameters (XSS Risk):", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Color(0xFFEF4444))
+                        Text("⚠️ Reflected Parameters (XSS Risk):", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Cyber.Red)
                         params.reflectedParams.take(5).forEach { p ->
-                            Text("• ${p.name}", fontSize = 12.sp, color = Color(0xFFEF4444))
+                            Text("• ${p.name}", fontSize = 12.sp, color = Cyber.Red)
                         }
                     }
                     if (params.discoveredParams.isNotEmpty()) {
                         Spacer(Modifier.height(8.dp))
-                        Text("Discovered Parameters:", fontWeight = FontWeight.Bold, fontSize = 13.sp)
+                        Text("Discovered Parameters:", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Cyber.TextPrimary)
                         params.discoveredParams.take(10).forEach { p ->
-                            Text("• ${p.name} (${p.method})", fontSize = 12.sp)
+                            Text("• ${p.name} (${p.method})", fontSize = 12.sp, color = Cyber.TextPrimary)
                         }
                     }
                 }
@@ -1059,9 +1131,9 @@ fun SecurityTab(report: AnalysisReport?) {
                     }
                     if (auth.loginPages.isNotEmpty()) {
                         Spacer(Modifier.height(8.dp))
-                        Text("Login Pages:", fontWeight = FontWeight.Bold, fontSize = 13.sp)
+                        Text("Login Pages:", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Cyber.TextPrimary)
                         auth.loginPages.take(5).forEach { page ->
-                            Text("• ${page.url}", fontSize = 12.sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                            Text("• ${page.url}", fontSize = 12.sp, maxLines = 1, overflow = TextOverflow.Ellipsis, color = Cyber.TextPrimary)
                         }
                     }
                 }
@@ -1083,24 +1155,290 @@ fun SecurityTab(report: AnalysisReport?) {
             ) {
                 report.cloudScanner?.let { cloud ->
                     if (cloud.exposedBuckets.isNotEmpty()) {
-                        Text("⚠️ Exposed Buckets:", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Color(0xFFEF4444))
+                        Text("⚠️ Exposed Buckets:", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Cyber.Red)
                         cloud.exposedBuckets.take(5).forEach { bucket ->
-                            Text("• ${bucket.url}", fontSize = 12.sp, color = Color(0xFFEF4444))
+                            Text("• ${bucket.url}", fontSize = 12.sp, color = Cyber.Red, maxLines = 1, overflow = TextOverflow.Ellipsis)
                         }
                     }
                     if (cloud.bucketsFound.isNotEmpty()) {
                         Spacer(Modifier.height(8.dp))
-                        Text("Detected Buckets:", fontWeight = FontWeight.Bold, fontSize = 13.sp)
+                        Text("Detected Buckets:", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Cyber.TextPrimary)
                         cloud.bucketsFound.take(5).forEach { bucket ->
-                            Text("• ${bucket.name} (${bucket.provider})", fontSize = 12.sp)
+                            Text("• ${bucket.name} (${bucket.provider})", fontSize = 12.sp, color = Cyber.TextPrimary)
                         }
                     }
                 }
             }
         }
         
+        // ============ PRO SECURITY MODULES ============
+
+        // 10. Open Redirect Testing
+        item {
+            val hasData = report.redirectTesting != null
+            val vulnCount = report.redirectTesting?.vulnerableCount ?: 0
+            FeatureSection(
+                title = "↗️ Open Redirect Testing",
+                subtitle = when {
+                    vulnCount > 0 -> "⚠️ $vulnCount vulnerable endpoints"
+                    hasData -> "✓ No open redirects found"
+                    else -> "Not scanned"
+                },
+                expanded = expandedSection == "redirects",
+                hasData = hasData,
+                onClick = { expandedSection = if (expandedSection == "redirects") null else "redirects" }
+            ) {
+                report.redirectTesting?.let { rt ->
+                    DetailRow("Params Tested", "${rt.testedParams}")
+                    DetailRow("Vulnerable", "${rt.vulnerableCount}")
+                    if (rt.findings.isNotEmpty()) {
+                        Spacer(Modifier.height(8.dp))
+                        Text("Vulnerable Endpoints:", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Cyber.Red)
+                        rt.findings.take(5).forEach { f ->
+                            Text("• [${f.method}] ${f.url}", fontSize = 12.sp, color = Cyber.Orange,
+                                maxLines = 1, overflow = TextOverflow.Ellipsis, fontFamily = FontFamily.Monospace)
+                            Text("  → ${f.redirectTo}", fontSize = 11.sp, color = Cyber.Red,
+                                maxLines = 1, overflow = TextOverflow.Ellipsis, fontFamily = FontFamily.Monospace)
+                        }
+                    }
+                    rt.summary.takeIf { it.isNotEmpty() }?.let {
+                        Spacer(Modifier.height(4.dp))
+                        Text(it, fontSize = 12.sp, color = Cyber.TextSecondary)
+                    }
+                }
+            }
+        }
+
+        // 11. Header Injection
+        item {
+            val totalIssues = report.headerInjection?.totalIssues ?: 0
+            val hasData = report.headerInjection != null
+            FeatureSection(
+                title = "💉 Header Injection (CRLF)",
+                subtitle = when {
+                    totalIssues > 0 -> "⚠️ $totalIssues injection vulnerabilities"
+                    hasData -> "✓ No injection vulnerabilities"
+                    else -> "Not scanned"
+                },
+                expanded = expandedSection == "headerinject",
+                hasData = hasData,
+                onClick = { expandedSection = if (expandedSection == "headerinject") null else "headerinject" }
+            ) {
+                report.headerInjection?.let { hi ->
+                    DetailRow("CRLF Findings", "${hi.crlfFindings.size}")
+                    DetailRow("Host Header Findings", "${hi.hostHeaderFindings.size}")
+                    hi.crlfFindings.take(3).forEach { f ->
+                        Spacer(Modifier.height(4.dp))
+                        Text("CRLF: ${f.url}", fontSize = 12.sp, color = Cyber.Orange,
+                            maxLines = 1, overflow = TextOverflow.Ellipsis, fontFamily = FontFamily.Monospace)
+                    }
+                    hi.hostHeaderFindings.take(3).forEach { f ->
+                        Text("Host: ${f.injectedHost}", fontSize = 12.sp, color = Cyber.Yellow, fontFamily = FontFamily.Monospace)
+                    }
+                    hi.summary.takeIf { it.isNotEmpty() }?.let {
+                        Spacer(Modifier.height(4.dp))
+                        Text(it, fontSize = 12.sp, color = Cyber.TextSecondary)
+                    }
+                }
+            }
+        }
+
+        // 12. JWT Token Analysis
+        item {
+            val jwtCount = report.jwtAnalysis?.uniqueTokensAnalyzed ?: 0
+            val vulnTokens = report.jwtAnalysis?.vulnerableTokens ?: 0
+            val hasData = report.jwtAnalysis != null && jwtCount > 0
+            FeatureSection(
+                title = "🎫 JWT Token Analysis",
+                subtitle = when {
+                    vulnTokens > 0 -> "⚠️ $jwtCount tokens, $vulnTokens vulnerable"
+                    hasData -> "✓ $jwtCount tokens found (secure)"
+                    else -> "Not scanned"
+                },
+                expanded = expandedSection == "jwt",
+                hasData = hasData,
+                onClick = { expandedSection = if (expandedSection == "jwt") null else "jwt" }
+            ) {
+                report.jwtAnalysis?.let { ja ->
+                    DetailRow("Tokens Analyzed", "${ja.uniqueTokensAnalyzed}")
+                    DetailRow("Vulnerable", "${ja.vulnerableTokens}")
+                    if (ja.critical > 0) DetailRow("Critical Issues", "${ja.critical}")
+                    if (ja.high > 0) DetailRow("High Issues", "${ja.high}")
+                    ja.findings.take(3).forEach { finding ->
+                        if (finding.issues.isNotEmpty()) {
+                            Spacer(Modifier.height(6.dp))
+                            Text("alg:${finding.algorithm}", fontSize = 11.sp, color = Cyber.Cyan,
+                                fontFamily = FontFamily.Monospace)
+                            finding.issues.take(2).forEach { issue ->
+                                Text("  ⚠ ${issue.issue}", fontSize = 12.sp,
+                                    color = Cyber.severityColor(issue.severity))
+                            }
+                        }
+                    }
+                    ja.summary.takeIf { it.isNotEmpty() }?.let {
+                        Spacer(Modifier.height(4.dp))
+                        Text(it, fontSize = 12.sp, color = Cyber.TextSecondary)
+                    }
+                }
+            }
+        }
+
+        // 13. GraphQL Security
+        item {
+            val endpointCount = report.graphqlTesting?.endpointsTested?.size ?: 0
+            val vulnCount = report.graphqlTesting?.vulnerableCount ?: 0
+            val hasData = report.graphqlTesting != null && endpointCount > 0
+            FeatureSection(
+                title = "🔮 GraphQL Security",
+                subtitle = when {
+                    vulnCount > 0 -> "⚠️ $vulnCount vulnerabilities in $endpointCount endpoints"
+                    hasData -> "✓ $endpointCount endpoints tested"
+                    else -> "Not scanned"
+                },
+                expanded = expandedSection == "graphql",
+                hasData = hasData,
+                onClick = { expandedSection = if (expandedSection == "graphql") null else "graphql" }
+            ) {
+                report.graphqlTesting?.let { gql ->
+                    DetailRow("Endpoints Tested", "${gql.endpointsTested.size}")
+                    DetailRow("Vulnerable", "${gql.vulnerableCount}")
+                    gql.endpointsTested.take(3).forEach { ep ->
+                        Spacer(Modifier.height(4.dp))
+                        val epColor = if (ep.introspectionEnabled) Cyber.Red else Cyber.Green
+                        Text(
+                            "${if (ep.introspectionEnabled) "⚠️" else "✓"} ${ep.url}",
+                            fontSize = 12.sp, color = epColor, maxLines = 1,
+                            overflow = TextOverflow.Ellipsis, fontFamily = FontFamily.Monospace
+                        )
+                        if (ep.introspectionEnabled) {
+                            Text("  Introspection enabled (${ep.typeCount} types)", fontSize = 11.sp, color = Cyber.Orange)
+                        }
+                    }
+                    gql.summary.takeIf { it.isNotEmpty() }?.let {
+                        Spacer(Modifier.height(4.dp))
+                        Text(it, fontSize = 12.sp, color = Cyber.TextSecondary)
+                    }
+                }
+            }
+        }
+
+        // 14. Information Disclosure
+        item {
+            val totalIssues = report.infoDisclosure?.totalIssues ?: 0
+            val hasData = report.infoDisclosure != null
+            FeatureSection(
+                title = "📁 Information Disclosure",
+                subtitle = when {
+                    totalIssues > 0 -> "⚠️ $totalIssues sensitive files exposed"
+                    hasData -> "✓ No sensitive files found"
+                    else -> "Not scanned"
+                },
+                expanded = expandedSection == "infodisclosure",
+                hasData = hasData,
+                onClick = { expandedSection = if (expandedSection == "infodisclosure") null else "infodisclosure" }
+            ) {
+                report.infoDisclosure?.let { id ->
+                    DetailRow("Total Issues", "${id.totalIssues}")
+                    if (id.critical > 0) DetailRow("Critical", "${id.critical}")
+                    if (id.high > 0) DetailRow("High", "${id.high}")
+                    id.securityTxt?.let {
+                        Spacer(Modifier.height(4.dp))
+                        Text("✓ security.txt present", fontSize = 12.sp, color = Cyber.Green)
+                    }
+                    id.findings.take(5).forEach { f ->
+                        Spacer(Modifier.height(4.dp))
+                        val fc = Cyber.severityColor(f.severity)
+                        Text("${f.path} (${f.statusCode})", fontSize = 12.sp, color = fc,
+                            fontFamily = FontFamily.Monospace, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                        Text(f.description, fontSize = 11.sp, color = Cyber.TextSecondary, maxLines = 1)
+                    }
+                    id.summary.takeIf { it.isNotEmpty() }?.let {
+                        Spacer(Modifier.height(4.dp))
+                        Text(it, fontSize = 12.sp, color = Cyber.TextSecondary)
+                    }
+                }
+            }
+        }
+
+        // 15. SQL Injection Detection
+        item {
+            val activeHits = report.sqliDetection?.activeHits ?: 0
+            val passiveHits = report.sqliDetection?.passiveHits ?: 0
+            val hasData = report.sqliDetection != null
+            FeatureSection(
+                title = "🗄️ SQL Injection",
+                subtitle = when {
+                    activeHits > 0 -> "🚨 $activeHits active SQLi confirmed"
+                    passiveHits > 0 -> "⚠️ $passiveHits error patterns detected"
+                    hasData -> "✓ No SQL injection detected"
+                    else -> "Not scanned"
+                },
+                expanded = expandedSection == "sqli",
+                hasData = hasData,
+                onClick = { expandedSection = if (expandedSection == "sqli") null else "sqli" }
+            ) {
+                report.sqliDetection?.let { sql ->
+                    DetailRow("Params Tested", "${sql.paramsTested}")
+                    DetailRow("Passive Hits", "${sql.passiveHits}")
+                    DetailRow("Active Hits", "${sql.activeHits}")
+                    if (sql.critical > 0) DetailRow("Critical", "${sql.critical}")
+                    sql.findings.take(5).forEach { f ->
+                        Spacer(Modifier.height(4.dp))
+                        val fc = Cyber.severityColor(f.severity)
+                        Text("[${f.method}] ${f.url}", fontSize = 12.sp, color = fc,
+                            fontFamily = FontFamily.Monospace, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                        Text("${f.type}: ${f.payloadDescription}", fontSize = 11.sp, color = Cyber.TextSecondary)
+                    }
+                    sql.summary.takeIf { it.isNotEmpty() }?.let {
+                        Spacer(Modifier.height(4.dp))
+                        Text(it, fontSize = 12.sp, color = Cyber.TextSecondary)
+                    }
+                }
+            }
+        }
+
+        // 16. Rate Limit Audit
+        item {
+            val unprotected = report.rateLimitCheck?.endpointsUnprotected ?: 0
+            val protected = report.rateLimitCheck?.endpointsProtected ?: 0
+            val hasData = report.rateLimitCheck != null
+            FeatureSection(
+                title = "⏱️ Rate Limit Audit",
+                subtitle = when {
+                    unprotected > 0 -> "⚠️ $unprotected endpoints unprotected"
+                    hasData -> "✓ $protected endpoints protected"
+                    else -> "Not scanned"
+                },
+                expanded = expandedSection == "ratelimit",
+                hasData = hasData,
+                onClick = { expandedSection = if (expandedSection == "ratelimit") null else "ratelimit" }
+            ) {
+                report.rateLimitCheck?.let { rl ->
+                    DetailRow("Endpoints Tested", "${rl.endpointsTested.size}")
+                    DetailRow("Protected", "${rl.endpointsProtected}")
+                    DetailRow("Unprotected", "${rl.endpointsUnprotected}")
+                    rl.endpointsTested.take(5).forEach { ep ->
+                        Spacer(Modifier.height(4.dp))
+                        val epColor = if (ep.rateLimited) Cyber.Green else Cyber.Red
+                        Text(
+                            "${if (ep.rateLimited) "✓" else "✗"} ${ep.method} ${ep.url}",
+                            fontSize = 12.sp, color = epColor, maxLines = 1,
+                            overflow = TextOverflow.Ellipsis, fontFamily = FontFamily.Monospace
+                        )
+                        if (!ep.rateLimited) {
+                            Text("  No rate limiting detected", fontSize = 11.sp, color = Cyber.Orange)
+                        }
+                    }
+                    rl.findings.take(3).forEach { f ->
+                        Spacer(Modifier.height(4.dp))
+                        Text("⚠ ${f.description}", fontSize = 12.sp, color = Cyber.Yellow)
+                    }
+                }
+            }
+        }
+
         // ============ FINDINGS LISTS ============
-        
+
         // Vulnerabilities List
         if (report.vulnerabilities.isNotEmpty()) {
             item {
@@ -1108,31 +1446,30 @@ fun SecurityTab(report: AnalysisReport?) {
                 Text(
                     "🐛 Vulnerabilities (${report.vulnerabilities.size})",
                     style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    color = Cyber.TextPrimary
                 )
             }
             items(report.vulnerabilities.take(10)) { vuln ->
-                val severityColor = when(vuln.severity) {
-                    "Critical" -> Color(0xFFEF4444)
-                    "High" -> Color(0xFFF97316)
-                    "Medium" -> Color(0xFFF59E0B)
-                    else -> Color(0xFF6B7280)
-                }
-                Card(
-                    colors = CardDefaults.cardColors(containerColor = severityColor.copy(alpha = 0.1f)),
-                    shape = RoundedCornerShape(8.dp)
+                val severityColor = Cyber.severityColor(vuln.severity)
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(Cyber.severityDim(vuln.severity))
+                        .border(1.dp, severityColor.copy(alpha = 0.4f), RoundedCornerShape(8.dp))
                 ) {
                     Column(Modifier.padding(12.dp)) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             SeverityBadge(vuln.severity)
                             Spacer(Modifier.width(8.dp))
-                            Text(vuln.type, fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                            Text(vuln.type, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = Cyber.TextPrimary)
                         }
                         vuln.cve?.let { cve ->
-                            Text(cve, style = MaterialTheme.typography.bodySmall, color = severityColor)
+                            Text(cve, style = MaterialTheme.typography.bodySmall, color = severityColor, fontFamily = FontFamily.Monospace)
                         }
                         vuln.description?.let { desc ->
-                            Text(desc, style = MaterialTheme.typography.bodySmall, maxLines = 2)
+                            Text(desc, style = MaterialTheme.typography.bodySmall, maxLines = 2, color = Cyber.TextSecondary)
                         }
                     }
                 }
@@ -1147,17 +1484,20 @@ fun SecurityTab(report: AnalysisReport?) {
                     "🔐 Secrets Leaked (${report.secretsFound.size})",
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
-                    color = Color(0xFFEF4444)
+                    color = Cyber.Red
                 )
             }
             items(report.secretsFound.take(10)) { secret ->
-                Card(
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFFEF4444).copy(alpha = 0.1f)),
-                    shape = RoundedCornerShape(8.dp)
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(Cyber.RedDim)
+                        .border(1.dp, Cyber.BorderDanger, RoundedCornerShape(8.dp))
                 ) {
                     Column(Modifier.padding(12.dp)) {
-                        Text(secret.type, fontWeight = FontWeight.Bold, color = Color(0xFFEF4444))
-                        Text("File: ${secret.file}", fontSize = 12.sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                        Text(secret.type, fontWeight = FontWeight.Bold, color = Cyber.Red, fontFamily = FontFamily.Monospace)
+                        Text("File: ${secret.file}", fontSize = 12.sp, maxLines = 1, overflow = TextOverflow.Ellipsis, color = Cyber.TextSecondary)
                     }
                 }
             }
@@ -1170,18 +1510,22 @@ fun SecurityTab(report: AnalysisReport?) {
                 Text(
                     "📂 Hidden Paths (${report.hiddenPaths.size})",
                     style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    color = Cyber.TextPrimary
                 )
             }
             items(report.hiddenPaths.take(15)) { path ->
-                Card(
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFF6366F1).copy(alpha = 0.1f)),
-                    shape = RoundedCornerShape(8.dp)
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(Cyber.PurpleDim)
+                        .border(1.dp, Cyber.Purple.copy(alpha = 0.3f), RoundedCornerShape(8.dp))
                 ) {
                     Row(Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
                         StatusBadge(path.status)
                         Spacer(Modifier.width(12.dp))
-                        Text(path.path, fontWeight = FontWeight.Medium, fontSize = 13.sp)
+                        Text(path.path, fontWeight = FontWeight.Medium, fontSize = 13.sp, color = Cyber.TextPrimary, fontFamily = FontFamily.Monospace)
                     }
                 }
             }
@@ -1194,19 +1538,20 @@ fun SecurityTab(report: AnalysisReport?) {
                 Text(
                     "💻 Technologies (${report.technologies.size})",
                     style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    color = Cyber.TextPrimary
                 )
             }
             item {
                 Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                     report.technologies.take(10).forEach { tech ->
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text("•", color = Color(0xFF8B5CF6))
+                            Text("•", color = Cyber.Purple)
                             Spacer(Modifier.width(8.dp))
-                            Text(tech.name, fontWeight = FontWeight.Medium)
+                            Text(tech.name, fontWeight = FontWeight.Medium, color = Cyber.TextPrimary)
                             tech.version?.let {
                                 Spacer(Modifier.width(4.dp))
-                                Text("v$it", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                Text("v$it", fontSize = 12.sp, color = Cyber.TextSecondary, fontFamily = FontFamily.Monospace)
                             }
                         }
                     }
@@ -1221,8 +1566,8 @@ fun SecurityTab(report: AnalysisReport?) {
 @Composable
 fun MiniStat(value: String, label: String, color: Color) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(value, fontWeight = FontWeight.Black, fontSize = 18.sp, color = color)
-        Text(label, fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text(value, fontWeight = FontWeight.Black, fontSize = 18.sp, color = color, fontFamily = FontFamily.Monospace)
+        Text(label, fontSize = 11.sp, color = Cyber.TextSecondary)
     }
 }
 
@@ -1235,17 +1580,14 @@ fun FeatureSection(
     onClick: () -> Unit,
     content: @Composable ColumnScope.() -> Unit
 ) {
-    val bgColor = if (hasData) 
-        MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f) 
-    else 
-        MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.2f)
-    
-    Card(
+    val borderColor = if (hasData) Cyber.BorderActive else Cyber.Border
+    Box(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable(enabled = hasData, onClick = onClick),
-        colors = CardDefaults.cardColors(containerColor = bgColor),
-        shape = RoundedCornerShape(12.dp)
+            .clip(RoundedCornerShape(12.dp))
+            .background(Cyber.BgCard)
+            .border(1.dp, borderColor, RoundedCornerShape(12.dp))
+            .clickable(enabled = hasData, onClick = onClick)
     ) {
         Column {
             Row(
@@ -1256,35 +1598,35 @@ fun FeatureSection(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column(modifier = Modifier.weight(1f)) {
-                    Text(title, fontWeight = FontWeight.Bold, fontSize = 15.sp)
+                    Text(title, fontWeight = FontWeight.Bold, fontSize = 15.sp, color = Cyber.TextPrimary)
                     Text(
                         subtitle,
                         fontSize = 12.sp,
-                        color = if (hasData) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
+                        color = if (hasData) Cyber.Cyan else Cyber.TextSecondary
                     )
                 }
                 if (hasData) {
                     Icon(
                         if (expanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        tint = Cyber.TextSecondary
                     )
                 } else {
                     Text(
                         "N/A",
                         fontSize = 12.sp,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
+                        color = Cyber.TextMuted
                     )
                 }
             }
-            
+
             AnimatedVisibility(visible = expanded && hasData) {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
                 ) {
-                    Divider(modifier = Modifier.padding(bottom = 12.dp))
+                    HorizontalDivider(color = Cyber.Border, modifier = Modifier.padding(bottom = 12.dp))
                     content()
                 }
             }
@@ -1300,8 +1642,8 @@ fun DetailRow(label: String, value: String) {
             .padding(vertical = 2.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(label, fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        Text(value, fontSize = 13.sp, fontWeight = FontWeight.Medium)
+        Text(label, fontSize = 13.sp, color = Cyber.TextSecondary)
+        Text(value, fontSize = 13.sp, fontWeight = FontWeight.Medium, color = Cyber.TextPrimary)
     }
 }
 @Composable
@@ -1329,19 +1671,22 @@ fun AdvancedScanSection(
 @Composable
 fun MissingHeaderChip(name: String, weight: Int) {
     val severity = when {
-        weight >= 20 -> Color(0xFFEF4444)
-        weight >= 10 -> Color(0xFFF59E0B)
-        else -> Color(0xFF6B7280)
+        weight >= 20 -> Cyber.Red
+        weight >= 10 -> Cyber.Yellow
+        else -> Cyber.TextSecondary
     }
-    Card(
-        colors = CardDefaults.cardColors(containerColor = severity.copy(alpha = 0.1f)),
-        shape = RoundedCornerShape(8.dp),
-        modifier = Modifier.padding(vertical = 2.dp)
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(8.dp))
+            .background(severity.copy(alpha = 0.08f))
+            .border(1.dp, severity.copy(alpha = 0.4f), RoundedCornerShape(8.dp))
+            .padding(vertical = 2.dp)
     ) {
         Row(Modifier.padding(horizontal = 12.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
-            Text("✗", color = severity)
+            Text("✗", color = severity, fontFamily = FontFamily.Monospace)
             Spacer(Modifier.width(8.dp))
-            Text(name, fontSize = 13.sp, fontWeight = FontWeight.Medium)
+            Text(name, fontSize = 13.sp, fontWeight = FontWeight.Medium, color = Cyber.TextPrimary)
         }
     }
 }
@@ -1349,42 +1694,50 @@ fun MissingHeaderChip(name: String, weight: Int) {
 @Composable
 fun SubdomainChip(subdomain: String, live: Boolean, riskLevel: String) {
     val color = when(riskLevel.lowercase()) {
-        "high" -> Color(0xFFEF4444)
-        "medium" -> Color(0xFFF59E0B)
-        else -> if (live) Color(0xFF10B981) else Color(0xFF6B7280)
+        "high" -> Cyber.Red
+        "medium" -> Cyber.Yellow
+        else -> if (live) Cyber.Green else Cyber.TextSecondary
     }
-    Card(
-        colors = CardDefaults.cardColors(containerColor = color.copy(alpha = 0.1f)),
-        shape = RoundedCornerShape(8.dp),
-        modifier = Modifier.padding(vertical = 2.dp)
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(8.dp))
+            .background(color.copy(alpha = 0.08f))
+            .border(1.dp, color.copy(alpha = 0.3f), RoundedCornerShape(8.dp))
+            .padding(vertical = 2.dp)
     ) {
         Row(Modifier.padding(horizontal = 12.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
             Box(
                 modifier = Modifier
                     .size(8.dp)
-                    .background(if (live) Color(0xFF10B981) else Color(0xFF6B7280), CircleShape)
+                    .background(if (live) Cyber.Green else Cyber.TextSecondary, CircleShape)
             )
             Spacer(Modifier.width(8.dp))
-            Text(subdomain, fontSize = 13.sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Text(subdomain, fontSize = 13.sp, maxLines = 1, overflow = TextOverflow.Ellipsis,
+                color = Cyber.TextPrimary, fontFamily = FontFamily.Monospace)
         }
     }
 }
 
 @Composable
 fun ExposedBucketCard(bucket: com.bitflow.finance.domain.crawler.ExposedBucket) {
-    Card(
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFEF4444).copy(alpha = 0.1f)),
-        shape = RoundedCornerShape(8.dp)
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(8.dp))
+            .background(Cyber.RedDim)
+            .border(1.dp, Cyber.BorderDanger, RoundedCornerShape(8.dp))
     ) {
         Column(Modifier.padding(12.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(Icons.Default.Warning, contentDescription = null, tint = Color(0xFFEF4444), modifier = Modifier.size(16.dp))
+                Icon(Icons.Default.Warning, contentDescription = null, tint = Cyber.Red, modifier = Modifier.size(16.dp))
                 Spacer(Modifier.width(8.dp))
-                Text(bucket.name, fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                Text(bucket.name, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = Cyber.TextPrimary,
+                    fontFamily = FontFamily.Monospace)
             }
-            Text("Provider: ${bucket.provider}", style = MaterialTheme.typography.bodySmall)
+            Text("Provider: ${bucket.provider}", style = MaterialTheme.typography.bodySmall, color = Cyber.TextSecondary)
             if (bucket.listingEnabled) {
-                Text("⚠️ Directory listing enabled!", style = MaterialTheme.typography.bodySmall, color = Color(0xFFEF4444))
+                Text("⚠️ Directory listing enabled!", style = MaterialTheme.typography.bodySmall, color = Cyber.Red)
             }
         }
     }
@@ -1392,12 +1745,12 @@ fun ExposedBucketCard(bucket: com.bitflow.finance.domain.crawler.ExposedBucket) 
 
 fun getGradeColor(grade: String): Color {
     return when(grade.uppercase()) {
-        "A", "A+" -> Color(0xFF10B981)
-        "B" -> Color(0xFF22C55E)
-        "C" -> Color(0xFFF59E0B)
-        "D" -> Color(0xFFF97316)
-        "E", "F" -> Color(0xFFEF4444)
-        else -> Color(0xFF6B7280)
+        "A", "A+" -> Cyber.Green
+        "B" -> Cyber.Green.copy(alpha = 0.7f)
+        "C" -> Cyber.Yellow
+        "D" -> Cyber.Orange
+        "E", "F" -> Cyber.Red
+        else -> Cyber.TextSecondary
     }
 }
 
@@ -1420,19 +1773,15 @@ fun SecurityInfoCard(title: String, subtitle: String, icon: androidx.compose.ui.
 
 @Composable
 fun SeverityBadge(severity: String) {
-    val color = when(severity) {
-        "Critical" -> Color(0xFFEF4444)
-        "High" -> Color(0xFFF97316)
-        "Medium" -> Color(0xFFF59E0B)
-        else -> Color(0xFF6B7280)
-    }
+    val color = Cyber.severityColor(severity)
     Box(
         modifier = Modifier
             .clip(RoundedCornerShape(4.dp))
-            .background(color)
+            .background(color.copy(alpha = 0.2f))
+            .border(1.dp, color.copy(alpha = 0.6f), RoundedCornerShape(4.dp))
             .padding(horizontal = 6.dp, vertical = 2.dp)
     ) {
-        Text(severity, fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color.White)
+        Text(severity.uppercase(), fontSize = 10.sp, fontWeight = FontWeight.Bold, color = color, fontFamily = FontFamily.Monospace)
     }
 }
 
@@ -1441,13 +1790,15 @@ fun TechChip(name: String, version: String?) {
     Box(
         modifier = Modifier
             .clip(RoundedCornerShape(16.dp))
-            .background(MaterialTheme.colorScheme.secondaryContainer)
+            .background(Cyber.BgElevated)
+            .border(1.dp, Cyber.Border, RoundedCornerShape(16.dp))
             .padding(horizontal = 12.dp, vertical = 6.dp)
     ) {
         Text(
             if (version != null) "$name v$version" else name,
             fontSize = 12.sp,
-            color = MaterialTheme.colorScheme.onSecondaryContainer
+            color = Cyber.TextPrimary,
+            fontFamily = FontFamily.Monospace
         )
     }
 }
@@ -1468,12 +1819,16 @@ fun OsintTab(report: AnalysisReport?) {
         // Summary Card
         osint?.counts?.let { counts ->
             item {
-                Card(
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
-                    shape = RoundedCornerShape(12.dp)
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(Cyber.BgCard)
+                        .border(1.dp, Cyber.Border, RoundedCornerShape(12.dp))
                 ) {
                     Column(Modifier.padding(16.dp)) {
-                        Text("OSINT Summary", fontWeight = FontWeight.Bold)
+                        Text("OSINT Summary", fontWeight = FontWeight.Bold, color = Cyber.Cyan,
+                            fontFamily = FontFamily.Monospace)
                         Spacer(Modifier.height(12.dp))
                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
                             OsintStatItem("Emails", counts.emails)
@@ -1489,17 +1844,21 @@ fun OsintTab(report: AnalysisReport?) {
         // Emails Found
         osint?.uniqueEmails?.takeIf { it.isNotEmpty() }?.let { emails ->
             item {
-                Text("Emails Found (${emails.size})", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+                Text("Emails Found (${emails.size})", style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold, color = Cyber.TextPrimary)
             }
             items(emails.take(15)) { email ->
-                Card(
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFF3B82F6).copy(alpha = 0.1f)),
-                    shape = RoundedCornerShape(8.dp)
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(Cyber.BlueDim)
+                        .border(1.dp, Cyber.Blue.copy(alpha = 0.3f), RoundedCornerShape(8.dp))
                 ) {
                     Row(Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Default.Email, contentDescription = null, tint = Color(0xFF3B82F6), modifier = Modifier.size(16.dp))
+                        Icon(Icons.Default.Email, contentDescription = null, tint = Cyber.Blue, modifier = Modifier.size(16.dp))
                         Spacer(Modifier.width(12.dp))
-                        Text(email, fontSize = 14.sp)
+                        Text(email, fontSize = 14.sp, color = Cyber.TextPrimary, fontFamily = FontFamily.Monospace)
                     }
                 }
             }
@@ -1509,17 +1868,21 @@ fun OsintTab(report: AnalysisReport?) {
         osint?.uniquePhones?.takeIf { it.isNotEmpty() }?.let { phones ->
             item {
                 Spacer(Modifier.height(8.dp))
-                Text("Phone Numbers (${phones.size})", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+                Text("Phone Numbers (${phones.size})", style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold, color = Cyber.TextPrimary)
             }
             items(phones.take(10)) { phone ->
-                Card(
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFF10B981).copy(alpha = 0.1f)),
-                    shape = RoundedCornerShape(8.dp)
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(Cyber.GreenDim)
+                        .border(1.dp, Cyber.Green.copy(alpha = 0.3f), RoundedCornerShape(8.dp))
                 ) {
                     Row(Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Default.Phone, contentDescription = null, tint = Color(0xFF10B981), modifier = Modifier.size(16.dp))
+                        Icon(Icons.Default.Phone, contentDescription = null, tint = Cyber.Green, modifier = Modifier.size(16.dp))
                         Spacer(Modifier.width(12.dp))
-                        Text(phone, fontSize = 14.sp)
+                        Text(phone, fontSize = 14.sp, color = Cyber.TextPrimary, fontFamily = FontFamily.Monospace)
                     }
                 }
             }
@@ -1529,21 +1892,27 @@ fun OsintTab(report: AnalysisReport?) {
         osint?.socialPresence?.takeIf { it.isNotEmpty() }?.let { social ->
             item {
                 Spacer(Modifier.height(8.dp))
-                Text("Social Media Presence (${social.size} platforms)", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+                Text("Social Media Presence (${social.size} platforms)", style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold, color = Cyber.TextPrimary)
             }
             social.forEach { (platform, links) ->
                 item {
-                    Card(
-                        colors = CardDefaults.cardColors(containerColor = Color(0xFF6366F1).copy(alpha = 0.1f)),
-                        shape = RoundedCornerShape(8.dp)
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(Cyber.PurpleDim)
+                            .border(1.dp, Cyber.Purple.copy(alpha = 0.3f), RoundedCornerShape(8.dp))
                     ) {
                         Column(Modifier.padding(12.dp)) {
-                            Text(platform.replaceFirstChar { it.uppercase() }, fontWeight = FontWeight.Bold, color = Color(0xFF6366F1))
+                            Text(platform.replaceFirstChar { it.uppercase() }, fontWeight = FontWeight.Bold,
+                                color = Cyber.Purple)
                             links.take(3).forEach { link ->
-                                Text(link, fontSize = 12.sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                                Text(link, fontSize = 12.sp, maxLines = 1, overflow = TextOverflow.Ellipsis,
+                                    color = Cyber.TextSecondary, fontFamily = FontFamily.Monospace)
                             }
                             if (links.size > 3) {
-                                Text("+${links.size - 3} more", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                Text("+${links.size - 3} more", fontSize = 12.sp, color = Cyber.TextMuted)
                             }
                         }
                     }
@@ -1555,17 +1924,21 @@ fun OsintTab(report: AnalysisReport?) {
         osint?.uniqueNames?.takeIf { it.isNotEmpty() }?.let { names ->
             item {
                 Spacer(Modifier.height(8.dp))
-                Text("Names/Employees (${names.size})", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+                Text("Names/Employees (${names.size})", style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold, color = Cyber.TextPrimary)
             }
             items(names.take(10)) { name ->
-                Card(
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFFF59E0B).copy(alpha = 0.1f)),
-                    shape = RoundedCornerShape(8.dp)
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(Cyber.YellowDim)
+                        .border(1.dp, Cyber.Yellow.copy(alpha = 0.3f), RoundedCornerShape(8.dp))
                 ) {
                     Row(Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Default.Person, contentDescription = null, tint = Color(0xFFF59E0B), modifier = Modifier.size(16.dp))
+                        Icon(Icons.Default.Person, contentDescription = null, tint = Cyber.Yellow, modifier = Modifier.size(16.dp))
                         Spacer(Modifier.width(12.dp))
-                        Text(name, fontSize = 14.sp)
+                        Text(name, fontSize = 14.sp, color = Cyber.TextPrimary)
                     }
                 }
             }
@@ -1575,20 +1948,24 @@ fun OsintTab(report: AnalysisReport?) {
         osint?.piiFindings?.takeIf { it.isNotEmpty() }?.let { pii ->
             item {
                 Spacer(Modifier.height(8.dp))
-                Text("PII Leaked (${pii.size})", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = Color(0xFFEF4444))
+                Text("PII Leaked (${pii.size})", style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold, color = Cyber.Red)
             }
             items(pii.take(10)) { finding ->
-                Card(
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFFEF4444).copy(alpha = 0.1f)),
-                    shape = RoundedCornerShape(8.dp)
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(Cyber.RedDim)
+                        .border(1.dp, Cyber.BorderDanger, RoundedCornerShape(8.dp))
                 ) {
                     Column(Modifier.padding(12.dp)) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             SeverityBadge(finding.severity)
                             Spacer(Modifier.width(8.dp))
-                            Text(finding.description, fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                            Text(finding.description, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = Cyber.TextPrimary)
                         }
-                        Text("Value: ${finding.valueMasked}", fontSize = 12.sp)
+                        Text("Value: ${finding.valueMasked}", fontSize = 12.sp, color = Cyber.TextSecondary, fontFamily = FontFamily.Monospace)
                     }
                 }
             }
@@ -1598,17 +1975,23 @@ fun OsintTab(report: AnalysisReport?) {
         osint?.ctSubdomains?.takeIf { it.isNotEmpty() }?.let { subs ->
             item {
                 Spacer(Modifier.height(8.dp))
-                Text("Certificate Transparency Subdomains (${subs.size})", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+                Text("Certificate Transparency Subdomains (${subs.size})",
+                    style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold,
+                    color = Cyber.TextPrimary)
             }
             items(subs.take(15)) { sub ->
-                Card(
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
-                    shape = RoundedCornerShape(8.dp)
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(Cyber.BgElevated)
+                        .border(1.dp, Cyber.Border, RoundedCornerShape(8.dp))
                 ) {
                     Column(Modifier.padding(12.dp)) {
-                        Text(sub.subdomain, fontWeight = FontWeight.Medium, fontSize = 14.sp)
+                        Text(sub.subdomain, fontWeight = FontWeight.Medium, fontSize = 14.sp,
+                            color = Cyber.Cyan, fontFamily = FontFamily.Monospace)
                         sub.issuer?.let {
-                            Text("Issuer: $it", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            Text("Issuer: $it", fontSize = 12.sp, color = Cyber.TextSecondary)
                         }
                     }
                 }
@@ -1619,16 +2002,22 @@ fun OsintTab(report: AnalysisReport?) {
         osint?.waybackUrls?.takeIf { it.isNotEmpty() }?.let { urls ->
             item {
                 Spacer(Modifier.height(8.dp))
-                Text("Wayback Machine History (${urls.size})", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+                Text("Wayback Machine History (${urls.size})",
+                    style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold,
+                    color = Cyber.TextPrimary)
             }
             items(urls.take(10)) { wayback ->
-                Card(
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
-                    shape = RoundedCornerShape(8.dp)
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(Cyber.BgElevated)
+                        .border(1.dp, Cyber.Border, RoundedCornerShape(8.dp))
                 ) {
                     Column(Modifier.padding(12.dp)) {
-                        Text(wayback.url, fontSize = 13.sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                        Text("Archived: ${wayback.timestamp}", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text(wayback.url, fontSize = 13.sp, maxLines = 1, overflow = TextOverflow.Ellipsis,
+                            color = Cyber.Cyan, fontFamily = FontFamily.Monospace)
+                        Text("Archived: ${wayback.timestamp}", fontSize = 12.sp, color = Cyber.TextSecondary)
                     }
                 }
             }
@@ -1646,46 +2035,65 @@ fun OsintTab(report: AnalysisReport?) {
 @Composable
 fun OsintStatItem(label: String, count: Int) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(count.toString(), fontWeight = FontWeight.Bold, fontSize = 20.sp)
-        Text(label, fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text(count.toString(), fontWeight = FontWeight.Bold, fontSize = 20.sp, color = Cyber.Cyan,
+            fontFamily = FontFamily.Monospace)
+        Text(label, fontSize = 12.sp, color = Cyber.TextSecondary)
     }
 }
 
 @Composable
 fun StatusBadge(status: Int) {
     val (color, text) = when (status) {
-        200 -> Pair(Color(0xFF10B981), "200")
-        403 -> Pair(Color(0xFFF59E0B), "403")
-        301, 302 -> Pair(Color(0xFF3B82F6), "$status")
-        else -> Pair(Color.Gray, "$status")
+        200 -> Pair(Cyber.Green, "200")
+        403 -> Pair(Cyber.Yellow, "403")
+        301, 302 -> Pair(Cyber.Blue, "$status")
+        else -> Pair(Cyber.TextSecondary, "$status")
     }
-    
+
     Box(
         modifier = Modifier
             .clip(RoundedCornerShape(4.dp))
-            .background(color.copy(alpha = 0.2f))
+            .background(color.copy(alpha = 0.15f))
+            .border(1.dp, color.copy(alpha = 0.5f), RoundedCornerShape(4.dp))
             .padding(horizontal = 8.dp, vertical = 4.dp)
     ) {
-        Text(text, fontSize = 12.sp, fontWeight = FontWeight.Bold, color = color)
+        Text(text, fontSize = 12.sp, fontWeight = FontWeight.Bold, color = color,
+            fontFamily = FontFamily.Monospace)
     }
 }
 
 @Composable
 fun IssueCard(url: String, issue: String, color: Color) {
-    Card(
-        colors = CardDefaults.cardColors(containerColor = color.copy(alpha = 0.1f)),
-        shape = RoundedCornerShape(8.dp)
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(6.dp))
+            .background(Cyber.BgCard)
+            .border(1.dp, color.copy(alpha = 0.3f), RoundedCornerShape(6.dp))
     ) {
-        Column(Modifier.padding(12.dp)) {
+        Box(
+            modifier = Modifier
+                .width(2.dp)
+                .matchParentSize()
+                .background(color.copy(alpha = 0.5f))
+        )
+        Column(Modifier.padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 10.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(Icons.Default.Warning, contentDescription = null, tint = color, modifier = Modifier.size(16.dp))
-                Spacer(Modifier.width(8.dp))
-                Text(issue, fontWeight = FontWeight.Medium, fontSize = 14.sp)
+                Icon(Icons.Default.Warning, contentDescription = null, tint = color, modifier = Modifier.size(14.dp))
+                Spacer(Modifier.width(6.dp))
+                Text(
+                    issue,
+                    fontFamily = FontFamily.Monospace,
+                    fontWeight = FontWeight.Medium,
+                    fontSize = 12.sp,
+                    color = Cyber.TextPrimary
+                )
             }
             Text(
                 url,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                fontFamily = FontFamily.Monospace,
+                fontSize = 10.sp,
+                color = Cyber.TextSecondary,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
@@ -1946,8 +2354,20 @@ fun DocumentRow(file: File) {
 @Composable
 fun StatItem(label: String, value: String) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(value, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-        Text(label, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text(
+            value,
+            fontFamily = FontFamily.Monospace,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = Cyber.TextPrimary
+        )
+        Text(
+            label.uppercase(),
+            fontFamily = FontFamily.Monospace,
+            fontSize = 9.sp,
+            letterSpacing = 1.sp,
+            color = Cyber.TextSecondary
+        )
     }
 }
 
@@ -1955,9 +2375,14 @@ fun StatItem(label: String, value: String) {
 fun EmptyState(message: String, icon: androidx.compose.ui.graphics.vector.ImageVector) {
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-             Icon(icon, contentDescription = null, modifier = Modifier.size(48.dp), tint = MaterialTheme.colorScheme.surfaceVariant)
-             Spacer(Modifier.height(16.dp))
-             Text(message, color = MaterialTheme.colorScheme.onSurfaceVariant)
+             Icon(icon, contentDescription = null, modifier = Modifier.size(40.dp), tint = Cyber.Border)
+             Spacer(Modifier.height(12.dp))
+             Text(
+                 "// ${message.lowercase().replace(" ", "_")}",
+                 fontFamily = FontFamily.Monospace,
+                 fontSize = 12.sp,
+                 color = Cyber.TextSecondary
+             )
         }
     }
 }

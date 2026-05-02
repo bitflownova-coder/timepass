@@ -449,5 +449,54 @@ def analyze_ssl_certificate(url):
         
     except Exception as e:
         result['error'] = str(e)
-    
+
+    # ── Normalize output to match Kotlin SslAnalysisResult / Gson ────────────
+    raw_cert = result.get('certificate') or {}
+
+    # issuer / subject: flatten dict → string
+    issuer_d = raw_cert.get('issuer', {})
+    subject_d = raw_cert.get('subject', {})
+    issuer_str = (issuer_d.get('common_name') or issuer_d.get('organization', '')) if isinstance(issuer_d, dict) else str(issuer_d)
+    subject_str = (subject_d.get('common_name') or subject_d.get('organization', '')) if isinstance(subject_d, dict) else str(subject_d)
+
+    result['certificate'] = {
+        'issuer': issuer_str,
+        'subject': subject_str,
+        'not_before': raw_cert.get('not_before', ''),
+        'not_after': raw_cert.get('not_after', ''),
+        'days_until_expiry': raw_cert.get('days_until_expiry', 0) or 0,
+        'is_expired': raw_cert.get('expired', False),
+        'san_domains': raw_cert.get('san', []),
+    } if raw_cert else None
+
+    # tls_versions: flat dict → Kotlin TlsVersions shape
+    tls_raw = result.get('tls_versions') or {}
+    deprecated = [v for v in ['SSLv2', 'SSLv3', 'TLSv1.0', 'TLSv1.1'] if tls_raw.get(v, False)]
+    result['tls_versions'] = {
+        'tls_1_0': tls_raw.get('TLSv1.0', False),
+        'tls_1_1': tls_raw.get('TLSv1.1', False),
+        'tls_1_2': tls_raw.get('TLSv1.2', False),
+        'tls_1_3': tls_raw.get('TLSv1.3', False),
+        'insecure_versions': deprecated,
+    }
+
+    # ct_logs: rename key + remap issuer_name → issuer
+    ct_raw = result.get('certificate_transparency') or []
+    result['ct_logs'] = [
+        {
+            'issuer': c.get('issuer_name', ''),
+            'common_name': c.get('common_name', ''),
+            'not_before': c.get('not_before', ''),
+            'not_after': c.get('not_after', ''),
+        }
+        for c in ct_raw
+    ]
+
+    # hsts_preload: remap preloaded → in_preload_list
+    hsts_raw = result.get('hsts_preload') or {}
+    result['hsts_preload'] = {
+        'in_preload_list': hsts_raw.get('preloaded', False),
+        'status': 'preloaded' if hsts_raw.get('preloaded') else 'not preloaded',
+    }
+
     return result

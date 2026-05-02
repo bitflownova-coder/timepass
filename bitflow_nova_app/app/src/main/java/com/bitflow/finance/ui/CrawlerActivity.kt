@@ -12,6 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.bitflow.finance.core.theme.FinanceAppTheme
+import com.bitflow.finance.ui.screens.crawler.Cyber
 import com.bitflow.finance.ui.screens.crawler.CrawlerDashboardScreen
 import com.bitflow.finance.ui.screens.crawler.CrawlerDetailScreen
 import com.bitflow.finance.ui.screens.crawler.CrawlerViewModel
@@ -25,7 +26,7 @@ class CrawlerActivity : ComponentActivity() {
             FinanceAppTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = Cyber.Bg
                 ) {
                     val navController = rememberNavController()
                     val viewModel: CrawlerViewModel = hiltViewModel()

@@ -1,0 +1,1624 @@
+{
+  "url": "https://www.bitflownova.com",
+  "pages_crawled": 66,
+  "hidden_paths": [
+    {
+      "url": "https://www.bitflownova.com/admin",
+      "status": 200,
+      "path": "/admin"
+    },
+    {
+      "url": "https://www.bitflownova.com/administrator",
+      "status": 200,
+      "path": "/administrator"
+    },
+    {
+      "url": "https://www.bitflownova.com/wp-admin",
+      "status": 200,
+      "path": "/wp-admin"
+    },
+    {
+      "url": "https://www.bitflownova.com/wp-login.php",
+      "status": 200,
+      "path": "/wp-login.php"
+    },
+    {
+      "url": "https://www.bitflownova.com/login",
+      "status": 200,
+      "path": "/login"
+    },
+    {
+      "url": "https://www.bitflownova.com/signin",
+      "status": 200,
+      "path": "/signin"
+    },
+    {
+      "url": "https://www.bitflownova.com/dashboard",
+      "status": 200,
+      "path": "/dashboard"
+    },
+    {
+      "url": "https://www.bitflownova.com/panel",
+      "status": 200,
+      "path": "/panel"
+    },
+    {
+      "url": "https://www.bitflownova.com/cpanel",
+      "status": 200,
+      "path": "/cpanel"
+    },
+    {
+      "url": "https://www.bitflownova.com/phpmyadmin",
+      "status": 200,
+      "path": "/phpmyadmin"
+    },
+    {
+      "url": "https://www.bitflownova.com/backup",
+      "status": 200,
+      "path": "/backup"
+    },
+    {
+      "url": "https://www.bitflownova.com/backups",
+      "status": 200,
+      "path": "/backups"
+    },
+    {
+      "url": "https://www.bitflownova.com/bak",
+      "status": 200,
+      "path": "/bak"
+    },
+    {
+      "url": "https://www.bitflownova.com/old",
+      "status": 200,
+      "path": "/old"
+    },
+    {
+      "url": "https://www.bitflownova.com/archive",
+      "status": 200,
+      "path": "/archive"
+    },
+    {
+      "url": "https://www.bitflownova.com/test",
+      "status": 200,
+      "path": "/test"
+    },
+    {
+      "url": "https://www.bitflownova.com/testing",
+      "status": 200,
+      "path": "/testing"
+    },
+    {
+      "url": "https://www.bitflownova.com/dev",
+      "status": 200,
+      "path": "/dev"
+    },
+    {
+      "url": "https://www.bitflownova.com/development",
+      "status": 200,
+      "path": "/development"
+    },
+    {
+      "url": "https://www.bitflownova.com/staging",
+      "status": 200,
+      "path": "/staging"
+    },
+    {
+      "url": "https://www.bitflownova.com/demo",
+      "status": 200,
+      "path": "/demo"
+    },
+    {
+      "url": "https://www.bitflownova.com/beta",
+      "status": 200,
+      "path": "/beta"
+    },
+    {
+      "url": "https://www.bitflownova.com/api",
+      "status": 200,
+      "path": "/api"
+    },
+    {
+      "url": "https://www.bitflownova.com/api/v1",
+      "status": 200,
+      "path": "/api/v1"
+    },
+    {
+      "url": "https://www.bitflownova.com/api/v2",
+      "status": 200,
+      "path": "/api/v2"
+    },
+    {
+      "url": "https://www.bitflownova.com/graphql",
+      "status": 200,
+      "path": "/graphql"
+    },
+    {
+      "url": "https://www.bitflownova.com/rest",
+      "status": 200,
+      "path": "/rest"
+    },
+    {
+      "url": "https://www.bitflownova.com/config",
+      "status": 200,
+      "path": "/config"
+    },
+    {
+      "url": "https://www.bitflownova.com/settings",
+      "status": 200,
+      "path": "/settings"
+    },
+    {
+      "url": "https://www.bitflownova.com/configuration",
+      "status": 200,
+      "path": "/configuration"
+    },
+    {
+      "url": "https://www.bitflownova.com/setup",
+      "status": 200,
+      "path": "/setup"
+    },
+    {
+      "url": "https://www.bitflownova.com/.git",
+      "status": 200,
+      "path": "/.git"
+    },
+    {
+      "url": "https://www.bitflownova.com/.git/config",
+      "status": 200,
+      "path": "/.git/config"
+    },
+    {
+      "url": "https://www.bitflownova.com/.env",
+      "status": 200,
+      "path": "/.env"
+    },
+    {
+      "url": "https://www.bitflownova.com/.htaccess",
+      "status": 200,
+      "path": "/.htaccess"
+    },
+    {
+      "url": "https://www.bitflownova.com/.htpasswd",
+      "status": 200,
+      "path": "/.htpasswd"
+    },
+    {
+      "url": "https://www.bitflownova.com/config.php",
+      "status": 200,
+      "path": "/config.php"
+    },
+    {
+      "url": "https://www.bitflownova.com/config.json",
+      "status": 200,
+      "path": "/config.json"
+    },
+    {
+      "url": "https://www.bitflownova.com/config.yml",
+      "status": 200,
+      "path": "/config.yml"
+    },
+    {
+      "url": "https://www.bitflownova.com/settings.py",
+      "status": 200,
+      "path": "/settings.py"
+    },
+    {
+      "url": "https://www.bitflownova.com/robots.txt",
+      "status": 200,
+      "path": "/robots.txt"
+    },
+    {
+      "url": "https://www.bitflownova.com/sitemap.xml",
+      "status": 200,
+      "path": "/sitemap.xml"
+    },
+    {
+      "url": "https://www.bitflownova.com/sitemap_index.xml",
+      "status": 200,
+      "path": "/sitemap_index.xml"
+    },
+    {
+      "url": "https://www.bitflownova.com/wp-config.php",
+      "status": 200,
+      "path": "/wp-config.php"
+    },
+    {
+      "url": "https://www.bitflownova.com/web.config",
+      "status": 200,
+      "path": "/web.config"
+    },
+    {
+      "url": "https://www.bitflownova.com/composer.json",
+      "status": 200,
+      "path": "/composer.json"
+    },
+    {
+      "url": "https://www.bitflownova.com/package.json",
+      "status": 200,
+      "path": "/package.json"
+    },
+    {
+      "url": "https://www.bitflownova.com/readme.md",
+      "status": 200,
+      "path": "/readme.md"
+    },
+    {
+      "url": "https://www.bitflownova.com/README.md",
+      "status": 200,
+      "path": "/README.md"
+    },
+    {
+      "url": "https://www.bitflownova.com/CHANGELOG.md",
+      "status": 200,
+      "path": "/CHANGELOG.md"
+    },
+    {
+      "url": "https://www.bitflownova.com/LICENSE",
+      "status": 200,
+      "path": "/LICENSE"
+    },
+    {
+      "url": "https://www.bitflownova.com/uploads",
+      "status": 200,
+      "path": "/uploads"
+    },
+    {
+      "url": "https://www.bitflownova.com/images",
+      "status": 200,
+      "path": "/images"
+    },
+    {
+      "url": "https://www.bitflownova.com/assets",
+      "status": 200,
+      "path": "/assets"
+    },
+    {
+      "url": "https://www.bitflownova.com/static",
+      "status": 200,
+      "path": "/static"
+    },
+    {
+      "url": "https://www.bitflownova.com/media",
+      "status": 200,
+      "path": "/media"
+    },
+    {
+      "url": "https://www.bitflownova.com/files",
+      "status": 200,
+      "path": "/files"
+    },
+    {
+      "url": "https://www.bitflownova.com/private",
+      "status": 200,
+      "path": "/private"
+    },
+    {
+      "url": "https://www.bitflownova.com/secret",
+      "status": 200,
+      "path": "/secret"
+    },
+    {
+      "url": "https://www.bitflownova.com/hidden",
+      "status": 200,
+      "path": "/hidden"
+    },
+    {
+      "url": "https://www.bitflownova.com/internal",
+      "status": 200,
+      "path": "/internal"
+    },
+    {
+      "url": "https://www.bitflownova.com/.well-known/security.txt",
+      "status": 200,
+      "path": "/.well-known/security.txt"
+    },
+    {
+      "url": "https://www.bitflownova.com/security.txt",
+      "status": 200,
+      "path": "/security.txt"
+    },
+    {
+      "url": "https://www.bitflownova.com/error",
+      "status": 200,
+      "path": "/error"
+    },
+    {
+      "url": "https://www.bitflownova.com/404",
+      "status": 200,
+      "path": "/404"
+    },
+    {
+      "url": "https://www.bitflownova.com/500",
+      "status": 200,
+      "path": "/500"
+    },
+    {
+      "url": "https://www.bitflownova.com/debug",
+      "status": 200,
+      "path": "/debug"
+    }
+  ],
+  "ssl": {
+    "url": "https://www.bitflownova.com",
+    "has_ssl": true,
+    "valid": true,
+    "issuer": "Google Trust Services",
+    "subject": "alsharqah.erasolutions.sa",
+    "expires": "Apr 17 01:41:24 2026 GMT",
+    "protocol": "TLSv1.3",
+    "issues": []
+  },
+  "seo_issues": [
+    {
+      "url": "https://www.bitflownova.com",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/administrator",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/administrator",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/administrator",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/admin",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/admin",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/admin",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/wp-login.php",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/wp-login.php",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/wp-login.php",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/wp-admin",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/wp-admin",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/wp-admin",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/login",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/login",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/login",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/dashboard",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/dashboard",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/dashboard",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/panel",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/panel",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/panel",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/signin",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/signin",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/signin",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/phpmyadmin",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/phpmyadmin",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/phpmyadmin",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/backup",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/backup",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/backup",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/cpanel",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/cpanel",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/cpanel",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/backups",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/backups",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/backups",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/bak",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/bak",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/bak",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/old",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/old",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/old",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/archive",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/archive",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/archive",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/test",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/test",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/test",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/testing",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/testing",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/testing",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/staging",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/staging",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/staging",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/development",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/development",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/development",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/dev",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/dev",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/dev",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/beta",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/beta",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/beta",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/api",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/api",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/api",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/demo",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/demo",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/demo",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/api/v2",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/api/v2",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/api/v2",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/api/v1",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/api/v1",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/api/v1",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/graphql",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/graphql",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/graphql",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/rest",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/rest",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/rest",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/config",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/config",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/config",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/settings",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/settings",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/settings",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/setup",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/setup",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/setup",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/.git",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/.git",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/.git",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/configuration",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/configuration",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/configuration",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/.htaccess",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/.htaccess",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/.htaccess",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/.git/config",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/.git/config",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/.git/config",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/.env",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/.env",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/.env",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/.htpasswd",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/.htpasswd",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/.htpasswd",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/config.json",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/config.json",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/config.json",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/config.php",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/config.php",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/config.php",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/config.yml",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/config.yml",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/config.yml",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/settings.py",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/settings.py",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/settings.py",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/sitemap_index.xml",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/sitemap_index.xml",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/sitemap_index.xml",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/wp-config.php",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/wp-config.php",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/wp-config.php",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/web.config",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/web.config",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/web.config",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/package.json",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/package.json",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/package.json",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/composer.json",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/composer.json",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/composer.json",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/CHANGELOG.md",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/CHANGELOG.md",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/CHANGELOG.md",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/README.md",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/README.md",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/README.md",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/readme.md",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/readme.md",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/readme.md",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/uploads",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/uploads",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/uploads",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/LICENSE",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/LICENSE",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/LICENSE",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/images",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/images",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/images",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/static",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/static",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/static",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/media",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/media",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/media",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/assets",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/assets",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/assets",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/files",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/files",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/files",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/private",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/private",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/private",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/secret",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/secret",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/secret",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/hidden",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/hidden",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/hidden",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/.well-known/security.txt",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/.well-known/security.txt",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/.well-known/security.txt",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/internal",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/internal",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/internal",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/security.txt",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/security.txt",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/security.txt",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/error",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/error",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/error",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/404",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/404",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/404",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/500",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/500",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/500",
+      "issue": "Missing H1 tag"
+    },
+    {
+      "url": "https://www.bitflownova.com/debug",
+      "issue": "Title too long (>60 chars): \"Bitflow Nova - Institutional Systems & Architecture | Enterprise Technology Solutions\""
+    },
+    {
+      "url": "https://www.bitflownova.com/debug",
+      "issue": "Meta description too long: \"Bitflow Nova delivers enterprise-grade institutional management systems with cutting-edge technology architecture, data security, and cloud-native solutions for Healthcare, Education, and Enterprise sectors.\""
+    },
+    {
+      "url": "https://www.bitflownova.com/debug",
+      "issue": "Missing H1 tag"
+    }
+  ],
+  "security_issues": [],
+  "all_pages": [
+    {
+      "url": "https://www.bitflownova.com",
+      "status": 200,
+      "success": true,
+      "load_time": 29,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/administrator",
+      "status": 200,
+      "success": true,
+      "load_time": 27,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/admin",
+      "status": 200,
+      "success": true,
+      "load_time": 32,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/wp-login.php",
+      "status": 200,
+      "success": true,
+      "load_time": 31,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/wp-admin",
+      "status": 200,
+      "success": true,
+      "load_time": 23,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/login",
+      "status": 200,
+      "success": true,
+      "load_time": 38,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/dashboard",
+      "status": 200,
+      "success": true,
+      "load_time": 22,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/panel",
+      "status": 200,
+      "success": true,
+      "load_time": 29,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/signin",
+      "status": 200,
+      "success": true,
+      "load_time": 34,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/phpmyadmin",
+      "status": 200,
+      "success": true,
+      "load_time": 23,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/backup",
+      "status": 200,
+      "success": true,
+      "load_time": 36,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/cpanel",
+      "status": 200,
+      "success": true,
+      "load_time": 29,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/backups",
+      "status": 200,
+      "success": true,
+      "load_time": 23,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/bak",
+      "status": 200,
+      "success": true,
+      "load_time": 29,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/old",
+      "status": 200,
+      "success": true,
+      "load_time": 35,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/archive",
+      "status": 200,
+      "success": true,
+      "load_time": 29,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/test",
+      "status": 200,
+      "success": true,
+      "load_time": 22,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/testing",
+      "status": 200,
+      "success": true,
+      "load_time": 34,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/staging",
+      "status": 200,
+      "success": true,
+      "load_time": 24,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/development",
+      "status": 200,
+      "success": true,
+      "load_time": 32,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/dev",
+      "status": 200,
+      "success": true,
+      "load_time": 38,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/beta",
+      "status": 200,
+      "success": true,
+      "load_time": 24,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/api",
+      "status": 200,
+      "success": true,
+      "load_time": 30,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/demo",
+      "status": 200,
+      "success": true,
+      "load_time": 49,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/api/v2",
+      "status": 200,
+      "success": true,
+      "load_time": 22,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/api/v1",
+      "status": 200,
+      "success": true,
+      "load_time": 28,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/graphql",
+      "status": 200,
+      "success": true,
+      "load_time": 51,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/rest",
+      "status": 200,
+      "success": true,
+      "load_time": 23,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/config",
+      "status": 200,
+      "success": true,
+      "load_time": 30,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/settings",
+      "status": 200,
+      "success": true,
+      "load_time": 35,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/setup",
+      "status": 200,
+      "success": true,
+      "load_time": 26,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/.git",
+      "status": 200,
+      "success": true,
+      "load_time": 32,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/configuration",
+      "status": 200,
+      "success": true,
+      "load_time": 39,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/.htaccess",
+      "status": 200,
+      "success": true,
+      "load_time": 26,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/.git/config",
+      "status": 200,
+      "success": true,
+      "load_time": 45,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/.env",
+      "status": 200,
+      "success": true,
+      "load_time": 50,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/.htpasswd",
+      "status": 200,
+      "success": true,
+      "load_time": 26,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/config.json",
+      "status": 200,
+      "success": true,
+      "load_time": 32,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/config.php",
+      "status": 200,
+      "success": true,
+      "load_time": 49,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/robots.txt",
+      "status": 200,
+      "success": false,
+      "load_time": 23,
+      "size": 1539
+    },
+    {
+      "url": "https://www.bitflownova.com/config.yml",
+      "status": 200,
+      "success": true,
+      "load_time": 45,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/settings.py",
+      "status": 200,
+      "success": true,
+      "load_time": 52,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/sitemap.xml",
+      "status": 200,
+      "success": false,
+      "load_time": 24,
+      "size": 955
+    },
+    {
+      "url": "https://www.bitflownova.com/sitemap_index.xml",
+      "status": 200,
+      "success": true,
+      "load_time": 24,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/wp-config.php",
+      "status": 200,
+      "success": true,
+      "load_time": 32,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/web.config",
+      "status": 200,
+      "success": true,
+      "load_time": 25,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/package.json",
+      "status": 200,
+      "success": true,
+      "load_time": 31,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/composer.json",
+      "status": 200,
+      "success": true,
+      "load_time": 37,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/CHANGELOG.md",
+      "status": 200,
+      "success": true,
+      "load_time": 23,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/README.md",
+      "status": 200,
+      "success": true,
+      "load_time": 30,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/readme.md",
+      "status": 200,
+      "success": true,
+      "load_time": 38,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/uploads",
+      "status": 200,
+      "success": true,
+      "load_time": 24,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/LICENSE",
+      "status": 200,
+      "success": true,
+      "load_time": 36,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/images",
+      "status": 200,
+      "success": true,
+      "load_time": 30,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/static",
+      "status": 200,
+      "success": true,
+      "load_time": 24,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/media",
+      "status": 200,
+      "success": true,
+      "load_time": 37,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/assets",
+      "status": 200,
+      "success": true,
+      "load_time": 31,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/files",
+      "status": 200,
+      "success": true,
+      "load_time": 23,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/private",
+      "status": 200,
+      "success": true,
+      "load_time": 29,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/secret",
+      "status": 200,
+      "success": true,
+      "load_time": 35,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/hidden",
+      "status": 200,
+      "success": true,
+      "load_time": 24,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/.well-known/security.txt",
+      "status": 200,
+      "success": true,
+      "load_time": 36,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/internal",
+      "status": 200,
+      "success": true,
+      "load_time": 30,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/security.txt",
+      "status": 200,
+      "success": true,
+      "load_time": 24,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/error",
+      "status": 200,
+      "success": true,
+      "load_time": 31,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/404",
+      "status": 200,
+      "success": true,
+      "load_time": 49,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/500",
+      "status": 200,
+      "success": true,
+      "load_time": 24,
+      "size": 5473
+    },
+    {
+      "url": "https://www.bitflownova.com/debug",
+      "status": 200,
+      "success": true,
+      "load_time": 30,
+      "size": 5473
+    }
+  ]
+}

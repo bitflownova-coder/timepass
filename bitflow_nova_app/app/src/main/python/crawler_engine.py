@@ -36,41 +36,126 @@ try:
 except ImportError as e:
     print(f"Warning: Some packages not available: {e}")
 
+# Central HTTP client – controls SSL verification and rate limiting
+try:
+    from http_client import make_client, VERIFY_SSL
+except ImportError:
+    def make_client(timeout=20, follow_redirects=True, verify=None, rate_limit=True):
+        import httpx
+        return httpx.Client(timeout=timeout, follow_redirects=follow_redirects, verify=False)
+    VERIFY_SSL = False
+
 # Import security modules
 SECURITY_MODULES_AVAILABLE = False
 SECURITY_MODULES_ERROR = None
-try:
-    from js_analyzer import analyze_javascript
-    from form_mapper import map_forms
-    from cookie_auditor import audit_cookies
-    from robots_parser import analyze_robots_and_sitemap
-    from vuln_scanner import (
-        test_cors_misconfiguration, test_http_methods, detect_waf,
-        check_clickjacking, check_mixed_content, extract_html_comments,
-        trigger_error_pages, check_subdomain_takeover
-    )
-    from osint_engine import analyze_osint, get_osint_summary
-    from version_detector import analyze_versions
-    # NEW: Advanced security modules
-    from dns_recon import analyze_dns, analyze_email_security
-    from ssl_analyzer import analyze_ssl_certificate
-    from subdomain_enum import enumerate_subdomains
-    from api_discovery import discover_apis
-    from param_fuzzer import fuzz_parameters
-    from auth_tester import analyze_authentication
-    from cloud_scanner import scan_cloud_resources
-    from security_headers import analyze_security_headers
-    SECURITY_MODULES_AVAILABLE = True
-    log_i("CrawlerEngine", "Security modules loaded successfully")
-except ImportError as e:
-    # SECURITY_MODULES_ERROR = str(e)
-    # log_e("CrawlerEngine", f"Security modules not available: {e}")
-    # Fallback: Create detailed error for all import failures
-    SECURITY_MODULES_ERROR = f"ImportError: {e}"
-    log_e("CrawlerEngine", f"ImportError in modules: {e}")
-except Exception as e:
-    SECURITY_MODULES_ERROR = f"Loader Error: {e}"
-    log_e("CrawlerEngine", f"Error loading security modules: {e}")
+_FAILED_MODULES = []
+
+def _try_import(module_name, from_module, symbols):
+    """Import symbols from a module, returning True if successful."""
+    global _FAILED_MODULES
+    try:
+        import importlib
+        mod = importlib.import_module(from_module)
+        for sym in symbols:
+            globals()[sym] = getattr(mod, sym)
+        log_i("CrawlerEngine", f"Loaded: {from_module}")
+        return True
+    except Exception as e:
+        _FAILED_MODULES.append(f"{from_module}: {e}")
+        log_e("CrawlerEngine", f"Failed to load {from_module}: {e}")
+        return False
+
+# Load each module individually so one failure doesn't kill the rest
+_m = {
+    'js_analyzer':      _try_import('js_analyzer',      'js_analyzer',      ['analyze_javascript']),
+    'form_mapper':      _try_import('form_mapper',       'form_mapper',       ['map_forms']),
+    'cookie_auditor':   _try_import('cookie_auditor',    'cookie_auditor',    ['audit_cookies']),
+    'robots_parser':    _try_import('robots_parser',     'robots_parser',     ['analyze_robots_and_sitemap']),
+    'vuln_scanner':     _try_import('vuln_scanner',      'vuln_scanner',      [
+                            'test_cors_misconfiguration', 'test_http_methods', 'detect_waf',
+                            'check_clickjacking', 'check_mixed_content', 'extract_html_comments',
+                            'trigger_error_pages', 'check_subdomain_takeover']),
+    'osint_engine':     _try_import('osint_engine',      'osint_engine',      ['analyze_osint', 'get_osint_summary']),
+    'version_detector': _try_import('version_detector',  'version_detector',  ['analyze_versions']),
+    'dns_recon':        _try_import('dns_recon',         'dns_recon',         ['analyze_dns', 'analyze_email_security']),
+    'ssl_analyzer':     _try_import('ssl_analyzer',      'ssl_analyzer',      ['analyze_ssl_certificate']),
+    'subdomain_enum':   _try_import('subdomain_enum',    'subdomain_enum',    ['enumerate_subdomains']),
+    'api_discovery':    _try_import('api_discovery',     'api_discovery',     ['discover_apis']),
+    'param_fuzzer':     _try_import('param_fuzzer',      'param_fuzzer',      ['fuzz_parameters']),
+    'auth_tester':      _try_import('auth_tester',       'auth_tester',       ['analyze_authentication']),
+    'cloud_scanner':    _try_import('cloud_scanner',     'cloud_scanner',     ['scan_cloud_resources']),
+    'security_headers': _try_import('security_headers',  'security_headers',  ['analyze_security_headers']),
+    # Pro security modules
+    'redirect_tester':  _try_import('redirect_tester',   'redirect_tester',   ['test_open_redirects']),
+    'header_injection': _try_import('header_injection',  'header_injection',  ['test_crlf_injection']),
+    'jwt_analyzer':     _try_import('jwt_analyzer',      'jwt_analyzer',      ['analyze_jwts']),
+    'graphql_tester':   _try_import('graphql_tester',    'graphql_tester',    ['test_graphql_endpoints']),
+    'info_disclosure':  _try_import('info_disclosure',   'info_disclosure',   ['scan_info_disclosure']),
+    'sqli_detector':    _try_import('sqli_detector',     'sqli_detector',     ['detect_sqli']),
+    'rate_limit_checker': _try_import('rate_limit_checker', 'rate_limit_checker', ['check_rate_limiting']),
+}
+
+SECURITY_MODULES_AVAILABLE = all(_m.values())
+if _FAILED_MODULES:
+    SECURITY_MODULES_ERROR = "Some modules failed: " + "; ".join(_FAILED_MODULES)
+    log_e("CrawlerEngine", f"Module load errors: {SECURITY_MODULES_ERROR}")
+else:
+    log_i("CrawlerEngine", "All security modules loaded successfully")
+
+# Provide safe stubs for any modules that failed to load
+if not _m.get('js_analyzer'):
+    def analyze_javascript(*a, **kw): return {}
+if not _m.get('form_mapper'):
+    def map_forms(*a, **kw): return []
+if not _m.get('cookie_auditor'):
+    def audit_cookies(*a, **kw): return []
+if not _m.get('robots_parser'):
+    def analyze_robots_and_sitemap(*a, **kw): return {}
+if not _m.get('vuln_scanner'):
+    def test_cors_misconfiguration(*a, **kw): return {}
+    def test_http_methods(*a, **kw): return {}
+    def detect_waf(*a, **kw): return {}
+    def check_clickjacking(*a, **kw): return {}
+    def check_mixed_content(*a, **kw): return []
+    def extract_html_comments(*a, **kw): return []
+    def trigger_error_pages(*a, **kw): return {}
+    def check_subdomain_takeover(*a, **kw): return []
+if not _m.get('osint_engine'):
+    def analyze_osint(*a, **kw): return {}
+    def get_osint_summary(*a, **kw): return {}
+if not _m.get('version_detector'):
+    def analyze_versions(*a, **kw): return []
+if not _m.get('dns_recon'):
+    def analyze_dns(*a, **kw): return {}
+    def analyze_email_security(*a, **kw): return {}
+if not _m.get('ssl_analyzer'):
+    def analyze_ssl_certificate(*a, **kw): return {}
+if not _m.get('subdomain_enum'):
+    def enumerate_subdomains(*a, **kw): return {}
+if not _m.get('api_discovery'):
+    def discover_apis(*a, **kw): return {}
+if not _m.get('param_fuzzer'):
+    def fuzz_parameters(*a, **kw): return {}
+if not _m.get('auth_tester'):
+    def analyze_authentication(*a, **kw): return {}
+if not _m.get('cloud_scanner'):
+    def scan_cloud_resources(*a, **kw): return {}
+if not _m.get('security_headers'):
+    def analyze_security_headers(*a, **kw): return {}
+if not _m.get('redirect_tester'):
+    def test_open_redirects(*a, **kw): return {}
+if not _m.get('header_injection'):
+    def test_crlf_injection(*a, **kw): return {}
+if not _m.get('jwt_analyzer'):
+    def analyze_jwts(*a, **kw): return {}
+if not _m.get('graphql_tester'):
+    def test_graphql_endpoints(*a, **kw): return {}
+if not _m.get('info_disclosure'):
+    def scan_info_disclosure(*a, **kw): return {}
+if not _m.get('sqli_detector'):
+    def detect_sqli(*a, **kw): return {}
+if not _m.get('rate_limit_checker'):
+    def check_rate_limiting(*a, **kw): return {}
 
 # In-memory state for active crawls
 _active_crawls = {}
@@ -602,7 +687,7 @@ def extract_text_content(html, url):
 def download_file(url, save_path, timeout=30):
     """Download a file from URL"""
     try:
-        with httpx.Client(timeout=timeout, follow_redirects=True, verify=False) as client:
+        with make_client(timeout=timeout, follow_redirects=True) as client:
             response = client.get(url, headers={'User-Agent': 'Mozilla/5.0'})
             if response.status_code == 200:
                 os.makedirs(os.path.dirname(save_path), exist_ok=True)
@@ -659,7 +744,7 @@ def crawl_page(url, crawl_state):
     
     try:
         user_agent = crawl_state.get('user_agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36')
-        with httpx.Client(timeout=30, follow_redirects=True, verify=False) as client:
+        with make_client(timeout=8, follow_redirects=True) as client:
             headers = {'User-Agent': user_agent}
             start_time = time.time()
             response = client.get(url, headers=headers)
@@ -787,20 +872,12 @@ def probe_hidden_paths(base_url, crawl_state):
     for path in HIDDEN_PATHS:
         probe_urls.add(base + path)
         
-    # 2. Probes relative to current path (if deep structure)
-    path_parts = parsed.path.strip('/').split('/')
-    if path_parts and path_parts[0]:
-        # Add probes relative to the first path segment (e.g., example.com/app/ -> example.com/app/admin)
-        sub_base = f"{base}/{path_parts[0]}"
-        for path in HIDDEN_PATHS:
-            probe_urls.add(sub_base + path)
-            
     # Filter out already visited
     to_check = [u for u in probe_urls if u not in crawl_state['visited']]
     
     def check_url(url):
         try:
-            with httpx.Client(timeout=3, follow_redirects=False, verify=False) as client:
+            with make_client(timeout=3, follow_redirects=False, rate_limit=False) as client:
                 response = client.head(url, headers={'User-Agent': user_agent})
                 if response.status_code in [200, 301, 302, 403]:
                     return {
@@ -812,8 +889,8 @@ def probe_hidden_paths(base_url, crawl_state):
             pass
         return None
 
-    # Run probes concurrently (Fast!)
-    with ThreadPoolExecutor(max_workers=15) as executor:
+    # Run probes concurrently
+    with ThreadPoolExecutor(max_workers=4) as executor:
         futures = {executor.submit(check_url, u): u for u in to_check}
         for future in as_completed(futures):
             result = future.result()
@@ -854,7 +931,7 @@ def probe_subdomains(base_url, crawl_state):
     def check_subdomain(url):
         try:
             # Short timeout for subdomains as DNS fail is fast usually
-            with httpx.Client(timeout=2, follow_redirects=True, verify=False) as client:
+            with make_client(timeout=2, follow_redirects=True, rate_limit=False) as client:
                 response = client.head(url, headers={'User-Agent': user_agent})
                 # If we get a response, the subdomain exists
                 if response.status_code < 500: # Accept almost anything that answers
@@ -867,8 +944,8 @@ def probe_subdomains(base_url, crawl_state):
             pass
         return None
 
-    # Run probes (increased parallelism for speed)
-    with ThreadPoolExecutor(max_workers=15) as executor:
+    # Run probes
+    with ThreadPoolExecutor(max_workers=4) as executor:
         futures = {executor.submit(check_subdomain, u): u for u in to_check}
         for future in as_completed(futures):
             result = future.result()
@@ -955,7 +1032,15 @@ def start_crawl(url, depth, output_dir, user_agent="Mozilla/5.0", scan_categorie
         'param_fuzzing': None,
         'auth_testing': None,
         'cloud_scanner': None,
-        'security_headers': None
+        'security_headers': None,
+        # Pro security scan results
+        'redirect_testing': None,
+        'header_injection': None,
+        'jwt_analysis': None,
+        'graphql_testing': None,
+        'info_disclosure': None,
+        'sqli_detection': None,
+        'rate_limit_check': None,
     }
     
     import threading
@@ -978,7 +1063,7 @@ def start_crawl(url, depth, output_dir, user_agent="Mozilla/5.0", scan_categorie
             # Initial connectivity check
             _crawl_results[c_id]['current_url'] = 'Checking connectivity...'
             try:
-                with httpx.Client(timeout=15, follow_redirects=True, verify=False) as client:
+                with make_client(timeout=15, follow_redirects=True) as client:
                     response = client.head(start_url, headers={'User-Agent': ua})
                     if response.status_code >= 400:
                         raise Exception(f"Server returned status {response.status_code}")
@@ -1185,7 +1270,7 @@ def start_crawl(url, depth, output_dir, user_agent="Mozilla/5.0", scan_categorie
                 if 'subdomain_enum' in enabled:
                     def run_subdomain_enum():
                         try:
-                            return [('subdomain_enum', enumerate_subdomains(start_url, bruteforce=False))]
+                            return [('subdomain_enum', enumerate_subdomains(start_url, bruteforce=True))]
                         except Exception as e:
                             log_e("CrawlerEngine", f"Subdomain enumeration error: {e}")
                             return [('subdomain_enum', None)]
@@ -1221,7 +1306,7 @@ def start_crawl(url, depth, output_dir, user_agent="Mozilla/5.0", scan_categorie
                 if 'cloud_scanner' in enabled:
                     def run_cloud_scanner():
                         try:
-                            with httpx.Client(timeout=10, verify=False) as client:
+                            with make_client(timeout=10) as client:
                                 resp = client.get(start_url)
                                 page_content = resp.text
                             return [('cloud_scanner', scan_cloud_resources(start_url, page_content))]
@@ -1238,10 +1323,55 @@ def start_crawl(url, depth, output_dir, user_agent="Mozilla/5.0", scan_categorie
                             log_e("CrawlerEngine", f"Security headers error: {e}")
                             return [('security_headers', None)]
                     advanced_scan_tasks.append(run_security_headers)
+
+                if is_full_scan or 'redirect_testing' in enabled:
+                    def run_redirect_testing():
+                        try:
+                            return [('redirect_testing', test_open_redirects(start_url))]
+                        except Exception as e:
+                            log_e("CrawlerEngine", f"Redirect testing error: {e}")
+                            return [('redirect_testing', None)]
+                    advanced_scan_tasks.append(run_redirect_testing)
+
+                if is_full_scan or 'header_injection' in enabled:
+                    def run_header_injection():
+                        try:
+                            return [('header_injection', test_crlf_injection(start_url))]
+                        except Exception as e:
+                            log_e("CrawlerEngine", f"Header injection error: {e}")
+                            return [('header_injection', None)]
+                    advanced_scan_tasks.append(run_header_injection)
+
+                if is_full_scan or 'graphql_testing' in enabled:
+                    def run_graphql_testing():
+                        try:
+                            return [('graphql_testing', test_graphql_endpoints(start_url))]
+                        except Exception as e:
+                            log_e("CrawlerEngine", f"GraphQL testing error: {e}")
+                            return [('graphql_testing', None)]
+                    advanced_scan_tasks.append(run_graphql_testing)
+
+                if is_full_scan or 'info_disclosure' in enabled:
+                    def run_info_disclosure():
+                        try:
+                            return [('info_disclosure', scan_info_disclosure(start_url))]
+                        except Exception as e:
+                            log_e("CrawlerEngine", f"Info disclosure error: {e}")
+                            return [('info_disclosure', None)]
+                    advanced_scan_tasks.append(run_info_disclosure)
+
+                if is_full_scan or 'rate_limit_check' in enabled:
+                    def run_rate_limit_check():
+                        try:
+                            return [('rate_limit_check', check_rate_limiting(start_url))]
+                        except Exception as e:
+                            log_e("CrawlerEngine", f"Rate limit check error: {e}")
+                            return [('rate_limit_check', None)]
+                    advanced_scan_tasks.append(run_rate_limit_check)
                 
                 # Execute all enabled advanced scans in parallel
                 if advanced_scan_tasks:
-                    with ThreadPoolExecutor(max_workers=min(8, len(advanced_scan_tasks))) as executor:
+                    with ThreadPoolExecutor(max_workers=min(4, len(advanced_scan_tasks))) as executor:
                         futures = [executor.submit(task) for task in advanced_scan_tasks]
                         for future in as_completed(futures):
                             try:
@@ -1254,15 +1384,18 @@ def start_crawl(url, depth, output_dir, user_agent="Mozilla/5.0", scan_categorie
             
             # ============ END ADVANCED SECURITY SCANS ============
             
-            # Main crawl loop with concurrent processing (increased parallelism)
-            with ThreadPoolExecutor(max_workers=8) as executor:
+            # Main crawl loop with concurrent processing
+            MAX_PAGES = 30  # cap pages crawled on mobile to avoid endless scans
+            with ThreadPoolExecutor(max_workers=3) as executor:
                 while crawl_state['to_visit']:
                     if _active_crawls.get(c_id, {}).get('stop'):
                         break
+                    if len(crawl_state['visited']) >= MAX_PAGES:
+                        break
                     
-                    # Get batch of URLs to process (larger batches for speed)
+                    # Get batch of URLs to process
                     batch = []
-                    while crawl_state['to_visit'] and len(batch) < 8:
+                    while crawl_state['to_visit'] and len(batch) < 3:
                         current_url, current_depth = crawl_state['to_visit'].pop(0)
                         if current_url not in crawl_state['visited'] and current_depth <= depth:
                             batch.append((current_url, current_depth))
@@ -1363,6 +1496,48 @@ def start_crawl(url, depth, output_dir, user_agent="Mozilla/5.0", scan_categorie
                     _crawl_results[c_id]['osint_summary'] = get_osint_summary(osint_results, domain)
                 except Exception as e:
                     log_e("CrawlerEngine", f"OSINT summary error: {e}")
+
+            # JWT Analysis — passive, uses already-collected page data
+            if SECURITY_MODULES_AVAILABLE and (is_full_scan or 'auth_testing' in scans):
+                try:
+                    pages_for_jwt = [
+                        {
+                            'url': r.get('url', ''),
+                            'html': r.get('html', ''),
+                            'headers': r.get('response_headers', {}),
+                            'cookies': r.get('cookies', []),
+                        }
+                        for r in all_results if r.get('url')
+                    ]
+                    jwt_result = analyze_jwts(pages_for_jwt)
+                    if jwt_result.get('vulnerable_tokens', 0) > 0:
+                        _crawl_results[c_id]['jwt_analysis'] = jwt_result
+                except Exception as e:
+                    log_e("CrawlerEngine", f"JWT analysis error: {e}")
+
+            # SQLi Detection — uses discovered params + page data
+            if SECURITY_MODULES_AVAILABLE and (is_full_scan or 'param_fuzzing' in scans):
+                try:
+                    pages_for_sqli = [
+                        {'url': r.get('url', ''), 'html': r.get('html', '')}
+                        for r in all_results if r.get('url')
+                    ]
+                    param_fuzzing_result = _crawl_results[c_id].get('param_fuzzing') or {}
+                    discovered_params = param_fuzzing_result.get('discovered_params', [])
+                    sqli_result = detect_sqli(start_url, discovered_params, pages_for_sqli)
+                    if sqli_result.get('findings'):
+                        _crawl_results[c_id]['sqli_detection'] = sqli_result
+                        # Add critical SQLi findings to main vulnerabilities list
+                        for finding in sqli_result['findings']:
+                            if finding.get('severity') in ('Critical', 'High'):
+                                _crawl_results[c_id]['vulnerabilities'].append({
+                                    'type': finding.get('type', 'SQL Injection'),
+                                    'url': finding.get('url', start_url),
+                                    'severity': finding.get('severity', 'High'),
+                                    'details': finding.get('description', ''),
+                                })
+                except Exception as e:
+                    log_e("CrawlerEngine", f"SQLi detection error: {e}")
             
             # NEW: Deduplicate technologies
             seen_tech = set()
@@ -1468,6 +1643,14 @@ def start_crawl(url, depth, output_dir, user_agent="Mozilla/5.0", scan_categorie
                     'auth_testing': _crawl_results[c_id].get('auth_testing'),
                     'cloud_scanner': _crawl_results[c_id].get('cloud_scanner'),
                     'security_headers': _crawl_results[c_id].get('security_headers'),
+                    # Pro security scan results
+                    'redirect_testing': _crawl_results[c_id].get('redirect_testing'),
+                    'header_injection': _crawl_results[c_id].get('header_injection'),
+                    'jwt_analysis': _crawl_results[c_id].get('jwt_analysis'),
+                    'graphql_testing': _crawl_results[c_id].get('graphql_testing'),
+                    'info_disclosure': _crawl_results[c_id].get('info_disclosure'),
+                    'sqli_detection': _crawl_results[c_id].get('sqli_detection'),
+                    'rate_limit_check': _crawl_results[c_id].get('rate_limit_check'),
                     'enabled_scans': list(crawl_state.get('enabled_scans', [])),
                     # Security summary
                     'security_score': security_score,
@@ -1575,6 +1758,14 @@ def get_analysis_report(crawl_id, output_dir):
             'auth_testing': _crawl_results[crawl_id].get('auth_testing'),
             'cloud_scanner': _crawl_results[crawl_id].get('cloud_scanner'),
             'security_headers': _crawl_results[crawl_id].get('security_headers'),
+            # Pro security scan results
+            'redirect_testing': _crawl_results[crawl_id].get('redirect_testing'),
+            'header_injection': _crawl_results[crawl_id].get('header_injection'),
+            'jwt_analysis': _crawl_results[crawl_id].get('jwt_analysis'),
+            'graphql_testing': _crawl_results[crawl_id].get('graphql_testing'),
+            'info_disclosure': _crawl_results[crawl_id].get('info_disclosure'),
+            'sqli_detection': _crawl_results[crawl_id].get('sqli_detection'),
+            'rate_limit_check': _crawl_results[crawl_id].get('rate_limit_check'),
             'enabled_scans': list(_crawl_results[crawl_id].get('enabled_scans', [])),
             'error': _crawl_results[crawl_id].get('error')
         })

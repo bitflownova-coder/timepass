@@ -1,0 +1,96 @@
+2026-01-31 02:30:28,603 - INFO - Starting website crawl...
+2026-01-31 02:30:28,603 - INFO - Scanning page: https://www.nmc.org.in/
+2026-01-31 02:30:30,744 - INFO - Scanning page: https://www.nmc.org.in/nmc-act/
+2026-01-31 02:30:32,905 - INFO - Scanning page: https://www.nmc.org.in/information-desk/teaching-faculty/
+2026-01-31 02:30:35,165 - INFO - Scanning page: https://www.nmc.org.in/ape_gallery/vasant-utsav-at-nmc/
+2026-01-31 02:30:37,442 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/indian-medical-council-rules-1957/
+2026-01-31 02:30:39,773 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-colleges/fees-for-various-inspection/
+2026-01-31 02:30:42,075 - INFO - Scanning page: https://www.nmc.org.in/autonomous-boards/ethics-medical-registration-board/
+2026-01-31 02:30:44,020 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/post-graduate-committee-rules-1961/
+2026-01-31 02:30:46,235 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/screening-test-regulations-2002/
+2026-01-31 02:30:48,436 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-colleges/pg-curricula-2/
+2026-01-31 02:30:50,586 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-colleges/
+2026-01-31 02:30:52,698 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/establishment-of-medical-college-regulations-1999/
+2026-01-31 02:30:55,168 - INFO - Scanning page: https://www.nmc.org.in/acts-amendments/right-to-information/
+2026-01-31 02:30:57,663 - INFO - Scanning page: https://www.nmc.org.in/posh-act-2013-and-composition-of-icc-under-post-act-2013/
+2026-01-31 02:31:00,163 - INFO - Scanning page: https://www.nmc.org.in/e-compendium-of-nmc-2024
+2026-01-31 02:31:04,249 - INFO - Scanning page: https://www.nmc.org.in/national-action-plan-on-antimicrobial-resistance
+2026-01-31 02:31:07,099 - INFO - Scanning page: https://www.nmc.org.in/information-desk/state-medical-councils/
+2026-01-31 02:31:09,385 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-colleges/procedure-to-increase-admission-capacity/
+2026-01-31 02:31:11,511 - INFO - Scanning page: https://www.nmc.org.in/about-nmc/
+2026-01-31 02:31:13,414 - INFO - Scanning page: https://www.nmc.org.in/terms-of-use/
+2026-01-31 02:31:15,967 - INFO - Scanning page: https://www.nmc.org.in/online-application-submit
+2026-01-31 02:31:18,764 - INFO - Scanning page: https://www.nmc.org.in/media-room/advertisements/
+2026-01-31 02:31:21,052 - INFO - Scanning page: https://www.nmc.org.in/online-pg-application
+2026-01-31 02:31:24,296 - INFO - Scanning page: https://www.nmc.org.in/old-archive-news
+2026-01-31 02:31:27,556 - INFO - Scanning page: https://www.nmc.org.in/ActivitiWebClient/open/doctorLogin
+2026-01-31 02:31:28,299 - INFO - Scanning page: https://www.nmc.org.in/e-gazette/e-gazette-nmc
+2026-01-31 02:31:31,126 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-colleges/ug-curriculum/
+2026-01-31 02:31:33,224 - INFO - Scanning page: https://www.nmc.org.in/annual-disclosure-report
+2026-01-31 02:31:36,017 - INFO - Scanning page: https://www.nmc.org.in/contact-us/
+2026-01-31 02:31:38,709 - INFO - Scanning page: https://www.nmc.org.in/information-desk/
+2026-01-31 02:31:41,093 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/election-of-students-union-regulations-2009/
+2026-01-31 02:31:43,426 - INFO - Scanning page: https://www.nmc.org.in/honble-supreme-court-mandated-oversight-committee-on-mci
+2026-01-31 02:31:46,658 - INFO - Scanning page: https://www.nmc.org.in/feedback/
+2026-01-31 02:31:48,941 - INFO - Scanning page: https://www.nmc.org.in/annual-disclosure-report/annual-disclosure-report-pg
+2026-01-31 02:31:51,790 - INFO - Scanning page: https://www.nmc.org.in/meetings/
+2026-01-31 02:31:54,171 - INFO - Scanning page: https://www.nmc.org.in/information-desk/list-of-college-teaching-pg-courses/
+2026-01-31 02:31:56,704 - INFO - Scanning page: https://www.nmc.org.in/information-desk/ethics_agenda
+2026-01-31 02:31:59,401 - INFO - Scanning page: https://www.nmc.org.in/autonomous-boards/post-graduate-medical-education-board/
+2026-01-31 02:32:03,148 - INFO - Scanning page: https://www.nmc.org.in/media-room/
+2026-01-31 02:32:05,086 - INFO - Scanning page: https://www.nmc.org.in/autonomous-boards/under-graduate-medical-education-board/
+2026-01-31 02:32:07,284 - INFO - Scanning page: https://www.nmc.org.in/information-desk/college-and-course-search/
+2026-01-31 02:32:09,345 - INFO - Scanning page: https://www.nmc.org.in/vigilance-corner-details
+2026-01-31 02:32:12,023 - INFO - Scanning page: https://www.nmc.org.in/information-desk/college-and-course-search/view-diplomate-and-fellowship-course-details/
+2026-01-31 02:32:14,368 - INFO - Scanning page: https://www.nmc.org.in/all-news
+2026-01-31 02:32:17,300 - INFO - Scanning page: https://www.nmc.org.in/acts-amendments/the-first-schedule-of-imc-act/
+2026-01-31 02:32:19,397 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/
+2026-01-31 02:32:21,869 - INFO - Scanning page: https://www.nmc.org.in/information-desk/teaching-faculty/popup/egazette
+2026-01-31 02:32:22,611 - WARNING - Timeout/connection error on https://www.nmc.org.in/information-desk/teaching-faculty/popup/egazette, retrying (1/3)...
+2026-01-31 02:32:24,612 - INFO - Scanning page: https://www.nmc.org.in/information-desk/teaching-faculty/popup/egazette
+2026-01-31 02:32:25,628 - WARNING - Timeout/connection error on https://www.nmc.org.in/information-desk/teaching-faculty/popup/egazette, retrying (2/3)...
+2026-01-31 02:32:27,629 - INFO - Scanning page: https://www.nmc.org.in/information-desk/teaching-faculty/popup/egazette
+2026-01-31 02:32:28,605 - ERROR - Failed after 3 attempts: https://www.nmc.org.in/information-desk/teaching-faculty/popup/egazette
+2026-01-31 02:32:34,873 - ERROR - Failed to get links from https://www.nmc.org.in/information-desk/teaching-faculty/popup/egazette after 3 attempts
+2026-01-31 02:32:35,374 - INFO - Scanning page: https://www.nmc.org.in/information-desk/circularspublic-notices/
+2026-01-31 02:32:37,601 - INFO - Scanning page: https://www.nmc.org.in/under-graduate/
+2026-01-31 02:32:40,117 - INFO - Scanning page: https://www.nmc.org.in/information-desk/college-assessment-reports
+2026-01-31 02:32:43,442 - INFO - Scanning page: https://www.nmc.org.in/ActivitiWebClient/forgotPassword
+2026-01-31 02:32:44,215 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/eligibility-certificate-regulations-2002/
+2026-01-31 02:32:46,286 - INFO - Scanning page: https://www.nmc.org.in/home/notice-for-visitor/
+2026-01-31 02:32:48,317 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-students-to-study-in-india/list-of-college-teaching-mbbs/
+2026-01-31 02:32:50,626 - INFO - Scanning page: https://www.nmc.org.in/news-and-event-nmc/
+2026-01-31 02:32:52,907 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/code-of-medical-ethics-regulations-2002/
+2026-01-31 02:32:55,114 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-colleges/national-faculty-development-programme/
+2026-01-31 02:32:57,644 - INFO - Scanning page: https://www.nmc.org.in/ActivitiWebClient/open/studentregistrationHome
+2026-01-31 02:32:58,400 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/students-admitted-in-excess-regulations-1997/
+2026-01-31 02:33:00,730 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/opening-of-a-new-or-higher-course-of-study-2000/
+2026-01-31 02:33:04,221 - INFO - Scanning page: https://www.nmc.org.in/media-room/announcements/
+2026-01-31 02:33:06,537 - INFO - Scanning page: https://www.nmc.org.in/phlas-treatment/
+2026-01-31 02:33:08,996 - INFO - Scanning page: https://www.nmc.org.in/ape_gallery/integrity-pledge-06-11-2023/
+2026-01-31 02:33:10,868 - INFO - Scanning page: https://www.nmc.org.in/ape_gallery/cyber-safety-awareness-session/
+2026-01-31 02:33:13,215 - INFO - Scanning page: https://www.nmc.org.in/ActivitiWebClient/monitoringCollegeLogin
+2026-01-31 02:33:13,944 - INFO - Scanning page: https://www.nmc.org.in/information-desk/college-and-course-search/view-closed-collegesinstitutions/
+2026-01-31 02:33:16,189 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-students-to-study-in-india/
+2026-01-31 02:33:18,521 - INFO - Scanning page: https://www.nmc.org.in/about-nmc/introduction/
+2026-01-31 02:33:20,684 - INFO - Scanning page: https://www.nmc.org.in/autonomous-boards/medical-assessment-rating-board/
+2026-01-31 02:33:22,877 - INFO - Scanning page: https://www.nmc.org.in/acts-amendments/the-indian-medical-degree-act-1916/
+2026-01-31 02:33:24,921 - INFO - Scanning page: https://www.nmc.org.in/about-nmc/functions-of-nmc/
+2026-01-31 02:33:27,182 - INFO - Scanning page: https://www.nmc.org.in/acts-amendments/the-third-schedule-of-imc-act/
+2026-01-31 02:33:29,395 - INFO - Scanning page: https://www.nmc.org.in/circulars-and-public-notices-nmc/
+2026-01-31 02:33:31,457 - INFO - Scanning page: https://www.nmc.org.in/e-gazette
+2026-01-31 02:33:34,478 - INFO - Scanning page: https://www.nmc.org.in/elligibility-for-ph/
+2026-01-31 02:33:36,934 - INFO - Scanning page: https://www.nmc.org.in/handling-of-disabled-children/
+2026-01-31 02:33:39,298 - INFO - Scanning page: https://www.nmc.org.in/information-desk/state-medical-councils/list-of-state-medical-councils/
+2026-01-31 02:34:09,397 - WARNING - Timeout/connection error on https://www.nmc.org.in/information-desk/state-medical-councils/list-of-state-medical-councils/, retrying (1/3)...
+2026-01-31 02:34:11,398 - INFO - Scanning page: https://www.nmc.org.in/information-desk/state-medical-councils/list-of-state-medical-councils/
+2026-01-31 02:34:41,481 - WARNING - Timeout/connection error on https://www.nmc.org.in/information-desk/state-medical-councils/list-of-state-medical-councils/, retrying (2/3)...
+2026-01-31 02:34:43,482 - INFO - Scanning page: https://www.nmc.org.in/information-desk/state-medical-councils/list-of-state-medical-councils/
+2026-01-31 02:35:13,570 - ERROR - Failed after 3 attempts: https://www.nmc.org.in/information-desk/state-medical-councils/list-of-state-medical-councils/
+2026-01-31 02:36:47,850 - ERROR - Failed to get links from https://www.nmc.org.in/information-desk/state-medical-councils/list-of-state-medical-councils/ after 3 attempts
+2026-01-31 02:36:48,351 - INFO - Scanning page: https://www.nmc.org.in/rti/
+2026-01-31 02:37:18,480 - WARNING - Timeout/connection error on https://www.nmc.org.in/rti/, retrying (1/3)...
+2026-01-31 02:37:20,481 - INFO - Scanning page: https://www.nmc.org.in/rti/
+2026-01-31 02:37:50,577 - WARNING - Timeout/connection error on https://www.nmc.org.in/rti/, retrying (2/3)...
+2026-01-31 02:37:52,577 - INFO - Scanning page: https://www.nmc.org.in/rti/
+2026-01-31 02:38:22,687 - ERROR - Failed after 3 attempts: https://www.nmc.org.in/rti/

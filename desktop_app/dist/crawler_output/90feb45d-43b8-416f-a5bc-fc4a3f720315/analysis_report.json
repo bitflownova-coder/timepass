@@ -1,0 +1,603 @@
+{
+  "url": "https://jerusalemcollegeofengine.web.app/",
+  "pages_crawled": 30,
+  "hidden_paths": [
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/404",
+      "status": 200,
+      "path": "/404"
+    }
+  ],
+  "ssl": {
+    "url": "https://jerusalemcollegeofengine.web.app/",
+    "has_ssl": true,
+    "valid": true,
+    "issuer": "Google Trust Services",
+    "subject": "web.app",
+    "expires": "Apr  5 17:31:30 2026 GMT",
+    "protocol": "TLSv1.3",
+    "issues": []
+  },
+  "seo_issues": [
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/404",
+      "issue": "Title too long (>60 chars): \"Jerusalem College of Engineering | NAAC Accredited | Top Engineering College in Chennai\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/404",
+      "issue": "Meta description too long: \"Jerusalem College of Engineering, Chennai - NAAC Accredited institution offering B.E., M.E., and Ph.D. programs in Computer Science, Mechanical, Civil, ECE, and EEE. AICTE approved with excellent placements.\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/404",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"404\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/",
+      "issue": "Title too long (>60 chars): \"Jerusalem College of Engineering | NAAC Accredited | Top Engineering College in Chennai\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/",
+      "issue": "Meta description too long: \"Jerusalem College of Engineering, Chennai - Leading NAAC accredited engineering institution offering B.E., M.E., Ph.D. programs with 95% placement record. AICTE approved. Apply now for admissions 2026.\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Shape Your Future withEngineering Excellence\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/research",
+      "issue": "Title too long (>60 chars): \"Jerusalem College of Engineering | NAAC Accredited | Top Engineering College in Chennai\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/research",
+      "issue": "Meta description too long: \"Jerusalem College of Engineering, Chennai - NAAC Accredited institution offering B.E., M.E., and Ph.D. programs in Computer Science, Mechanical, Civil, ECE, and EEE. AICTE approved with excellent placements.\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/research",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Research & Development\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/it",
+      "issue": "Title too long (>60 chars): \"Information Technology | Jerusalem College of Engineering | Jerusalem College of Engineering\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/it",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Information Technology\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/cs-bs",
+      "issue": "Title too long (>60 chars): \"Computer Science & Business Systems | Jerusalem College of Engineering | Jerusalem College of Engineering\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/cs-bs",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Computer Science & Business Systems\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/alumni",
+      "issue": "Title too long (>60 chars): \"Jerusalem College of Engineering | NAAC Accredited | Top Engineering College in Chennai\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/alumni",
+      "issue": "Meta description too long: \"Jerusalem College of Engineering, Chennai - NAAC Accredited institution offering B.E., M.E., and Ph.D. programs in Computer Science, Mechanical, Civil, ECE, and EEE. AICTE approved with excellent placements.\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/alumni",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"JCE Alumni Network\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/placements",
+      "issue": "Title too long (>60 chars): \"Placements | Jerusalem College of Engineering | Jerusalem College of Engineering\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/placements",
+      "issue": "Meta description too long: \"Explore placement statistics, top recruiters, and career opportunities at Jerusalem College of Engineering. 95%+ placement rate with top companies like TCS, Infosys, Wipro, Cognizant.\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/placements",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Training & Placements\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/admissions",
+      "issue": "Title too long (>60 chars): \"Jerusalem College of Engineering | NAAC Accredited | Top Engineering College in Chennai\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/admissions",
+      "issue": "Meta description too long: \"Jerusalem College of Engineering, Chennai - NAAC Accredited institution offering B.E., M.E., and Ph.D. programs in Computer Science, Mechanical, Civil, ECE, and EEE. AICTE approved with excellent placements.\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/admissions",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Admissions 2024-25\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/ai-ds",
+      "issue": "Title too long (>60 chars): \"Artificial Intelligence & Data Science | Jerusalem College of Engineering | Jerusalem College of Engineering\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/ai-ds",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Artificial Intelligence & Data Science\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/civil",
+      "issue": "Title too long (>60 chars): \"Civil Engineering | Jerusalem College of Engineering | Jerusalem College of Engineering\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/civil",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Civil Engineering\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/mba",
+      "issue": "Title too long (>60 chars): \"Master of Business Administration | Jerusalem College of Engineering | Jerusalem College of Engineering\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/mba",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Master of Business Administration\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/eee",
+      "issue": "Title too long (>60 chars): \"Electrical & Electronics Engineering | Jerusalem College of Engineering | Jerusalem College of Engineering\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/eee",
+      "issue": "Meta description too long: \"Learn about Electrical & Electronics Engineering department at Jerusalem College of Engineering. NBA Accredited. Explore programs, faculty, placements, and more.\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/eee",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Electrical & Electronics Engineering\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments",
+      "issue": "Title too long (>60 chars): \"Jerusalem College of Engineering | NAAC Accredited | Top Engineering College in Chennai\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments",
+      "issue": "Meta description too long: \"Jerusalem College of Engineering, Chennai - NAAC Accredited institution offering B.E., M.E., and Ph.D. programs in Computer Science, Mechanical, Civil, ECE, and EEE. AICTE approved with excellent placements.\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Our Departments\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/notices",
+      "issue": "Title too long (>60 chars): \"Jerusalem College of Engineering | NAAC Accredited | Top Engineering College in Chennai\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/notices",
+      "issue": "Meta description too long: \"Jerusalem College of Engineering, Chennai - NAAC Accredited institution offering B.E., M.E., and Ph.D. programs in Computer Science, Mechanical, Civil, ECE, and EEE. AICTE approved with excellent placements.\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/notices",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Notices &Announcements\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/campus-life",
+      "issue": "Title too long (>60 chars): \"Jerusalem College of Engineering | NAAC Accredited | Top Engineering College in Chennai\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/campus-life",
+      "issue": "Meta description too long: \"Jerusalem College of Engineering, Chennai - NAAC Accredited institution offering B.E., M.E., and Ph.D. programs in Computer Science, Mechanical, Civil, ECE, and EEE. AICTE approved with excellent placements.\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/campus-life",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Campus Life at JCE\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/about",
+      "issue": "Title too long (>60 chars): \"Jerusalem College of Engineering | NAAC Accredited | Top Engineering College in Chennai\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/about",
+      "issue": "Meta description too long: \"Jerusalem College of Engineering, Chennai - NAAC Accredited institution offering B.E., M.E., and Ph.D. programs in Computer Science, Mechanical, Civil, ECE, and EEE. AICTE approved with excellent placements.\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/about",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"About Jerusalem College of Engineering\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/academics",
+      "issue": "Title too long (>60 chars): \"Jerusalem College of Engineering | NAAC Accredited | Top Engineering College in Chennai\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/academics",
+      "issue": "Meta description too long: \"Jerusalem College of Engineering, Chennai - NAAC Accredited institution offering B.E., M.E., and Ph.D. programs in Computer Science, Mechanical, Civil, ECE, and EEE. AICTE approved with excellent placements.\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/academics",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Academic Programs\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/mandatory-disclosure",
+      "issue": "Title too long (>60 chars): \"Mandatory Disclosure | Jerusalem College of Engineering | Jerusalem College of Engineering\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/mandatory-disclosure",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Mandatory Disclosure\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/ai-ml",
+      "issue": "Title too long (>60 chars): \"Artificial Intelligence & Machine Learning | Jerusalem College of Engineering | Jerusalem College of Engineering\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/ai-ml",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Artificial Intelligence & Machine Learning\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/cyber-security",
+      "issue": "Title too long (>60 chars): \"Cyber Security | Jerusalem College of Engineering | Jerusalem College of Engineering\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/cyber-security",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Cyber Security\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/ece",
+      "issue": "Title too long (>60 chars): \"Electronics & Communication Engineering | Jerusalem College of Engineering | Jerusalem College of Engineering\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/ece",
+      "issue": "Meta description too long: \"Learn about Electronics & Communication Engineering department at Jerusalem College of Engineering. NBA Accredited. Explore programs, faculty, placements, and more.\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/ece",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Electronics & Communication Engineering\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/mech",
+      "issue": "Title too long (>60 chars): \"Mechanical Engineering | Jerusalem College of Engineering | Jerusalem College of Engineering\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/mech",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Mechanical Engineering\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/cse",
+      "issue": "Title too long (>60 chars): \"Computer Science & Engineering | Jerusalem College of Engineering | Jerusalem College of Engineering\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/cse",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Computer Science & Engineering\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/contact",
+      "issue": "Title too long (>60 chars): \"Jerusalem College of Engineering | NAAC Accredited | Top Engineering College in Chennai\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/contact",
+      "issue": "Meta description too long: \"Jerusalem College of Engineering, Chennai - NAAC Accredited institution offering B.E., M.E., and Ph.D. programs in Computer Science, Mechanical, Civil, ECE, and EEE. AICTE approved with excellent placements.\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/contact",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Get in Touch\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/iqac-naac",
+      "issue": "Title too long (>60 chars): \"Jerusalem College of Engineering | NAAC Accredited | Top Engineering College in Chennai\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/iqac-naac",
+      "issue": "Meta description too long: \"Jerusalem College of Engineering, Chennai - NAAC Accredited institution offering B.E., M.E., and Ph.D. programs in Computer Science, Mechanical, Civil, ECE, and EEE. AICTE approved with excellent placements.\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/iqac-naac",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Quality Assurance\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/bme",
+      "issue": "Title too long (>60 chars): \"Biomedical Engineering | Jerusalem College of Engineering | Jerusalem College of Engineering\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/bme",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Biomedical Engineering\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/admissions/apply",
+      "issue": "Title too long (>60 chars): \"Jerusalem College of Engineering | NAAC Accredited | Top Engineering College in Chennai\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/admissions/apply",
+      "issue": "Meta description too long: \"Jerusalem College of Engineering, Chennai - NAAC Accredited institution offering B.E., M.E., and Ph.D. programs in Computer Science, Mechanical, Civil, ECE, and EEE. AICTE approved with excellent placements.\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/admissions/apply",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Online Application Form\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/academics/ug-programs",
+      "issue": "Title too long (>60 chars): \"UG Programs | Jerusalem College of Engineering | Jerusalem College of Engineering\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/academics/ug-programs",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Undergraduate Programs\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/academics/pg-programs",
+      "issue": "Title too long (>60 chars): \"PG Programs | Jerusalem College of Engineering | Jerusalem College of Engineering\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/academics/pg-programs",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Postgraduate Programs\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/admissions/process",
+      "issue": "Title too long (>60 chars): \"Admission Process | Jerusalem College of Engineering | Jerusalem College of Engineering\""
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/admissions/process",
+      "issue": "Multiple H1 tags (2): \"Jerusalem College of Engineering\", \"Admission Process\""
+    }
+  ],
+  "security_issues": [],
+  "all_pages": [
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/404",
+      "status": 200,
+      "success": true,
+      "load_time": 25,
+      "size": 37017
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/",
+      "status": 200,
+      "success": true,
+      "load_time": 62,
+      "size": 107606
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/research",
+      "status": 200,
+      "success": true,
+      "load_time": 300,
+      "size": 63231
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/it",
+      "status": 200,
+      "success": true,
+      "load_time": 393,
+      "size": 74875
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/privacy-policy",
+      "status": 404,
+      "success": false,
+      "load_time": 648,
+      "size": 37017
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/cs-bs",
+      "status": 200,
+      "success": true,
+      "load_time": 267,
+      "size": 71002
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/alumni",
+      "status": 200,
+      "success": true,
+      "load_time": 340,
+      "size": 49023
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/placements",
+      "status": 200,
+      "success": true,
+      "load_time": 404,
+      "size": 104692
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/admissions",
+      "status": 200,
+      "success": true,
+      "load_time": 266,
+      "size": 90299
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/ai-ds",
+      "status": 200,
+      "success": true,
+      "load_time": 390,
+      "size": 70968
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/civil",
+      "status": 200,
+      "success": true,
+      "load_time": 420,
+      "size": 73613
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/mba",
+      "status": 200,
+      "success": true,
+      "load_time": 334,
+      "size": 75426
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/eee",
+      "status": 200,
+      "success": true,
+      "load_time": 385,
+      "size": 73754
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments",
+      "status": 200,
+      "success": true,
+      "load_time": 491,
+      "size": 128480
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/notices",
+      "status": 200,
+      "success": true,
+      "load_time": 275,
+      "size": 45528
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/campus-life",
+      "status": 200,
+      "success": true,
+      "load_time": 361,
+      "size": 66301
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/about",
+      "status": 200,
+      "success": true,
+      "load_time": 350,
+      "size": 72529
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/terms-of use",
+      "status": 404,
+      "success": false,
+      "load_time": 169,
+      "size": 37017
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/academics",
+      "status": 200,
+      "success": true,
+      "load_time": 257,
+      "size": 82003
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/mandatory-disclosure",
+      "status": 200,
+      "success": true,
+      "load_time": 369,
+      "size": 167020
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/ai-ml",
+      "status": 200,
+      "success": true,
+      "load_time": 298,
+      "size": 76546
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/cyber-security",
+      "status": 200,
+      "success": true,
+      "load_time": 369,
+      "size": 71011
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/ece",
+      "status": 200,
+      "success": true,
+      "load_time": 349,
+      "size": 73635
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/mech",
+      "status": 200,
+      "success": true,
+      "load_time": 319,
+      "size": 73485
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/cse",
+      "status": 200,
+      "success": true,
+      "load_time": 383,
+      "size": 81601
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/contact",
+      "status": 200,
+      "success": true,
+      "load_time": 455,
+      "size": 82413
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/iqac-naac",
+      "status": 200,
+      "success": true,
+      "load_time": 254,
+      "size": 43485
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/departments/bme",
+      "status": 200,
+      "success": true,
+      "load_time": 334,
+      "size": 71013
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/admissions/apply",
+      "status": 200,
+      "success": true,
+      "load_time": 404,
+      "size": 45354
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/sitemap",
+      "status": 404,
+      "success": false,
+      "load_time": 164,
+      "size": 37017
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/news/1",
+      "status": 404,
+      "success": false,
+      "load_time": 169,
+      "size": 37017
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/news/2",
+      "status": 404,
+      "success": false,
+      "load_time": 172,
+      "size": 37017
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/news",
+      "status": 404,
+      "success": false,
+      "load_time": 159,
+      "size": 37017
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/admissions/brochure.pdf",
+      "status": 404,
+      "success": false,
+      "load_time": 167,
+      "size": 37017
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/academics/ug-programs",
+      "status": 200,
+      "success": true,
+      "load_time": 285,
+      "size": 132547
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/news/3",
+      "status": 404,
+      "success": false,
+      "load_time": 165,
+      "size": 37017
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/campus",
+      "status": 404,
+      "success": false,
+      "load_time": 166,
+      "size": 37017
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/academics/pg-programs",
+      "status": 200,
+      "success": true,
+      "load_time": 265,
+      "size": 103088
+    },
+    {
+      "url": "https://jerusalemcollegeofengine.web.app/admissions/process",
+      "status": 200,
+      "success": true,
+      "load_time": 236,
+      "size": 92763
+    }
+  ]
+}

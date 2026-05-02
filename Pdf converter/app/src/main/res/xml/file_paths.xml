@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- External app-specific storage: Android/data/<pkg>/files/PDFs/ (visible in Files app) -->
+    <external-files-path name="external_pdfs" path="PDFs/" />
+    <external-files-path name="external_files" path="." />
+    <!-- Internal storage fallback -->
+    <files-path name="internal_pdfs" path="pdfs/" />
+    <files-path name="internal_files" path="." />
+    <!-- App cache directory -->
+    <cache-path name="cache" path="." />
+</paths>

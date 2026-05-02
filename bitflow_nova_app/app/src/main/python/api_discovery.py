@@ -1,4 +1,4 @@
-# api_discovery.py
+﻿# api_discovery.py
 # API Endpoint Discovery - Swagger/OpenAPI, GraphQL Introspection, REST detection
 
 import re
@@ -9,6 +9,11 @@ try:
     import httpx
 except ImportError:
     httpx = None
+
+try:
+    from http_client import VERIFY_SSL
+except ImportError:
+    VERIFY_SSL = False
 
 # Common API documentation paths
 SWAGGER_PATHS = [
@@ -147,7 +152,7 @@ def check_url_exists(url, timeout=10):
         return None
     
     try:
-        with httpx.Client(timeout=timeout, verify=False, follow_redirects=True) as client:
+        with httpx.Client(timeout=timeout, verify=VERIFY_SSL, follow_redirects=True) as client:
             response = client.get(url)
             if response.status_code in [200, 201, 301, 302, 401, 403]:
                 content_type = response.headers.get('content-type', '').lower()
@@ -180,7 +185,7 @@ def discover_swagger(base_url, timeout=10):
             # Try to parse as JSON
             spec = None
             try:
-                with httpx.Client(timeout=timeout, verify=False) as client:
+                with httpx.Client(timeout=timeout, verify=VERIFY_SSL) as client:
                     response = client.get(url)
                     if 'json' in result['content_type'] or path.endswith('.json'):
                         spec = response.json()
@@ -299,7 +304,7 @@ def discover_graphql(base_url, timeout=15):
         
         # Try OPTIONS/GET first to check if endpoint exists
         try:
-            with httpx.Client(timeout=timeout, verify=False) as client:
+            with httpx.Client(timeout=timeout, verify=VERIFY_SSL) as client:
                 # Try GET with introspection
                 response = client.get(url, params={'query': GRAPHQL_SIMPLE_INTROSPECTION})
                 
@@ -354,7 +359,7 @@ def introspect_graphql(url, client=None):
     
     should_close = False
     if client is None:
-        client = httpx.Client(timeout=15, verify=False)
+        client = httpx.Client(timeout=15, verify=VERIFY_SSL)
         should_close = True
     
     try:
@@ -631,7 +636,54 @@ def discover_api_endpoints(url):
         
     except Exception as e:
         result['error'] = str(e)
-    
+
+    # Normalize output keys and item structures for Kotlin ApiDiscoveryResult / Gson deserialization
+    result['url'] = url
+    result['swagger_specs'] = [
+        {
+            'url': s.get('url', ''),
+            'title': s.get('info', {}).get('title', '') if isinstance(s.get('info'), dict) else '',
+            'version': s.get('version', s.get('info', {}).get('version', '')
+                             if isinstance(s.get('info'), dict) else ''),
+            'endpoints_count': len(s.get('endpoints', [])),
+            'security_schemes': [],
+        }
+        for s in result['swagger']
+    ]
+    result['graphql_endpoints'] = [
+        {
+            'url': g.get('url', ''),
+            'introspection_enabled': g.get('introspection_enabled', False),
+            'types': [
+                t.get('name', '') if isinstance(t, dict) else str(t)
+                for t in g.get('types', [])
+            ],
+            'queries': [
+                q.get('name', '') if isinstance(q, dict) else str(q)
+                for q in g.get('queries', [])
+            ],
+            'mutations': [
+                m.get('name', '') if isinstance(m, dict) else str(m)
+                for m in g.get('mutations', [])
+            ],
+        }
+        for g in result['graphql']
+    ]
+    result['rest_endpoints'] = [
+        {
+            'path': e.get('url', ''),
+            'method': 'GET',
+            'status_code': e.get('status', 0),
+            'source': 'discovery',
+        }
+        for e in result['rest']
+    ]
+    result['websockets'] = [
+        w.get('url', '') if isinstance(w, dict) else str(w)
+        for w in result['websocket']
+    ]
+    result['total_endpoints'] = result['summary'].get('total_endpoints', 0)
+
     return result
 
 # Alias for compatibility with import in crawler_engine.py

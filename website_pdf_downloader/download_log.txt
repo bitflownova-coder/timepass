@@ -1,0 +1,917 @@
+2026-01-31 02:19:17,381 - INFO - Starting website crawl...
+2026-01-31 02:19:17,381 - INFO - Scanning page: https://www.nmc.org.in/
+2026-01-31 02:19:17,608 - ERROR - Error scanning https://www.nmc.org.in/: HTTPSConnectionPool(host='www.nmc.org.in', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)')))
+2026-01-31 02:19:17,811 - ERROR - Error getting links from https://www.nmc.org.in/: HTTPSConnectionPool(host='www.nmc.org.in', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)')))
+2026-01-31 02:19:18,313 - INFO - Crawled 1 pages
+2026-01-31 02:19:18,314 - INFO - Index saved to: NMC_PDFs\pdf_index.json
+2026-01-31 02:19:18,314 - INFO - Summary saved to: NMC_PDFs\pdf_summary.txt
+2026-01-31 02:19:38,258 - INFO - Starting website crawl...
+2026-01-31 02:19:38,258 - INFO - Scanning page: https://www.nmc.org.in/
+2026-01-31 02:19:40,543 - INFO - Scanning page: https://www.nmc.org.in/information-desk/national-faculty-development-programme-new/
+2026-01-31 02:19:42,960 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-students-to-study-in-india/online-research-methods-course
+2026-01-31 02:19:45,882 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/the-mci-conduct-of-election-regulations-1998/
+2026-01-31 02:19:48,381 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/students-admitted-in-excess-regulations-1997/
+2026-01-31 02:19:50,858 - INFO - Scanning page: https://www.nmc.org.in/information-desk/list-of-college-teaching-pg-courses/
+2026-01-31 02:19:53,443 - INFO - Scanning page: https://www.nmc.org.in/autonomous-boards/under-graduate-medical-education-board/
+2026-01-31 02:19:55,932 - INFO - Scanning page: https://www.nmc.org.in/faq/
+2026-01-31 02:19:58,382 - INFO - Scanning page: https://www.nmc.org.in/photo-gallery/
+2026-01-31 02:20:00,762 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/screening-test-regulations-2002/
+2026-01-31 02:20:03,378 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/eligibility-certificate-regulations-2002/
+2026-01-31 02:20:06,152 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations-nmc/
+2026-01-31 02:20:08,483 - INFO - Scanning page: https://www.nmc.org.in/vigilance-corner-details
+2026-01-31 02:20:11,344 - INFO - Scanning page: https://www.nmc.org.in/bwg_gallery/activities-in-ugmeb/
+2026-01-31 02:20:13,736 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/teachers-eligibility-qualifications-1998/
+2026-01-31 02:20:16,425 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-colleges/procedure-to-start-new-college/
+2026-01-31 02:20:18,845 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/establishment-of-medical-college-regulations-1999/
+2026-01-31 02:20:21,668 - INFO - Scanning page: https://www.nmc.org.in/ape_gallery/cyber-safety-awareness-session/
+2026-01-31 02:20:24,123 - INFO - Scanning page: https://www.nmc.org.in/nmc-act/
+2026-01-31 02:20:26,228 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-colleges/pg-curricula-2/
+2026-01-31 02:20:28,843 - INFO - Scanning page: https://www.nmc.org.in/information-desk/teaching-faculty/
+2026-01-31 02:20:32,124 - INFO - Scanning page: https://www.nmc.org.in/circulars-and-public-notices-nmc/
+2026-01-31 02:20:34,449 - INFO - Scanning page: https://www.nmc.org.in/publications/
+2026-01-31 02:20:36,598 - INFO - Scanning page: https://www.nmc.org.in/about-nmc/functions-of-nmc/
+2026-01-31 02:20:38,675 - INFO - Scanning page: https://www.nmc.org.in/information-desk/teaching-faculty/popup/egazette
+2026-01-31 02:20:39,599 - ERROR - Error scanning https://www.nmc.org.in/information-desk/teaching-faculty/popup/egazette: 404 Client Error: Not Found for url: https://www.nmc.org.in/information-desk/teaching-faculty/popup/egazette
+2026-01-31 02:20:40,331 - ERROR - Error getting links from https://www.nmc.org.in/information-desk/teaching-faculty/popup/egazette: 404 Client Error: Not Found for url: https://www.nmc.org.in/information-desk/teaching-faculty/popup/egazette
+2026-01-31 02:20:40,832 - INFO - Scanning page: https://www.nmc.org.in/information-desk/ethics_agenda
+2026-01-31 02:20:43,667 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/p-g-medical-education-regulations-2000/
+2026-01-31 02:20:45,796 - INFO - Scanning page: https://www.nmc.org.in/e-gazette/e-gazette-nmc
+2026-01-31 02:20:48,541 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/indian-medical-council-rules-1957/
+2026-01-31 02:20:50,823 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-students-to-study-in-india/
+2026-01-31 02:20:53,414 - INFO - Scanning page: https://www.nmc.org.in/acts-amendments/right-to-information/
+2026-01-31 02:20:55,831 - INFO - Scanning page: https://www.nmc.org.in/information-desk/indian-medical-register/
+2026-01-31 02:20:58,011 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/opening-of-a-new-or-higher-course-of-study-2000/
+2026-01-31 02:21:00,288 - INFO - Scanning page: https://www.nmc.org.in/e-compendium-of-nmc-2024
+2026-01-31 02:21:03,368 - INFO - Scanning page: https://www.nmc.org.in/online-application-submit
+2026-01-31 02:21:06,248 - INFO - Scanning page: https://www.nmc.org.in/acts-amendments/the-second-schedule-of-imc-act/
+2026-01-31 02:21:08,486 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/establishment-of-medical-college-regulations-amendment-2022/
+2026-01-31 02:21:10,497 - INFO - Scanning page: https://www.nmc.org.in/autonomous-boards/
+2026-01-31 02:21:12,528 - INFO - Scanning page: https://www.nmc.org.in/media-room/announcements/
+2026-01-31 02:21:14,722 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/minimum-requirements-for-annual-m-b-b-s-admissions-regulation2020/
+2026-01-31 02:21:16,987 - INFO - Scanning page: https://www.nmc.org.in/bwg_gallery/activities-in-ugmeb/?page_number_0=3
+2026-01-31 02:21:19,158 - INFO - Scanning page: https://www.nmc.org.in/about-nmc/
+2026-01-31 02:21:21,352 - INFO - Scanning page: https://www.nmc.org.in/tenders/
+2026-01-31 02:21:23,940 - INFO - Scanning page: https://www.nmc.org.in/media-room/news-and-event/
+2026-01-31 02:21:26,176 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-colleges/procedure-to-increase-admission-capacity/
+2026-01-31 02:21:28,376 - INFO - Scanning page: https://www.nmc.org.in/national-action-plan-on-antimicrobial-resistance
+2026-01-31 02:21:31,209 - INFO - Scanning page: https://www.nmc.org.in/ActivitiWebClient/open/doctorLogin
+2026-01-31 02:21:31,949 - INFO - Scanning page: https://www.nmc.org.in/media-room/advertisements/
+2026-01-31 02:21:33,868 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/
+2026-01-31 02:21:36,254 - INFO - Scanning page: https://www.nmc.org.in/about-nmc/introduction/
+2026-01-31 02:21:38,447 - INFO - Crawled 50 pages
+2026-01-31 02:21:38,456 - INFO - Index saved to: NMC_PDFs\pdf_index.json
+2026-01-31 02:21:38,458 - INFO - Summary saved to: NMC_PDFs\pdf_summary.txt
+2026-01-31 02:25:14,448 - INFO - Starting website crawl...
+2026-01-31 02:25:14,448 - INFO - Scanning page: https://www.nmc.org.in/
+2026-01-31 02:25:17,742 - INFO - Scanning page: https://www.nmc.org.in/nmc-act/
+2026-01-31 02:25:19,719 - INFO - Scanning page: https://www.nmc.org.in/faq/
+2026-01-31 02:25:21,975 - INFO - Scanning page: https://www.nmc.org.in/contact-us/
+2026-01-31 02:25:24,447 - INFO - Scanning page: https://www.nmc.org.in/ape_gallery/integrity-pledge-06-11-2023/
+2026-01-31 02:25:26,844 - INFO - Scanning page: https://www.nmc.org.in/information-desk/list-of-college-teaching-pg-courses
+2026-01-31 02:25:30,061 - INFO - Scanning page: https://www.nmc.org.in/information-desk/list-of-college-teaching-pg-courses/
+2026-01-31 02:25:32,299 - INFO - Scanning page: https://www.nmc.org.in/information-desk/ethics_agenda
+2026-01-31 02:25:35,469 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-colleges/procedure-to-increase-admission-capacity/
+2026-01-31 02:25:37,793 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/graduate-medical-education-regulations-1997/
+2026-01-31 02:25:40,079 - INFO - Scanning page: https://www.nmc.org.in/online-pg-application
+2026-01-31 02:25:43,224 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/p-g-medical-education-regulations-2000/
+2026-01-31 02:25:45,671 - INFO - Scanning page: https://www.nmc.org.in/information-desk/college-and-course-search/
+2026-01-31 02:25:47,807 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/screening-test-regulations-2002/
+2026-01-31 02:25:50,306 - INFO - Scanning page: https://www.nmc.org.in/feedback/
+2026-01-31 02:25:52,577 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-students-to-study-in-india/list-of-college-teaching-mbbs/
+2026-01-31 02:25:54,571 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/students-admitted-in-excess-regulations-1997/
+2026-01-31 02:25:56,794 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/establishment-of-medical-college-regulations-1999/
+2026-01-31 02:25:59,202 - INFO - Scanning page: https://www.nmc.org.in/meetings/
+2026-01-31 02:26:01,557 - INFO - Scanning page: https://www.nmc.org.in/information-desk/state-medical-councils/
+2026-01-31 02:26:04,376 - INFO - Scanning page: https://www.nmc.org.in/acts-amendments/the-third-schedule-of-imc-act/
+2026-01-31 02:26:06,930 - INFO - Scanning page: https://www.nmc.org.in/vigilance-corner-details
+2026-01-31 02:26:09,736 - INFO - Scanning page: https://www.nmc.org.in/acts-amendments/right-to-information/
+2026-01-31 02:26:12,473 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/post-graduate-committee-rules-1961/
+2026-01-31 02:26:15,115 - INFO - Scanning page: https://www.nmc.org.in/old-archive-news
+2026-01-31 02:26:19,612 - INFO - Scanning page: https://www.nmc.org.in/tenders/
+2026-01-31 02:26:21,911 - INFO - Scanning page: https://www.nmc.org.in/information-desk/
+2026-01-31 02:26:24,086 - INFO - Scanning page: https://www.nmc.org.in/pg-new-course
+2026-01-31 02:26:27,333 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-colleges/fees-for-various-inspection/
+2026-01-31 02:26:29,517 - INFO - Scanning page: https://www.nmc.org.in/news-and-event-nmc/
+2026-01-31 02:26:31,520 - INFO - Scanning page: https://www.nmc.org.in/information-desk/college-and-course-search/archival-data-of-college-and-course/
+2026-01-31 02:26:34,211 - INFO - Scanning page: https://www.nmc.org.in/information-desk/teaching-faculty/
+2026-01-31 02:26:36,475 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-colleges/procedure-to-start-new-college/
+2026-01-31 02:26:38,750 - INFO - Scanning page: https://www.nmc.org.in/ape_gallery/vasant-utsav-at-nmc/
+2026-01-31 02:26:40,899 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-students-to-study-in-india/online-research-methods-course
+2026-01-31 02:26:43,870 - INFO - Scanning page: https://www.nmc.org.in/home/notice-for-visitor/
+2026-01-31 02:26:46,497 - INFO - Scanning page: https://www.nmc.org.in/disclaimer/
+2026-01-31 02:26:48,554 - INFO - Scanning page: https://www.nmc.org.in/information-desk/circularspublic-notices/
+2026-01-31 02:26:50,955 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/code-of-medical-ethics-regulations-2002/
+2026-01-31 02:26:53,212 - INFO - Scanning page: https://www.nmc.org.in/tenders
+2026-01-31 02:26:56,181 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-colleges/national-faculty-development-programme/
+2026-01-31 02:26:58,810 - INFO - Scanning page: https://www.nmc.org.in/information-desk/college-and-course-search/view-diplomate-and-fellowship-course-details/
+2026-01-31 02:27:01,131 - INFO - Scanning page: https://www.nmc.org.in/e-gazette
+2026-01-31 02:27:03,975 - INFO - Scanning page: https://www.nmc.org.in/autonomous-boards/under-graduate-medical-education-board/
+2026-01-31 02:27:06,026 - INFO - Scanning page: https://www.nmc.org.in/online-application-submit/
+2026-01-31 02:27:08,223 - INFO - Scanning page: https://www.nmc.org.in/rti/
+2026-01-31 02:27:10,244 - INFO - Scanning page: https://www.nmc.org.in/information-desk/college-assessment-reports
+2026-01-31 02:27:13,453 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/indian-medical-council-rules-1957/
+2026-01-31 02:27:15,750 - INFO - Scanning page: https://www.nmc.org.in/ActivitiWebClient/open/studentregistrationHome
+2026-01-31 02:27:16,497 - INFO - Scanning page: https://www.nmc.org.in/autonomous-boards/
+2026-01-31 02:27:18,847 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/election-of-students-union-regulations-2009/
+2026-01-31 02:27:21,192 - INFO - Scanning page: https://www.nmc.org.in/honble-supreme-court-mandated-oversight-committee-on-mci
+2026-01-31 02:27:24,076 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/eligibility-certificate-regulations-2002/
+2026-01-31 02:27:26,512 - INFO - Scanning page: https://www.nmc.org.in/ape_gallery/cyber-safety-awareness-session/
+2026-01-31 02:27:28,840 - INFO - Scanning page: https://www.nmc.org.in/information-desk/national-faculty-development-programme-new/
+2026-01-31 02:27:31,343 - INFO - Scanning page: https://www.nmc.org.in/bwg_gallery/activities-in-ugmeb/
+2026-01-31 02:27:33,724 - INFO - Scanning page: https://www.nmc.org.in/bwg_gallery/activities-in-ugmeb/?page_number_0=3
+2026-01-31 02:27:35,785 - INFO - Scanning page: https://www.nmc.org.in/media-room/advertisements/
+2026-01-31 02:27:37,894 - INFO - Scanning page: https://www.nmc.org.in/acts-amendments/the-indian-medical-council-act-1956/
+2026-01-31 02:27:40,262 - INFO - Scanning page: https://www.nmc.org.in/information-desk/ug-new-course/
+2026-01-31 02:27:42,394 - INFO - Scanning page: https://www.nmc.org.in/phlas-treatment/
+2026-01-31 02:27:44,896 - INFO - Scanning page: https://www.nmc.org.in/ActivitiWebClient/monitoringCollegeLogin
+2026-01-31 02:27:45,664 - INFO - Scanning page: https://www.nmc.org.in/under-graduate/
+2026-01-31 02:27:47,958 - INFO - Scanning page: https://www.nmc.org.in/all-news
+2026-01-31 02:27:50,942 - INFO - Scanning page: https://www.nmc.org.in/e-compendium-of-nmc-2020-2023/
+2026-01-31 02:27:53,041 - INFO - Scanning page: https://www.nmc.org.in/complaints
+2026-01-31 02:27:56,049 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-colleges/ug-curriculum/
+2026-01-31 02:27:58,440 - INFO - Scanning page: https://www.nmc.org.in/information-desk/state-medical-councils/list-of-state-medical-councils/
+2026-01-31 02:28:28,523 - ERROR - Error scanning https://www.nmc.org.in/information-desk/state-medical-councils/list-of-state-medical-councils/: HTTPSConnectionPool(host='www.nmc.org.in', port=443): Read timed out. (read timeout=30)
+2026-01-31 02:28:58,610 - ERROR - Error getting links from https://www.nmc.org.in/information-desk/state-medical-councils/list-of-state-medical-councils/: HTTPSConnectionPool(host='www.nmc.org.in', port=443): Read timed out. (read timeout=30)
+2026-01-31 02:28:59,111 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/the-mci-conduct-of-election-regulations-1998/
+2026-01-31 02:40:00,048 - INFO - Starting website crawl...
+2026-01-31 02:40:00,048 - INFO - Scanning page: https://www.nmc.org.in/
+2026-01-31 02:40:02,370 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/the-mci-conduct-of-election-regulations-1998/
+2026-01-31 02:40:04,876 - INFO - Scanning page: https://www.nmc.org.in/feedback/
+2026-01-31 02:40:07,503 - INFO - Scanning page: https://www.nmc.org.in/information-desk/circularspublic-notices/
+2026-01-31 02:40:10,173 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-students-to-study-in-abroad
+2026-01-31 02:40:13,412 - INFO - Scanning page: https://www.nmc.org.in/media-room/news-and-event/
+2026-01-31 02:40:15,729 - INFO - Scanning page: https://www.nmc.org.in/media-room/announcements/
+2026-01-31 02:40:18,151 - INFO - Scanning page: https://www.nmc.org.in/information-desk/college-and-course-search/
+2026-01-31 02:40:20,440 - INFO - Scanning page: https://www.nmc.org.in/autonomous-boards/
+2026-01-31 02:40:22,810 - INFO - Scanning page: https://www.nmc.org.in/media-room/advertisements/
+2026-01-31 02:40:25,606 - INFO - Scanning page: https://www.nmc.org.in/imr/
+2026-01-31 02:40:27,790 - INFO - Scanning page: https://www.nmc.org.in/e-compendium-of-nmc-2020-2023/
+2026-01-31 02:40:30,074 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_TEL.rar
+2026-01-31 02:40:31,181 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:31,307 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:31,810 - INFO - Scanning page: https://www.nmc.org.in/media-room/
+2026-01-31 02:40:33,814 - INFO - Scanning page: https://www.nmc.org.in/annual-disclosure-report
+2026-01-31 02:40:36,502 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_ARU.zip
+2026-01-31 02:40:36,654 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:36,793 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:37,296 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/opening-of-a-new-or-higher-course-of-study-2000/
+2026-01-31 02:40:39,432 - INFO - Scanning page: https://www.nmc.org.in/acts-amendments/the-first-schedule-of-imc-act/
+2026-01-31 02:40:41,788 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_MIZ.zip
+2026-01-31 02:40:41,929 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:42,062 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:42,565 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_JHA.rar
+2026-01-31 02:40:42,691 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:42,810 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:43,313 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_MEG.rar
+2026-01-31 02:40:43,434 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:43,555 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:44,058 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_HAR_03.rar
+2026-01-31 02:40:44,179 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:44,297 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:44,800 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_TEL_03.rar
+2026-01-31 02:40:44,921 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:45,052 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:45,555 - INFO - Scanning page: https://www.nmc.org.in/under-graduate/
+2026-01-31 02:40:47,888 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_KAR_03.rar
+2026-01-31 02:40:48,033 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:48,151 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:48,654 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_HIM_03.rar
+2026-01-31 02:40:48,781 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:48,910 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:49,413 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_CHA.zip
+2026-01-31 02:40:49,562 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:49,710 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:50,214 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_TAM.zip
+2026-01-31 02:40:50,387 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:50,521 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:51,025 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_KAR.rar
+2026-01-31 02:40:51,142 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:51,262 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:51,765 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/p-g-medical-education-regulations-2000/
+2026-01-31 02:40:55,153 - INFO - Scanning page: https://www.nmc.org.in/autonomous-boards/post-graduate-medical-education-board/
+2026-01-31 02:40:57,559 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_MAN_03.rar
+2026-01-31 02:40:57,681 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:57,803 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:40:58,306 - INFO - Scanning page: https://www.nmc.org.in/category/circulars-and-notices/
+2026-01-31 02:41:00,948 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_MEG.rar
+2026-01-31 02:41:01,079 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:41:01,223 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:41:01,725 - INFO - Scanning page: https://www.nmc.org.in/acts-amendments/recognition-circular-regards-to-institute-of-national-importance/
+2026-01-31 02:41:05,697 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-students-to-study-in-india/online-research-methods-course/
+2026-01-31 02:41:08,729 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/prevention-of-ragging-regulation-2009/
+2026-01-31 02:41:11,195 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_UTT.rar
+2026-01-31 02:41:11,321 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:41:11,435 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:41:11,938 - INFO - Scanning page: https://www.nmc.org.in/bwg_gallery/activities-in-ugmeb/
+2026-01-31 02:41:14,367 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_UTT.zip
+2026-01-31 02:41:14,512 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:41:14,646 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:41:15,150 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-colleges/fees-for-various-inspection/
+2026-01-31 02:41:17,565 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_TRI.zip
+2026-01-31 02:41:17,712 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:41:17,862 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:41:18,365 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_JHA_03.rar
+2026-01-31 02:41:18,499 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:41:18,620 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:41:19,123 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_MAD.rar
+2026-01-31 02:41:19,251 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:41:19,373 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:41:19,875 - INFO - Scanning page: https://www.nmc.org.in/news-and-event-nmc/
+2026-01-31 02:41:21,796 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_AND.rar
+2026-01-31 02:41:21,910 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:41:22,038 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:41:22,540 - INFO - Scanning page: https://www.nmc.org.in/information-desk/indian-medical-register/
+2026-01-31 02:41:24,924 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-students-to-study-in-india/list-of-college-teaching-mbbs/
+2026-01-31 02:41:27,437 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/students-admitted-in-excess-regulations-1997/
+2026-01-31 02:41:29,879 - INFO - Scanning page: https://www.nmc.org.in/information-desk/list-of-college-teaching-pg-courses/
+2026-01-31 02:41:32,063 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_ASS.zip
+2026-01-31 02:41:32,217 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:41:32,351 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:41:32,855 - INFO - Scanning page: https://www.nmc.org.in/complaints
+2026-01-31 02:41:35,693 - INFO - Scanning page: https://www.nmc.org.in/elligibility-for-ph/
+2026-01-31 02:41:38,365 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_TAM.rar
+2026-01-31 02:41:38,506 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:41:38,625 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:41:39,127 - INFO - Scanning page: https://www.nmc.org.in/old-archive-news
+2026-01-31 02:41:42,269 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-colleges/procedure-to-increase-admission-capacity/
+2026-01-31 02:41:44,536 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_KAR.rar
+2026-01-31 02:41:44,662 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:41:44,789 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:41:45,291 - INFO - Scanning page: https://www.nmc.org.in/registration/
+2026-01-31 02:41:47,989 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_MIZ_03.rar
+2026-01-31 02:41:48,119 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:41:48,240 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:41:48,743 - INFO - Scanning page: https://www.nmc.org.in/online-pg-application
+2026-01-31 02:41:51,857 - INFO - Scanning page: https://www.nmc.org.in/autonomous-boards/medical-assessment-rating-board/
+2026-01-31 02:41:55,127 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_KER.rar
+2026-01-31 02:41:55,309 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:41:55,548 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:41:56,050 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/indian-medical-council-rules-1957/
+2026-01-31 02:41:58,626 - INFO - Scanning page: https://www.nmc.org.in/terms-of-use/
+2026-01-31 02:42:00,922 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_GOA.zip
+2026-01-31 02:42:01,073 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:42:01,214 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:42:01,718 - INFO - Scanning page: https://www.nmc.org.in/circulars-and-public-notices-nmc/
+2026-01-31 02:42:04,015 - INFO - Scanning page: https://www.nmc.org.in/rti/
+2026-01-31 02:42:06,093 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_MIZ.rar
+2026-01-31 02:42:06,229 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:42:06,350 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:42:06,853 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_AND.zip
+2026-01-31 02:42:07,007 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:42:07,153 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:42:07,658 - INFO - Scanning page: https://www.nmc.org.in/home/notice-for-visitor/
+2026-01-31 02:42:10,012 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_CHA_03.rar
+2026-01-31 02:42:10,141 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:42:10,261 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:42:10,764 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_SIK.zip
+2026-01-31 02:42:10,916 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:42:11,057 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:42:11,560 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_TRI.rar
+2026-01-31 02:42:12,496 - WARNING - Timeout/connection error on https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_TRI.rar, retrying (1/3)...
+2026-01-31 02:42:14,497 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_TRI.rar
+2026-01-31 02:42:15,467 - WARNING - Timeout/connection error on https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_TRI.rar, retrying (2/3)...
+2026-01-31 02:42:17,468 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_TRI.rar
+2026-01-31 02:42:18,295 - ERROR - Failed after 3 attempts: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_TRI.rar
+2026-01-31 02:42:24,705 - ERROR - Failed to get links from https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_TRI.rar after 3 attempts
+2026-01-31 02:42:25,206 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_ORI.rar
+2026-01-31 02:42:25,342 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:42:25,458 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:42:25,961 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_GUJ.rar
+2026-01-31 02:42:26,080 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:42:26,200 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:42:26,703 - INFO - Scanning page: https://www.nmc.org.in/bwg_gallery/activities-in-ugmeb/?page_number_0=3
+2026-01-31 02:42:28,922 - INFO - Scanning page: https://www.nmc.org.in/bwg_gallery/activities-in-ugmeb/?page_number_0=2
+2026-01-31 02:42:31,381 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/mci-regulations-2000/
+2026-01-31 02:42:33,736 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_KER.rar
+2026-01-31 02:42:33,861 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:42:33,995 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:42:34,497 - INFO - Scanning page: https://www.nmc.org.in/about-nmc/introduction/
+2026-01-31 02:42:36,933 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-colleges/ug-curriculum
+2026-01-31 02:42:40,127 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-colleges/pg-curricula-2/
+2026-01-31 02:42:42,684 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/eligibility-certificate-regulations-2002/
+2026-01-31 02:42:45,345 - INFO - Scanning page: https://www.nmc.org.in/acts-amendments/
+2026-01-31 02:42:47,637 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_JAM.rar
+2026-01-31 02:42:47,761 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:42:47,880 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:42:48,382 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_WES_03.rar
+2026-01-31 02:42:48,526 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:42:48,651 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:42:49,154 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/post-graduate-committee-rules-1961/
+2026-01-31 02:42:51,499 - INFO - Scanning page: https://www.nmc.org.in/about-nmc/functions-of-nmc/
+2026-01-31 02:42:53,951 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_MAD_03.rar
+2026-01-31 02:42:54,097 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:42:54,215 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:42:54,717 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-medical-professional/price-of-application-forms/
+2026-01-31 02:42:56,815 - INFO - Scanning page: https://www.nmc.org.in/acts-amendments/the-third-schedule-of-imc-act/
+2026-01-31 02:42:59,081 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2022/revised/Guidelines_for_DM_in_Neurology _for_uploading.docx
+2026-01-31 02:42:59,231 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:42:59,389 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:42:59,894 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_GOA.rar
+2026-01-31 02:43:00,037 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:00,158 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:00,661 - INFO - Scanning page: https://www.nmc.org.in/annual-disclosure-report/annual-disclosure-report-pg
+2026-01-31 02:43:03,612 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_MEG.zip
+2026-01-31 02:43:03,772 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:03,900 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:04,404 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_ARU.rar
+2026-01-31 02:43:04,558 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:04,678 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:05,181 - INFO - Scanning page: https://www.nmc.org.in/publications/
+2026-01-31 02:43:07,467 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_ORI.zip
+2026-01-31 02:43:07,603 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:07,733 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:08,237 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_BIH.rar
+2026-01-31 02:43:08,375 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:08,494 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:08,997 - INFO - Scanning page: https://www.nmc.org.in/pg-increase-seat/
+2026-01-31 02:43:11,252 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_MAD.zip
+2026-01-31 02:43:11,428 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:11,624 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:12,127 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_PUN.rar
+2026-01-31 02:43:12,248 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:12,383 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:12,885 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_GUJ.zip
+2026-01-31 02:43:13,032 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:13,175 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:13,680 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/election-of-students-union-regulations-2009/
+2026-01-31 02:43:15,925 - INFO - Scanning page: https://www.nmc.org.in/acts-amendments/the-second-schedule-of-imc-act/
+2026-01-31 02:43:18,628 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_MAH.rar
+2026-01-31 02:43:18,759 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:18,873 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:19,375 - INFO - Scanning page: https://www.nmc.org.in/ActivitiWebClient/open/doctorLogin
+2026-01-31 02:43:20,125 - INFO - Scanning page: https://www.nmc.org.in/national-action-plan-on-antimicrobial-resistance
+2026-01-31 02:43:23,262 - INFO - Scanning page: https://www.nmc.org.in/handling-of-disabled-children/
+2026-01-31 02:43:25,737 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_Tri.rar
+2026-01-31 02:43:25,863 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:25,991 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:26,494 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_KER_03.rar
+2026-01-31 02:43:26,624 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:26,740 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:27,243 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_DEL_03.rar
+2026-01-31 02:43:27,360 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:27,479 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:27,981 - INFO - Scanning page: https://www.nmc.org.in/about-nmc/members-of-the-nmc/
+2026-01-31 02:43:30,375 - INFO - Scanning page: https://www.nmc.org.in/contact-us/
+2026-01-31 02:43:32,774 - INFO - Scanning page: https://www.nmc.org.in/information-desk/college-and-course-search/archival-data-of-college-and-course/
+2026-01-31 02:43:35,477 - INFO - Scanning page: https://www.nmc.org.in/post-graduate/
+2026-01-31 02:43:37,868 - INFO - Scanning page: https://www.nmc.org.in/ape_gallery/integrity-pledge/
+2026-01-31 02:43:40,177 - INFO - Scanning page: https://www.nmc.org.in/information-desk/teaching-faculty/
+2026-01-31 02:43:42,777 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_CHA.rar
+2026-01-31 02:43:42,919 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:43,036 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:43,539 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_HIM.zip
+2026-01-31 02:43:43,666 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:43,816 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:43:44,319 - INFO - Scanning page: https://www.nmc.org.in/information-desk/
+2026-01-31 02:43:46,345 - INFO - Scanning page: https://www.nmc.org.in/ActivitiWebClient/monitoringCollegeLogin
+2026-01-31 02:43:47,070 - INFO - Scanning page: https://www.nmc.org.in/vigilance-corner-details
+2026-01-31 02:43:50,031 - INFO - Scanning page: https://www.nmc.org.in/e-gazette/
+2026-01-31 02:43:52,431 - INFO - Scanning page: https://www.nmc.org.in/information-desk/college-assessment-reports/
+2026-01-31 02:43:54,991 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-students-to-study-in-india/list-of-housemanship-hospital/
+2026-01-31 02:43:57,795 - INFO - Scanning page: https://www.nmc.org.in/information-desk/ethics_agenda
+2026-01-31 02:44:00,691 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_HIM.rar
+2026-01-31 02:44:00,824 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:00,943 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:01,446 - INFO - Scanning page: https://www.nmc.org.in/ape_gallery/integrity-pledge-06-11-2023/
+2026-01-31 02:44:03,876 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-students-to-study-in-india/
+2026-01-31 02:44:05,959 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-colleges/national-faculty-development-programme/
+2026-01-31 02:44:08,246 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_ORI_03.rar
+2026-01-31 02:44:08,390 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:08,509 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:09,012 - INFO - Scanning page: https://www.nmc.org.in/bwg_gallery/activities-in-ugmeb/?page_number_0=1
+2026-01-31 02:44:11,397 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_WES.rar
+2026-01-31 02:44:11,528 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:11,638 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:12,139 - INFO - Scanning page: https://www.nmc.org.in/information-desk/state-medical-councils/
+2026-01-31 02:44:14,268 - INFO - Scanning page: https://www.nmc.org.in/disclaimer/
+2026-01-31 02:44:16,309 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_DEL.rar
+2026-01-31 02:44:16,446 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:16,580 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:17,083 - INFO - Scanning page: https://www.nmc.org.in/pg-new-course
+2026-01-31 02:44:20,235 - INFO - Scanning page: https://www.nmc.org.in/information-desk/list-of-college-teaching-pg-courses
+2026-01-31 02:44:23,518 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_JHA.zip
+2026-01-31 02:44:23,675 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:23,807 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:24,310 - INFO - Scanning page: https://www.nmc.org.in/anti-ragging/
+2026-01-31 02:44:26,918 - INFO - Scanning page: https://www.nmc.org.in/information-desk/college-and-course-search/view-closed-collegesinstitutions/
+2026-01-31 02:44:29,489 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_RAJ.zip
+2026-01-31 02:44:29,658 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:29,882 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:30,386 - INFO - Scanning page: https://www.nmc.org.in/all-news
+2026-01-31 02:44:33,794 - INFO - Scanning page: https://www.nmc.org.in/acts-amendments/institute-of-national-importance/
+2026-01-31 02:44:36,271 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_Tri_03.rar
+2026-01-31 02:44:36,396 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:36,519 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:37,022 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_UP.rar
+2026-01-31 02:44:37,168 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:37,287 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:37,790 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_UP_03.rar
+2026-01-31 02:44:37,923 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:38,047 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:38,550 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_WES.rar
+2026-01-31 02:44:38,679 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:38,821 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:39,324 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_NAG.rar
+2026-01-31 02:44:39,462 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:39,585 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:40,087 - INFO - Scanning page: https://www.nmc.org.in/information-desk/teaching-faculty/popup/egazette
+2026-01-31 02:44:41,168 - WARNING - Timeout/connection error on https://www.nmc.org.in/information-desk/teaching-faculty/popup/egazette, retrying (1/3)...
+2026-01-31 02:44:43,169 - INFO - Scanning page: https://www.nmc.org.in/information-desk/teaching-faculty/popup/egazette
+2026-01-31 02:44:44,113 - WARNING - Timeout/connection error on https://www.nmc.org.in/information-desk/teaching-faculty/popup/egazette, retrying (2/3)...
+2026-01-31 02:44:46,114 - INFO - Scanning page: https://www.nmc.org.in/information-desk/teaching-faculty/popup/egazette
+2026-01-31 02:44:47,051 - ERROR - Failed after 3 attempts: https://www.nmc.org.in/information-desk/teaching-faculty/popup/egazette
+2026-01-31 02:44:53,637 - ERROR - Failed to get links from https://www.nmc.org.in/information-desk/teaching-faculty/popup/egazette after 3 attempts
+2026-01-31 02:44:54,138 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_JAM.zip
+2026-01-31 02:44:54,294 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:54,450 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:54,953 - INFO - Scanning page: https://www.nmc.org.in/ActivitiWebClient/open/doctorLoginHome
+2026-01-31 02:44:55,723 - INFO - Scanning page: https://www.nmc.org.in/ape_gallery/cyber-safety-awareness-session/
+2026-01-31 02:44:58,380 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_RAJ.rar
+2026-01-31 02:44:58,506 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:58,641 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:44:59,144 - INFO - Scanning page: https://www.nmc.org.in/online-application-submit
+2026-01-31 02:45:02,567 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-students-to-study-in-abroad/
+2026-01-31 02:45:05,378 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_JHA.rar
+2026-01-31 02:45:05,520 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:05,646 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:06,149 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_MAH_03.rar
+2026-01-31 02:45:06,271 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:06,401 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:06,904 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_UP.zip
+2026-01-31 02:45:07,041 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:07,174 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:07,682 - INFO - Scanning page: https://www.nmc.org.in/posh-act-2013-and-composition-of-icc-under-post-act-2013/
+2026-01-31 02:45:10,126 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_TAM_03.rar
+2026-01-31 02:45:10,255 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:10,393 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:10,895 - INFO - Scanning page: https://www.nmc.org.in/nmc-act/
+2026-01-31 02:45:13,255 - INFO - Scanning page: https://www.nmc.org.in/ape_gallery/vasant-utsav-at-nmc/
+2026-01-31 02:45:15,669 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_TEL.zip
+2026-01-31 02:45:15,815 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:15,952 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:16,454 - INFO - Scanning page: https://www.nmc.org.in/information-desk/download-application-forms-nmc/
+2026-01-31 02:45:18,623 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_PUN_03.rar
+2026-01-31 02:45:18,742 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:18,872 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:19,375 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_RAJ_03.rar
+2026-01-31 02:45:19,506 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:19,630 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:20,133 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2025/09/UG_Assessment_Form_AII.docx
+2026-01-31 02:45:20,318 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:20,523 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:21,029 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (ANATOMY).docx
+2026-01-31 02:45:21,148 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:21,264 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:21,766 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2025/08/Application_form_for_Students_wishing_to_undergo_Medical-Elective-Training_in_India.doc
+2026-01-31 02:45:21,877 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:22,007 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:22,509 - INFO - Scanning page: https://www.nmc.org.in/about-nmc/medical-advisory-council/
+2026-01-31 02:45:24,643 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_KAR.zip
+2026-01-31 02:45:24,801 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:24,936 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:25,440 - INFO - Scanning page: https://www.nmc.org.in/information-desk/national-faculty-development-programme-new
+2026-01-31 02:45:28,616 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2022/01/Application_Forms/Procedure_Recognition_of_PG_qualifications.docx
+2026-01-31 02:45:28,720 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:28,826 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:29,328 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc/UG_Assessment Form for self declaration 25-26 MARB 23-04-25.doc
+2026-01-31 02:45:29,744 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:30,193 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:30,699 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_MAH.rar
+2026-01-31 02:45:30,850 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:30,993 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:31,496 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_AND.rar
+2026-01-31 02:45:31,624 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:31,748 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:32,251 - INFO - Scanning page: https://www.nmc.org.in/e-gazette
+2026-01-31 02:45:35,276 - INFO - Scanning page: https://www.nmc.org.in/photo-gallery/
+2026-01-31 02:45:37,832 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (IMMUNOHAEMATOLOGY AND BLOOD TRANSFUSION).docx
+2026-01-31 02:45:37,954 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:38,075 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:38,577 - INFO - Scanning page: https://www.nmc.org.in/online-application-submit/
+2026-01-31 02:45:40,762 - INFO - Scanning page: https://www.nmc.org.in/information-desk/college-assessment-reports
+2026-01-31 02:45:43,844 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_BIH.zip
+2026-01-31 02:45:43,982 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:44,118 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:44,621 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/screening-test-regulations-2002/
+2026-01-31 02:45:46,841 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_SIK.rar
+2026-01-31 02:45:46,980 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:47,101 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:47,605 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (HEPATOLOGY).docx
+2026-01-31 02:45:47,724 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:47,841 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:48,344 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/teachers-eligibility-qualifications-1998/
+2026-01-31 02:45:50,669 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_AND_03.rar
+2026-01-31 02:45:50,813 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:50,938 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:51,441 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM B (SURGICAL ONCOLOGY).docx
+2026-01-31 02:45:51,578 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:51,682 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:52,184 - INFO - Scanning page: https://www.nmc.org.in/teq/
+2026-01-31 02:45:54,780 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_DEL.rar
+2026-01-31 02:45:54,908 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:55,036 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:55,540 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_HIM.rar
+2026-01-31 02:45:55,662 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:55,780 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:56,283 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_WES.zip
+2026-01-31 02:45:56,421 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:56,553 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:57,057 - INFO - Scanning page: https://www.nmc.org.in/acts-amendments/the-indian-medical-council-act-1956/
+2026-01-31 02:45:59,433 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_GOA_03.rar
+2026-01-31 02:45:59,570 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:45:59,687 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:00,190 - INFO - Scanning page: https://www.nmc.org.in/information-desk/national-faculty-development-programme-new/
+2026-01-31 02:46:02,953 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_NAG_03.rar
+2026-01-31 02:46:03,119 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:03,281 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:03,784 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-medical-professional/
+2026-01-31 02:46:06,376 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_SIK.rar
+2026-01-31 02:46:06,511 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:06,635 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:07,138 - INFO - Scanning page: https://www.nmc.org.in/autonomous-boards/under-graduate-medical-education-board/
+2026-01-31 02:46:09,082 - INFO - Scanning page: https://www.nmc.org.in/tenders/
+2026-01-31 02:46:11,315 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_UP.rar
+2026-01-31 02:46:11,441 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:11,582 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:12,085 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_GUJ_03.rar
+2026-01-31 02:46:12,215 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:12,344 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:12,847 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (RESPIRATORY MEDICINE).docx
+2026-01-31 02:46:12,964 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:13,096 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:13,599 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (PAEDIATRICS).docx
+2026-01-31 02:46:13,725 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:13,839 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:14,341 - INFO - Scanning page: https://www.nmc.org.in/e-compendium-of-nmc-2024
+2026-01-31 02:46:17,298 - INFO - Scanning page: https://www.nmc.org.in/about-nmc/
+2026-01-31 02:46:19,751 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/graduate-medical-education-regulations-1997/
+2026-01-31 02:46:22,226 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_TAM.rar
+2026-01-31 02:46:22,396 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:22,580 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:23,083 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM B (ENDOCRINOLOGY).docx
+2026-01-31 02:46:23,266 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:23,399 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:23,902 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_RAJ.rar
+2026-01-31 02:46:24,034 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:24,153 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:24,656 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_HAR.zip
+2026-01-31 02:46:24,792 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:24,943 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:25,447 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_HAR.rar
+2026-01-31 02:46:25,586 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:25,710 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:26,213 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_MAN.rar
+2026-01-31 02:46:26,358 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:26,511 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:27,015 - INFO - Scanning page: https://www.nmc.org.in/information-desk/teaching-faculty/alphabatically-teaching-faculty-search
+2026-01-31 02:46:29,860 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_MAN.zip
+2026-01-31 02:46:29,995 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:30,141 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:30,646 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_NAG.rar
+2026-01-31 02:46:30,776 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:30,906 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:31,409 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM B (CLINICAL HAEMATOLOGY).docx
+2026-01-31 02:46:31,527 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:31,646 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:32,149 - INFO - Scanning page: https://www.nmc.org.in/annual-disclosure-report/websupport.pgmsmer@nmc.org.in
+2026-01-31 02:46:32,865 - WARNING - Timeout/connection error on https://www.nmc.org.in/annual-disclosure-report/websupport.pgmsmer@nmc.org.in, retrying (1/3)...
+2026-01-31 02:46:34,866 - INFO - Scanning page: https://www.nmc.org.in/annual-disclosure-report/websupport.pgmsmer@nmc.org.in
+2026-01-31 02:46:35,698 - WARNING - Timeout/connection error on https://www.nmc.org.in/annual-disclosure-report/websupport.pgmsmer@nmc.org.in, retrying (2/3)...
+2026-01-31 02:46:37,699 - INFO - Scanning page: https://www.nmc.org.in/annual-disclosure-report/websupport.pgmsmer@nmc.org.in
+2026-01-31 02:46:38,392 - ERROR - Failed after 3 attempts: https://www.nmc.org.in/annual-disclosure-report/websupport.pgmsmer@nmc.org.in
+2026-01-31 02:46:45,005 - ERROR - Failed to get links from https://www.nmc.org.in/annual-disclosure-report/websupport.pgmsmer@nmc.org.in after 3 attempts
+2026-01-31 02:46:45,506 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_UTT_03.rar
+2026-01-31 02:46:45,649 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:45,765 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:46,268 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_TEL.rar
+2026-01-31 02:46:46,390 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:46,513 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:47,015 - INFO - Scanning page: https://www.nmc.org.in/MCIRest/open/getDocument?path=/Documents/Public/Portal/ApplicationForm/Word/Proforma_Recognition_of_PG_qualifications.docx
+2026-01-31 02:46:47,179 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:47,321 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:47,823 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_ARU_03.rar
+2026-01-31 02:46:47,945 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:48,069 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:48,572 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations-nmc/
+2026-01-31 02:46:50,929 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_MEG_03.rar
+2026-01-31 02:46:51,046 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:51,166 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:51,669 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_BIH_03.rar
+2026-01-31 02:46:51,788 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:51,914 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:52,416 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_ORI.rar
+2026-01-31 02:46:52,539 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:52,667 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:53,170 - INFO - Scanning page: https://www.nmc.org.in/autonomous-boards/ethics-medical-registration-board/
+2026-01-31 02:46:55,532 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/code-of-medical-ethics-regulations-2002/
+2026-01-31 02:46:58,037 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM B (SURGICAL GASTROENTEROLOGY).docx
+2026-01-31 02:46:58,154 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:58,273 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:58,775 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_MAN.rar
+2026-01-31 02:46:58,890 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:59,012 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:46:59,516 - INFO - Scanning page: https://www.nmc.org.in/acts-amendments/the-indian-medical-degree-act-1916/
+2026-01-31 02:47:01,946 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_SIK_03.rar
+2026-01-31 02:47:02,064 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:02,180 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:02,682 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_ASS_03.rar
+2026-01-31 02:47:02,814 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:02,930 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:03,433 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_ASS.rar
+2026-01-31 02:47:03,561 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:03,681 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:04,186 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_NAG.zip
+2026-01-31 02:47:04,355 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:04,505 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:05,010 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_BIH.rar
+2026-01-31 02:47:05,127 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:05,256 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:05,759 - INFO - Scanning page: https://www.nmc.org.in/ActivitiWebClient/open/initiateAntiRagging
+2026-01-31 02:47:06,476 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_UTT.rar
+2026-01-31 02:47:06,603 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:06,722 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:07,224 - INFO - Scanning page: https://www.nmc.org.in/information-desk/ug-new-course/
+2026-01-31 02:47:09,576 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_CHA.rar
+2026-01-31 02:47:09,724 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:09,844 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:10,347 - INFO - Scanning page: https://www.nmc.org.in/information-desk/college-and-course-search/popup/egazette
+2026-01-31 02:47:11,301 - WARNING - Timeout/connection error on https://www.nmc.org.in/information-desk/college-and-course-search/popup/egazette, retrying (1/3)...
+2026-01-31 02:47:13,302 - INFO - Scanning page: https://www.nmc.org.in/information-desk/college-and-course-search/popup/egazette
+2026-01-31 02:47:14,165 - WARNING - Timeout/connection error on https://www.nmc.org.in/information-desk/college-and-course-search/popup/egazette, retrying (2/3)...
+2026-01-31 02:47:16,165 - INFO - Scanning page: https://www.nmc.org.in/information-desk/college-and-course-search/popup/egazette
+2026-01-31 02:47:17,155 - ERROR - Failed after 3 attempts: https://www.nmc.org.in/information-desk/college-and-course-search/popup/egazette
+2026-01-31 02:47:23,895 - ERROR - Failed to get links from https://www.nmc.org.in/information-desk/college-and-course-search/popup/egazette after 3 attempts
+2026-01-31 02:47:24,396 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc/UGforms/2_STANDARD__C_UG_2021-22_FINAL.docx
+2026-01-31 02:47:24,503 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:24,606 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:25,108 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (PHYSICAL MEDICINE AND REHABILITATION).docx.docx
+2026-01-31 02:47:25,212 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:25,321 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:25,823 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_JAM.rar
+2026-01-31 02:47:25,957 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:26,072 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:26,575 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (VASCULAR SURGERY).docx
+2026-01-31 02:47:26,693 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:26,810 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:27,313 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (OPHTHALMOLOGY).docx
+2026-01-31 02:47:27,457 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:27,576 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:28,078 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (GENERAL MEDICINE).docx
+2026-01-31 02:47:28,213 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:28,336 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:28,838 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_MIZ.rar
+2026-01-31 02:47:28,967 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:29,086 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:29,588 - INFO - Scanning page: https://www.nmc.org.in/ActivitiWebClient/open/studentregistrationHome
+2026-01-31 02:47:30,346 - INFO - Scanning page: https://www.nmc.org.in/imr
+2026-01-31 02:47:33,285 - INFO - Scanning page: https://www.nmc.org.in/e-gazette/e-gazette-nmc
+2026-01-31 02:47:36,329 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_PUN.rar
+2026-01-31 02:47:36,550 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:36,751 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:37,253 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-colleges/ug-curriculum/
+2026-01-31 02:47:39,879 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/minimum-requirements-for-annual-m-b-b-s-admissions-regulation2020/
+2026-01-31 02:47:42,158 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (CARDIO VASCULAR & THORACIC SURGERY).docx
+2026-01-31 02:47:42,276 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:42,387 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:42,888 - INFO - Scanning page: https://www.nmc.org.in/acts-amendments/right-to-information/
+2026-01-31 02:47:45,455 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_ARU.rar
+2026-01-31 02:47:45,577 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:45,703 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:46,206 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_DEL.zip
+2026-01-31 02:47:46,348 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:46,485 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:47:46,989 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-colleges/
+2026-01-31 02:47:49,545 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-students-to-study-in-india/online-research-methods-course
+2026-01-31 02:47:52,374 - INFO - Scanning page: https://www.nmc.org.in/ape_gallery/vigilance-awareness-week/
+2026-01-31 02:47:54,908 - INFO - Scanning page: https://www.nmc.org.in/election-of-students-union/
+2026-01-31 02:47:57,519 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/establishment-of-medical-college-regulations-1999/
+2026-01-31 02:47:59,882 - INFO - Scanning page: https://www.nmc.org.in/faq/
+2026-01-31 02:48:02,247 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/
+2026-01-31 02:48:04,693 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_KER.zip
+2026-01-31 02:48:04,838 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:04,987 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:05,491 - INFO - Scanning page: https://www.nmc.org.in/honble-supreme-court-mandated-oversight-committee-on-mci
+2026-01-31 02:48:08,419 - INFO - Scanning page: https://www.nmc.org.in/information-desk/download-application-forms/
+2026-01-31 02:48:10,584 - INFO - Scanning page: https://www.nmc.org.in/phlas-treatment/
+2026-01-31 02:48:12,936 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-colleges/procedure-to-start-new-college/
+2026-01-31 02:48:15,305 - INFO - Scanning page: https://www.nmc.org.in/meetings/
+2026-01-31 02:48:17,646 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (OBSTETRICS AND GYNAECOLOGY).docx
+2026-01-31 02:48:17,763 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:17,878 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:18,380 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (EMERGENCY MEDICINE).docx
+2026-01-31 02:48:18,529 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:18,645 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:19,148 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_PUN.zip
+2026-01-31 02:48:19,277 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:19,442 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:19,946 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (CARDIAC ANAESTHESIA).docx
+2026-01-31 02:48:20,068 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:20,202 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:20,705 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_MAD.rar
+2026-01-31 02:48:20,849 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:20,972 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:21,475 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_GOA.rar
+2026-01-31 02:48:21,602 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:21,745 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:22,248 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (COMMUNITY MEDICINE).docx
+2026-01-31 02:48:22,375 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:22,496 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:22,999 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (ORTHOPAEDICS).docx
+2026-01-31 02:48:23,126 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:23,247 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:23,749 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/establishment-of-medical-college-regulationamendment-2020/
+2026-01-31 02:48:26,053 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_ASS.rar
+2026-01-31 02:48:26,193 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:26,351 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:26,854 - INFO - Scanning page: https://www.nmc.org.in/information-desk/college-and-course-search/view-diplomate-and-fellowship-course-details/
+2026-01-31 02:48:29,089 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2019_HAR.rar
+2026-01-31 02:48:29,219 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:29,349 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:29,852 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2017_JAM_03.rar
+2026-01-31 02:48:29,975 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:30,105 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:30,608 - INFO - Scanning page: https://www.nmc.org.in/information-desk/for-medical-professional/duplicateregistration-certificate/
+2026-01-31 02:48:32,943 - INFO - Scanning page: https://www.nmc.org.in/information-desk/tracking
+2026-01-31 02:48:36,478 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (Traumatology and Surgery).docx
+2026-01-31 02:48:36,595 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:36,720 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:37,222 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2024/smc_imr/IMR_MAH.zip
+2026-01-31 02:48:37,420 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:37,554 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:38,057 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (PSYCHIATRY).docx
+2026-01-31 02:48:38,164 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:38,274 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:38,776 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2018/02/IMR_2018_GUJ.rar
+2026-01-31 02:48:38,980 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:39,138 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:39,640 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/establishment-of-medical-college-regulations-amendment-2022/
+2026-01-31 02:48:41,823 - INFO - Scanning page: https://www.nmc.org.in/tenders
+2026-01-31 02:48:44,925 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (NEURO-SURGERY).docx
+2026-01-31 02:48:45,044 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:45,171 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:45,673 - INFO - Scanning page: https://www.nmc.org.in/ActivitiWebClient/open/initiateAntiRaggingHome
+2026-01-31 02:48:46,460 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM B (CRITICAL CARE MEDICINE).docx
+2026-01-31 02:48:46,592 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:46,713 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:47,216 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM B (PLASTIC & RECONSTRUCTIVE SURGERY).docx
+2026-01-31 02:48:47,333 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:47,442 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:47,944 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (GENERAL SURGERY).docx
+2026-01-31 02:48:48,065 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:48,198 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:48:48,700 - INFO - Scanning page: https://www.nmc.org.in/information-desk/indian-medical-register
+2026-01-31 02:48:51,743 - INFO - Scanning page: https://www.nmc.org.in/e-gazette/popup/egazette
+2026-01-31 02:48:52,630 - WARNING - Timeout/connection error on https://www.nmc.org.in/e-gazette/popup/egazette, retrying (1/3)...
+2026-01-31 02:48:54,630 - INFO - Scanning page: https://www.nmc.org.in/e-gazette/popup/egazette
+2026-01-31 02:48:55,638 - WARNING - Timeout/connection error on https://www.nmc.org.in/e-gazette/popup/egazette, retrying (2/3)...
+2026-01-31 02:48:57,638 - INFO - Scanning page: https://www.nmc.org.in/e-gazette/popup/egazette
+2026-01-31 02:48:58,504 - ERROR - Failed after 3 attempts: https://www.nmc.org.in/e-gazette/popup/egazette
+2026-01-31 02:49:05,301 - ERROR - Failed to get links from https://www.nmc.org.in/e-gazette/popup/egazette after 3 attempts
+2026-01-31 02:49:05,802 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (DERMATOLOGY, VENEREOLOGY AND LEPROSY).docx
+2026-01-31 02:49:05,920 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:49:06,043 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:49:06,545 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM B (GYNAECOLOGICAL ONCOLOGY).docx
+2026-01-31 02:49:06,659 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:49:06,769 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:49:07,271 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM B (CLINICAL IMMUNOLOGY & RHEUMATOLOGY).docx
+2026-01-31 02:49:07,387 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:49:07,518 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:49:08,020 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (ANAESTHESIOLOGY).docx
+2026-01-31 02:49:08,145 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:49:08,261 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:49:08,764 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM FOR STARTING OF NEW QUALIFICATION.DOCX
+2026-01-31 02:49:08,893 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:49:09,023 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:49:09,525 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (PAEDIATRIC SURGERY).docx
+2026-01-31 02:49:09,633 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:49:09,753 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:49:10,255 - INFO - Scanning page: https://www.nmc.org.in/information-desk/indian-medical-register/black-list-doctors/
+2026-01-31 02:49:12,664 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/Master SAF FORM-B for Broad Speciality & Super Speciality.docx
+2026-01-31 02:49:12,796 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:49:12,923 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:49:13,425 - INFO - Scanning page: https://www.nmc.org.in/acts-amendments/amendment-to-the-act/
+2026-01-31 02:49:15,865 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (BIOCHEMISTRY).docx
+2026-01-31 02:49:15,983 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:49:16,116 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:49:16,618 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (FORENSIC MEDICINE AND TOXICOLOGY).docx
+2026-01-31 02:49:16,743 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:49:16,854 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:49:17,357 - INFO - Scanning page: https://www.nmc.org.in/ActivitiWebClient/forgotPassword
+2026-01-31 02:49:18,104 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2021/09/Application_Form_for_Migration.doc
+2026-01-31 02:49:18,229 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:49:18,343 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:49:18,845 - INFO - Scanning page: https://www.nmc.org.in/information-desk/state-medical-councils/list-of-state-medical-councils/
+2026-01-31 02:49:48,946 - WARNING - Timeout/connection error on https://www.nmc.org.in/information-desk/state-medical-councils/list-of-state-medical-councils/, retrying (1/3)...
+2026-01-31 02:49:50,947 - INFO - Scanning page: https://www.nmc.org.in/information-desk/state-medical-councils/list-of-state-medical-councils/
+2026-01-31 02:50:21,039 - WARNING - Timeout/connection error on https://www.nmc.org.in/information-desk/state-medical-councils/list-of-state-medical-councils/, retrying (2/3)...
+2026-01-31 02:50:23,040 - INFO - Scanning page: https://www.nmc.org.in/information-desk/state-medical-councils/list-of-state-medical-councils/
+2026-01-31 02:50:53,117 - ERROR - Failed after 3 attempts: https://www.nmc.org.in/information-desk/state-medical-councils/list-of-state-medical-councils/
+2026-01-31 02:52:27,388 - ERROR - Failed to get links from https://www.nmc.org.in/information-desk/state-medical-councils/list-of-state-medical-councils/ after 3 attempts
+2026-01-31 02:52:27,888 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (RADIATION ONCOLOGY).docx
+2026-01-31 02:52:28,006 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:52:28,115 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:52:28,618 - INFO - Scanning page: https://www.nmc.org.in/popup/egazette
+2026-01-31 02:52:58,710 - WARNING - Timeout/connection error on https://www.nmc.org.in/popup/egazette, retrying (1/3)...
+2026-01-31 02:53:00,711 - INFO - Scanning page: https://www.nmc.org.in/popup/egazette
+2026-01-31 02:53:30,805 - WARNING - Timeout/connection error on https://www.nmc.org.in/popup/egazette, retrying (2/3)...
+2026-01-31 02:53:32,806 - INFO - Scanning page: https://www.nmc.org.in/popup/egazette
+2026-01-31 02:54:02,901 - ERROR - Failed after 3 attempts: https://www.nmc.org.in/popup/egazette
+2026-01-31 02:55:36,902 - ERROR - Failed to get links from https://www.nmc.org.in/popup/egazette after 3 attempts
+2026-01-31 02:55:37,402 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (PATHOLOGY).docx
+2026-01-31 02:55:37,535 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:37,658 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:38,161 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc/5.1_Declaration_Form_Faculty_Revised_2021-2022.docx
+2026-01-31 02:55:38,288 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:38,413 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:38,915 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (MICROBIOLOGY).docx
+2026-01-31 02:55:39,042 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:39,162 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:39,664 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc/5.2_Declaration_Form_Resident_Revised_2021-2022.docx
+2026-01-31 02:55:39,783 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:39,894 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:40,396 - INFO - Scanning page: https://www.nmc.org.in/annual-disclosure-report/
+2026-01-31 02:55:42,624 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/nmc-national-exit-test-regulations-2023/
+2026-01-31 02:55:44,895 - INFO - Scanning page: https://www.nmc.org.in/information-desk/ug-increase-seat/
+2026-01-31 02:55:47,039 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM B (Hepato-Pancreato-Biliary-Surgery).docx
+2026-01-31 02:55:47,152 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:47,259 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:47,761 - INFO - Scanning page: https://www.nmc.org.in/MCIRest/open/getDocument?path=/Documents/Public/Portal/ApplicationForm/Word/CVA-SAF-PG.docx
+2026-01-31 02:55:47,928 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:48,104 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:48,605 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-A (STANDARD ASSESSMENT FORM).docx
+2026-01-31 02:55:48,757 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:48,924 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:49,429 - INFO - Scanning page: https://www.nmc.org.in/ActivitiWebClient/open/registerftpftc
+2026-01-31 02:55:50,184 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc/UGforms/STANDARD_SAF_A_B.docx
+2026-01-31 02:55:50,564 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:50,918 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:51,425 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (PHARMACOLOGY).docx
+2026-01-31 02:55:51,545 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:51,698 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:52,200 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (RADIO DIAGNOSIS).docx
+2026-01-31 02:55:52,319 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:52,427 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:52,929 - INFO - Scanning page: https://www.nmc.org.in/ActivitiWebClient/login
+2026-01-31 02:55:53,651 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (GERIATRIC MEDICINE).docx
+2026-01-31 02:55:53,778 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:53,920 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:54,422 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM B (NEONATOLOGY).docx
+2026-01-31 02:55:54,543 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:54,660 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:55,162 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2025/09/UG_Assessment_form_AIII-Compliance.docx
+2026-01-31 02:55:55,291 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:55,413 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:55,916 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM B (UROLOGY).docx
+2026-01-31 02:55:56,046 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:56,186 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:56,690 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM B (MEDICAL ONCOLOGY).docx
+2026-01-31 02:55:56,824 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:56,952 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:57,455 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (OTORHINOLARYNGOLOGY).docx
+2026-01-31 02:55:57,584 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:57,708 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:58,211 - INFO - Scanning page: https://www.nmc.org.in/wp-content/uploads/2025/09/UG_Assessment_Form_AI.doc
+2026-01-31 02:55:58,541 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:58,879 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:55:59,384 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/teachers-eligibility-qualifications-in-medical-institutions-regulations-amendment-2023-2/
+2026-01-31 02:56:01,673 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM B (PULMONARY MEDICINE).docx
+2026-01-31 02:56:01,778 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:56:01,886 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:56:02,388 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (NUCLEAR MEDICINE).docx
+2026-01-31 02:56:02,512 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:56:02,630 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:56:03,133 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (CARDIOLOGY).docx
+2026-01-31 02:56:03,272 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:56:03,390 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:56:03,893 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (Palliative Medicine).docx
+2026-01-31 02:56:04,011 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:56:04,129 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:56:04,631 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM B (MEDICAL GASTROENTEROLOGY).docx
+2026-01-31 02:56:04,750 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:56:04,868 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:56:05,370 - INFO - Scanning page: https://www.nmc.org.in/ActivitiWebClient/open/studentRaise
+2026-01-31 02:56:06,101 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (PHYSIOLOGY).docx
+2026-01-31 02:56:06,210 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:56:06,327 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:56:06,829 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM B (REPRODUCTIVE MEDICINE AND SURGERY).docx
+2026-01-31 02:56:06,945 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:56:07,079 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:56:07,581 - INFO - Scanning page: https://www.nmc.org.in/category/latest-news/
+2026-01-31 02:56:10,039 - INFO - Scanning page: https://www.nmc.org.in/AppForms_nmc_2024/PGforms/FORM-B (ENDOCRINE SURGERY).docx
+2026-01-31 02:56:10,157 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:56:10,278 - WARNING - Some characters could not be decoded, and were replaced with REPLACEMENT CHARACTER.
+2026-01-31 02:56:10,780 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/national-medical-commission-minimum-standard-requirments-for-establishment-of-new-medical-college-increase-of-seats-in-mbbs-course-guidelines-2023-reg/
+2026-01-31 02:56:12,915 - INFO - Scanning page: https://www.nmc.org.in/ActivitiWebClient/index.html
+2026-01-31 02:56:13,869 - INFO - Scanning page: https://www.nmc.org.in/rules-regulations/national-medical-commission-registered-medical-practitioner-professional-conduct-regulations-2023-reg/
+2026-01-31 02:56:16,038 - INFO - Scanning page: https://www.nmc.org.in/ActivitiWebClient
+2026-01-31 02:56:17,054 - WARNING - Timeout/connection error on https://www.nmc.org.in/ActivitiWebClient, retrying (1/3)...
+2026-01-31 02:56:19,055 - INFO - Scanning page: https://www.nmc.org.in/ActivitiWebClient
+2026-01-31 02:56:20,095 - WARNING - Timeout/connection error on https://www.nmc.org.in/ActivitiWebClient, retrying (2/3)...
+2026-01-31 02:56:22,095 - INFO - Scanning page: https://www.nmc.org.in/ActivitiWebClient
+2026-01-31 02:56:23,079 - ERROR - Failed after 3 attempts: https://www.nmc.org.in/ActivitiWebClient
+2026-01-31 02:56:29,651 - ERROR - Failed to get links from https://www.nmc.org.in/ActivitiWebClient after 3 attempts
+2026-01-31 02:56:30,151 - INFO - Scanning page: https://www.nmc.org.in/public-notice-at-large-regarding-forged-registration/
+2026-01-31 02:56:32,411 - INFO - Scanning page: https://www.nmc.org.in/honble-supreme-court-mandated-oversight-committee-on-mci/
+2026-01-31 02:56:34,637 - INFO - Crawled 356 pages
+2026-01-31 02:56:34,656 - INFO - Index saved to: NMC_PDFs\pdf_index.json
+2026-01-31 02:56:34,660 - INFO - Summary saved to: NMC_PDFs\pdf_summary.txt

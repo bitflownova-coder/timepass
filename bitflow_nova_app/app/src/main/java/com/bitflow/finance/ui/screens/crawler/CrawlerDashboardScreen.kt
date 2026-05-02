@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -108,7 +109,7 @@ fun CrawlerDashboardScreen(
     val hasMore = filteredSessions.size > visibleCount
 
     Scaffold(
-        containerColor = MaterialTheme.colorScheme.background
+        containerColor = Cyber.Bg
     ) { padding ->
         LazyColumn(
             modifier = Modifier
@@ -125,29 +126,80 @@ fun CrawlerDashboardScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Column {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text(
+                                "// ",
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 13.sp,
+                                color = Cyber.TextSecondary,
+                                fontWeight = FontWeight.Normal
+                            )
+                            Text(
+                                "CYBER_RECON",
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 20.sp,
+                                fontWeight = FontWeight.Black,
+                                color = Cyber.Green
+                            )
+                        }
                         Text(
-                            "Website Crawler",
-                            style = MaterialTheme.typography.headlineMedium,
-                            fontWeight = FontWeight.Black,
-                            color = MaterialTheme.colorScheme.onBackground
-                        )
-                        Text(
-                            "Analyze & scan websites",
+                            "website intelligence & threat analysis",
+                            fontFamily = FontFamily.Monospace,
                             style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                            color = Cyber.TextSecondary
                         )
                     }
-                    FilledTonalButton(
-                        onClick = { showNewCrawlDialog = true },
-                        colors = ButtonDefaults.filledTonalButtonColors(
-                            containerColor = Color(0xFF6366F1),
-                            contentColor = Color.White
-                        ),
-                        shape = RoundedCornerShape(12.dp)
+                    // Show scanner pulse when a scan is running
+                    if (runningCount > 0) {
+                        ScannerPulse(color = Cyber.Cyan, rings = true)
+                    } else {
+                        FilledTonalButton(
+                            onClick = { showNewCrawlDialog = true },
+                            colors = ButtonDefaults.filledTonalButtonColors(
+                                containerColor = Cyber.Green.copy(alpha = 0.15f),
+                                contentColor = Cyber.Green
+                            ),
+                            shape = RoundedCornerShape(8.dp),
+                            border = BorderStroke(1.dp, Cyber.Green.copy(alpha = 0.5f))
+                        ) {
+                            Icon(Icons.Rounded.Add, contentDescription = null, modifier = Modifier.size(16.dp))
+                            Spacer(Modifier.width(4.dp))
+                            Text(
+                                "INIT SCAN",
+                                fontFamily = FontFamily.Monospace,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 12.sp
+                            )
+                        }
+                    }
+                }
+            }
+            
+            // Floating new scan button when running
+            if (runningCount > 0) {
+                item {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End
                     ) {
-                        Icon(Icons.Rounded.Add, contentDescription = null, modifier = Modifier.size(18.dp))
-                        Spacer(Modifier.width(6.dp))
-                        Text("New Crawl", fontWeight = FontWeight.Bold)
+                        FilledTonalButton(
+                            onClick = { showNewCrawlDialog = true },
+                            colors = ButtonDefaults.filledTonalButtonColors(
+                                containerColor = Cyber.Green.copy(alpha = 0.15f),
+                                contentColor = Cyber.Green
+                            ),
+                            shape = RoundedCornerShape(8.dp),
+                            border = BorderStroke(1.dp, Cyber.Green.copy(alpha = 0.5f))
+                        ) {
+                            Icon(Icons.Rounded.Add, contentDescription = null, modifier = Modifier.size(16.dp))
+                            Spacer(Modifier.width(4.dp))
+                            Text(
+                                "INIT SCAN",
+                                fontFamily = FontFamily.Monospace,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 12.sp
+                            )
+                        }
                     }
                 }
             }
@@ -162,26 +214,26 @@ fun CrawlerDashboardScreen(
                         StatCard(
                             count = sessions.size,
                             label = "Total",
-                            color = Color(0xFF6366F1),
+                            color = Cyber.Blue,
                             modifier = Modifier.weight(1f)
                         )
                         StatCard(
                             count = runningCount,
                             label = "Running",
-                            color = Color(0xFF10B981),
+                            color = Cyber.Cyan,
                             modifier = Modifier.weight(1f)
                         )
                         StatCard(
                             count = completedCount,
                             label = "Done",
-                            color = Color(0xFF3B82F6),
+                            color = Cyber.Green,
                             modifier = Modifier.weight(1f)
                         )
                         if (failedCount > 0) {
                             StatCard(
                                 count = failedCount,
                                 label = "Failed",
-                                color = Color(0xFFEF4444),
+                                color = Cyber.Red,
                                 modifier = Modifier.weight(1f)
                             )
                         }
@@ -246,8 +298,16 @@ fun CrawlerDashboardScreen(
                                     )
                                 },
                                 colors = FilterChipDefaults.filterChipColors(
-                                    selectedContainerColor = Color(0xFF6366F1).copy(alpha = 0.15f),
-                                    selectedLabelColor = Color(0xFF6366F1)
+                                    selectedContainerColor = Cyber.Green.copy(alpha = 0.15f),
+                                    selectedLabelColor = Cyber.Green,
+                                    containerColor = Cyber.BgCard,
+                                    labelColor = Cyber.TextSecondary
+                                ),
+                                border = FilterChipDefaults.filterChipBorder(
+                                    enabled = true,
+                                    selected = selectedFilter == filter,
+                                    selectedBorderColor = Cyber.Green.copy(alpha = 0.5f),
+                                    borderColor = Cyber.Border
                                 )
                             )
                         }
@@ -259,19 +319,23 @@ fun CrawlerDashboardScreen(
                             Icon(
                                 Icons.Default.Sort,
                                 contentDescription = "Sort",
-                                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                                tint = Cyber.TextSecondary
                             )
                         }
                         DropdownMenu(
                             expanded = showSortMenu,
-                            onDismissRequest = { showSortMenu = false }
+                            onDismissRequest = { showSortMenu = false },
+                            modifier = Modifier.background(Cyber.BgElevated)
                         ) {
                             CrawlSort.entries.forEach { sort ->
                                 DropdownMenuItem(
                                     text = { 
                                         Text(
                                             sort.label,
-                                            fontWeight = if (selectedSort == sort) FontWeight.Bold else FontWeight.Normal
+                                            color = if (selectedSort == sort) Cyber.Green else Cyber.TextPrimary,
+                                            fontWeight = if (selectedSort == sort) FontWeight.Bold else FontWeight.Normal,
+                                            fontFamily = FontFamily.Monospace,
+                                            fontSize = 13.sp
                                         )
                                     },
                                     onClick = {
@@ -283,10 +347,13 @@ fun CrawlerDashboardScreen(
                                             Icon(
                                                 Icons.Default.Check,
                                                 contentDescription = null,
-                                                tint = Color(0xFF6366F1)
+                                                tint = Cyber.Green
                                             )
                                         }
-                                    }
+                                    },
+                                    colors = MenuDefaults.itemColors(
+                                        textColor = Cyber.TextSecondary
+                                    )
                                 )
                             }
                         }
@@ -301,7 +368,8 @@ fun CrawlerDashboardScreen(
                         "${filteredSessions.size} result${if (filteredSessions.size != 1) "s" else ""}" +
                             if (hasMore) " (showing ${displayedSessions.size})" else "",
                         style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        fontFamily = FontFamily.Monospace,
+                        color = Cyber.TextSecondary
                     )
                 }
             }
@@ -331,9 +399,17 @@ fun CrawlerDashboardScreen(
                         OutlinedButton(
                             onClick = { visibleCount += 10 },
                             modifier = Modifier.fillMaxWidth(),
-                            shape = RoundedCornerShape(12.dp)
+                            shape = RoundedCornerShape(8.dp),
+                            border = BorderStroke(1.dp, Cyber.Green.copy(alpha = 0.4f)),
+                            colors = ButtonDefaults.outlinedButtonColors(
+                                contentColor = Cyber.Green
+                            )
                         ) {
-                            Text("Load More (${filteredSessions.size - visibleCount} remaining)")
+                            Text(
+                                "[ LOAD MORE: ${filteredSessions.size - visibleCount} remaining ]",
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 12.sp
+                            )
                         }
                     }
                 }
@@ -358,25 +434,29 @@ fun CrawlerDashboardScreen(
 
 @Composable
 fun StatCard(count: Int, label: String, color: Color, modifier: Modifier = Modifier) {
-    Card(
-        modifier = modifier,
-        colors = CardDefaults.cardColors(containerColor = color.copy(alpha = 0.1f)),
-        shape = RoundedCornerShape(12.dp)
+    Box(
+        modifier = modifier
+            .clip(RoundedCornerShape(8.dp))
+            .background(Cyber.BgCard)
+            .border(1.dp, color.copy(alpha = 0.3f), RoundedCornerShape(8.dp))
+            .padding(12.dp),
+        contentAlignment = Alignment.Center
     ) {
-        Column(
-            modifier = Modifier.padding(12.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
                 "$count",
-                style = MaterialTheme.typography.titleLarge,
+                fontFamily = FontFamily.Monospace,
+                fontSize = 22.sp,
                 fontWeight = FontWeight.Black,
                 color = color
             )
             Text(
-                label,
-                style = MaterialTheme.typography.labelSmall,
-                color = color.copy(alpha = 0.8f)
+                label.uppercase(),
+                fontFamily = FontFamily.Monospace,
+                fontSize = 9.sp,
+                fontWeight = FontWeight.Bold,
+                color = color.copy(alpha = 0.7f),
+                letterSpacing = 1.sp
             )
         }
     }
@@ -384,36 +464,35 @@ fun StatCard(count: Int, label: String, color: Color, modifier: Modifier = Modif
 
 @Composable
 fun NoResultsContent(searchQuery: String, filter: CrawlFilter) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
-        ),
-        shape = RoundedCornerShape(16.dp)
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(12.dp))
+            .background(Cyber.BgCard)
+            .border(1.dp, Cyber.Border, RoundedCornerShape(12.dp))
+            .padding(24.dp),
+        contentAlignment = Alignment.Center
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Icon(
                 Icons.Outlined.SearchOff,
                 contentDescription = null,
-                modifier = Modifier.size(48.dp),
-                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                modifier = Modifier.size(40.dp),
+                tint = Cyber.TextSecondary
             )
-            Spacer(Modifier.height(12.dp))
+            Spacer(Modifier.height(10.dp))
             Text(
-                "No results found",
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold
+                "// NO_RESULTS",
+                fontFamily = FontFamily.Monospace,
+                fontWeight = FontWeight.Bold,
+                color = Cyber.TextSecondary
             )
             Text(
-                if (searchQuery.isNotEmpty()) "Try a different search term"
-                else "No ${filter.label.lowercase()} crawls available",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+                if (searchQuery.isNotEmpty()) "try a different search term"
+                else "no ${filter.label.lowercase()} scans recorded",
+                fontFamily = FontFamily.Monospace,
+                fontSize = 11.sp,
+                color = Cyber.TextSecondary.copy(alpha = 0.6f)
             )
         }
     }
@@ -421,12 +500,12 @@ fun NoResultsContent(searchQuery: String, filter: CrawlFilter) {
 
 @Composable
 fun EmptyDashboardContent(onNewCrawl: () -> Unit = {}) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
-        ),
-        shape = RoundedCornerShape(20.dp)
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(12.dp))
+            .background(Cyber.BgCard)
+            .border(1.dp, Cyber.Green.copy(alpha = 0.25f), RoundedCornerShape(12.dp))
     ) {
         Column(
             modifier = Modifier
@@ -436,44 +515,55 @@ fun EmptyDashboardContent(onNewCrawl: () -> Unit = {}) {
         ) {
             Box(
                 modifier = Modifier
-                    .size(80.dp)
+                    .size(72.dp)
                     .background(
-                        Color(0xFF6366F1).copy(alpha = 0.1f),
+                        Cyber.Green.copy(alpha = 0.08f),
                         CircleShape
-                    ),
+                    )
+                    .border(1.dp, Cyber.Green.copy(alpha = 0.3f), CircleShape),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    Icons.Rounded.Language, 
-                    contentDescription = null, 
-                    modifier = Modifier.size(40.dp),
-                    tint = Color(0xFF6366F1)
+                    Icons.Rounded.Language,
+                    contentDescription = null,
+                    modifier = Modifier.size(36.dp),
+                    tint = Cyber.Green
                 )
             }
             Spacer(Modifier.height(16.dp))
             Text(
-                "No Crawls Yet",
-                style = MaterialTheme.typography.titleLarge,
+                "// NO_SCANS_RECORDED",
+                fontFamily = FontFamily.Monospace,
+                fontSize = 14.sp,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onSurface
+                color = Cyber.TextPrimary
             )
-            Spacer(Modifier.height(8.dp))
+            Spacer(Modifier.height(6.dp))
             Text(
-                "Start by crawling your first website",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+                "initialize a recon mission to get started",
+                fontFamily = FontFamily.Monospace,
+                fontSize = 11.sp,
+                color = Cyber.TextSecondary
             )
             Spacer(Modifier.height(20.dp))
             Button(
                 onClick = onNewCrawl,
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF6366F1)
+                    containerColor = Cyber.Green.copy(alpha = 0.15f),
+                    contentColor = Cyber.Green
                 ),
-                shape = RoundedCornerShape(12.dp)
+                border = BorderStroke(1.dp, Cyber.Green.copy(alpha = 0.5f)),
+                shape = RoundedCornerShape(8.dp),
+                elevation = ButtonDefaults.buttonElevation(0.dp)
             ) {
-                Icon(Icons.Rounded.Add, contentDescription = null, modifier = Modifier.size(18.dp))
+                Icon(Icons.Rounded.Add, contentDescription = null, modifier = Modifier.size(16.dp))
                 Spacer(Modifier.width(8.dp))
-                Text("Start First Crawl", fontWeight = FontWeight.Bold)
+                Text(
+                    "INIT SCAN",
+                    fontFamily = FontFamily.Monospace,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 12.sp
+                )
             }
         }
     }
@@ -520,13 +610,22 @@ fun NewCrawlDialog(onDismiss: () -> Unit, onStart: (String, Int, Boolean, Set<St
 
     AlertDialog(
         onDismissRequest = { if (!isProcessing) onDismiss() },
+        containerColor = Cyber.BgCard,
+        titleContentColor = Cyber.Green,
+        textContentColor = Cyber.TextPrimary,
         title = { 
             Column {
-                Text("New Website Crawl", fontWeight = FontWeight.Bold)
                 Text(
-                    "Scan & analyze website",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    "// INIT_RECON_MISSION",
+                    fontFamily = FontFamily.Monospace,
+                    fontWeight = FontWeight.Bold,
+                    color = Cyber.Green
+                )
+                Text(
+                    "configure target & scan modules",
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 11.sp,
+                    color = Cyber.TextSecondary
                 )
             }
         },
@@ -538,23 +637,35 @@ fun NewCrawlDialog(onDismiss: () -> Unit, onStart: (String, Int, Boolean, Set<St
                     OutlinedTextField(
                         value = url,
                         onValueChange = { url = it },
-                        label = { Text("Target URL") },
-                        placeholder = { Text("https://example.com") },
-                        leadingIcon = { Icon(Icons.Default.Language, contentDescription = null) },
+                        label = { Text("Target URL", color = Cyber.TextSecondary, fontFamily = FontFamily.Monospace) },
+                        placeholder = { Text("https://example.com", color = Cyber.TextSecondary) },
+                        leadingIcon = { Icon(Icons.Default.Language, contentDescription = null, tint = Cyber.Cyan) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(bottom = 16.dp),
-                        shape = RoundedCornerShape(12.dp),
+                        shape = RoundedCornerShape(8.dp),
                         singleLine = true,
+                        colors = OutlinedTextFieldDefaults.colors(
+                            unfocusedBorderColor = Cyber.Border,
+                            focusedBorderColor = Cyber.Green,
+                            unfocusedContainerColor = Cyber.Bg,
+                            focusedContainerColor = Cyber.Bg,
+                            cursorColor = Cyber.Green,
+                            focusedTextColor = Cyber.TextPrimary,
+                            unfocusedTextColor = Cyber.TextPrimary
+                        )
                     )
                 }
                 
                 // Scan Mode Selection - VISIBLE BY DEFAULT
                 item {
                     Text(
-                        "Scan Mode",
-                        style = MaterialTheme.typography.titleSmall,
+                        "SCAN_MODE",
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
+                        color = Cyber.TextSecondary,
+                        letterSpacing = 1.sp,
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
                 }
@@ -570,7 +681,7 @@ fun NewCrawlDialog(onDismiss: () -> Unit, onStart: (String, Int, Boolean, Set<St
                             title = "Quick",
                             subtitle = "2 scans",
                             icon = "⚡",
-                            color = Color(0xFF10B981),
+                            color = Cyber.Green,
                             modifier = Modifier.weight(1f),
                             onClick = { 
                                 scanMode = 0
@@ -588,7 +699,7 @@ fun NewCrawlDialog(onDismiss: () -> Unit, onStart: (String, Int, Boolean, Set<St
                             title = "Full",
                             subtitle = "8 scans",
                             icon = "🔒",
-                            color = Color(0xFF3B82F6),
+                            color = Cyber.Cyan,
                             modifier = Modifier.weight(1f),
                             onClick = { 
                                 scanMode = 1
@@ -604,7 +715,7 @@ fun NewCrawlDialog(onDismiss: () -> Unit, onStart: (String, Int, Boolean, Set<St
                             title = "Custom",
                             subtitle = "${categories.values.count { it }}",
                             icon = "⚙️",
-                            color = Color(0xFF8B5CF6),
+                            color = Cyber.Purple,
                             modifier = Modifier.weight(1f),
                             onClick = { 
                                 scanMode = 2
@@ -619,9 +730,12 @@ fun NewCrawlDialog(onDismiss: () -> Unit, onStart: (String, Int, Boolean, Set<St
                     item {
                         Spacer(Modifier.height(12.dp))
                         Text(
-                            "Select Scans",
-                            style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                            "SELECT_MODULES",
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 10.sp,
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 1.sp,
+                            color = Cyber.TextSecondary
                         )
                         Spacer(Modifier.height(8.dp))
                     }
@@ -659,7 +773,7 @@ fun NewCrawlDialog(onDismiss: () -> Unit, onStart: (String, Int, Boolean, Set<St
                 
                 item {
                     Spacer(Modifier.height(16.dp))
-                    Divider()
+                    HorizontalDivider(color = Cyber.Border)
                     Spacer(Modifier.height(12.dp))
                 }
                 
@@ -670,10 +784,18 @@ fun NewCrawlDialog(onDismiss: () -> Unit, onStart: (String, Int, Boolean, Set<St
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text("Crawl Depth", style = MaterialTheme.typography.labelLarge)
                         Text(
-                            "${depth.toInt()} pages deep",
-                            color = MaterialTheme.colorScheme.primary,
+                            "CRAWL_DEPTH",
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Cyber.TextSecondary
+                        )
+                        Text(
+                            "${depth.toInt()} levels deep",
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 11.sp,
+                            color = Cyber.Cyan,
                             fontWeight = FontWeight.Bold
                         )
                     }
@@ -681,7 +803,12 @@ fun NewCrawlDialog(onDismiss: () -> Unit, onStart: (String, Int, Boolean, Set<St
                         value = depth,
                         onValueChange = { depth = it },
                         valueRange = 1f..5f,
-                        steps = 3
+                        steps = 3,
+                        colors = SliderDefaults.colors(
+                            thumbColor = Cyber.Green,
+                            activeTrackColor = Cyber.Green,
+                            inactiveTrackColor = Cyber.Border
+                        )
                     )
                 }
 
@@ -692,15 +819,26 @@ fun NewCrawlDialog(onDismiss: () -> Unit, onStart: (String, Int, Boolean, Set<St
                         modifier = Modifier
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(8.dp))
+                            .background(Cyber.Bg)
+                            .border(1.dp, Cyber.Border, RoundedCornerShape(8.dp))
                             .clickable { isMobile = !isMobile }
-                            .padding(vertical = 4.dp)
+                            .padding(horizontal = 12.dp, vertical = 8.dp)
                     ) {
                         Checkbox(
                             checked = isMobile,
-                            onCheckedChange = { isMobile = it }
+                            onCheckedChange = { isMobile = it },
+                            colors = CheckboxDefaults.colors(
+                                checkedColor = Cyber.Green,
+                                uncheckedColor = Cyber.Border
+                            )
                         )
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text("Mobile User-Agent", style = MaterialTheme.typography.bodyMedium)
+                        Text(
+                            "Mobile User-Agent",
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 12.sp,
+                            color = Cyber.TextPrimary
+                        )
                     }
                 }
             }
@@ -713,25 +851,43 @@ fun NewCrawlDialog(onDismiss: () -> Unit, onStart: (String, Int, Boolean, Set<St
                     onStart(url, depth.toInt(), isMobile, enabledCategories) 
                 },
                 shape = RoundedCornerShape(8.dp),
-                enabled = !isProcessing && url.length > 8 && categories.values.any { it }
+                enabled = !isProcessing && url.length > 8 && categories.values.any { it },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Cyber.Green.copy(alpha = 0.2f),
+                    contentColor = Cyber.Green,
+                    disabledContainerColor = Cyber.BgElevated,
+                    disabledContentColor = Cyber.TextSecondary
+                ),
+                border = BorderStroke(1.dp, Cyber.Green.copy(alpha = 0.5f)),
+                elevation = ButtonDefaults.buttonElevation(0.dp)
             ) {
                 if (isProcessing) {
                     CircularProgressIndicator(
                         modifier = Modifier.size(16.dp),
                         strokeWidth = 2.dp,
-                        color = MaterialTheme.colorScheme.onPrimary
+                        color = Cyber.Green
                     )
                     Spacer(Modifier.width(8.dp))
                 }
-                Text(if(isProcessing) "Starting..." else "Start Crawl")
+                Text(
+                    if(isProcessing) "LAUNCHING..." else "LAUNCH SCAN",
+                    fontFamily = FontFamily.Monospace,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 12.sp
+                )
             }
         },
         dismissButton = {
             TextButton(
                 onClick = { onDismiss() },
-                enabled = !isProcessing
+                enabled = !isProcessing,
+                colors = ButtonDefaults.textButtonColors(contentColor = Cyber.TextSecondary)
             ) {
-                Text("Cancel")
+                Text(
+                    "ABORT",
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 12.sp
+                )
             }
         }
     )
@@ -747,33 +903,36 @@ fun ScanModeCard(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
-    Card(
+    Box(
         modifier = modifier
-            .clickable(onClick = onClick),
-        colors = CardDefaults.cardColors(
-            containerColor = if (selected) color.copy(alpha = 0.15f) else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
-        ),
-        border = if (selected) androidx.compose.foundation.BorderStroke(2.dp, color) else null,
-        shape = RoundedCornerShape(12.dp)
+            .clip(RoundedCornerShape(8.dp))
+            .background(if (selected) color.copy(alpha = 0.12f) else Cyber.Bg)
+            .border(
+                width = if (selected) 2.dp else 1.dp,
+                color = if (selected) color else Cyber.Border,
+                shape = RoundedCornerShape(8.dp)
+            )
+            .clickable(onClick = onClick)
+            .padding(10.dp),
+        contentAlignment = Alignment.Center
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(12.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(icon, fontSize = 24.sp)
+            Text(icon, fontSize = 20.sp)
             Spacer(Modifier.height(4.dp))
             Text(
-                title,
+                title.uppercase(),
+                fontFamily = FontFamily.Monospace,
                 fontWeight = FontWeight.Bold,
-                fontSize = 14.sp,
-                color = if (selected) color else MaterialTheme.colorScheme.onSurface
+                fontSize = 11.sp,
+                color = if (selected) color else Cyber.TextSecondary
             )
             Text(
                 subtitle,
-                fontSize = 11.sp,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+                fontFamily = FontFamily.Monospace,
+                fontSize = 10.sp,
+                color = if (selected) color.copy(alpha = 0.7f) else Cyber.TextSecondary.copy(alpha = 0.5f)
             )
         }
     }
@@ -787,39 +946,41 @@ fun ScanOptionChip(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
-    Card(
-        modifier = modifier.clickable(onClick = onClick),
-        colors = CardDefaults.cardColors(
-            containerColor = if (selected) 
-                MaterialTheme.colorScheme.primary.copy(alpha = 0.1f) 
-            else 
-                MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
-        ),
-        shape = RoundedCornerShape(8.dp)
+    Box(
+        modifier = modifier
+            .clip(RoundedCornerShape(6.dp))
+            .background(if (selected) Cyber.Green.copy(alpha = 0.08f) else Cyber.Bg)
+            .border(
+                width = 1.dp,
+                color = if (selected) Cyber.Green.copy(alpha = 0.5f) else Cyber.Border,
+                shape = RoundedCornerShape(6.dp)
+            )
+            .clickable(onClick = onClick)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 10.dp, vertical = 8.dp),
+                .padding(horizontal = 8.dp, vertical = 7.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(icon, fontSize = 16.sp)
-            Spacer(Modifier.width(6.dp))
+            Text(icon, fontSize = 14.sp)
+            Spacer(Modifier.width(5.dp))
             Text(
                 name,
-                fontSize = 12.sp,
+                fontFamily = FontFamily.Monospace,
+                fontSize = 11.sp,
                 fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal,
-                color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
+                color = if (selected) Cyber.Green else Cyber.TextSecondary,
                 maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.weight(1f)
             )
-            Spacer(Modifier.weight(1f))
             if (selected) {
                 Icon(
                     Icons.Default.Check,
                     contentDescription = null,
-                    modifier = Modifier.size(14.dp),
-                    tint = MaterialTheme.colorScheme.primary
+                    modifier = Modifier.size(12.dp),
+                    tint = Cyber.Green
                 )
             }
         }
@@ -832,39 +993,50 @@ fun CrawlSessionCard(session: CrawlSessionEntity, onClick: () -> Unit) {
     val isRunning = session.status == "RUNNING"
     val isCompleted = session.status == "COMPLETED"
     
-    Card(
+    val domain = session.startUrl
+        .removePrefix("https://www.")
+        .removePrefix("http://www.")
+        .removePrefix("https://")
+        .removePrefix("http://")
+        .trimEnd('/')
+    
+    Box(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable(onClick = onClick),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface,
-        ),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = if (isRunning) 6.dp else 2.dp
-        ),
-        shape = RoundedCornerShape(16.dp),
-        border = if (isRunning) androidx.compose.foundation.BorderStroke(
-            2.dp, 
-            Brush.horizontalGradient(listOf(statusColor, statusColor.copy(alpha = 0.5f)))
-        ) else null
+            .clip(RoundedCornerShape(10.dp))
+            .background(Cyber.BgCard)
+            .border(1.dp, statusColor.copy(alpha = if (isRunning) 0.6f else 0.2f), RoundedCornerShape(10.dp))
+            .clickable(onClick = onClick)
     ) {
+        // Left accent bar
+        Box(
+            modifier = Modifier
+                .width(3.dp)
+                .matchParentSize()
+                .background(
+                    Brush.verticalGradient(
+                        colors = listOf(statusColor, statusColor.copy(alpha = 0.3f))
+                    )
+                )
+        )
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(start = 14.dp, end = 14.dp, top = 12.dp, bottom = 12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Status Indicator Circle
+            // Status Indicator
             Box(
                 modifier = Modifier
-                    .size(44.dp)
-                    .clip(CircleShape)
-                    .background(statusColor.copy(alpha = 0.15f)),
+                    .size(36.dp)
+                    .clip(RoundedCornerShape(6.dp))
+                    .background(statusColor.copy(alpha = 0.1f))
+                    .border(1.dp, statusColor.copy(alpha = 0.3f), RoundedCornerShape(6.dp)),
                 contentAlignment = Alignment.Center
             ) {
                 if (isRunning) {
                     CircularProgressIndicator(
-                        modifier = Modifier.size(24.dp),
+                        modifier = Modifier.size(18.dp),
                         strokeWidth = 2.dp,
                         color = statusColor
                     )
@@ -873,45 +1045,44 @@ fun CrawlSessionCard(session: CrawlSessionEntity, onClick: () -> Unit) {
                         if (isCompleted) Icons.Default.CheckCircle else Icons.Default.Warning,
                         contentDescription = null,
                         tint = statusColor,
-                        modifier = Modifier.size(24.dp)
+                        modifier = Modifier.size(18.dp)
                     )
                 }
             }
             
-            Spacer(Modifier.width(14.dp))
+            Spacer(Modifier.width(12.dp))
             
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = session.startUrl
-                        .removePrefix("https://www.")
-                        .removePrefix("http://www.")
-                        .removePrefix("https://")
-                        .removePrefix("http://")
-                        .trimEnd('/')
-                        .take(30) + if (session.startUrl.length > 38) "..." else "",
-                    style = MaterialTheme.typography.titleSmall,
+                    text = domain.take(35) + if (domain.length > 35) "..." else "",
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 13.sp,
                     fontWeight = FontWeight.Bold,
+                    color = Cyber.TextPrimary,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
                 
-                Spacer(Modifier.height(4.dp))
+                Spacer(Modifier.height(3.dp))
                 
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
                         text = formatDate(session.startTime),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 10.sp,
+                        color = Cyber.TextSecondary
                     )
                     Text(
-                        " • ",
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        " │ ",
+                        fontFamily = FontFamily.Monospace,
+                        color = Cyber.Border,
                         fontSize = 10.sp
                     )
                     Text(
-                        text = "${session.pagesCrawled} pages",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        text = "${session.pagesCrawled}p",
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 10.sp,
+                        color = Cyber.TextSecondary
                     )
                 }
             }
@@ -919,18 +1090,20 @@ fun CrawlSessionCard(session: CrawlSessionEntity, onClick: () -> Unit) {
             // Status Badge
             Box(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(8.dp))
+                    .clip(RoundedCornerShape(4.dp))
                     .background(statusColor.copy(alpha = 0.1f))
-                    .padding(horizontal = 10.dp, vertical = 6.dp)
+                    .border(1.dp, statusColor.copy(alpha = 0.3f), RoundedCornerShape(4.dp))
+                    .padding(horizontal = 8.dp, vertical = 4.dp)
             ) {
                 Text(
                     text = when(session.status) {
-                        "RUNNING" -> "Scanning"
-                        "COMPLETED" -> "Done"
-                        "FAILED" -> "Failed"
+                        "RUNNING" -> "SCAN"
+                        "COMPLETED" -> "DONE"
+                        "FAILED" -> "FAIL"
                         else -> session.status
                     },
-                    style = MaterialTheme.typography.labelSmall,
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 10.sp,
                     fontWeight = FontWeight.Bold,
                     color = statusColor
                 )

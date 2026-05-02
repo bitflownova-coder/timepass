@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PDF Converter</string>
+
+    <!-- Modules -->
+    <string name="module_scanner">Scanner</string>
+    <string name="module_converter">Converter</string>
+    <string name="module_editor">Editor</string>
+    <string name="module_optimization">Optimize</string>
+    <string name="module_security">Security</string>
+    <string name="module_smarttools">Smart Tools</string>
+    <string name="module_storage">Storage</string>
+    <string name="module_utility">Utility</string>
+    <string name="module_downloader">Web Downloader</string>
+
+    <!-- Individual Tool Tiles -->
+    <string name="tool_scan_to_pdf">Scan to PDF</string>
+    <string name="tool_scan_to_pdf_desc">Convert photos to high quality documents</string>
+    <string name="tool_image_to_pdf">Image to PDF</string>
+    <string name="tool_image_to_pdf_desc">Batch convert images effortlessly</string>
+    <string name="tool_office_to_pdf">Office to PDF</string>
+    <string name="tool_office_to_pdf_desc">Convert Word, Excel, PPT files</string>
+    <string name="tool_merge">Merge PDF</string>
+    <string name="tool_merge_desc">Combine files</string>
+    <string name="tool_split">Split PDF</string>
+    <string name="tool_split_desc">Extract pages</string>
+    <string name="tool_edit_text">Edit Text</string>
+    <string name="tool_edit_text_desc">Modify content</string>
+    <string name="tool_compress">Compress</string>
+    <string name="tool_compress_desc">Reduce size</string>
+    <string name="tool_password">Password</string>
+    <string name="tool_password_desc">Set security</string>
+    <string name="tool_watermark">Watermark</string>
+    <string name="tool_watermark_desc">Add branding</string>
+    <string name="tool_redact">Redact</string>
+    <string name="tool_redact_desc">Hide content</string>
+    <string name="tool_ocr">Text OCR</string>
+    <string name="tool_ocr_desc">Extract text</string>
+    <string name="tool_qr_scan">QR Scanner</string>
+    <string name="tool_qr_scan_desc">Scan codes</string>
+    <string name="tool_qr_gen">QR Generator</string>
+    <string name="tool_qr_gen_desc">Create codes</string>
+    <string name="tool_pdf_search">PDF Search</string>
+    <string name="tool_pdf_search_desc">Find text</string>
+    <string name="tool_stamp">Stamp</string>
+    <string name="tool_stamp_desc">Add stamp</string>
+    <string name="tool_form">Form</string>
+    <string name="tool_form_desc">Fillable fields</string>
+    <string name="tool_storage">Files</string>
+    <string name="tool_storage_desc">Manage files</string>
+    <string name="tool_downloader">Download</string>
+    <string name="tool_downloader_desc">Get web PDFs</string>
+
+    <!-- Module descriptions -->
+    <string name="module_scanner_desc">Scan documents with edge detection</string>
+    <string name="module_converter_desc">Convert images &amp; office files to PDF</string>
+    <string name="module_editor_desc">Edit, annotate and manage PDF pages</string>
+    <string name="module_optimization_desc">Compress and reduce PDF file size</string>
+    <string name="module_security_desc">Password, watermark and signature</string>
+    <string name="module_smarttools_desc">OCR, QR codes and PDF search</string>
+    <string name="module_storage_desc">File manager and cloud sync</string>
+    <string name="module_utility_desc">Stamps, forms and offline support</string>
+
+    <!-- Common -->
+    <string name="recent_files">Recent Files</string>
+    <string name="no_recent_files">No recent files. Get started by scanning or importing a document.</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="share">Share</string>
+    <string name="export">Export</string>
+    <string name="import_label">Import</string>
+    <string name="done">Done</string>
+    <string name="loading">Loading…</string>
+    <string name="error">Error</string>
+    <string name="retry">Retry</string>
+    <string name="permission_required">Permission Required</string>
+    <string name="camera_permission_rationale">Camera permission is needed to scan documents.</string>
+    <string name="storage_permission_rationale">Storage permission is needed to read and save files.</string>
+    <string name="open_settings">Open Settings</string>
+
+    <!-- Scanner -->
+    <string name="scan_document">Scan Document</string>
+    <string name="detecting_edges">Detecting edges…</string>
+    <string name="adjust_crop">Adjust crop corners</string>
+    <string name="enhancement_original">Original</string>
+    <string name="enhancement_enhanced">Enhanced</string>
+    <string name="enhancement_bw">B&amp;W</string>
+    <string name="enhancement_grayscale">Grayscale</string>
+    <string name="add_page">Add Page</string>
+    <string name="retake">Retake</string>
+    <string name="pages_scanned">%d page(s) scanned</string>
+
+    <!-- Converter -->
+    <string name="images_to_pdf">Images to PDF</string>
+    <string name="office_to_pdf">Office to PDF</string>
+    <string name="pdf_to_images">PDF to Images</string>
+    <string name="merge_pdfs">Merge PDFs</string>
+    <string name="split_pdf">Split PDF</string>
+    <string name="select_images">Select Images</string>
+    <string name="page_size_a4">A4</string>
+    <string name="page_size_letter">Letter</string>
+    <string name="page_size_fit">Fit to image</string>
+    <string name="converting">Converting… %d%%</string>
+
+    <!-- Editor -->
+    <string name="text_edit">Text Edit</string>
+    <string name="highlight">Highlight</string>
+    <string name="annotate">Annotate</string>
+    <string name="page_management">Manage Pages</string>
+    <string name="undo">Undo</string>
+    <string name="redo">Redo</string>
+
+    <!-- Optimization -->
+    <string name="compress">Compress</string>
+    <string name="resolution_low">72 DPI (Web)</string>
+    <string name="resolution_medium">150 DPI (Standard)</string>
+    <string name="resolution_high">300 DPI (Print)</string>
+    <string name="original_size">Original: %s</string>
+    <string name="compressed_size">Compressed: %s</string>
+    <string name="compression_ratio" formatted="false">Saved %s (%.0f%%)</string>
+
+    <!-- Security -->
+    <string name="set_password">Set Password</string>
+    <string name="remove_password">Remove Password</string>
+    <string name="add_watermark">Add Watermark</string>
+    <string name="digital_signature">Digital Signature</string>
+    <string name="redact">Redact</string>
+    <string name="enter_password">Enter password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="password_mismatch">Passwords do not match</string>
+
+    <!-- Smart Tools -->
+    <string name="run_ocr">Run OCR</string>
+    <string name="scan_qr">Scan QR</string>
+    <string name="generate_qr">Generate QR</string>
+    <string name="pdf_search">Search in PDF</string>
+    <string name="ocr_processing">Processing page %1$d of %2$d…</string>
+    <string name="search_hint">Type to search…</string>
+    <string name="results_found">%d result(s) found</string>
+
+    <!-- Storage -->
+    <string name="my_files">My Files</string>
+    <string name="google_drive">Google Drive</string>
+    <string name="new_folder">New Folder</string>
+    <string name="sort_by_name">Name</string>
+    <string name="sort_by_date">Date</string>
+    <string name="sort_by_size">Size</string>
+    <string name="trash">Trash</string>
+
+    <!-- Utility -->
+    <string name="stamp">Stamp</string>
+    <string name="create_form">Create Form</string>
+    <string name="offline_mode">Offline Mode</string>
+    <string name="stamp_approved">APPROVED</string>
+    <string name="stamp_draft">DRAFT</string>
+    <string name="stamp_confidential">CONFIDENTIAL</string>
+    <string name="stamp_custom">Custom…</string>
+</resources>
